@@ -1,4 +1,3 @@
 # F1-Vizsgaremek
 
-
-#Leghamarabb 17-én lesz ez kész c:
+Minden létező F1-es statisztikát megjelenítő weboldal. Illetve aktuális híreket is lehet olvasni, illetve újakat írni.
