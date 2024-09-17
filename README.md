@@ -17,6 +17,9 @@ https://huzsi.hu/f1vizsgaremek
 - JavaScript
 - MySQL
 
+# Mappastruktúra
+Jelenleg nem elérhető.
+
 # Szerepek
 - Bartók Krisztián (API elkészítése, Adatok elérése, Hír oldalak felkeresése)
 - Ináncsi Krisztián (Frontend - Stílusfájlok, UI/UX tervezése & elkészítése)
