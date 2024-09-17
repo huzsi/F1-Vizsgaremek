@@ -5,10 +5,10 @@ Ez a weboldal egy átfogó Forma 1-es platform, ahol a látogatók részletes st
 https://huzsi.hu/f1vizsgaremek
 
 # Funkciók
-- Pilóták és csapatok statisztikái: Minden jelenlegi és korábbi Forma 1-es versenyzőről és csapatról részletes adatok.
-- Hírek: Az F1 világának friss hírei külön HTML fájlban jelennek meg.
-- Keresési funkció: Gyors és hatékony keresés a pilóták és csapatok között.
-- Interaktív statisztikák: Grafikonok és vizualizációk a szezonok teljesítményéről.
+- **Pilóták és csapatok statisztikái:** Minden jelenlegi és korábbi Forma 1-es versenyzőről és csapatról részletes adatok.
+- **Hírek:** Az F1 világának friss hírei külön HTML fájlban jelennek meg.
+- **Keresési funkció:** Gyors és hatékony keresés a pilóták és csapatok között.
+- **Interaktív statisztikák:** Grafikonok és vizualizációk a szezonok teljesítményéről.
 
 # Technológiai háttér
 - HTML5
