@@ -2,7 +2,7 @@
 Ez a weboldal egy átfogó Forma 1-es platform, ahol a látogatók részletes statisztikákat találhatnak a versenyzőkről és csapatokról, valamint aktuális híreket olvashatnak az F1 világából. Az oldal külön HTML fájlban jeleníti meg a híreket, míg a statisztikai adatok egy másik részben találhatóak. Az oldal felhasználóbarát felületen nyújt részletes információkat a szezonokról, versenyekről, pilótákról és csapatokról.
 
 # Elérés
-https://huzsi.hu/f1vizsgaremek
+[Kattints ide](https://huzsi.hu/f1vizsgaremek)
 
 # Funkciók
 - **Pilóták és csapatok statisztikái:** Minden jelenlegi és korábbi Forma 1-es versenyzőről és csapatról részletes adatok.
@@ -18,23 +18,25 @@ https://huzsi.hu/f1vizsgaremek
 - MySQL
 
 # Mappastruktúra
-├── source/
-│   └── css/
-│       └── index/
+```
+├── source/                       # Fájlok
+│   └── css/                      # Stílus fájlok
+│       └── index/                # "index.html" stílus fájljai
 │           └── header.css
 │           └── main.css
 │           └── footer.css
 │           └── responsive.css
-│       └── stat/
+│       └── stat/                 # "stat.html" stílus fájljai
 │           └── header.css
 │           └── main.css
 │           └── footer.css
 │           └── responsive.css
-│   └── img/
-│   └── js/
-├── html/
-    └── index.html 
-    └── stat.html
+│   └── img/                      # Képek
+│   └── js/                       # JavaScript Fájlok
+├── html/                         # ".html" kiterjesztésű fájlok
+    └── index.html                # Hírek weboldal
+    └── stat.html                 # Statisztikai weboldal
+```
 
 # Szerepek
 - Bartók Krisztián (API elkészítése, Adatok elérése, Hír oldalak felkeresése)
