@@ -18,7 +18,23 @@ https://huzsi.hu/f1vizsgaremek
 - MySQL
 
 # Mappastruktúra
-Jelenleg nem elérhető.
+├── source/
+│   └── css/
+│       └── index/
+│           └── header.css
+│           └── main.css
+│           └── footer.css
+│           └── responsive.css
+│       └── stat/
+│           └── header.css
+│           └── main.css
+│           └── footer.css
+│           └── responsive.css
+│   └── img/
+│   └── js/
+├── html/
+    └── index.html 
+    └── stat.html
 
 # Szerepek
 - Bartók Krisztián (API elkészítése, Adatok elérése, Hír oldalak felkeresése)
