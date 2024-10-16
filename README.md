@@ -2,7 +2,7 @@
 Ez a weboldal egy átfogó Forma 1-es platform, ahol a látogatók részletes statisztikákat találhatnak a versenyzőkről és csapatokról, valamint aktuális híreket olvashatnak az F1 világából. Az oldal külön HTML fájlban jeleníti meg a híreket, míg a statisztikai adatok egy másik részben találhatóak. Az oldal felhasználóbarát felületen nyújt részletes információkat a szezonokról, versenyekről, pilótákról és csapatokról.
 
 # Elérés
-[Kattints ide](https://huzsi.hu/f1vizsgaremek)
+[Kattints ide](https://f1statsandnews.com/)
 
 # Funkciók
 - **Pilóták és csapatok statisztikái:** Minden jelenlegi és korábbi Forma 1-es versenyzőről és csapatról részletes adatok.
