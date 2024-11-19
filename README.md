@@ -1,11 +1,11 @@
 # Leírás
-Ez a weboldal egy átfogó Forma 1-es platform, ahol a látogatók részletes statisztikákat találhatnak a versenyzőkről és csapatokról, valamint aktuális híreket olvashatnak az F1 világából. Az oldal külön HTML fájlban jeleníti meg a híreket, míg a statisztikai adatok egy másik részben találhatóak. Az oldal felhasználóbarát felületen nyújt részletes információkat a szezonokról, versenyekről, pilótákról és csapatokról.
+Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt egy többrészes weboldal rendszeren keresztül elérhetik a Formula-1 történelmének statisztikáit valamint aktuális híreket olvashatnak az F1 világából, és egy pontrendszeren alapuló fogadási játékot is játszhatnak futamról futamra. Az oldal külön HTML fájlban jeleníti meg a híreket, míg a statisztikai adatok egy másik részben találhatóak, a fogadásokat mindkét oldalról elérhetik a felhasználók. Az oldal felhasználóbarát felületen nyújt részletes információkat a szezonokról, versenyekről, pilótákról és csapatokról.
 
 # Elérés
 [Kattints ide](https://f1statsandnews.com/)
 
 # Funkciók
-- **Pilóták és csapatok statisztikái:** Minden jelenlegi és korábbi Forma 1-es versenyzőről és csapatról részletes adatok.
+- **Statisztika:** Pilóták és csapatok eredményei (Futamgyőzelmek, Bajnoki címek), Minden megrendezett verseny teljes végeredménye futamról futamra, illetve összes szezon végeredménye.
 - **Hírek:** Az F1 világának friss hírei külön HTML fájlban jelennek meg.
 - **Keresési funkció:** Gyors és hatékony keresés a pilóták és csapatok között.
 - **Interaktív statisztikák:** Grafikonok és vizualizációk a szezonok teljesítményéről.
