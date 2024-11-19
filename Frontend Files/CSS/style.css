@@ -159,21 +159,3 @@ footer>p {
 .hidden {
     display: none;
 }
-
-/*LOADER*/
-.loader {
-    width: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--gray-color);
-    box-shadow: 0 0 0 0 var(--gray-color);
-    animation: l1 1s infinite;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-@keyframes l1 {
-      100% {box-shadow: 0 0 0 30px #0000}
-}
