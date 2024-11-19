@@ -39,6 +39,6 @@ Ez a weboldal egy átfogó Forma 1-es platform, ahol a látogatók részletes st
 ```
 
 # Szerepek
-- Bartók Krisztián (API elkészítése, Adatok elérése, Hír oldalak felkeresése)
+- Bartók Krisztián (Adatok elérése, Hír oldalak felkeresése, Fogadás oldal elkészítése)
 - Ináncsi Krisztián (Frontend - Stílusfájlok, UI/UX tervezése & elkészítése)
 - Fábián Tamás (Backend - Adatbázis elkészítése, a frontend összekötése Djangó segítségével.)
