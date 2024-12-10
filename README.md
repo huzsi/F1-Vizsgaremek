@@ -19,23 +19,21 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 
 # Mappastruktúra
 ```
-├── source/                       # Fájlok
-│   └── css/                      # Stílus fájlok
-│       └── index/                # "index.html" stílus fájljai
-│           └── header.css
-│           └── main.css
-│           └── footer.css
-│           └── responsive.css
-│       └── stat/                 # "stat.html" stílus fájljai
-│           └── header.css
-│           └── main.css
-│           └── footer.css
-│           └── responsive.css
-│   └── img/                      # Képek
-│   └── js/                       # JavaScript Fájlok
-├── html/                         # ".html" kiterjesztésű fájlok
-    └── index.html                # Hírek weboldal
-    └── stat.html                 # Statisztikai weboldal
+├── !Frontend/                # Frontend fájlok (HTML, CSS, FONTS, JS)
+|   └── CSS/                  # CSS Fájlok
+|   └── Fonts/                # Betűtípusok
+|   └── JS/                   # Javascript fájlok
+├── application/              # Backend fájlok (Django)
+|   └── __pycache__           # Python Cache fájlok
+|   └── application/          # Django konfiguráló fájlok (Settings, URLs)
+|       └── __pycache__/      # Django Cache fájlok
+|   └── static_files/         # Ide illesztjük be a Frontend fájlok Statikus részét (CSS, JS, IMGs)
+|       └── admin/            # Django alap admin panel
+|       └── index/            # Countdown
+|       └── statics/          # Frontend mappából be másolt statikus fájlok
+|   └── templates/            # Megjeleníthető HTML fájlok
+|       └── static_pages/     # HTMLs
+|   └── tmp/                  # Temp Fájlok
 ```
 
 # Szerepek
