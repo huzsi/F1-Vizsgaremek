@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats & News</title>
+
+    <link rel="stylesheet" href="{% static 'index/style.css' %}">
+</head>
+<body>
+    <div class="text">
+        <h1>F<span style="color: white;">1</span> Stats & News</h1>
+        <h3>Release date</h3>
+        <h3 id ="target-time">2025-06-01</h3>
+        <h4 id="time">00:00:00:00</h4>
+    </div>
+    
+    <script src="{% static 'index/countdown.js' %}"></script>
+</body>
+</html>
