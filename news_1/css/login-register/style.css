@@ -1,0 +1,137 @@
+:root{
+    --carbon-color: #15151E;
+    --primary-color: #11998e;
+
+    --secondary-color: #38ef7d;
+    --white-color: #fff;
+    --gray-color: #9b9b9b;
+}
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Regular.otf");
+}
+body{
+    margin: 0;
+    background-color: var(--carbon-color);
+    color: white;
+    
+}
+h1, h2, h3, nav{
+    font-family: F1Font;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a.active{
+    padding-bottom: 5px;
+    border-bottom: 2px solid red;
+}
+.header-container{
+    color: white;
+    top: 0;
+}
+.page-header{
+    border-bottom: 1px solid rgb(128, 128, 128);
+    padding: 0 150px;
+}
+header{
+    border-bottom: 1px solid rgb(128, 128, 128);
+    padding: 0 150px;
+}
+nav ul{
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li{
+    border-right: 1px solid rgb(128, 128, 128);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
+h2{
+    padding: 15px 0;
+}
+.main-container{
+    height: 100vh;
+}
+main{
+    margin: 25px 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+
+}
+main section{
+    padding: 25px;  
+    top: 0;
+}
+main h3{  
+    font-size: small;
+}
+main h3>a{
+    color: white;
+}
+main h3>a:hover{
+    color: red;
+}
+.input-container{
+	position: relative;
+	margin-bottom:25px;
+    font-family: F1Font;
+}
+.input-container label{
+	position: absolute;
+	top:0px;
+	left:0px;
+	font-size:18px;
+	color:#fff;	
+    pointer-events: none;
+	transition: all 0.5s ease-in-out;
+}
+.input-container input{ 
+    border:0;
+    border-bottom:1px solid rgb(128, 128, 128);  
+    background:transparent;
+    padding: 10px 0;
+    font-size:18px;
+    color:#fff;
+}
+.input-container input:focus{ 
+    border:none;	
+    outline:none;
+    border-bottom:1px solid rgb(128,128,128);	
+}
+.btn{
+    text-align: center;
+	color:#fff;
+	background-color:red;
+	outline: none;
+    border: 0;
+    color: #fff;
+	padding:10px 20px;
+	text-transform:uppercase;
+	margin-top:25px;
+	border-radius:2px;
+	position:relative;
+}
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+	top:-12px;
+	font-size:14px;
+	
+}
+footer{
+    text-align: center;
+    border-top: 1px solid rgb(128, 128, 128);
+    bottom: 0;
+}
