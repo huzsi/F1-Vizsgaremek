@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats & News</title>
+    <link rel="stylesheet" href="../css/tracks/style.css">
+    <link rel="stylesheet" href="../css/tracks/responsive.css">
+</head>
+<body>
+    <div class="header-container">
+        <div class="page-header">
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><a href="auth.html">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="logo">
+                <h2><a href="index.html">F1 News</a></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Features</a></li>
+                    <li><a href="">Tech news</a></li>
+                    <li><a href="">Standlist</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="timer">
+            <h3 id="RaceName"></h3>
+            <p id="timerParagraph"></p>
+        </div>
+    </div>
+    <div class="main-container">
+        <main>
+                <section id="datas-section">
+                    <nav>
+                        <ul>
+                            <li><a href="#" class="active" id="circuitBtn">Circuit datas</a></li>
+                            <li><a href="#" id="winnersBtn">Last winners</a></li>
+                            <li><a href="#" id="eventBtn">Event date</a></li>
+                        </ul>
+                    </nav> 
+                    <div id="datas">
+                        <h2>Albert Park Grand Prix Circuit</h2>
+                        <div class="">
+                            <h3>First Grand Prix</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Number of Laps</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Circuit Length</h3>
+                            <p>-</p> 
+                        </div>
+                        <div class="">
+                            <h3>Race Distance</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Lap Record</h3>
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div id="pastWinners" class="hidden">
+                        <h2>Past winners</h2>
+                        <table>
+                            <tr>
+                                <th>Year</th>
+                                <th>Winner</th>
+                            </tr>
+                            <tr>
+                                <td>2024</td>
+                                <td>Carlos Sainz</td>
+                            </tr>
+                            <tr>
+                                <td>2023</td>
+                                <td>Max Verstappen</td>
+                            </tr>
+                            <tr>
+                                <td>2022</td>
+                                <td>Max Verstappen</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="regularEvents" class="hidden">
+                        <h2>Grand Prix Events</h2>
+                        <table>
+                            <tr>
+                                <th>Event</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td>FP1</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Sprint Qualify</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Sprint</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Qualify</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Race</td>
+                                <th>-</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="sprintEvent" class="hidden">
+                        <h2>Grand Prix Events</h2>
+                        <table>
+                            <tr>
+                                <th>Event</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td>FP1</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>FP2</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>FP3</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Qualify</td>
+                                <th>-</th>
+                            </tr>
+                            <tr>
+                                <td>Race</td>
+                                <th>-</th>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <section class="img-section">
+                    <img src="../img/tracks/Australia_Circuit.avif" alt="" height="75%">
+                </section>
+           
+        </main>
+    </div>
+    <footer>
+        <h2>F1 website</h2>
+        <h3>Created by: Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+        <h2>&copy; <span id="yearSpan"></span> | Licence: </h2>
+    </footer>
+    <script src="../js/tracks/data-switch.js"></script>
+    <script src="../js/tracks/timer.js"></script>
+    <script src="../js/index/time-changer.js"></script>
+</body>
+</html>
