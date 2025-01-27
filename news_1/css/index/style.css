@@ -1,0 +1,255 @@
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Regular.otf");
+}
+body{
+    margin: 0;
+    height: 200vh;
+}
+h1, h2, h3{
+    font-family: F1Font;
+}
+.page-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: smaller;
+    padding: 0 150px;
+    border-bottom:1px rgb(129, 128, 128) solid ;
+}
+.page-header nav{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+nav ul{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 15px 0px;
+    padding: 0;
+    
+}
+
+nav ul li{
+    border-right: 1px solid rgb(129, 128, 128);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
+nav ul li>a{
+    text-decoration: none;
+    color: white;
+}
+h2>a{
+    text-decoration: none;
+    color: white;
+}
+.active{
+    padding-bottom: 5px;
+    border-bottom: 2px solid red;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-bottom:1px rgb(129, 128, 128) solid;
+    padding: 0 150px;
+    top: 0;
+}
+
+.container{
+    font-family: F1Font;
+    background-image: url("../../img/mcl60_wallpaper_3840x2160.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-weight: bold;
+    height: 100vh;
+    border-bottom:1px rgb(129, 128, 128) solid  ;
+    
+}
+.container main{
+    display: flex;
+    padding: 25px 150px;
+    justify-content: center;
+    
+}
+.container main .event{
+    flex: 1 2;
+    background-color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+    display: flex; /* Flexbox alkalmazása */
+    flex-direction: column; /* Függőleges igazítás */
+    justify-content: center; /* Középre igazítás függőlegesen */
+    align-items: center; /* Középre igazítás vízszintesen */
+    border-radius: 15px;
+}
+table{
+    margin: 25px;
+    text-align: center;
+}
+th,td{
+    padding: 5px;
+    border-bottom:1px rgb(129, 128, 128) solid ;
+    width: 100px;
+}
+.container main>section{
+    flex: 2 1;
+}
+.news-content{
+    color: white;
+    background-color: #15151E;
+    padding: 25px 0;
+    height: 100vh;
+}
+.news-content fieldset{
+    margin: 0 150px;
+    padding: 25px;
+    border-radius: 0 15px 0 0;
+    border: red 3px solid;
+    border-bottom: none;
+    border-left: none;
+}
+.news-content main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.news-content main section{
+    padding: 25px;
+}
+.daily-section{
+    flex: 3 2;
+}
+.daily-section h3{
+    text-align: center;
+}
+.features-section{
+    flex: 2 3;
+}
+.features h3{
+    text-align: center;
+}
+.standlist-content{
+    background-image: url("../../img/SI202403090438_hires_jpeg_24bit_rgb.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    border-bottom: 1px solid rgb(129, 128, 128);
+    border-top: 1px solid rgb(129, 128, 128);
+    font-family: F1Font;
+}
+.standlist-content section{
+    flex: 1 2;
+}
+.standlist-section{
+    flex: 2 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    color: white;
+    display: flex; /* Flexbox alkalmazása */
+    flex-direction: column; /* Függőleges igazítás */
+    justify-content: center; /* Középre igazítás függőlegesen */
+    align-items: center; /* Középre igazítás vízszintesen */
+    margin: 10px 150px;
+}
+.standlist-content a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+.season-container{
+    padding: 10px 150px;
+    background-color: #15151E;
+    color: white;
+    text-align: center;
+    border-bottom: 3px solid red;
+    font-family: F1Font;
+}
+table.hidden{
+    display: none;
+}
+div.scrollmenu {
+   
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    align-items: center;
+    padding: 14px;
+    text-decoration: none;
+
+}  
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+  
+.scrollmenu a>p{
+    font-size: smaller;
+}
+.scrollmenu a p>span{
+    font-weight: bold;
+    font-size: large;
+}
+.tech-container{
+    padding: 25px 0;
+    height: 100vh;
+}
+.tech-container main{
+    display: flex;
+}
+.tech-container section{
+    padding: 15px;
+}
+.tech-container fieldset{
+    margin: 0 150px;
+    padding: 25px;
+    border-radius: 0 15px 0 0;
+    border: red 3px solid;
+    border-bottom: none;
+    border-left: none;
+}
+.t-daily-section{
+     flex: 3 1;
+}
+.latest-section{
+    flex: 1 3;
+}
+footer{
+    background-color: #15151E;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+footer fieldset{
+    border: red 3px solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+footer a{
+    text-decoration: none;
+    color: white;
+  }
+img{
+    height: 25px;
+    width: 32px;
+    border-radius: 5px;
+}
