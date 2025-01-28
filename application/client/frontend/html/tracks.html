@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats & News</title>
+    <link rel="stylesheet" href="static/css/tracks/style.css">
+    <link rel="stylesheet" href="static/css/tracks/responsive.css">
+</head>
+<body>
+    <div class="header-container">
+        <div class="page-header">
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><a href="auth.html">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="logo">
+                <h2><a href="/">F1 News</a></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Features</a></li>
+                    <li><a href="">Tech news</a></li>
+                    <li><a href="">Standlist</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="timer">
+            <span id="headline-flag"></span>
+            <h3 id="RaceName"><!--API lekérdezi--></h3>
+            <p id="timerParagraph"><!--jelenleg JS csinálja--></p>
+        </div>
+    </div>
+    <div class="main-container">
+        <main>
+                <section id="datas-section">
+                    <nav>
+                        <ul>
+                            <li><a href="#" class="active" id="circuitBtn">Circuit datas</a></li>
+                            <li><a href="#" id="winnersBtn">Last winners</a></li>
+                            <li><a href="#" id="eventBtn">Event date</a></li>
+                        </ul>
+                    </nav> 
+                    <div id="datas">
+                        <h2 id="circuitName"><!--API lekérdezi--></h2>
+                        <hr>
+                        <div class="">
+                            <h3>First Grand Prix</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Number of Laps</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Circuit Length</h3>
+                            <p>-</p> 
+                        </div>
+                        <div class="">
+                            <h3>Race Distance</h3>
+                            <p>-</p>
+                        </div>
+                        <div class="">
+                            <h3>Lap Record</h3>
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div id="pastWinners" class="hidden">
+                        <h2>Past winners</h2>
+                        <table>
+                            <tr>
+                                <th>Year</th>
+                                <th>Winner</th>
+                            </tr>
+                            <tr>
+                                <td>2024</td>
+                                <td>Carlos Sainz</td>
+                            </tr>
+                            <tr>
+                                <td>2023</td>
+                                <td>Max Verstappen</td>
+                            </tr>
+                            <tr>
+                                <td>2022</td>
+                                <td>Max Verstappen</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="regularEvents" class="hidden">
+                        <!--API lekérdezés-->
+                    </div>
+                    <div id="sprintEvents" class="hidden">
+                        <!--API lekérdezés-->
+                    </div>
+                    <hr>
+                </section>
+                <section class="img-section">
+                    <!--API lekérdezés elhelyezi a képet-->   
+                </section>
+        </main>
+        <main>
+            <h2>Highlights</h2>
+           
+        </main>
+    </div>
+    <footer>
+        <h2>F1 website</h2>
+        <h3>Created by: Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+        <h2>&copy; <span id="yearSpan"></span> | Licence: </h2>
+    </footer>
+    <script src="static/js/tracks/data-switch.js"></script>
+    <script src="static/js/tracks/timer.js"></script>
+    <script src="static/js/index/time-changer.js"></script>
+    <script src="static/js/tracks/tracks-frontend.js"></script>
+</body>
+</html>

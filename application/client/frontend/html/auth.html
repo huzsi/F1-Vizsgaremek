@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats & News</title>
+    <link rel="stylesheet" href="static/css/login-register/style.css">
+</head>
+<body>
+    <div class="header-container">
+        <div class="page-header">
+            <nav>
+                <ul>
+                    <li><a href="/">News</a></li>
+                    <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+        <header>
+            <div class="logo">
+                <h2>F1 Stats & News</h2>
+            </div>
+        </header>
+    </div>
+    <div class="main-container">
+        <main>
+            <nav>
+                <ul>
+                    <li><a href="#" id="loginBtn" class="active">Login</a></li>
+                    <li><a href="#" id="registerBtn">Register</a></li>
+                </ul>
+            </nav>
+            <section id="loginForm">
+                <h2>Sign in</h2>
+                <form>
+                <div class="input-container">
+                    <input type="text" name="username" id="username" required>
+                    <label>Username</label>		
+                </div>
+                <div class="input-container">		
+                    <input type="password" name="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                    <button type="button" class="btn">Login</button>
+                    
+            </form>
+            
+            </section>
+            <section id="registerForm" class="hidden">
+                <h2>Register</h2>
+                <form>
+                <div class="input-container">
+                    <input type="text" name="username" required>
+                    <label>Username</label>		
+                </div>
+                <div class="input-container">
+                    <input type="email" name="email" id="email" required>
+                    <label>Email</label>		
+                </div>
+                <div class="input-container">		
+                    <input type="password" name="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                    <button type="button" class="btn">Register</button>
+                    
+            </form>
+            
+            </section>
+            <h3 id="registerHeadline">Don't have an account yet? <a id="headlineBtn">Register</a></h3>	
+        </main>
+    </div>
+    <footer>
+        <h2>F1 website</h2>
+        <h3>Created by: Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+        <h2>&copy; <span id="yearSpan"></span> | Licence: </h2>
+    </footer>
+    <script src="static/js/index/time-changer.js"></script>
+    <script src="static/js/login-register/data-switch.js"></script>
+</body>
+</html>
