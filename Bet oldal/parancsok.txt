@@ -1,0 +1,46 @@
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('1','Oscar Piastri','PIA','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('2','Lando Norris','NOR','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('3','Charles Leclerc','LEC','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('4','Lewis Hamilton','HAM','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('5','Max Verstappen','VER',''),
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('6','Liam Lawson','LAW','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('7','George Russel','RUS','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('8','Andrea Kimi  Antonelli','ANT','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('9','Lance Stroll','STR',''),
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('10','Fernando Alonso','ALO','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('11','Pierre Gasly','GAS','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('12','Jack Doohan','DOO','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('13','Isack Hadjar','HAD','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('14','Yuki Tsunoda','TSU','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('15','Esteban Ocon','OCO','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('16','Oliver Bearman','BEA','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('17','Alexander Albon','ALB','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('18','Carlos Sainz','SAI','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('19','Nico Hulkenberg','HUL','');
+INSERT INTO `pilot`(`pilotId`, `fullName`, `triCode`, `rating`) VALUES ('20','Gabriel Bortoleto','BOR','');
+
+
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('1','au','FORMULA 1 AUSTRALIAN GRAND PRIX 2025','Australia');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('2','cn','FORMULA 1 HEINEKEN CHINESE GRAND PRIX 2025','China');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('3','jp','FORMULA 1 LENOVO JAPANESE GRAND PRIX 2025','Japan');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('4','bh','FORMULA 1 BAHRAIN GRAND PRIX 2025','Bahrain');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('5','sa','FORMULA 1 STC SAUDI ARABIAN GRAND PRIX 2025','Saudi Arabia');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('6','mi','FORMULA 1 CRYPTO.COM MIAMI GRAND PRIX 2025','Miami');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('7','er','FORMULA 1 AWS GRAN PREMIO DEL MADE IN ITALY E DELL`EMILIA-ROMAGNA 2025','Emilia-Romagna');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('8','mc','FORMULA 1 GRAND PRIX DE MONACO 2025','Monaco');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('9','es','FORMULA 1 ARAMCO GRAN PREMIO DE ESPAÑA 2025','Spain');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('10','ca','FORMULA 1 PIRELLI GRAND PRIX DU CANADA 2025','Canada');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('11','at','FORMULA 1 MSC CRUISES AUSTRIAN GRAND PRIX 2025','Austria');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('12','gb','FORMULA 1 QATAR AIRWAYS BRITISH GRAND PRIX 2025','Great Britian');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('13','be','FORMULA 1 BELGIAN GRAND PRIX 2025','Belgium');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('14','hu','FORMULA 1 LENOVO HUNGARIAN GRAND PRIX 2025','Hungary');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('15','nl','FORMULA 1 HEINEKEN DUTCH GRAND PRIX 2025','Netherlands');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('16','it','FORMULA 1 PIRELLI GRAN PREMIO D’ITALIA 2025','Italy');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('17','az','FORMULA 1 QATAR AIRWAYS AZERBAIJAN GRAND PRIX 2025','Azerbaijan');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('18','sg','FORMULA 1 SINGAPORE AIRLINES SINGAPORE GRAND PRIX 2025','Singapore');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('19','us','FORMULA 1 MSC CRUISES UNITED STATES GRAND PRIX 2025','United States');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('20','mx','FORMULA 1 GRAN PREMIO DE LA CIUDAD DE MÉXICO 2025','Mexico');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('21','br','FORMULA 1 MSC CRUISES GRANDE PRÊMIO DE SÃO PAULO 2025','Brazil');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('22','lv','FORMULA 1 HEINEKEN LAS VEGAS GRAND PRIX 2025','Las Vegas');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('23','qa','FORMULA 1 QATAR AIRWAYS QATAR GRAND PRIX 2025','Qatar');
+INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('24','ae','FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025','Abu Dhabi');
