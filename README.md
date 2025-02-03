@@ -13,7 +13,8 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 # Technológiai háttér
 - HTML5
 - CSS3
-- Python (Django)
+- Express
+- Node.JS
 - JavaScript
 - MySQL
 
