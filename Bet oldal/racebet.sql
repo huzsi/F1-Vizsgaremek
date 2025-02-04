@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 29. 15:13
+-- Létrehozás ideje: 2025. Feb 04. 09:23
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.0.30
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `racebet`
 --
-CREATE DATABASE IF NOT EXISTS `racebet` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `racebet`;
 
 -- --------------------------------------------------------
 
@@ -33,6 +31,35 @@ CREATE TABLE `bets` (
   `pilotId` int(11) NOT NULL,
   `bet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `constructors`
+--
+
+CREATE TABLE `constructors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `pilotId1` int(11) NOT NULL,
+  `pilotId2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `constructors`
+--
+
+INSERT INTO `constructors` (`id`, `name`, `pilotId1`, `pilotId2`) VALUES
+(1, 'McLaren', 1, 2),
+(2, 'Ferrari', 3, 4),
+(3, 'Red Bull Racing', 5, 6),
+(4, 'Mercedes', 7, 8),
+(5, 'Aston Martin', 9, 10),
+(6, 'Alpine', 11, 12),
+(7, 'Racing Bulls', 13, 14),
+(8, 'Haas', 15, 16),
+(9, 'Williams', 17, 18),
+(10, 'Kick Sauber', 19, 20);
 
 -- --------------------------------------------------------
 

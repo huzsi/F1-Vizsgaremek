@@ -44,3 +44,15 @@ INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('21','
 INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('22','lv','FORMULA 1 HEINEKEN LAS VEGAS GRAND PRIX 2025','Las Vegas');
 INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('23','qa','FORMULA 1 QATAR AIRWAYS QATAR GRAND PRIX 2025','Qatar');
 INSERT INTO `race`(`raceNumber`, `raceID`, `raceName`, `country`) VALUES ('24','ae','FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025','Abu Dhabi');
+
+
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('1','McLaren','1','2');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('2','Ferrari','3','4');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('3','Red Bull Racing','5','6');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('4','Mercedes','7','8');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('5','Aston Martin','9','10');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('6','Alpine','11','12');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('7','Racing Bulls','13','14');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('8','Haas','15','16');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('9','Williams','17','18');
+INSERT INTO `constructors`(`id`, `name`, `pilotId1`, `pilotId2`) VALUES ('10','Kick Sauber','19','20');
