@@ -5,31 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('mainHeader');
     let isDropdownVisible = false; // Változó a dropdown láthatóságának követéséhez
 
-    // Egér események a gombon
-    scheduleBtn.addEventListener('mouseenter', () => {
-        if (!isDropdownVisible) {
-            dropdownContent.style.display = 'block';
-            findNavClass();
-            findHeaderClass();
-        }
-    });
-
-    scheduleBtn.addEventListener('mouseleave', (event) => {
-        if (!isDropdownVisible && !dropdownContent.contains(event.relatedTarget)) {
-            dropdownContent.style.display = 'none';
-            findNavClass();
-            findHeaderClass();    
-        }
-    });
-
     // Kattintás eseménykezelő a gombra
     scheduleBtn.addEventListener('click', (event) => {
         event.preventDefault();
         if (isDropdownVisible) {
             dropdownContent.style.display = 'none';
+            topNav.style.backgroundColor = '';
+            header.style.backgroundColor = '';
+            scheduleBtn.classList.remove('active');
             isDropdownVisible = false;
         } else {
             dropdownContent.style.display = 'block';
+            topNav.style.backgroundColor = '#15151E';
+            header.style.backgroundColor = '#15151E';
+            scheduleBtn.classList.add('active');
             isDropdownVisible = true;
         }
     });
@@ -42,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdownContent.addEventListener('mouseleave', (event) => {
         if (!scheduleBtn.contains(event.relatedTarget) && !isDropdownVisible) {
             dropdownContent.style.display = 'none';
+            topNav.style.backgroundColor = '';
+            header.style.backgroundColor = '';
+            scheduleBtn.classList.remove('active');
         }
     });
 

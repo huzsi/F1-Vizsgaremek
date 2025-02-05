@@ -42,6 +42,22 @@ app.get('/racenames', (req, res) => {
       res.json(results);
     });
 });
+
+app.get('/race-schedule', (req, res) => {
+  const query = `
+      SELECT rd.id, rd.type, rd.event1, rd.event2, rd.event3, rd.event4, rd.event5, rn.name, rn.raceNumber 
+      FROM racedates rd 
+      JOIN racenames rn ON rd.id = rn.id 
+      ORDER BY rn.raceNumber ASC
+  `;
+
+  conn.query(query, (err, results) => {
+      if (err) {
+          return res.status(500).send(err);
+      }
+      res.json(results);
+  });
+});
 app.get('/trackinfo', (req, res) => {
   const raceId = req.query.id;
   
