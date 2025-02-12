@@ -1,78 +1,20 @@
-:root{
-    --carbon-color: #15151E
-}
-@font-face {
-    font-family: F1Font;
-    src: url("../../fonts/Formula1-Regular.otf");
-}
 body{
     margin: 0;
-    background-color: var(--carbon-color);
-}
-h1, h2, h3, nav{
+    background-color: #15151E;
     font-family: F1Font;
-}
-div.hidden{
-    display: none;
-}
-.flag-icon{
-    height: 50px;
-    width: 64px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-} 
-.header-container{
-    background-color: var(--carbon-color);
     color: white;
-}
-.page-header{
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
-    border-bottom:1px rgb(129, 128, 128) solid ;
-    padding: 0 150px;
 
-}
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom:1px rgb(129, 128, 128) solid ;
-    padding: 0 150px;
-    
-}
-.logo h2>a{
-    text-decoration: none;
-    color: white;
 }
 nav ul{
     display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
     list-style-type: none;
-    padding: 0;
     margin: 15px 0px;
-    font-weight: bold;
+    padding: 0;
 }
-nav ul li>a{
-    text-decoration: none;
-    color: white;
-    padding-bottom: 5px;
-}
-nav li>a:after {
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: #252525;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-  }
-  nav ul li{
+nav ul li{
     border-right: 1px solid rgb(129, 128, 128);
     padding: 0 25px;
 }
@@ -84,51 +26,110 @@ nav ul li:last-child{
 nav ul li:first-child{
     padding-left: 0;
 }
+a{
+    text-decoration: none;
+    color: white;
+}
+.active{
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--red-color);
+}
+.hidden{
+    display: none;
+}
+.flag-icon{
+    height: 50px;
+    width: 64px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+fieldset{
+    border-radius: 0 0 15px 0;
+    -webkit-border-radius: 0 0 15px 0;
+    -moz-border-radius: 0 0 15px 0;
+    -ms-border-radius: 0 0 15px 0;
+    -o-border-radius: 0 0 15px 0;
+    border: 1px rgb(128, 128, 128) solid;
+    border-top: none;
+    border-left: none;
+}
+table{
+    margin: 25px;
+    text-align: center;
+}
+th,td{
+    padding: 5px;
+    border-bottom: 1px solid var(--grey-color);
+    width: 100px;
+}
+/*header*/
+.top-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: smaller;
+    padding: 0 150px;
+    border-bottom: 1px solid var(--grey-color);
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px var(--grey-color) solid;
+    padding: 0 150px;
+    top: 0;
+}
 .timer{
     
     text-align: center;
     margin: 0 150px;
     border-bottom: 1px solid rgb(129, 128, 128);
-    padding: 25px 150px;
-    font-family: F1Font;
-}
-.main-container{
-    margin: 50px 150px;
-    color: white;
-    height: 100vh;
-}
-.main-container main{
-    display: flex;
-    justify-content: space-between;
-
-}
-#datas-section{
-    border-right: solid 1px rgb(129, 128, 128);
-    padding-right: 50px;
-}
-#datas-section nav{
-    display: flex; /* Flexbox alkalmazása */
-    flex-direction: column; /* Függőleges igazítás */
-    justify-content: center; /* Középre igazítás függőlegesen */
-    align-items: center; /* Középre igazítás vízszintesen */
    
-}
-#datas-section nav ul li a.active{
-    border-bottom: 2px solid red;
-}
-table{
     font-family: F1Font;
-    text-align: center;
 }
-th, td{
-    border-bottom: solid 1px rgb(129, 128, 128);
-    padding: 10px 25px ;
+/*main*/
+main{
+    margin: 25px 150px;
 }
+.track-container{
+    display: flex;
+    gap: 20px;
+}
+.trackData-content{
+    padding: 0 25px 0 0;
+}
+#datas h3{
+    font-size: larger;
+}
+#datas div{
+    border-bottom: #808080 solid 1px;
+}
+#datas div:last-child{
+    border-bottom: none;
+}
+#datas div p{
+    font-size: medium;
+    font-style: italic;
+    color: #c9c6c6;
+}
+/*footer*/
 footer{
     background-color: #15151E;
     color: white;
     text-align: center;
     padding: 25px;
-    font-size: small;
-    border-top: 1px solid rgb(129, 128, 128);
+    border-top: 1px rgb(129, 128, 128) solid;
+}
+footer fieldset{
+    border: red 3px solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
   }
+footer a{
+    text-decoration: none;
+    color: white;
+}

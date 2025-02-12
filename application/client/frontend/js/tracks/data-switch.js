@@ -3,15 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const winnersBtn = document.getElementById('winnersBtn');
     const eventBtn = document.getElementById('eventBtn');
     const datasDiv = document.getElementById('datas');
-    const winnersDiv = document.getElementById('pastWinners');
-    const regularEventDiv = document.getElementById('regularEvents');
-    const sprintEventDiv = document.getElementById('sprintEvents');
+    const winnersDiv = document.getElementById('lastWinners');
+    const eventDiv = document.getElementById('event-container');
+
 
     circuitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         datasDiv.classList.remove('hidden');
         winnersDiv.classList.add('hidden');
-        regularEventDiv.classList.add('hidden');
+        eventDiv.classList.add('hidden');
         
 
         setActiveButton(circuitBtn);
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         datasDiv.classList.add('hidden');
         winnersDiv.classList.remove('hidden');
-        regularEventDiv.classList.add('hidden');
+        eventDiv.classList.add('hidden');
       
         setActiveButton(winnersBtn);
     });
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         datasDiv.classList.add('hidden');
         winnersDiv.classList.add('hidden');
-        regularEventDiv.classList.remove('hidden');
+        eventDiv.classList.remove('hidden');
       
         setActiveButton(eventBtn);
     });

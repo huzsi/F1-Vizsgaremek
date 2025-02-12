@@ -3,37 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Stats & News</title>
-    <link rel="stylesheet" href="static/css/login-register/style.css">
+    <title>F1 Stats &amp; News</title>
+    <link rel="stylesheet" href="static/css/auth/style.css">
+    <link rel="stylesheet" href="static/css/auth/responsive.css">
+    <link rel="stylesheet" href="static/css/config.css">
 </head>
 <body>
     <div class="header-container">
-        <div class="page-header">
+        <nav class="top-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="">Stats</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <ul>
+                <li><a href="auth.html">Login</a></li>
+                <li><a href="auth.html">Register</a></li>
+            </ul>
+        </nav>
+        <!--Main header-->
+        <header id="header">
+            <div class="logo">
+                <h2><a href="/">F1 Stats &amp; News</a></h2>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="/">News</a></li>
-                    <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Tech news</a></li>
+                    <li><a href="#">Standlist</a></li>
+                    <li><a href="#">Schedule</a></li>
                 </ul>
             </nav>
-        </div>
-        <header>
-            <div class="logo">
-                <h2>F1 Stats & News</h2>
-            </div>
         </header>
     </div>
-    <div class="main-container">
-        <main>
-            <nav>
-                <ul>
-                    <li><a href="#" id="loginBtn" class="active">Login</a></li>
-                    <li><a href="#" id="registerBtn">Register</a></li>
-                </ul>
-            </nav>
-            <section id="loginForm">
-                <h2>Sign in</h2>
-                <form>
+    <main>
+        <nav>
+            <ul>
+                <li><a href="#" id="loginBtn" class="active">Login</a></li>
+                <li><a href="#" id="registerBtn">Register</a></li>
+            </ul>
+        </nav>
+        <section id="login-section">
+            <h2>Sign in</h2>
+            <form action="">
                 <div class="input-container">
                     <input type="text" name="username" id="username" required>
                     <label>Username</label>		
@@ -42,14 +54,14 @@
                     <input type="password" name="password" id="password" required>
                     <label>Password</label>
                 </div>
-                    <button type="button" class="btn">Login</button>
-                    
+                <button type="button" class="btn">Login</button>
             </form>
-            
-            </section>
-            <section id="registerForm" class="hidden">
-                <h2>Register</h2>
-                <form>
+            <h3 id="registerHeadline">Don't have an account yet? <a id="headlineBtn">Register</a></h3>	
+        </section>
+
+        <section id="register-section" class="hidden">
+            <h2>Register</h2>
+            <form action="">
                 <div class="input-container">
                     <input type="text" name="username" required>
                     <label>Username</label>		
@@ -63,19 +75,19 @@
                     <label>Password</label>
                 </div>
                     <button type="button" class="btn">Register</button>
-                    
             </form>
-            
-            </section>
-            <h3 id="registerHeadline">Don't have an account yet? <a id="headlineBtn">Register</a></h3>	
-        </main>
-    </div>
+        </section>
+    </main>
     <footer>
-        <h2>F1 website</h2>
-        <h3>Created by: Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
-        <h2>&copy; <span id="yearSpan"></span> | Licence: </h2>
-    </footer>
-    <script src="static/js/index/time-changer.js"></script>
-    <script src="static/js/login-register/data-switch.js"></script>
+        <div>
+                <h2><a href="https://www.formula1.com/">F1 website</a></h2>
+              <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+              <h2>&copy; <span id="yearSpan">2025</span></h2>
+              
+        </div>
+          <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+      </footer>
+
+    <script src="static/js/auth/data-switch.js"></script>
 </body>
 </html>

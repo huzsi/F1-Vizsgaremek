@@ -3,283 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Stats & News</title>
-    <link rel="stylesheet" type="text/css" href="static/css/index/style.css">
-    <link rel="stylesheet" type="text/css" href="static/css/index/responsive.css">
+    <title>F1 Stats &amp; News</title>
+
+    <link rel="stylesheet" href="static/css/index/style.css">
+    <link rel="stylesheet" href="static/css/index/responsive.css">
+    <link rel="stylesheet" href="static/css/config.css">
 </head>
 <body>
-    <div class="container">
-        <div class="page-header">
-            <nav>
-                <ul>
-                    <li><a href="/" class="active">Home</a></li>
-                    <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <li><a href="auth.html">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                </ul>
-            </nav>
-        </div>
-        <header>
+    <div class="header-container">
+        <nav class="top-nav" id="topNav">
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <ul>
+                <li><a href="auth.html">Login</a></li>
+                <li><a href="auth.html">Register</a></li>
+            </ul>
+        </nav>
+        <!--Main header-->
+        
+        <header id="mainHeader" class="header-transparent">
             <div class="logo">
                 <h2><a href="/">F1 News</a></h2>
             </div>
             <nav>
                 <ul>
-                    <li>Features</li>
-                    <li>Tech news</li>
-                    <li>Standlist</li>
-                    <li>Schedule</li>
+                    <li><a href="#news">Features</a></li>
+                    <li><a href="#techNews">Tech news</a></li>
+                    <li><a href="#standlist">Standlist</a></li>
+                    <li class="dropdown"><a href="#" id="scheduleBtn">Schedule</a></li>
                 </ul>
             </nav>
         </header>
-        <main>
-            <section class="event">
-                <h3 id="RaceName">TBA</h3>
-                <p id="timerParagraph">TBA</p>
-                <hr>
-
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="fullSchedule-container">
+                <a href="#schedule">Full schedule &gt;</a>
+            </div>
+            <div id="schedule-content">
+                <!--API-->
+            </div>
+            
+        </div>
+        <!--section #1-->
+        <div class="event-container">
+            <div class="event">
+                <h3 id="RaceName"></h3>
+                <p id="timerParagraph"></p>
+                
                 <table id="regularEvent">
-                   <!--Később API lekérdezése lesz-->
+                    <!--API-->
                 </table>
                 <table id="sprintEvent" class="hidden">
-                    <!--Később API lekérdezése lesz-->
+                    <!--API-->
                 </table>
-            </section>
-            <section>
+            </div>
+            <div class="event-spacer">
                 <!--Spacer for 2:3 flex-->
-            </section>
-        </main>
-    </div>
-    <div class="news-content">
-        <fieldset>
-            <legend><h1>News</h1></legend>
-        
-            <main>
-                <section class="daily-section">
-                    <h3>Daily News</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab corporis iste fuga at. Odit est, nisi libero at ullam dolorum eius nulla. Quos possimus, iure ipsam numquam tempore magnam perferendis.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut explicabo id esse! Ullam fugit nostrum in dolore? Deserunt nesciunt, ipsa dolor officiis alias commodi iusto voluptas amet est incidunt sequi?</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, ipsa maiores ipsum laudantium neque obcaecati nam nemo earum quia officiis veritatis facere ratione adipisci voluptatibus consequatur enim, repudiandae soluta. Alias.</p>
-                </section>
-                <section class="features-section">
-                    <h3>Features</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, aut. Inventore assumenda labore nam omnis necessitatibus ut fugit quidem, dicta eaque voluptatem illo. Obcaecati ut, ducimus natus quia debitis perferendis!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia odio sint debitis dolorum consequuntur vero ea, aliquam consectetur ad. Veniam quasi quisquam cupiditate adipisci quis reiciendis maiores porro sed ex.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod alias accusamus nostrum cumque aliquid animi enim doloribus, fugiat optio consectetur consequuntur, voluptatum officiis iste molestiae tenetur quas sit? Necessitatibus, libero!</p>
-                </section>
-            </main>
-        </fieldset>
-    </div>
-    <div class="standlist-content">
-        <section>
-            
-        </section>
-        <section class="standlist-section">
-            <nav>
-                <ul>
-                    <li><a href="#" id="driverBtn" class="active">Driver standlist</a></li>
-                    <li><a href="#" id="constructorBtn">Constructor standlist</a></li>
-                    <li><a href="#" id="raceBtn">Race results</a></li>
-                </ul>
-            </nav>
-            <table id="driverTable">
-                <tr><th colspan="3">Driver Standlist</th></tr>
-                <tr>
-                    <td>1</td> 
-                    <td>VER</td> 
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>2</td> 
-                    <td>NOR</td> 
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>3</td> 
-                    <td>LEC</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>PIA</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>SAI</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>RUS</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>HAM</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>PER</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>ALO</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>GAS</td>
-                    <td>0</td>
-                </tr>
-            </table>
-            <table id="constructorTable" class="hidden">
-                <tr>
-                    <th colspan="3">Constructor Standlist</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>McLaren</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Ferrari</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>RedBull</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Mercedes</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Racing Bulls</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Williams</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Stake Sauber</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Haas</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Aston Martin</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Alpine</td>
-                    <td>0</td>
-                </tr>
-
-            </table>
-            <table id="raceTable" class="hidden">
-                <tr>
-                    <th colspan="4">Race results</th>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-                <tr>
-                    <td>Race name</td>
-                    <td>first</td>
-                    <td>second</td>
-                    <td>third</td>
-                </tr>
-            </table>
-        </section>
-        <!--<a href="https://f1statsandnews.com/fooldal">More stats</a>-->
-    </div>
-    <div class="season-container">
-        <!--Szezon futamai egymás mellé-->
-        <h3>Upcoming Races</h3>
-        <div class="scrollmenu" id="racenames-container">
-            <!--API lekérdezés-->
+            </div>
         </div>
     </div>
-    <div class="tech-container">
-        <fieldset><legend><h2>Tech News</h2></legend>
-        <main>
-            <section class="latest-section">
-                <h3>Latest news</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur vel, numquam laboriosam magnam recusandae cum molestiae doloribus unde ex voluptatibus, veritatis corrupti repellat veniam a cupiditate molestias voluptatum ea quisquam?</p>
-            </section>
-            <section class="t-daily-section">
-                <h3>Daily tech</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quia molestias, possimus unde mollitia accusantium natus excepturi illum eveniet. Atque modi labore cumque dolorem perferendis. Omnis similique exercitationem repellendus itaque!</p>
-            </section>
-        </main>
-    </fieldset>
-    </div>
+    <main>
+        <!--section #2-->
+        <section class="news" id="news">
+            <fieldset>
+                <legend><h2>News</h2></legend>
+                <div class="news-container">
+                    
+                    <div class="daily-content">
+                        <h3>Daily News</h3>
+                        <!--API-->
+                        <div class="dailyNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-content">
+                        <h3>Features</h3>
+                        <!--API-->
+                        <div class="featuresNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </section>
+        <section class="standlist" id="standlist">
+            <div class="standlist-spacer">
+                <!--Spacer for 2:1 flex-->
+            </div>
+            <div class="standlist-content">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="driverBtn" class="active">Driver standlist</a></li>
+                        <li><a href="#" id="constructorBtn">Constructor standlist</a></li>
+                        <li><a href="#" id="raceBtn">Race results</a></li>
+                    </ul>
+                </nav>
+                <table id="driverTable">
+                    <!--API-->
+                    <tr><th colspan="3">Driver Standlist</th></tr>
+                    <tr>
+                        <td>1</td> 
+                        <td>VER</td> 
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>2</td> 
+                        <td>NOR</td> 
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>3</td> 
+                        <td>LEC</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>PIA</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>SAI</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>RUS</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>HAM</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>PER</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>ALO</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GAS</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+                <table id="constructorTable" class="hidden">
+                    <!--API-->
+                </table>
+                <table id="raceTable" class="hidden">
+                    <!--API-->
+                </table>
+            </div>
+        </section>
+        <section class="schedule" id="schedule">
+            <h3>Upcoming Races</h3>
+            <div class="scrollmenu">
+                <div class="inner" id="racenames-container">
+
+                </div>
+            </div>
+        </section>
+        <section class="tech-news" id="techNews">
+            <fieldset>
+                <legend><h2>Tech News</h2></legend>
+                <div class="techNews-container">
+                    <div class="features-content">
+                        <h3>Latest news</h3>
+                        <!--API-->
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero provident nisi molestiae! At commodi sed deleniti accusantium harum iure facere laboriosam esse, aspernatur autem dolore eaque earum recusandae consectetur cupiditate!</p>
+                    </div>
+                    <div class="daily-content">
+                        <h3>Daily news</h3>
+                        <!--API-->
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi esse rem eum molestias maxime, similique neque deleniti voluptate, itaque ut consequuntur repellendus adipisci ipsum laudantium quam at. Animi, maiores! Magni?</p>
+                    </div>
+                </div>  
+            </fieldset>
+        </section>
+    </main>
     <footer>
-        <fieldset><legend><h2><a href="">F1 Website</a></h2></legend></fieldset>
-        <h3>Created by: Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
-        <h3>&copy; <span id="yearSpan"></span> | Licence: </h3>
+        <div>
+            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
+            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            <h2>&copy; <span id="yearSpan">2025</span></h2>   
+        </div>
+        <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+        <p>Links: - </p>
     </footer>
+
+    <!--client-->
+    <script src="static/js/index/indexApiManager.js"></script>
+    <!--Frontend js-->
     <script src="static/js/index/data-switch.js"></script>
-    <script src="static/js/index/time-changer.js"></script>
-    <script src="/static/js/index/schedule-frontend.js"></script>
+    <script src="static/js/index/dropdown.js"></script>
+    <script src="static/js/index/scroll.js"></script>
+    <script src="static/js/bootstrap.js"></script>
 </body>
 </html>
