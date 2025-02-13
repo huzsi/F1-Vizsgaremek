@@ -1,0 +1,130 @@
+:root{
+    --carbon-color: #15151E
+}
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Regular.otf");
+}
+body{
+    margin: 0;
+    background-color: var(--carbon-color);
+}
+h1, h2, h3, nav{
+    font-family: F1Font;
+}
+div.hidden{
+    display: none;
+} 
+.header-container{
+    background-color: var(--carbon-color);
+    color: white;
+}
+.page-header{
+    display: flex;
+    justify-content: space-between;
+    font-size: smaller;
+    border-bottom:1px rgb(129, 128, 128) solid ;
+    padding: 0 150px;
+
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px rgb(129, 128, 128) solid ;
+    padding: 0 150px;
+    
+}
+.logo h2>a{
+    text-decoration: none;
+    color: white;
+}
+nav ul{
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0px;
+    font-weight: bold;
+}
+nav ul li>a{
+    text-decoration: none;
+    color: white;
+    padding-bottom: 5px;
+}
+nav li>a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #252525;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  nav ul li{
+    border-right: 1px solid rgb(129, 128, 128);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
+
+main{
+    margin: 15px 150px;
+    color: white;
+    display: flex;
+    gap: 20px;
+}
+.creator-section{
+    flex: 2 3;
+    border-right: 1px solid gray;
+}
+.preview-section{
+    flex: 3 2;
+}
+.selector-container{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 15px 10px;
+    border-bottom: 1px solid gray;
+    margin-left: 0;
+}
+
+.editor-container{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 0 10px;
+    margin-left: 0;
+}
+
+.element-container{
+    display: flex;
+
+    gap: 10px;
+    border-bottom: 1px solid gray;
+    padding: 15px 0;
+}
+.input-container{
+    flex: 2 1;
+    width: 100%;
+}
+textarea{
+    width: 100%;
+}
+.buttons-container{
+    display: flex;
+    flex: 1 2;
+    flex-direction: column;
+    padding: 0 10px;
+   
+    gap: 10px;
+}
