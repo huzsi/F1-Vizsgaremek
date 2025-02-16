@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats &amp; News</title>
+
+    <link rel="stylesheet" href="static/css/index/style.css">
+    <link rel="stylesheet" href="static/css/index/responsive.css">
+    <link rel="stylesheet" href="static/css/config.css">
+</head>
+<body>
+    <div class="header-container" id="header-container">
+        <nav class="top-nav" id="topNav">
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <ul>
+                <li><a href="auth.html">Login</a></li>
+                <li><a href="auth.html">Register</a></li>
+            </ul>
+        </nav>
+        <!--Main header-->
+        
+        <header id="mainHeader" class="header-transparent">
+            <div class="logo">
+                <h2><a href="/">F1 News</a></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#news">Features</a></li>
+                    <li><a href="#techNews">Tech news</a></li>
+                    <li><a href="#standlist">Standlist</a></li>
+                    <li class="dropdown"><a href="#" id="scheduleBtn">Schedule</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="fullSchedule-container">
+                <a href="#schedule">Full schedule &gt;</a>
+            </div>
+            <div id="schedule-content">
+                <!--API-->
+            </div>
+            
+        </div>
+        <!--section #1-->
+        <div class="event-container">
+            <div class="event">
+                <h3 id="RaceName"></h3>
+                <p id="timerParagraph"></p>
+                
+                <table id="regularEvent">
+                    <!--API-->
+                </table>
+                <table id="sprintEvent" class="hidden">
+                    <!--API-->
+                </table>
+            </div>
+            <div class="event-spacer">
+                <!--Spacer for 2:3 flex-->
+            </div>
+        </div>
+    </div>
+    <main>
+        <!--section #2-->
+        <section class="news" id="news">
+            <fieldset>
+                <legend><h2>News</h2></legend>
+                <div class="news-container">
+                    
+                    <div class="daily-content">
+                        <h3>Daily News</h3>
+                        <!--API-->
+                        <div class="dailyNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-content">
+                        <h3>Features</h3>
+                        <!--API-->
+                        <div class="featuresNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </section>
+        <section class="standlist" id="standlist">
+            <div class="standlist-spacer">
+                <!--Spacer for 2:1 flex-->
+            </div>
+            <div class="standlist-content">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="driverBtn" class="active">Driver standlist</a></li>
+                        <li><a href="#" id="constructorBtn">Constructor standlist</a></li>
+                        <li><a href="#" id="raceBtn">Race results</a></li>
+                    </ul>
+                </nav>
+                <table id="driverTable">
+                    <!--API-->
+                </table>
+                <table id="constructorTable" class="hidden">
+                    <!--API-->
+                </table>
+                <table id="raceTable" class="hidden">
+                    <!--API-->
+                </table>
+            </div>
+        </section>
+        <section class="schedule" id="schedule">
+            <h3>Upcoming Races</h3>
+            <div class="scrollmenu">
+                <div class="inner" id="racenames-container">
+                    <!--API-->
+                </div>
+            </div>
+        </section>
+        <section class="tech-news" id="techNews">
+            <fieldset>
+                <legend><h2>Tech News</h2></legend>
+                <div class="techNews-container">
+                    
+                    <div class="daily-content">
+                        <h3>Daily News</h3>
+                        <!--API-->
+                        <div class="dailyNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-content">
+                        <h3>Features</h3>
+                        <!--API-->
+                        <div class="featuresNews-container">
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                            <div class="newsDiv">
+                                <a href="#">
+                                    <h4>Headline</h4>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </fieldset>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
+            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            <h2>&copy; <span id="yearSpan"></span></h2>   
+        </div>
+        <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+        <p>Links: - </p>
+    </footer>
+
+    <!--client-->
+    <script src="static/js/index/indexApiManager.js"></script>
+    <!--Frontend js-->
+    <script src="static/js/index/data-switch.js"></script>
+    <script src="static/js/index/dropdown.js"></script>
+    <script src="static/js/index/scroll.js"></script>
+    <script src="static/js/time-changer.js"></script>
+    <script src="static/js/index/header.js"></script>
+
+</body>
+</html>

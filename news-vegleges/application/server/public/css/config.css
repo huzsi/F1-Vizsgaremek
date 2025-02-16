@@ -1,0 +1,56 @@
+:root{
+    --carbon-color: #15151E;
+    --red-color: red;
+    --grey-color: #808080;
+    
+}
+@font-face {
+    font-family: F1Font;
+    src: url("../fonts/Formula1-Bold.otf");
+}
+body{
+    margin: 0;
+    background-color: #15151E;
+    font-family: F1Font;
+    color: white;
+}
+.PIA, .NOR{
+    border-left: 5px solid #FF8000;
+
+}
+.LEC, .HAM{
+    border-left: 5px solid #E8002D;
+
+}
+.VER, .LAW{
+    border-left: 5px solid #3671C6;
+
+}
+.RUS, .ANT{
+    border-left: 5px solid #27F4D2;
+
+}
+.STR, .ALO{
+    border-left: 5px solid #229971;
+
+}
+.GAS, .DOO{
+    border-left: 5px solid #FF87BC;
+
+}
+.HAD, .TSU{
+    border-left: 5px solid #6692FF;
+
+}
+.OCO, .BEA{
+    border-left: 5px solid #B6BABD;
+
+}
+.ALB, .SAI{
+    border-left: 5px solid #64C4FF;
+
+}
+.HUL, .BOR{
+    border-left: 5px solid 	#52E252;
+
+}
