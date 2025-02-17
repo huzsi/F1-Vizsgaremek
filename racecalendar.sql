@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 04. 11:21
+-- Létrehozás ideje: 2025. Feb 17. 15:15
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.0.30
 
@@ -67,6 +67,33 @@ INSERT INTO `circuitdatas` (`id`, `firstGP`, `lapNumber`, `length`, `raceDistanc
 ('qa', '2021', 57, 5.419, 308.611, '1:22.384', 'NOR', '2024'),
 ('ae', '2009', 58, 5.281, 306.183, '1:25.637', 'MAG', '2024'),
 ('ca', '1978', 70, 4.361, 305.27, '1:13.078', 'BOT', '2019');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `constructornames`
+--
+
+CREATE TABLE `constructornames` (
+  `constructorId` int(11) NOT NULL,
+  `constructorName` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `constructornames`
+--
+
+INSERT INTO `constructornames` (`constructorId`, `constructorName`) VALUES
+(1, 'McLaren'),
+(2, 'Ferrari'),
+(3, 'Red Bull Racing'),
+(4, 'Mercedes'),
+(5, 'Aston Martin'),
+(6, 'Alpine'),
+(7, 'Racing Bulls'),
+(8, 'Haas'),
+(9, 'Williams'),
+(10, 'Kick Sauber');
 
 -- --------------------------------------------------------
 
@@ -177,6 +204,45 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullName`, `trackName`) VA
 (18, 'sg', 'Singapore', 'FORMULA 1 SINGAPORE AIRLINES SINGAPORE GRAND PRIX 2025', 'Marina Bay Street Circuit'),
 (19, 'us', 'United States', 'FORMULA 1 MSC CRUISES UNITED STATES GRAND PRIX 2025', 'Circuit of The Americas');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `standlist`
+--
+
+CREATE TABLE `standlist` (
+  `driverId` int(11) NOT NULL,
+  `driverName` varchar(255) NOT NULL,
+  `constructorId` int(11) NOT NULL,
+  `constructor` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `standlist`
+--
+
+INSERT INTO `standlist` (`driverId`, `driverName`, `constructorId`, `constructor`) VALUES
+(1, 'Oscar Piastri', 1, 'mclaren'),
+(2, 'Lando Norris', 1, 'mclaren'),
+(3, 'Charles Leclerc', 2, 'ferrari'),
+(4, 'Lewis Hamilton', 2, 'ferrari'),
+(5, 'Max Verstappen', 3, 'redbull'),
+(6, 'Liam Lawson', 3, 'redbull'),
+(7, 'George Russell', 4, 'mercedes'),
+(8, 'Andrea Kimi Antonelli', 4, 'mercedes'),
+(9, 'Lance Stroll', 5, 'astonmartin'),
+(10, 'Fernando Alonso', 5, 'astonmartin'),
+(11, 'Pierre Gasly', 6, 'alpine'),
+(12, 'Jack Doohan', 6, 'alpine'),
+(13, 'Isack Hadjar', 7, 'racingbulls'),
+(14, 'Yuki Tsunoda', 7, 'racingbulls'),
+(15, 'Esteban Ocon', 8, 'haas'),
+(16, 'Oliver Bearman', 8, 'haas'),
+(17, 'Alexander Albon', 9, 'williams'),
+(18, 'Carlos Sainz', 9, 'williams'),
+(19, 'Nico Hulkeberg', 10, 'sauber'),
+(20, 'Gabriel Bortoleto', 10, 'sauber');
+
 --
 -- Indexek a kiírt táblákhoz
 --
@@ -186,6 +252,12 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullName`, `trackName`) VA
 --
 ALTER TABLE `circuitdatas`
   ADD KEY `id` (`id`);
+
+--
+-- A tábla indexei `constructornames`
+--
+ALTER TABLE `constructornames`
+  ADD PRIMARY KEY (`constructorId`);
 
 --
 -- A tábla indexei `eventtype`
@@ -205,6 +277,39 @@ ALTER TABLE `racedates`
 --
 ALTER TABLE `racenames`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `standlist`
+--
+ALTER TABLE `standlist`
+  ADD PRIMARY KEY (`driverId`),
+  ADD KEY `constructorId` (`constructorId`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `constructornames`
+--
+ALTER TABLE `constructornames`
+  MODIFY `constructorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT a táblához `standlist`
+--
+ALTER TABLE `standlist`
+  MODIFY `driverId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Megkötések a kiírt táblákhoz
+--
+
+--
+-- Megkötések a táblához `standlist`
+--
+ALTER TABLE `standlist`
+  ADD CONSTRAINT `standlist_ibfk_1` FOREIGN KEY (`constructorId`) REFERENCES `constructornames` (`constructorId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
