@@ -44,21 +44,30 @@ fieldset{
 }
 
 table{
-    margin: 25px;
+    margin: 15px;
     text-align: center;
-    border-spacing: 0;
+    border-collapse: collapse;
+}
+tr{
+    border-bottom: 10px solid transparent;
 }
 th,td{
-    padding: 5px;
-    border-bottom: 1px solid var(--grey-color);    
-    width: 100px;
+    text-align: center;
     border-spacing: 0;
-    margin: 0;
+    margin: 10px;
+}
+td{
+    border-right: 1px solid var(--grey-color);
+    padding: 5px 15px;
+    
+}
+td:last-child{
+   border: none;
+  
 }
 tr{
     margin: 0;
 }
-
 img{
     height: 25px;
     width: 32px;
@@ -127,6 +136,20 @@ header{
 }
 .event-container .event-spacer{
     flex: 2 1;
+}
+#regularEvent table, #sprintEvent table{
+    margin: 25px;
+    text-align: center;
+}
+#regularEvent th, #sprintEvent th{
+    padding: 5px;
+    border-bottom: 1px solid var(--grey-color) !important;
+    width: 100px;
+}
+#regularEvent td, #sprintEvent td{
+    padding: 5px;
+    border-bottom: 1px solid var(--grey-color);
+    width: 100px;
 }
 /* Dropdown stílusok */
 .dropdown {

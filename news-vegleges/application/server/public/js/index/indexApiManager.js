@@ -1,22 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const container = document.getElementById('racenames-container');
+    /*event API*/
     fetch('/racenames')
         .then(response => response.json())
         .then(raceData => {
-            const container = document.getElementById('racenames-container');
-            const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-
+            /*Dropdown API */
             fetch('/race-schedule')
                 .then(response => response.json())
                 .then(scheduleData => {
-                    let nextRace = null;
+                    let nextRace = scheduleData.find(schedule => new Date(schedule.event1) > new Date());
 
-                    // Feldolgozás és a legközelebbi futam kiválasztása
                     scheduleData.forEach(schedule => {
                         const event1Date = new Date(schedule.event1);
-                        if (!nextRace || (event1Date > new Date() && event1Date < new Date(nextRace.event1))) {
-                            nextRace = schedule;
-                        }
-
                         const correspondingRace = raceData.find(race => race.id === schedule.id);
                         const day = event1Date.getDate();
                         const month = monthNames[event1Date.getMonth()];
@@ -39,19 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const event1Date = new Date(nextRace.event1);
                         const day = event1Date.getDate();
                         const month = monthNames[event1Date.getMonth()];
-
-                        const correspondingRace = raceData.find(race => race.id === nextRace.id);
-
-                        // Event konténer feltöltése
-                        const eventContainer = document.querySelector('.event-container .event');
-                        const regularEventTable = document.getElementById('regularEvent');
-                        const sprintEventTable = document.getElementById('sprintEvent');
                         const raceNameHeader = document.getElementById('RaceName');
                         const timerParagraph = document.getElementById('timerParagraph');
 
                         raceNameHeader.textContent = nextRace.name;
 
-                        const events = (nextRace.type === 1) ? [
+                        const events = nextRace.type === 1 ? [
                             { event: 'FP1', date: nextRace.event1 },
                             { event: 'FP2', date: nextRace.event2 },
                             { event: 'FP3', date: nextRace.event3 },
@@ -65,20 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             { event: 'Race', date: nextRace.event5 }
                         ];
 
-                        const targetTable = (nextRace.type === 1) ? regularEventTable : (nextRace.type === 2) ? sprintEventTable : null;
+                        const targetTable = nextRace.type === 1 ? document.getElementById('regularEvent') : document.getElementById('sprintEvent');
 
                         if (targetTable) {
                             targetTable.innerHTML = `
-                                <table>
+                                <table class="event-Table">
                                     <tr>
                                         <th>Event</th>
+
                                         <th colspan="2">Date</th>
                                     </tr>
                                     ${events.map(event => {
                                         const eventDate = new Date(event.date);
                                         const day = eventDate.getDate();
                                         const month = monthNames[eventDate.getMonth()];
-                                        const time = eventDate.toTimeString().slice(0, 5);  // HH:MM formátum
+                                        const time = eventDate.toTimeString().slice(0, 5);
 
                                         return `
                                             <tr>
@@ -92,16 +82,97 @@ document.addEventListener('DOMContentLoaded', () => {
                             `;
                         }
 
-                        // Visszaszámláló beállítása
                         updateCountdown(timerParagraph, new Date(nextRace.event1));
-                        setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);  // Frissítés minden percben
+                        setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
                     }
                 })
                 .catch(error => console.error('Error fetching race schedule:', error));
         })
         .catch(error => console.error('Error fetching racenames:', error));
+    /*Scroll-menu API*/
+    fetch('/race-schedule')
+        .then(response => response.json())
+        .then(data => {
+            const scheduleContent = document.getElementById('schedule-content');
+            const today = new Date();
+
+            const upcomingRaces = data
+                .filter(race => new Date(race.event1) >= today)
+                .sort((a, b) => new Date(a.event1) - new Date(b.event1))
+                .slice(0, 3);
+
+            const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+            upcomingRaces.forEach(race => {
+                const event1Date = new Date(race.event1);
+                const event5Date = new Date(race.event5);
+                const formattedDate = `${monthNames[event1Date.getMonth()]} ${event1Date.getDate()} - ${event5Date.getDate()}`;
+
+                scheduleContent.innerHTML += `
+                    <div>
+                        <a href="tracks.html?id=${race.id}&trackName=${race.trackName}&fullName=${race.fullName}" id="${race.id}">
+                            <fieldset>
+                                <legend>
+                                    <p>Round ${race.raceNumber}</p>
+                                </legend>
+                                <img src="static/img/flags/${race.id}.svg" alt="${race.name}">
+                                <h4>${race.name}</h4>
+                                <p>${formattedDate}</p>
+                            </fieldset>
+                        </a>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => console.error('Error fetching race schedule:', error));
+    /*Standlist API-s*/ 
+    fetch('/driverStandlist')
+        .then(response => response.json())
+        .then(data => {
+            const driverTable = document.getElementById('driverTable');
+            
+            driverTable.innerHTML += `
+                <tr>
+                    <th colspan="3">Driver Standlist</th>
+                </tr>
+            `;
+
+            data.forEach((driver, index) => {
+                driverTable.innerHTML += `
+                    <tr>
+                        <td class="${driver.constructor}">${index + 1}</td>
+                        <td>${driver.driverName}</td>
+                        <td class="${driver.constructor}">300</td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(error => console.error('Error fetching driver standlist:', error));
+
+    fetch('/constructorStandlist')
+        .then(response => response.json())
+        .then(data => {
+            const constructorTable = document.getElementById('constructorTable');
+            
+            constructorTable.innerHTML += `
+                <tr>
+                    <th colspan="3">Constructor Standlist</th>
+                </tr>
+            `;
+            data.forEach((constructor, index) => {
+                constructorTable.innerHTML += `
+                    <tr>
+                        <td class="${constructor.constructor}">${index + 1}</td>
+                        <td>${constructor.constructorName}</td>
+                        <td class="${constructor.constructor}">500</td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(error => console.error('Error fetching constructor standlist:', error));
 });
 
+/*Methods*/
 function updateCountdown(element, eventDate) {
     const now = new Date();
     const distance = eventDate - now;
@@ -112,139 +183,3 @@ function updateCountdown(element, eventDate) {
 
     element.textContent = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/race-schedule')
-        .then(response => response.json())
-        .then(data => {
-            const scheduleContent = document.getElementById('schedule-content');
-            
-            // Szűrés a mai dátumhoz legközelebbi futamokra
-            const today = new Date();
-            const upcomingRaces = data
-                .filter(race => new Date(race.event1) >= today)
-                .sort((a, b) => new Date(a.event1) - new Date(b.event1))
-                .slice(0, 3);
-
-            upcomingRaces.forEach(race => {
-                const raceDiv = document.createElement('div');
-
-                const raceElement = document.createElement('a');
-                raceElement.href = `tracks.html?id=${race.id}&trackName=${race.trackName}&fullName=${race.fullName}`;
-                
-                raceElement.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    fetch(`/trackinfo?id=${race.id}`)
-                        .then(response => response.json())
-                        .then(trackData => {
-                            console.log(trackData);
-                            window.location.href = `tracks.html?id=${race.id}&trackName=${race.trackName}&fullName=${race.fullName}`;
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
-                });
-                
-                const fieldset = document.createElement('fieldset');
-                
-                const legend = document.createElement('legend');
-                const legendText = document.createElement('p');
-                legendText.textContent = `Round ${race.raceNumber}`;
-                legend.appendChild(legendText);
-                
-                const img = document.createElement('img');
-                img.src = `static/img/flags/${race.id}.svg`;
-                img.alt = race.name;
-                
-                const h4 = document.createElement('h4');
-                h4.textContent = race.name;
-                
-                const p = document.createElement('p');
-                const event1Date = new Date(race.event1);
-                const event5Date = new Date(race.event5);
-                const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-                const formattedDate = `${monthNames[event1Date.getMonth()]} ${event1Date.getDate()} - ${event5Date.getDate()}`;
-                p.textContent = formattedDate;
-                
-                fieldset.appendChild(legend);
-                fieldset.appendChild(img);
-                fieldset.appendChild(h4);
-                fieldset.appendChild(p);
-                
-                raceElement.appendChild(fieldset);
-                raceDiv.appendChild(raceElement);
-                scheduleContent.appendChild(raceDiv);
-            });
-        })
-        .catch(error => console.error('Error fetching race schedule:', error));
-});
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/standlist')
-        .then(response => response.json())
-        .then(standlistData => {
-            const driverTable = document.getElementById('driverTable');
-            const constructorTable = document.getElementById('constructorTable');
-
-            const constructorClasses = {
-                1: 'McLaren',
-                2: 'Ferrari',
-                3: 'Red Bull Racing',
-                4: 'Mercedes',
-                5: 'Aston Martin',
-                6: 'Alpine',
-                7: 'Racing Bulls',
-                8: 'Haas',
-                9: 'Williams',
-                10: 'Kick Sauber'
-            };
-
-            const addedConstructors = new Set(); // A már hozzáadott konstruktorok nyilvántartása
-
-            // Tábla címsor hozzáadása
-            driverTable.innerHTML = `<tr><th colspan="3">Driver Standlist</th></tr>`;
-            constructorTable.innerHTML = `<tr><th colspan="3">Constructor Standlist</th></tr>`;
-
-            // Adatok feltöltése a táblázatba
-            standlistData.forEach((driver, index) => {
-                const constructorId = Number(driver.constructorId); // Biztosan szám legyen
-                
-                // Pilóták adatai
-                driverTable.innerHTML += `
-                    <tr>
-                        <td class="${driver.driverCode}">${index + 1}</td>
-                        <td>${driver.driverCode}</td>
-                        <td>0</td>
-                    </tr>
-                `;
-
-                // Konstruktorok táblázata, csak egyszer adja hozzá az adatokat
-                if (!addedConstructors.has(constructorId)) {
-                    addedConstructors.add(constructorId);
-
-                    const className = constructorClasses[constructorId] || 'Unknown';
-
-                    constructorTable.innerHTML += `
-                        <tr class="${className}">
-                            <td>${addedConstructors.size}</td>
-                            <td>${className}</td>
-                            <td>0</td>
-                        </tr>
-                    `;
-                }
-            });
-
-            // Az összes konstruktor megjelenítése, amely kimaradt volna
-            Object.entries(constructorClasses).forEach(([constructorId, className], index) => {
-                if (!addedConstructors.has(Number(constructorId))) {
-                    constructorTable.innerHTML += `
-                        <tr class="${className}">
-                            <td>${addedConstructors.size + 1}</td>
-                            <td>${className}</td>
-                            <td>0</td>
-                        </tr>
-                    `;
-                    addedConstructors.add(Number(constructorId));
-                }
-            });
-        })
-        .catch(error => console.error('Error fetching standlist:', error));
-});
-

@@ -59,10 +59,12 @@ app.get('/circuitdatas', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT firstGP, lapNumber, length, raceDistance, record, driver, recordYear FROM circuitdatas WHERE id = ?', [req.query.id]);
 });
-app.get('/standlist', (req, res) => {
-    const query = `SELECT driverId, driverCode, name
-                   FROM standlist 
-                   INNER JOIN constructors ON standlist.constructorId = constructors.constructorId;`;
+app.get('/driverStandlist', (req, res) => {
+    const query = `SELECT driverId,driverName,constructor FROM standlist`;
+    queryDB(res, query);
+});
+app.get('/constructorStandlist', (req, res) => {
+    const query = `SELECT DISTINCT constructorName, standlist.constructor FROM constructornames INNER JOIN standlist ON constructornames.constructorId = standlist.constructorId`;
     queryDB(res, query);
 });
 // Szerver indítása
