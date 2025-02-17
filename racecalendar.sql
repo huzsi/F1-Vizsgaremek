@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 17. 15:15
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.0.30
+-- Gép: localhost
+-- Létrehozás ideje: 2025. Feb 17. 22:27
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -207,6 +207,43 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullName`, `trackName`) VA
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `seasonRaceResult`
+--
+
+CREATE TABLE `seasonRaceResult` (
+  `raceId` varchar(3) NOT NULL,
+  `P1` int(11) NOT NULL,
+  `P2` int(11) NOT NULL,
+  `P3` int(11) NOT NULL,
+  `P4` int(11) NOT NULL,
+  `P5` int(11) NOT NULL,
+  `P6` int(11) NOT NULL,
+  `P7` int(11) NOT NULL,
+  `P8` int(11) NOT NULL,
+  `P9` int(11) NOT NULL,
+  `P10` int(11) NOT NULL,
+  `P11` int(11) NOT NULL,
+  `P12` int(11) NOT NULL,
+  `P13` int(11) NOT NULL,
+  `P14` int(11) NOT NULL,
+  `P15` int(11) NOT NULL,
+  `P16` int(11) NOT NULL,
+  `P17` int(11) NOT NULL,
+  `P18` int(11) NOT NULL,
+  `P19` int(11) NOT NULL,
+  `P20` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `seasonRaceResult`
+--
+
+INSERT INTO `seasonRaceResult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
+('au', 1, 2, 3, 7, 4, 5, 6, 9, 10, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `standlist`
 --
 
@@ -277,6 +314,13 @@ ALTER TABLE `racedates`
 --
 ALTER TABLE `racenames`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `seasonRaceResult`
+--
+ALTER TABLE `seasonRaceResult`
+  ADD UNIQUE KEY `raceId` (`raceId`),
+  ADD KEY `P1` (`P1`,`P2`,`P3`,`P4`,`P5`,`P6`,`P7`,`P8`,`P9`,`P10`,`P11`,`P12`,`P13`,`P14`,`P15`,`P16`,`P17`,`P18`,`P19`,`P20`);
 
 --
 -- A tábla indexei `standlist`
