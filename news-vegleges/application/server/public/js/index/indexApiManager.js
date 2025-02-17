@@ -125,49 +125,126 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => console.error('Error fetching race schedule:', error));
-    /*Standlist API-s*/ 
+    
+});
+document.addEventListener('DOMContentLoaded', () => {
+    // Standlist API-s
     fetch('/driverStandlist')
         .then(response => response.json())
-        .then(data => {
-            const driverTable = document.getElementById('driverTable');
-            
-            driverTable.innerHTML += `
-                <tr>
-                    <th colspan="3">Driver Standlist</th>
-                </tr>
-            `;
-
-            data.forEach((driver, index) => {
-                driverTable.innerHTML += `
-                    <tr>
-                        <td class="${driver.constructor}">${index + 1}</td>
-                        <td>${driver.driverName}</td>
-                        <td class="${driver.constructor}">300</td>
-                    </tr>
-                `;
+        .then(driverData => {
+            const driverPoints = {};
+            driverData.forEach(driver => {
+                driverPoints[driver.driverId] = 0; // Kezdeti pontszám
             });
+
+            // Eredmények lekérése és pontszámok frissítése
+            fetch('/seasonRaceResults')
+                .then(response => response.json())
+                .then(results => {
+                    console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
+                    if (!Array.isArray(results)) {
+                        console.error('Unexpected results format:', results);
+                        results = [results]; // Egyedi objektumot tömbbé alakítjuk
+                    }
+
+                    results.forEach(result => {
+                        const points = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+                        for (let i = 1; i <= 20; i++) {
+                            const driverId = result[`P${i}`];
+                            if (driverId && driverPoints[driverId] !== undefined && points[i - 1] !== undefined) {
+                                driverPoints[driverId] += points[i - 1];
+                            }
+                        }
+                    });
+
+                    // Pilóták rendezése a pontszámok alapján
+                    driverData.sort((a, b) => driverPoints[b.driverId] - driverPoints[a.driverId]);
+
+                    // Pilóta tábla frissítése
+                    const driverTable = document.getElementById('driverTable');
+                    driverTable.innerHTML = `
+                        <tr>
+                            <th colspan="3">Driver Standlist</th>
+                        </tr>
+                    `;
+
+                    driverData.forEach((driver, index) => {
+                        driverTable.innerHTML += `
+                            <tr>
+                                <td class="${driver.constructor}">${index + 1}</td>
+                                <td>${driver.driverName}</td>
+                                <td class="${driver.constructor}">${driverPoints[driver.driverId]}</td>
+                            </tr>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error fetching season race results:', error));
         })
         .catch(error => console.error('Error fetching driver standlist:', error));
 
     fetch('/constructorStandlist')
         .then(response => response.json())
-        .then(data => {
-            const constructorTable = document.getElementById('constructorTable');
-            
-            constructorTable.innerHTML += `
-                <tr>
-                    <th colspan="3">Constructor Standlist</th>
-                </tr>
-            `;
-            data.forEach((constructor, index) => {
-                constructorTable.innerHTML += `
-                    <tr>
-                        <td class="${constructor.constructor}">${index + 1}</td>
-                        <td>${constructor.constructorName}</td>
-                        <td class="${constructor.constructor}">500</td>
-                    </tr>
-                `;
+        .then(constructorData => {
+            const constructorPoints = {};
+
+            constructorData.forEach(constructor => {
+                constructorPoints[constructor.constructor] = 0; // Kezdeti pontszám
             });
+
+            // Eredmények lekérése és pontszámok frissítése
+            fetch('/seasonRaceResults')
+                .then(response => response.json())
+                .then(results => {
+                    console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
+                    if (!Array.isArray(results)) {
+                        console.error('Unexpected results format:', results);
+                        results = [results]; // Egyedi objektumot tömbbé alakítjuk
+                    }
+
+                    const driverConstructorMap = {};
+
+                    // Pilóta és konstruktor párosítás
+                    fetch('/driverStandlist')
+                        .then(response => response.json())
+                        .then(driverData => {
+                            driverData.forEach(driver => {
+                                driverConstructorMap[driver.driverId] = driver.constructor;
+                            });
+
+                            results.forEach(result => {
+                                const points = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+                                for (let i = 1; i <= 20; i++) {
+                                    const driverId = result[`P${i}`];
+                                    if (driverId && driverConstructorMap[driverId] !== undefined && points[i - 1] !== undefined) {
+                                        constructorPoints[driverConstructorMap[driverId]] += points[i - 1];
+                                    }
+                                }
+                            });
+
+                            // Konstruktorok rendezése a pontszámok alapján
+                            constructorData.sort((a, b) => constructorPoints[b.constructor] - constructorPoints[a.constructor]);
+
+                            // Konstruktor tábla frissítése
+                            const constructorTable = document.getElementById('constructorTable');
+                            constructorTable.innerHTML = `
+                                <tr>
+                                    <th colspan="3">Constructor Standlist</th>
+                                </tr>
+                            `;
+
+                            constructorData.forEach((constructor, index) => {
+                                constructorTable.innerHTML += `
+                                    <tr>
+                                        <td class="${constructor.constructor}">${index + 1}</td>
+                                        <td>${constructor.constructorName}</td>
+                                        <td class="${constructor.constructor}">${constructorPoints[constructor.constructor]}</td>
+                                    </tr>
+                                `;
+                            });
+                        })
+                        .catch(error => console.error('Error fetching driver stand list:', error));
+                })
+                .catch(error => console.error('Error fetching season race results:', error));
         })
         .catch(error => console.error('Error fetching constructor standlist:', error));
 });
@@ -179,7 +256,7 @@ function updateCountdown(element, eventDate) {
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const minutes = Math.floor((distance % (1000 * 60)) / (1000 * 60));
 
     element.textContent = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
 }

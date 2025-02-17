@@ -83,3 +83,6 @@ body{
 .sauber:last-child {
     border-right: 5px solid #52E252;
 }
+.hidden{
+    display: none;
+}
