@@ -1,0 +1,32 @@
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('1','1','PIA');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('2','1','NOR');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('3','2','LEC');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('4','2','HAM');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('5','3','VER');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('6','3','LAW');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('7','4','RUS');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('8','4','ANT');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('9','5','STR');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('10','5','ALO');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('11','6','GAS');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('12','6','DOO');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('13','7','HAD');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('14','7','TSU');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('15','8','OCO');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('16','8','BEA');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('17','9','ALB');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('18','9','SAI');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('19','10','HUL');
+INSERT INTO `standlist`(`driverId`, `constructorId`, `driverCode`) VALUES ('20','10','BOR');
+
+
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('1','McLaren');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('2','Ferrar');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('3','Red Bull Racing');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('4','Mercedes');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('5','Aston Martin');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('6','Alpine');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('7','Racing Bulls');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('8','Haas');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('9','Williams');
+INSERT INTO `constructors`(`constructorId`, `name`) VALUES ('10','Kick Sauber');

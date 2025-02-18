@@ -1,0 +1,88 @@
+:root{
+    --carbon-color: #15151E;
+    --red-color: red;
+    --grey-color: #808080;
+    
+}
+@font-face {
+    font-family: F1Font;
+    src: url("../fonts/Formula1-Bold.otf");
+}
+body{
+    margin: 0;
+    background-color: #15151E;
+    font-family: F1Font;
+    color: white;
+}
+.mclaren {
+    border-left: 5px solid #FF8000;
+}
+.mclaren:last-child {
+    border-right: 5px solid #FF8000;
+}
+
+.ferrari {
+    border-left: 5px solid #E8002D;
+}
+.ferrari:last-child {
+    border-right: 5px solid #E8002D;
+}
+
+.redbull {
+    border-left: 5px solid #3671C6;
+}
+.redbull:last-child {
+    border-right: 5px solid #3671C6;
+}
+
+.mercedes {
+    border-left: 5px solid #27F4D2;
+}
+.mercedes:last-child {
+    border-right: 5px solid #27F4D2;
+}
+
+.astonmartin {
+    border-left: 5px solid #229971;
+}
+.astonmartin:last-child {
+    border-right: 5px solid #229971;
+}
+
+.alpine {
+    border-left: 5px solid #FF87BC;
+}
+.alpine:last-child {
+    border-right: 5px solid #FF87BC;
+}
+
+.racingbulls {
+    border-left: 5px solid #6692FF;
+}
+.racingbulls:last-child {
+    border-right: 5px solid #6692FF;
+}
+
+.haas {
+    border-left: 5px solid #B6BABD;
+}
+.haas:last-child {
+    border-right: 5px solid #B6BABD;
+}
+
+.williams {
+    border-left: 5px solid #64C4FF;
+}
+.williams:last-child {
+    border-right: 5px solid #64C4FF;
+}
+
+.sauber {
+    border-left: 5px solid #52E252;
+}
+.sauber:last-child {
+    border-right: 5px solid #52E252;
+}
+.hidden{
+    display: none;
+}
