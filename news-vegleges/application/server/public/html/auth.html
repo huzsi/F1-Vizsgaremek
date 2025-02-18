@@ -45,36 +45,36 @@
         </nav>
         <section id="login-section">
             <h2>Sign in</h2>
-            <form action="">
+            <form id="login-form">
                 <div class="input-container">
-                    <input type="text" name="username" id="username" required>
-                    <label>Username</label>		
+                    <input type="text" id="login-email" required>
+                    <label>Email</label>		
                 </div>
                 <div class="input-container">		
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" id="login-password" required>
                     <label>Password</label>
                 </div>
-                <button type="button" class="btn">Login</button>
+                <button class="btn" type="submit">Login</button>
             </form>
             <h3 id="registerHeadline">Don't have an account yet? <a id="headlineBtn">Register</a></h3>	
         </section>
 
         <section id="register-section" class="hidden">
             <h2>Register</h2>
-            <form action="">
+            <form id="register-form">
                 <div class="input-container">
-                    <input type="text" name="username" required>
+                    <input type="text" id="username" required>
                     <label>Username</label>		
                 </div>
                 <div class="input-container">
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" id="email" required>
                     <label>Email</label>		
                 </div>
                 <div class="input-container">		
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" id="password" required>
                     <label>Password</label>
                 </div>
-                    <button type="button" class="btn">Register</button>
+                <button type="submit" class="btn">Register</button>
             </form>
         </section>
     </main>
@@ -90,5 +90,6 @@
 
     <script src="static/js/auth/data-switch.js"></script>
     <script src="static/js/time-changer.js"></script>
+    <script src="static/js/auth/authApiManager.js"></script>
 </body>
 </html>

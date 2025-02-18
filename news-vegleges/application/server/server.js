@@ -1,14 +1,19 @@
 const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 // Statikus fájlok beállítása
 app.use('/static', express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 // MySQL kapcsolat
 const conn = mysql.createConnection({
@@ -33,12 +38,18 @@ const queryDB = (res, query, params = []) => {
 // HTML oldalak kiszolgálása dinamikusan
 const servePage = (page) => (req, res) => res.sendFile(path.join(__dirname, 'public', 'html', `${page}.html`));
 
-app.get('/', servePage('index'));
+// Az oldal indulásakor a start.html-re dob
+app.get('/', (req, res) => res.redirect('/start.html'));
+
+// Új GET végpont az index.html-nek
+app.get('/index.html', servePage('index'));
 app.get('/about.html', servePage('about'));
 app.get('/auth.html', servePage('auth'));
 app.get('/tracks.html', servePage('tracks'));
 app.get('/newsCreator.html', servePage('newsCreator'));
 app.get('/resultUpload.html', servePage('resultUpload'));
+app.get('/start.html', servePage('start'));
+
 // API végpontok
 app.get('/racenames', (req, res) => {
     queryDB(res, 'SELECT raceNumber, id, name, fullName, trackName FROM racenames ORDER BY raceNumber ASC');
@@ -75,8 +86,6 @@ app.get('/seasonRaceResults', (req, res) => {
     queryDB(res, query);
 });
 
-
-
 app.post('/saveRaceResults', (req, res) => {
     const { raceId, results } = req.body;
     const query = `
@@ -105,10 +114,70 @@ app.post('/saveRaceResults', (req, res) => {
         results.P18 || null,
         results.P19 || null,
         results.P20 || null,
-      ];
-      
-    // Feltételezve, hogy a queryDB egy olyan függvény, amely végrehajtja a lekérdezést a megadott értékekkel
+    ];
     queryDB(res, query, values);
 });
-// Szerver indítása
+
+app.post('/register', (req, res) => {
+  const { username, email, password } = req.body;
+
+  bcrypt.hash(password, 10, (err, hashedPassword) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error hashing password' });
+    }
+
+    const query = 'INSERT INTO user (usernames, emails, passwords) VALUES (?, ?, ?)';
+    conn.query(query, [username, email, hashedPassword], (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error registering user', error: err.message });
+      }
+      res.status(201).json({ message: 'User registered successfully' });
+    });
+  });
+});
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const query = 'SELECT * FROM user WHERE emails = ?';
+  conn.query(query, [email], (err, result) => {
+      if (err) {
+          return res.status(500).json({ message: 'Error checking user in the database', error: err.message });
+      }
+
+      if (result.length === 0) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      const user = result[0];
+
+      bcrypt.compare(password, user.passwords, (err, isMatch) => {
+          if (err) {
+              return res.status(500).json({ message: 'Error comparing passwords', error: err.message });
+          }
+
+          if (!isMatch) {
+              return res.status(401).json({ message: 'Invalid credentials' });
+          }
+
+          const token = jwt.sign({ id: user.id, username: user.usernames }, 'secret_key', { expiresIn: '1h' });
+          res.json({ token });
+      });
+  });
+});
+
+app.get('/check-auth', (req, res) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+      return res.status(401).json({ loggedIn: false });
+  }
+
+  jwt.verify(token, 'secret_key', (err, decoded) => {
+      if (err) {
+          return res.status(401).json({ loggedIn: false });
+      }
+      res.json({ loggedIn: true, username: decoded.username });
+  });
+});
+
 app.listen(port, () => console.log(`Server is running at: http://localhost:${port}`));
