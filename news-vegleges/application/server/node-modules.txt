@@ -1,0 +1,1 @@
+npm i express mysql2 path body-parser bcryptjs jsonwebtoken cors

@@ -40,24 +40,6 @@ th,td{
     border-bottom: 1px solid var(--grey-color);
     width: 100px;
 }
-
-/*navigation*/
-.top-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: smaller;
-    padding: 0 150px;
-    border-bottom: 1px solid var(--grey-color);
-}
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px var(--grey-color) solid;
-    padding: 0 150px;
-    top: 0;
-}
 /*main*/
 main{
     margin: 25px 150px;
@@ -126,30 +108,4 @@ main h3>a:hover{
 	top:-12px;
 	font-size:14px;
 	
-}
-/*footer*/
-footer{
-    background-color: #15151E;
-    color: white;
-    text-align: center;
-    padding: 25px;
-    border-top: 1px rgb(129, 128, 128) solid;
-}
-footer fieldset{
-    border: red 3px solid;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-  }
-footer a{
-    text-decoration: none;
-    color: white;
-  }
-img{
-    height: 25px;
-    width: 32px;
-    border-radius: 5px;
-}
-footer div{
-    border-bottom: 1px solid var(--gray-color);
 }

@@ -73,23 +73,6 @@ button{
     font-family: F1Font;
     border-radius: 5px;
 }
-/*header*/
-.top-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: smaller;
-    padding: 0 150px;
-    border-bottom: 1px solid var(--grey-color);
-}
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px var(--grey-color) solid;
-    padding: 0 150px;
-    top: 0;
-}
 /*main*/
 main{
     margin: 15px 150px;
@@ -160,24 +143,4 @@ textarea{
 .preview-content p {
     word-wrap: break-word;
     white-space: normal;
-}
-
-
-/*footer*/
-footer{
-    background-color: #15151E;
-    color: white;
-    text-align: center;
-    padding: 25px;
-    border-top: 1px rgb(129, 128, 128) solid;
-}
-footer fieldset{
-    border: red 3px solid;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-  }
-footer a{
-    text-decoration: none;
-    color: white;
 }

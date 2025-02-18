@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2025. Feb 17. 22:27
+-- Létrehozás ideje: 2025. Feb 18. 17:17
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -280,6 +280,26 @@ INSERT INTO `standlist` (`driverId`, `driverName`, `constructorId`, `constructor
 (19, 'Nico Hulkeberg', 10, 'sauber'),
 (20, 'Gabriel Bortoleto', 10, 'sauber');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `usernames` varchar(255) NOT NULL,
+  `emails` varchar(255) NOT NULL,
+  `passwords` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `user`
+--
+
+INSERT INTO `user` (`id`, `usernames`, `emails`, `passwords`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2b$10$sMLNILd7T.K/dNK8xvheuOIOrzHIUl6OnAi39b2faEtrCiy5KmHTK');
+
 --
 -- Indexek a kiírt táblákhoz
 --
@@ -330,6 +350,12 @@ ALTER TABLE `standlist`
   ADD KEY `constructorId` (`constructorId`);
 
 --
+-- A tábla indexei `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -344,6 +370,12 @@ ALTER TABLE `constructornames`
 --
 ALTER TABLE `standlist`
   MODIFY `driverId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT a táblához `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Megkötések a kiírt táblákhoz
