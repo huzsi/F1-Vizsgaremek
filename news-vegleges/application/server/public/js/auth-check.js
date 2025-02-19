@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
 
     if (token) {
-        fetch('/check-auth', {
+        fetch('/get-profile', {
             headers: {
                 'Authorization': token
             }
         })
         .then(response => response.json())
         .then(data => {
-            if (data.loggedIn) {
+            if (data.usernames && data.emails && data.passwords) {
                 topNav.innerHTML = `
                     <ul>
                         <li><a href="/index.html" class="active">Home</a></li>
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li>
                             <a href="#" id="profileBtn">Profile</a>
                             <ul class="Profile-dropdown-content" id="dropdownContent" style="display: none;">
-                                <li><a href="#">Profile View</a></li>
+                                <li><a href="#" id="viewProfileBtn">Profile View</a></li>
                                 <li><a href="#">Profile Settings</a></li>
                                 <li><a href="#">Help Center</a></li>
                                 <li><a href="#" id="logoutBtn">Log Out</a></li>
@@ -53,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("logoutBtn").addEventListener("click", () => {
                     localStorage.removeItem("token"); // Token törlése
                     window.location.href = "index.html"; // Átirányítás a bejelentkezési oldalra
+                });
+
+                // Profile View átirányítás
+                document.getElementById("viewProfileBtn").addEventListener("click", () => {
+                    window.location.href = "default.html"; // Átirányítás a profil oldalra
                 });
 
             } else {
