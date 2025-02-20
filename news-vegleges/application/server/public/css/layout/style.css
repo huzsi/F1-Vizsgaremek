@@ -1,0 +1,182 @@
+
+nav ul{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 15px 0px;
+    padding: 0;
+}
+nav ul li{
+    border-right: 1px solid rgb(129, 128, 128);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.active{
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--red-color);
+}
+.hidden{
+    display: none;
+}
+.flag-icon{
+    height: 50px;
+    width: 64px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+fieldset{
+    border-radius: 0 0 15px 0;
+    -webkit-border-radius: 0 0 15px 0;
+    -moz-border-radius: 0 0 15px 0;
+    -ms-border-radius: 0 0 15px 0;
+    -o-border-radius: 0 0 15px 0;
+    border: 1px rgb(128, 128, 128) solid;
+    border-top: none;
+    border-left: none;
+}
+table{
+    margin: 25px;
+    text-align: center;
+}
+th,td{
+    padding: 5px;
+    border-bottom: 1px solid var(--grey-color);
+    width: 100px;
+}
+
+/*main*/
+main{
+    margin: 25px 150px;
+    display: flex;
+    gap: 25px;
+}
+/*Profile page styles*/
+.profile-datas-container{
+    flex: 2 1;
+}
+.profile-datas-container p{
+    color: var(--grey-color);
+}
+.settings-container{
+    flex: 1 2;
+}
+.settings-container div{
+    border-bottom: 1px solid var(--grey-color);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+}
+.settings-container button{
+    background-color: var(--red-color);
+    color: white;
+    padding: 5px 15px;
+    margin: 15px 0;
+    border: 0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-family: F1Font;
+}
+/*Creator page style*/
+.creator-section{
+    flex: 2 3;
+    border-right: 1px solid gray;
+    width: max-content;
+}
+.preview-section{
+    flex: 3 2;
+}
+.selector-container{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 15px 10px;
+    border-bottom: 1px solid gray;
+    margin-left: 0;
+}
+
+.editor-container{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 0 10px;
+    margin-left: 0;
+}
+
+.element-container{
+    display: flex;
+
+    gap: 10px;
+    border-bottom: 1px solid gray;
+    padding: 15px 0;
+}
+.input-container{
+    flex: 2 1;
+    width: 100%;
+}
+textarea{
+    width: 100%;
+    resize: none;
+}
+.buttons-container{
+    display: flex;
+    flex: 1 2;
+    flex-direction: column;
+    padding: 0 10px;
+    
+    gap: 10px;
+}
+.bottomButtons-container{
+    margin: 15px 0;
+}
+.preview-content{
+    word-wrap: break-word;
+    overflow-y: auto;
+    height: calc(100vh - 250px);
+    width: 100vh;
+}
+.preview-content p {
+    word-wrap: break-word;
+    white-space: normal;
+}
+button{
+    color: white;
+    background-color: var(--red-color);
+    padding: 5px 15px;
+    border: 0;
+    border-radius: 5px;
+    font-family: F1Font;
+    font-size: 10px;
+}
+/*Full schedule page style*/
+.schedule-container{
+    flex: 1 1;
+}
+.schedule-container div{
+    border: 1px solid var(--grey-color);
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 25px 0;
+}
+#raceResultsForm{
+    flex: 1 1;
+}
