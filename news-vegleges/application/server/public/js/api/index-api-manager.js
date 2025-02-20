@@ -140,8 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
                             </tr>
                         `;
                     });
-                })
-                .catch(error => console.error('Error fetching season race results:', error));
+                    const resultTable = document.getElementById('raceTable');
+                    resultTable.innerHTML = `
+                        <tr>
+                            <th colspan="4">Adat</th>
+                        </tr>
+
+                    `
+                    driverData.forEach((driver, index) => {
+                        resultTable.innerHTML += `
+                            <tr>
+                                <td>Race</td>
+                                <td>First</td>
+                                <td>First</td>
+                                <td>First</td>
+                            </tr>
+                        `;
+                    });
+            })
+            .catch(error => console.error('Error fetching season race results:', error));
         })
         .catch(error => console.error('Error fetching driver standlist:', error));
 

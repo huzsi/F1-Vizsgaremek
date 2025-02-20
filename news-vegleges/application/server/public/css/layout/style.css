@@ -179,4 +179,17 @@ button{
 }
 #raceResultsForm{
     flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+#raceData-input-container div{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+#raceData-input-container div label{
+    padding: 0 15px;
+}
+

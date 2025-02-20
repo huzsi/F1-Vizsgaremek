@@ -1,4 +1,3 @@
-// Regisztrációs űrlap kezelése
 document.getElementById('register-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
@@ -10,15 +9,14 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email, password })
+        body: JSON.stringify({ username, email, password }) // NINCS permission küldve!
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message); // Ez az alert a regisztrációs üzenetet mutatja
+        alert(data.message); // Regisztrációs üzenet megjelenítése
     })
     .catch(error => alert('Registration failed: ' + error));
 });
-
 // Bejelentkezési űrlap kezelése
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -35,13 +33,22 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .then(response => response.json())
     .then(data => {
         if (data.token) {
-            localStorage.setItem('token', data.token); // Token tárolása
+            // Token és felhasználó adatainak elmentése
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', data.username);
+            localStorage.setItem('permission', data.permission);
+
+            console.log('Login successful:', data); // Ellenőrzéshez
+
+            // Átirányítás
             window.location.href = '/index.html';
         } else {
             alert('Login failed: ' + data.message);
+            console.log('Login failed:', data); // Hibák logolása
         }
     })
     .catch(error => {
         alert('Login failed: ' + error);
+        console.log('Login error:', error); // Hibák logolása
     });
 });

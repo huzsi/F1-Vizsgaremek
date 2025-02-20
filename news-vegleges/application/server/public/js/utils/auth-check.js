@@ -1,45 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     const topNav = document.getElementById('topNav');
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const permission = localStorage.getItem('permission');
 
     if (token) {
+        // Token van, le kérjük a profil adatokat
         fetch('/get-profile', {
+            method: 'GET',
             headers: {
-                'Authorization': token
+                'Authorization': `Bearer ${token}`  // Bearer token
             }
         })
         .then(response => response.json())
         .then(data => {
-            if (data.usernames && data.emails && data.passwords) {
-                topNav.innerHTML = `
+            if (data.usernames && data.emails && data.permission) {
+                let navLinks = `
                     <ul>
                         <li><a href="/index.html" class="active">Home</a></li>
-                        <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
+                        <li><a href="">Stats</a></li>
                         <li><a href="/about.html">About</a></li>
-                        <li><a href="#" id="news-creator-btn">Create</a></li>
-                        <li><a href="#" id="uploader-btn">Result</a></li>
-                    </ul>
+                `;
+                
+                // Jogosultságok alapján
+                if (data.permission <= 2) {
+                    navLinks += `<li><a href="#" id="news-creator-btn">Create</a></li>`;
+                }
+
+                if (data.permission === 1) {
+                    navLinks += `<li><a href="#" id="uploader-btn">Result</a></li>`;
+                }
+
+                navLinks += `</ul>`;
+
+                // Profil és kijelentkezés
+                navLinks += `
                     <ul class="Profile-dropdown">
                         <li>
-                            <a href="#" id="profileBtn">Profile</a>
+                            <a href="#" id="profileBtn">${username}</a>
                             <ul class="Profile-dropdown-content" id="dropdownContent" style="display: none;">
-                                <li><a href="/profile.html">Profile View</a></li>
-                                <li>
-                                    <p>Dark mode</p>
-                                    <label class="switch">
-                                        
-                                        <input type="checkbox">
-                                        <span class="slider"></span>
-                                    </label>
-                                </li>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#" id="logoutBtn">Log Out</a></li>
-                                
+                                <li><a href="/profile.html">View Profile</a></li>
+                                <li><a href="#" id="logoutBtn">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
                 `;
-
+                
+                topNav.innerHTML = navLinks;
                 const profileBtn = document.getElementById("profileBtn");
                 const dropdownContent = document.getElementById("dropdownContent");
        
@@ -85,32 +92,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         dropdownContent.style.display = "none";
                     }
                 });
-
-                // Log out
+                // Kijelentkezés kezelése
                 document.getElementById("logoutBtn").addEventListener("click", () => {
-                    localStorage.removeItem("token"); // Remove token
-                    window.location.href = "index.html"; // Redirect to the home page
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("permission");
+                    window.location.href = "/index.html"; // Újratöltés
                 });
-
-            } else {
-                showLoggedOutNav();
             }
         })
         .catch(error => {
-            console.error('Error checking auth status:', error);
-            showLoggedOutNav();
+            console.error('Error fetching profile:', error);
         });
     } else {
-        showLoggedOutNav();
-    }
-
-    // If not logged in, show this menu
-    function showLoggedOutNav() {
+        // Ha nincs token, akkor a nem bejelentkezett menü
         topNav.innerHTML = `
             <ul>
                 <li><a href="/index.html" class="active">Home</a></li>
-                <li><a href="https://f1statsandnews.com/fooldal">Stats</a></li>
-                <li><a href="/about.html" id="about-btn">About</a></li>
+                <li><a href="/about.html">About</a></li>
             </ul>
             <ul>
                 <li><a href="/auth.html">Login</a></li>

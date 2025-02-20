@@ -1,8 +1,7 @@
+console.log('JavaScript fájl betöltődött'); // Ellenőrizni, hogy betöltődik a fájl
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Ellenőrizzük, hogy a jelenlegi URL tartalmazza-e a "/profile" részt
-    if (!window.location.pathname.includes('/profile')) {
-        return; // Ha nem a profil oldal, akkor kilépünk a scriptből
-    }
+    console.log('DOMContentLoaded esemény kiváltva'); // Ellenőrizni, hogy a DOM teljesen betöltődött
 
     const token = localStorage.getItem('token');
     const profileDataContent = document.getElementById('profile-datas');
@@ -12,15 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    if (token) {
+    // Ellenőrizzük, hogy van-e token
+    console.log('Token:', token);  // Ellenőrizd a token tartalmát
+
+    // Ellenőrizni, hogy a token nem üres-e
+    if (token && token.trim() !== "") {
+        console.log("Token érvényes:", token);
+
         fetch('/get-profile', {
+            method: 'GET',
             headers: {
-                'Authorization': token
+                'Authorization': `Bearer ${token}`  // Bearer token
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response status:', response.status);  // Státusz kód
+            return response.json();
+        })
         .then(data => {
-            if (data.usernames && data.emails && data.passwords) {
+            console.log('Profile data:', data);  // Az API válasza
+
+            // Itt már az új válasz formátumát kell használni
+            if (data.usernames && data.emails) {
                 const { usernames, emails } = data;
 
                 // Profil adatok betöltése
@@ -60,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('delete-account').addEventListener('click', () => {
                     fetch('/delete-account', {
                         method: 'DELETE',
-                        headers: { 'Authorization': token }
+                        headers: { 'Authorization': `Bearer ${token}` } // Bearer típusú token
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -74,15 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
             } else {
-                mainContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
+                profileDataContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
             }
         })
         .catch(error => {
             console.error('Error fetching profile data:', error);
-            mainContent.innerHTML = `<p>Hiba történt az adatok lekérésekor.</p>`;
+            profileDataContent.innerHTML = `<p>Hiba történt az adatok lekérésekor.</p>`;
         });
     } else {
-        mainContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
+        console.log('Nincs token vagy a token üres!');
+        profileDataContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
     }
 
     // Külön függvény az adatok mentéséhez
@@ -93,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': `Bearer ${token}` // Bearer típusú token
             },
             body: JSON.stringify({ [fieldName]: newValue })
         })
@@ -106,4 +119,75 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error(`Error updating ${fieldName}:`, error));
     }
+});
+//Admin panel:
+document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const profileDataContent = document.getElementById('profile-datas');
+
+        //Jogosultság ellenőrzése. Csak az admin profil fogja látni az oldalon
+        if(token){
+            fetch('/get-profile', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`  // Bearer token
+                }
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(userData => {
+                if(userData.permission == 1){
+                    profileDataContent.innerHTML +=`
+                        <hr>
+                        <h3>Admin Panel </h3>
+                        <form>
+                            <div>
+                                <p>Give Permission</p>
+                                <table>
+                                    <tr>
+                                        <th>Choose Profile</th>
+                                        <th>Permission level</th>
+                                    </tr>
+                                    <tr>
+                                        <td><select id="profile-select"></select></td>
+                                        <td>
+                                            <select id="permisson-select">
+                                                <option>admin</option>
+                                                <option>Moderator</option>
+                                                <option>User</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <button id="submit">Submit changes</button>
+                            </div>
+                        </form>
+                    `;
+                    //minden profil betöltése a select menübe (Másik API végpont)
+                    fetch('/get-profiles')
+                        .then(response => response.json())
+                        .then(datas => {
+                            const profileSelect = document.getElementById('profile-select');
+
+                            datas.forEach( user  => {
+                                profileSelect.innerHTML += `
+                                    <option>${user.usernames}</option>
+                            `;
+                             });
+                             //submit gomb eseménykezelője
+
+                        })
+                        .catch(error => {
+                            console.error('Error fetching profile data:', error);
+                        });
+                    }
+                })
+            .catch(error => {
+                console.error('Error fetching profile data:', error);
+            });
+        }
+        else{
+            console.log("Nincs bejelentkezve")
+        }
 });

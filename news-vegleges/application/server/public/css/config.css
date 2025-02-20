@@ -2,7 +2,7 @@
     --carbon-color: #15151E;
     --red-color: red;
     --grey-color: #808080;
-    --red-hover-color: #d20000;
+    --red-hover-color: #bd0202;
 }
 @font-face {
     font-family: F1Font;
@@ -10,7 +10,7 @@
 }
 body{
     margin: 0;
-    background-color: #15151E;
+    background-color: var(--carbon-color);
     font-family: F1Font;
     color: white;
 }

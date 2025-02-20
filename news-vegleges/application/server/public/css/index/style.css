@@ -72,6 +72,19 @@ img{
     width: 32px;
     border-radius: 5px;
 }
+button{
+    background-color: var(--red-color);
+    font-family: F1Font;
+    padding: 5px 15px;
+    margin: 25px 0;
+    border: 0;
+    color: white;
+    border-radius: 5px;
+}
+button:hover{
+    background-color: var(--red-hover-color);
+}
+
 .header-container{
 
     background-size: cover;
