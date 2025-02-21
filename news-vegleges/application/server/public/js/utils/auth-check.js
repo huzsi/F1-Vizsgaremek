@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         topNav.innerHTML = `
             <ul>
                 <li><a href="/index.html" class="active">Home</a></li>
+                <li><a href="#">Stats</a></li>
                 <li><a href="/about.html">About</a></li>
             </ul>
             <ul>

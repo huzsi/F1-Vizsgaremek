@@ -5,49 +5,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const techDailyNews = document.getElementById('tech-daily-news-container');
     const techFeaturesNews = document.getElementById('tech-features-news-container');
 
-    for (let index = 0; index <  20; index++) {
-        regularDailyNews.innerHTML += `<div class="newsDiv">
-                                            <a href="/news-layout.html/news">
-                                                <h4>Headline</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
-                                            </a>
-                                        </div>`;
+    fetch('/news')
+        .then(response => response.json())
+        .then(newsData => {
+            
+            if(!window.location.pathname.includes('/index.html')){
+                return;
+            }
+            let count = 0;
+            newsData.forEach(article => {
+                if (count < 12) {
+                    regularDailyNews.innerHTML += `<div class="newsDiv">
+                        <a href="${article.url}">
+                            <h4>${article.title}</h4>
+                            <p>${article.description}</p>
+                        </a>
+                    </div>`;
+                count++;
+                }
+            }); //foreach end
 
-        techDailyNews.innerHTML += `<div class="newsDiv">
-                                        <a href="/news-layout.html/news">
-                                            <h4>Headline</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
-                                        </a>
-                                    </div>`; 
-    }
-    for (let index = 0; index < 6; index++) {
-        techFeaturesNews.innerHTML += `<div class="newsDiv">
-                                            <a href="/news-layout.html/news">
-                                                <h4>Headline</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
-                                            </a>
-                                        </div>`;
-        
-        regularFeaturesNews.innerHTML += `<div class="newsDiv">
-                                            <a href="/news-layout.html/news">
-                                                <h4>Headline</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum quo quibusdam perspiciatis impedit. Reprehenderit voluptate maxime, ducimus animi natus fugiat dicta repellendus quia voluptatibus eligendi, veniam vel. Asperiores, odio?</p>
-                                            </a>
-                                        </div>`;
-        
-    }
+            const regularNewsBtn = document.getElementById('regular-news-btn');
+            const techNewsBtn = document.getElementById('tech-news-btn');
 
-    const regularNewsBtn = document.getElementById('regular-news-btn');
-    const techNewsBtn = document.getElementById('tech-news-btn');
-
-    if(regularNewsBtn){
-        regularNewsBtn.addEventListener('click', () =>{
-            window.location.href = "/news-layout.html/daily-news"
-        });
-    }
-    if(techNewsBtn){
-        techNewsBtn.addEventListener('click', () =>{
-            window.location.href = "/news-layout.html/tech-news"
-        });
-    }
+            if(regularNewsBtn){
+                regularNewsBtn.addEventListener('click', () =>{
+                    window.location.href = "/news-layout.html/regular-news"
+                });
+            }
+            if(techNewsBtn){
+                techNewsBtn.addEventListener('click', () =>{
+                    window.location.href = "/news-layout.html/tech-news"
+                });
+            }   
+        })
+        .catch(error => console.log(error));
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(!window.location.pathname.includes('/regular-news')){
+        return;
+    }
+    const regularNewsSection = document.getElementById('regular-news');
+
+    fetch('/news')
+        .then(response => response.json())
+        .then(newsData => {
+            newsData.forEach(article => {
+                regularNewsSection.innerHTML += `<div class="newsDiv">
+                                                <a href="${article.url}">
+                                                    <h4>${article.title}</h4>
+                                                    <p>${article.description}</p>
+                                                </a>
+                                            </div>`;
+                });
+            })
+        .catch(error => console.log(error));
+
+});
