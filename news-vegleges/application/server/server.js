@@ -2,11 +2,21 @@ const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
 const bodyParser = require('body-parser');
-const app = express();
-const port = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
+(async () => {
+    const fetch = await import('node-fetch');
+    const response = await fetch.default(`https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`);
+    const data = await response.json();
+
+})();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -55,11 +65,29 @@ app.get('/auth.html', servePage('auth'));
 app.get('/tracks.html', servePage('tracks'));
 app.get('/start.html', servePage('start'));
 app.get('/profile.html', servePage('profile'));
+
+app.get('/news', async (req, res) => {
+    try {
+        const response = await fetch(newsUrl);
+        if (!response.ok) {
+            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        if (data.status === 'ok') {
+            res.json(data.articles);
+        } else {
+            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
+        }
+    } catch (error) {
+        console.error('Hálózati hiba:', error);
+        res.status(500).json({ error: 'Hálózati hiba történt' });
+    }
+});
 app.get('/news-layout.html/:page',(req, res) =>{
     const { page } = req.params;
     let filePath = path.join(__dirname, 'public','html', 'news-layout.html');
 
-    if(page === 'news'  || page === 'tech-news' || page === 'daily-news'){
+    if(page === 'news'  || page === 'tech-news' || page === 'regular-news'){
         res.sendFile(filePath);
     }
     else{
@@ -209,12 +237,7 @@ app.delete('/delete-account', authorize, (req, res) => {
     const query = 'DELETE FROM user WHERE id = ?';
     queryDB(res, query, [req.user.id]);
 });
-
-
-
-
 app.get('/check-auth', authorize, (req, res) => {
     res.json({ loggedIn: true, username: req.user.username });
 });
-
 app.listen(port, () => console.log(`Server is running at: http://localhost:${port}`));
