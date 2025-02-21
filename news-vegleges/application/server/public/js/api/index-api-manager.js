@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const container = document.getElementById('racenames-container');
     /*event API*/
-    fetch('/racenames')
+    fetch('/news/racenames')
         .then(response => response.json())
         .then(raceData => {
             /*Dropdown API */
-            fetch('/race-schedule')
+            fetch('/news/race-schedule')
                 .then(response => response.json())
                 .then(scheduleData => {
                     let nextRace = scheduleData.find(schedule => new Date(schedule.event1) > new Date());
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const month = monthNames[event1Date.getMonth()];
 
                         container.innerHTML += `
-                            <a href="tracks.html?id=${correspondingRace.id}&trackName=${correspondingRace.trackName}&fullName=${correspondingRace.fullName}" id="${correspondingRace.id}">
+                            <a href="/news/tracks.html?id=${correspondingRace.id}&trackName=${correspondingRace.trackName}&fullName=${correspondingRace.fullName}" id="${correspondingRace.id}">
                                 <img src="/static/img/flags/${correspondingRace.id}.svg" alt="${correspondingRace.name}">
                                 <br>
                                 ${correspondingRace.name}
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
     // Standlist API-s
-    fetch('/driverStandlist')
+    fetch('/news/driverStandlist')
         .then(response => response.json())
         .then(driverData => {
             const driverPoints = {};
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Eredmények lekérése és pontszámok frissítése
-            fetch('/seasonRaceResults')
+            fetch('/news/seasonRaceResults')
                 .then(response => response.json())
                 .then(results => {
                     console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching driver standlist:', error));
 
-    fetch('/constructorStandlist')
+    fetch('/news/constructorStandlist')
         .then(response => response.json())
         .then(constructorData => {
             const constructorPoints = {};
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Eredmények lekérése és pontszámok frissítése
-            fetch('/seasonRaceResults')
+            fetch('/news/seasonRaceResults')
                 .then(response => response.json())
                 .then(results => {
                     console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const driverConstructorMap = {};
 
                     // Pilóta és konstruktor párosítás
-                    fetch('/driverStandlist')
+                    fetch('/news/driverStandlist')
                         .then(response => response.json())
                         .then(driverData => {
                             driverData.forEach(driver => {

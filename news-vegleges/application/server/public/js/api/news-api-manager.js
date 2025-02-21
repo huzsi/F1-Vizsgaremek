@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const techDailyNews = document.getElementById('tech-daily-news-container');
     const techFeaturesNews = document.getElementById('tech-features-news-container');
 
-    fetch('/news')
+    fetch('/news/news')
         .then(response => response.json())
         .then(newsData => {
             
@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
             newsData.forEach(article => {
                 if (count < 12) {
                     regularDailyNews.innerHTML += `<div class="newsDiv">
-                        <a href="${article.url}">
-                            <h4>${article.title}</h4>
-                            <p>${article.description}</p>
-                        </a>
-                    </div>`;
+                                                        <a href="/news/news-layout.html/article/${article.title}">
+                                                            <h4>${article.title}</h4>
+                                                            <p>${article.content}</p>
+                                                        </a>
+                                                    </div>`;
                 count++;
                 }
             }); //foreach end
@@ -48,18 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const regularNewsSection = document.getElementById('regular-news');
 
-    fetch('/news')
+    fetch('/news/news')
         .then(response => response.json())
         .then(newsData => {
             newsData.forEach(article => {
                 regularNewsSection.innerHTML += `<div class="newsDiv">
-                                                <a href="${article.url}">
-                                                    <h4>${article.title}</h4>
-                                                    <p>${article.description}</p>
-                                                </a>
-                                            </div>`;
+                                                    <a href="/news-layout.html/article/${article.article}">
+                                                        <h4>${article.title}</h4>
+                                                        <p>${article.description}</p>
+                                                    </a>
+                                                </div>`;
                 });
             })
         .catch(error => console.log(error));
+});
+document.addEventListener('DOMContentLoaded', () => {
+    if(!window.location.pathname.includes('/article')){
+        return;
+    }
+    fetch('/news')
+    .then(response => response.json())
+    .then(newsData => {
+            if(window.location.pathname.includes(`/${newsData.title}`)){
+                const mainContent = document.getElementById('main-content');
+
+                mainContent.innerHTML = `<h2>${newsData.title}</h2>
+                                        <p>${newsData.document}</p>`
+            }
+        })
+    .catch(error => console.log(error));
 
 });

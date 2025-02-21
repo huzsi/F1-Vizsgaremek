@@ -1,8 +1,8 @@
 const urls = [
-    'static/img/mcl60_wallpaper_3840x2160.jpg',
-    'static/img/dark_mercw14.jpg',
+    '/static/img/mcl60_wallpaper_3840x2160.jpg',
+    '/static/img/dark_mercw14.jpg',
 
-    'static/img/240213_SF-Media31_0bc3335f-5c3f-461c-afff-ba3d9dad52fd.webp'
+    '/static/img/240213_SF-Media31_0bc3335f-5c3f-461c-afff-ba3d9dad52fd.webp'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {

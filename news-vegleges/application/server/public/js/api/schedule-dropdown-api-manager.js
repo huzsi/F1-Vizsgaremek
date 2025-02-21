@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () { 
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const container = document.getElementById('racenames-container');
-    fetch('/race-schedule')
+    fetch('/news/race-schedule')
         .then(response => response.json())
     .then(data => {
         const scheduleContent = document.getElementById('schedule-content');
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             scheduleContent.innerHTML += `
                 <div>
-                    <a href="/tracks.html?id=${race.id}&trackName=${race.trackName}&fullName=${race.fullName}" id="${race.id}">
+                    <a href="/news/tracks.html?id=${race.id}&trackName=${race.trackName}&fullName=${race.fullName}" id="${race.id}">
                         <fieldset>
                             <legend>
                                 <p>Round ${race.raceNumber}</p>

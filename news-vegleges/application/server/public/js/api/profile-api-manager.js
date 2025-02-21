@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (token && token.trim() !== "") {
         console.log("Token érvényes:", token);
 
-        fetch('/get-profile', {
+        fetch('/news/get-profile', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`  // Bearer token
@@ -65,12 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Kijelentkezés
                 document.getElementById('logout').addEventListener('click', () => {
                     localStorage.removeItem('token');
-                    window.location.href = '/auth.html';
+                    window.location.href = '/news/auth.html';
                 });
 
                 // Fiók törlése
                 document.getElementById('delete-account').addEventListener('click', () => {
-                    fetch('/delete-account', {
+                    fetch('/news/delete-account', {
                         method: 'DELETE',
                         headers: { 'Authorization': `Bearer ${token}` } // Bearer típusú token
                     })
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert(data.message);
                         if (data.success) {
                             localStorage.removeItem('token');
-                            window.location.href = '/auth.html';
+                            window.location.href = '/news/auth.html';
                         }
                     })
                     .catch(error => console.error('Error deleting account:', error));
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Jogosultság ellenőrzése. Csak az admin profil fogja látni az oldalon
         if(token){
-            fetch('/get-profile', {
+            fetch('/news/get-profile', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`  // Bearer token
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </form>
                     `;
                     //minden profil betöltése a select menübe (Másik API végpont)
-                    fetch('/get-profiles')
+                    fetch('/news/get-profiles')
                         .then(response => response.json())
                         .then(datas => {
                             const profileSelect = document.getElementById('profile-select');

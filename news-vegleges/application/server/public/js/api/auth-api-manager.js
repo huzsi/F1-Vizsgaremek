@@ -4,7 +4,7 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('/register', {
+    fetch('/news/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    fetch('/login', {
+    fetch('/news/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             console.log('Login successful:', data); // Ellenőrzéshez
 
             // Átirányítás
-            window.location.href = '/index.html';
+            window.location.href = '/news/index.html';
         } else {
             alert('Login failed: ' + data.message);
             console.log('Login failed:', data); // Hibák logolása

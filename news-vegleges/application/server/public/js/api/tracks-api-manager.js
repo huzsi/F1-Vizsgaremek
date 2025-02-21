@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventBtn = document.getElementById('eventBtn');
 
     if (raceId) {
-        fetch(`/trackinfo?id=${raceId}`)
+        fetch(`/news/trackinfo?id=${raceId}`)
             .then(response => response.json())
             .then(trackData => {
                 const imgSection = document.querySelector('.track-img');
                 imgSection.innerHTML = `
-                    <img class="circuit-image" src="static/img/tracks/${raceId}_Circuit.avif" alt="" height="500px">
+                    <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="" height="500px">
                 `;
                 
                 const headlineImg = document.getElementById("headline-flag");
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error('Error fetching track data:', error));
 
-        fetch(`/circuitdatas?id=${raceId}`)
+        fetch(`/news/circuitdatas?id=${raceId}`)
             .then(response => response.json())
             .then(circuitData => {
                 const datasSection = document.getElementById('datas');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // API feldolgozása
-    fetch('/race-schedule')
+    fetch('/news/race-schedule')
         .then(response => response.json())
         .then(data => {
             const events = data.filter(race => race.id === raceId);

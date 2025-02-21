@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Versenynevek lekérése
-    fetch('/racenames')
+    fetch('/news/racenames')
       .then(response => response.json())
       .then(data => {
         const raceSelectElement = document.getElementById('raceName');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(error => console.error('Error fetching race names:', error));
 
     // Pilóták listájának lekérése
-    fetch('/driverStandlist')
+    fetch('/news/driverStandlist')
       .then(response => response.json())
       .then(drivers => {
         const raceDataContainer = document.getElementById('raceData-input-container');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Adatok küldése a szerverre
-      fetch('/saveRaceResults', {
+      fetch('/news/saveRaceResults', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
