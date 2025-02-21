@@ -10,7 +10,6 @@ const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
     const fetch = await import('node-fetch');
     const response = await fetch.default(`https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`);
     const data = await response.json();
-
 })();
 
 const app = express();
@@ -43,11 +42,12 @@ const queryDB = (res, query, params = []) => {
 };
 
 const authorize = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (!token) {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    const token = authHeader.split(' ')[1];
     jwt.verify(token, 'secret_key', (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Unauthorized' });
@@ -56,17 +56,16 @@ const authorize = (req, res, next) => {
         next();
     });
 };
-
 const servePage = (page) => (req, res) => res.sendFile(path.join(__dirname, 'public', 'html', `${page}.html`));
+app.get('/', servePage('start'));
+app.get('/news/index.html', servePage('index'));
+app.get('/news/about.html', servePage('about'));
+app.get('/news/auth.html', servePage('auth'));
+app.get('/news/tracks.html', servePage('tracks'));
+app.get('/news/start.html', servePage('start'));
+app.get('/news/profile.html', servePage('profile'));
 
-app.get('/index.html', servePage('index'));
-app.get('/about.html', servePage('about'));
-app.get('/auth.html', servePage('auth'));
-app.get('/tracks.html', servePage('tracks'));
-app.get('/start.html', servePage('start'));
-app.get('/profile.html', servePage('profile'));
-
-app.get('/news', async (req, res) => {
+app.get('/news/news', async (req, res) => {
     try {
         const response = await fetch(newsUrl);
         if (!response.ok) {
@@ -83,30 +82,28 @@ app.get('/news', async (req, res) => {
         res.status(500).json({ error: 'Hálózati hiba történt' });
     }
 });
-app.get('/news-layout.html/:page',(req, res) =>{
+app.get('/news/news-layout.html/:page', (req, res) => {
     const { page } = req.params;
-    let filePath = path.join(__dirname, 'public','html', 'news-layout.html');
+    let filePath = path.join(__dirname, 'public', 'html', 'news-layout.html');
 
-    if(page === 'news'  || page === 'tech-news' || page === 'regular-news'){
+    if (page === 'article' || page === 'tech-news' || page === 'regular-news') {
         res.sendFile(filePath);
-    }
-    else{
+    } else {
         res.status(404).send('Page not found');
     }
 });
-app.get('/script-layout.html/:page',(req, res) =>{
+app.get('/news/script-layout.html/:page', (req, res) => {
     const { page } = req.params;
-    let filePath = path.join(__dirname, 'public','html', 'script-layout.html');
+    let filePath = path.join(__dirname, 'public', 'html', 'script-layout.html');
 
-    if(page === 'news-creator' || page === 'result-uploader'){
+    if (page === 'news-creator' || page === 'result-uploader') {
         res.sendFile(filePath);
-    }
-    else{
+    } else {
         res.status(404).send('Page not found');
     }
 });
 
-app.get('/race-schedule', (req, res) => {
+app.get('/news/race-schedule', (req, res) => {
     queryDB(res, `
         SELECT rd.id, rd.type, rd.event1, rd.event2, rd.event3, rd.event4, rd.event5, 
                rn.name, rn.fullName, rn.trackName, rn.raceNumber 
@@ -116,31 +113,31 @@ app.get('/race-schedule', (req, res) => {
     `);
 });
 
-app.get('/trackinfo', (req, res) => {
+app.get('/news/trackinfo', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT trackName, fullName FROM racenames WHERE id = ?', [req.query.id]);
 });
-app.get('/racenames', (req, res) =>{
+app.get('/news/racenames', (req, res) =>{
     queryDB(res,'SELECT raceNumber, id, name, fullName, trackName FROM racenames ORDER BY raceNumber ASC',[req.query.id]);
 });
-app.get('/circuitdatas', (req, res) => {
+app.get('/news/circuitdatas', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT firstGP, lapNumber, length, raceDistance, record, driver, recordYear FROM circuitdatas WHERE id = ?', [req.query.id]);
 });
 
-app.get('/driverStandlist', (req, res) => {
+app.get('/news/driverStandlist', (req, res) => {
     queryDB(res, `SELECT driverId,driverName,constructor FROM standlist`);
 });
 
-app.get('/constructorStandlist', (req, res) => {
+app.get('/news/constructorStandlist', (req, res) => {
     queryDB(res, `SELECT DISTINCT constructorName, standlist.constructor FROM constructornames INNER JOIN standlist ON constructornames.constructorId = standlist.constructorId`);
 });
 
-app.get('/seasonRaceResults', (req, res) => {
+app.get('/news/seasonRaceResults', (req, res) => {
     queryDB(res, `SELECT * FROM seasonRaceResult`);
 });
 
-app.post('/saveRaceResults', (req, res) => {
+app.post('/news/saveRaceResults', (req, res) => {
     const { raceId, results } = req.body;
     const query = `
         INSERT INTO seasonRaceResult (raceId, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20)
@@ -156,7 +153,7 @@ app.post('/saveRaceResults', (req, res) => {
     queryDB(res, query, values);
 });
 
-app.post('/register', (req, res) => {
+app.post('/news/register', (req, res) => {
     const { username, email, password } = req.body;
 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
@@ -174,7 +171,7 @@ app.post('/register', (req, res) => {
     });
 });
 
-app.post('/login', (req, res) => {
+app.post('/news/login', (req, res) => {
     const { email, password } = req.body;
 
     const query = 'SELECT * FROM user WHERE emails = ?';
@@ -204,24 +201,26 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.get('/get-profile', authorize, (req, res) => {
-    const query = 'SELECT usernames, emails, passwords FROM user WHERE id = ?';
+app.get('/news/get-profile', authorize, (req, res) => {
+    const query = 'SELECT usernames, emails, permission FROM user WHERE id = ?';
     queryDB(res, query, [req.user.id]);
 });
 
-app.put('/update-username', authorize, (req, res) => {
+
+
+app.put('/news/update-username', authorize, (req, res) => {
     const { username } = req.body;
     const query = 'UPDATE user SET usernames = ? WHERE id = ?';
     queryDB(res, query, [username, req.user.id]);
 });
 
-app.put('/update-email', authorize, (req, res) => {
+app.put('/news/update-email', authorize, (req, res) => {
     const { email } = req.body;
     const query = 'UPDATE user SET emails = ? WHERE id = ?';
     queryDB(res, query, [email, req.user.id]);
 });
 
-app.put('/update-password', authorize, (req, res) => {
+app.put('/news/update-password', authorize, (req, res) => {
     const { password } = req.body;
     bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
@@ -233,11 +232,13 @@ app.put('/update-password', authorize, (req, res) => {
     });
 });
 
-app.delete('/delete-account', authorize, (req, res) => {
+app.delete('/news/delete-account', authorize, (req, res) => {
     const query = 'DELETE FROM user WHERE id = ?';
     queryDB(res, query, [req.user.id]);
 });
-app.get('/check-auth', authorize, (req, res) => {
+
+app.get('/news/check-auth', authorize, (req, res) => {
     res.json({ loggedIn: true, username: req.user.username });
 });
+
 app.listen(port, () => console.log(`Server is running at: http://localhost:${port}`));
