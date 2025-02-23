@@ -37,9 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         const month = monthNames[event1Date.getMonth()];
                         const raceNameHeader = document.getElementById('RaceName');
                         const timerParagraph = document.getElementById('timerParagraph');
+                        const raceDiv = document.getElementById('race-div');
+                        
 
-                        raceNameHeader.textContent = nextRace.name;
-
+                       
+                        raceDiv.innerHTML += `
+                        <h2>Next Race</h2>
+                        <img src="/static/img/flags/${nextRace.id}.svg" alt="${nextRace.name}">
+                        <h3 id="RaceName">${nextRace.name}</h3>`;
+                        
                         const events = nextRace.type === 1 ? [
                             { event: 'FP1', date: nextRace.event1 },
                             { event: 'FP2', date: nextRace.event2 },
@@ -59,11 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (targetTable) {
                             targetTable.innerHTML = `
                                 <table class="event-Table">
-                                    <tr>
-                                        <th>Event</th>
-
-                                        <th colspan="2">Date</th>
-                                    </tr>
                                     ${events.map(event => {
                                         const eventDate = new Date(event.date);
                                         const day = eventDate.getDate();

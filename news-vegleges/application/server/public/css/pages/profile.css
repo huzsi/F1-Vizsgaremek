@@ -1,0 +1,25 @@
+.header-container{
+    height: unset;
+}
+main{
+    padding: 0 150px;
+    display: flex;
+}
+.profile-datas-container{
+    flex: 2 1;
+}
+.profile-datas-container p{
+    color: #777;
+}
+.settings-container{
+    flex: 1 2;
+}
+.settings-container div{
+    border-bottom: 1px solid var(--primary-color);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+}
+.settings-container button{
+    margin: 5px 0;
+}

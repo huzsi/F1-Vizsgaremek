@@ -16,10 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
             newsData.forEach(article => {
                 if (count < 12) {
                     regularDailyNews.innerHTML += `<div class="newsDiv">
-                                                        <a href="/news/news-layout.html/article/${article.title}">
+                                                        <a href="${article.url}" target="_newblank">
                                                             <h4>${article.title}</h4>
                                                             <p>${article.content}</p>
                                                         </a>
+                                                        <p>Author: ${article.author}</p>
                                                     </div>`;
                 count++;
                 }
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(regularNewsBtn){
                 regularNewsBtn.addEventListener('click', () =>{
-                    window.location.href = "/news-layout.html/regular-news"
+                    window.location.href = "/news/news-layout.html/regular-news"
                 });
             }
             if(techNewsBtn){
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }   
         })
         .catch(error => console.log(error));
-})
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     if(!window.location.pathname.includes('/regular-news')){
@@ -52,11 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(newsData => {
             newsData.forEach(article => {
-                regularNewsSection.innerHTML += `<div class="newsDiv">
+                regularNewsSection.innerHTML += `
+                                                <div class="newsDiv">
                                                     <a href="/news-layout.html/article/${article.article}">
                                                         <h4>${article.title}</h4>
                                                         <p>${article.description}</p>
-                                                    </a>
+                                                        <p>${article.author}</p>
+                                                         </a>
                                                 </div>`;
                 });
             })
@@ -78,4 +81,39 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     .catch(error => console.log(error));
 
+});
+
+//Latest btn dropdown content
+document.addEventListener('DOMContentLoaded', () => {
+    const newsContent = document.getElementById('news-content');
+    fetch('/news/news')
+        .then(response => response.json())
+        .then(newsData => {
+            
+            
+            let count = 0;
+            newsData.forEach(article => {
+                if (count < 5) {
+                    newsContent.innerHTML += `
+                                                   <h5><a href="${article.url}" target="_newblank">${article.title} </a></h5>         
+                                                `;
+                count++;
+                }
+            }); //foreach end
+
+            const regularNewsBtn = document.getElementById('regular-news-btn');
+            const techNewsBtn = document.getElementById('tech-news-btn');
+
+            if(regularNewsBtn){
+                regularNewsBtn.addEventListener('click', () =>{
+                    window.location.href = "/news/news-layout.html/regular-news"
+                });
+            }
+            if(techNewsBtn){
+                techNewsBtn.addEventListener('click', () =>{
+                    window.location.href = "/news-layout.html/tech-news"
+                });
+            }   
+        })
+        .catch(error => console.log(error));
 });

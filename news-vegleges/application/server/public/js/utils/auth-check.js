@@ -32,30 +32,30 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li><a href="/news/about.html">About</a></li>
                 `;
                 
-                // Jogosultságok alapján
-                if (data.permission <= 2) {
-                    navLinks += `<li><a href="#" id="news-creator-btn">Create</a></li>`;
-                }
+               
 
                 if (data.permission === 1) {
-                    navLinks += `<li><a href="#" id="uploader-btn">Result</a></li>`;
+                    navLinks += `<li><a href="#">Bet</a></li>`
                 }
 
                 navLinks += `</ul>`;
 
-                // Profil és kijelentkezés
-                navLinks += `
-                    <ul class="Profile-dropdown">
-                        <li>
-                            <a href="#" id="profileBtn">${data.usernames}</a>
-                            <ul class="Profile-dropdown-content" id="dropdownContent" style="display: none;">
-                                <li><a href="/news/profile.html">View Profile</a></li>
-                                <li><a href="#" id="logoutBtn">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+              // Profil és kijelentkezés menü generálása dinamikusan
+                const profileMenu = `
+                <ul class="Profile-dropdown">
+                    <li>
+                        <a href="#" id="profileBtn">${data.usernames}</a>
+                        <ul class="Profile-dropdown-content" id="dropdownContent" style="display: none;">
+                            <li><a href="/news/profile.html">View Profile</a></li>
+                            ${data.permission === 1 ? '<li><a href="#" id="uploader-btn">Result</a></li>' : ''}
+                            ${data.permission <= 2 ? '<li><a href="#" id="news-creator-btn">Create</a></li>' : ''}
+                            <li><a href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 `;
-                
+                navLinks += profileMenu;
+
                 topNav.innerHTML = navLinks;
                 console.log('navLinks:', navLinks);
                 const profileBtn = document.getElementById("profileBtn");
