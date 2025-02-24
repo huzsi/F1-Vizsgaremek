@@ -26,32 +26,10 @@
         <header id="mainHeader" class="header-transparent">
             <!--JS code-->
         </header>
-        <div class="dropdown-content" id="scheduleDropdownContent">
-            <div class="fullSchedule-container">
-                <a href="#" id="full-schedule-btn">Full schedule &gt;</a>
-            </div>
-            <div id="schedule-content">
-                <!--API-->
-            </div>
+        <div class="dropdown-content" id="dropdown-content">
+            <!--JS code-->
         </div>
-        <div class="dropdown-content" id="latestDropdownContent">
-            <div class="latest-nav-div">
-                <nav>
-                    <ul>
-                        <li><a href="#">Latest</a></li>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Daily</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div id="latest-content">
-                <!--API-->
-                <div id="news-content">
-
-                </div>
-                
-            </div>
-        </div>
+       
         <!--section #1-->
         <div class="event-container">
             <div class="event">
@@ -174,7 +152,8 @@
             <p>Source: Github</p>
         </div>
     </footer>
-
+    <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
+    <script src="/static/js/frontend/header-renderer.js"></script>
     <!--API Manager JS scripts-->
     <script src="/static/js/api/index-api-manager.js"></script>
     <script src="/static/js/api/schedule-dropdown-api-manager.js"></script>
@@ -183,7 +162,7 @@
     <script src="/static/js/utils/auth-check.js"></script>
     <!--Frontend JS scripts-->
     <script src="/static/js/frontend/theme.js"></script>
-    <script src="/static/js/frontend/header-renderer.js"></script>
+    
     <script src="/static/js/frontend/index/header-slider.js"></script>
     <script src="/static/js/frontend/index/horizontal-scroll.js"></script>
     <script src="/static/js/frontend/index/table-switcher.js"></script>

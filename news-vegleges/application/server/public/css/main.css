@@ -135,3 +135,7 @@ fieldset{
 #spacer{
     flex: 2 1;
 }
+
+.result-nav-div{
+    border-bottom: 1px solid var(--primary-color);
+}

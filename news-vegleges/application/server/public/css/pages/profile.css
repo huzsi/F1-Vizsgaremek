@@ -1,9 +1,10 @@
 .header-container{
-    height: unset;
+    border-bottom: none;
 }
 main{
     padding: 0 150px;
     display: flex;
+    gap: 25px;
 }
 .profile-datas-container{
     flex: 2 1;

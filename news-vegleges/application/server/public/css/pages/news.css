@@ -1,5 +1,5 @@
 .header-container{
-    height: unset;
+    border-bottom: none;
 }
 main{
     padding: 25px 150px;

@@ -25,23 +25,10 @@
         <header id="mainHeader" class="header-transparent">
             <!--JS code-->
         </header>
-        <div class="dropdown-content" id="scheduleDropdownContent">
-            <div class="fullSchedule-container">
-                <a href="#" id="full-schedule-btn">Full schedule &gt;</a>
-            </div>
-            <div id="schedule-content">
-                <!--API-->
-            </div>
+        <div class="dropdown-content" id="dropdown-content">
+            <!--JS code-->
         </div>
-        <div class="dropdown-content" id="latestDropdownContent">
-            <div>
-                <a href="">Latest</a>
-                <a href="">Read More</a>
-            </div>
-            <div id="latest-content">
-                <!--API-->
-            </div>
-        </div>
+       
     </div>
     <main>
         <nav>
@@ -102,13 +89,15 @@
             <p>Source: Github</p>
         </div>
     </footer>
+    <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
+    <script src="/static/js/frontend/header-renderer.js"></script>
     <!--API manager JS scripts-->
     <script src="/static/js/api/auth-api-manager.js"></script>
     <script src="/static/js/api/schedule-dropdown-api-manager.js"></script>
     <!--Util JS scripts-->
     <script src="/static/js/utils/auth-check.js"></script>
     <!--Frontend JS scripts-->
-    <script src="/static/js/frontend/header-renderer.js"></script>
+
     <script src="/static/js/frontend/auth/auth-panel-switcher.js"></script>
     <script src="/static/js/frontend/dropdown.js"></script>
     <script src="/static/js/frontend/footer-time-changer.js"></script>
