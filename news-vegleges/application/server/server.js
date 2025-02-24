@@ -64,7 +64,7 @@ app.get('/news/auth.html', servePage('auth'));
 app.get('/news/tracks.html', servePage('tracks'));
 app.get('/news/start.html', servePage('start'));
 app.get('/news/profile.html', servePage('profile'));
-
+app.get('/news/raceresult.html', servePage('raceresult'));
 app.get('/news/news', async (req, res) => {
     try {
         const response = await fetch(newsUrl);
@@ -126,17 +126,64 @@ app.get('/news/circuitdatas', (req, res) => {
 });
 
 app.get('/news/driverStandlist', (req, res) => {
-    queryDB(res, `SELECT driverId,driverName,constructor FROM standlist`);
+    queryDB(res, `SELECT driverId,driverName,constructor FROM driverNames`);
 });
 
 app.get('/news/constructorStandlist', (req, res) => {
-    queryDB(res, `SELECT DISTINCT constructorName, standlist.constructor FROM constructornames INNER JOIN standlist ON constructornames.constructorId = standlist.constructorId`);
+    queryDB(res, `SELECT DISTINCT constructorName, driverNames.constructor FROM constructornames INNER JOIN driverNames ON constructornames.constructorId = driverNames.constructorId`);
 });
 
 app.get('/news/seasonRaceResults', (req, res) => {
     queryDB(res, `SELECT * FROM seasonRaceResult`);
 });
-
+app.get('/news/raceResults', (req, res) => {
+    queryDB(res, `SELECT 
+    srr.raceId,
+    rn.name AS raceName,
+    d1.driverName AS P1,
+    d2.driverName AS P2,
+    d3.driverName AS P3,
+    d4.driverName AS P4,
+    d5.driverName AS P5,
+    d6.driverName AS P6,
+    d7.driverName AS P7,
+    d8.driverName AS P8,
+    d9.driverName AS P9,
+    d10.driverName AS P10,
+    d11.driverName AS P11,
+    d12.driverName AS P12,
+    d13.driverName AS P13,
+    d14.driverName AS P14,
+    d15.driverName AS P15,
+    d16.driverName AS P16,
+    d17.driverName AS P17,
+    d18.driverName AS P18,
+    d19.driverName AS P19,
+    d20.driverName AS P20
+    FROM seasonRaceResult srr
+    JOIN raceNames rn ON srr.raceId = rn.id
+    LEFT JOIN driverNames d1 ON srr.P1 = d1.driverId
+    LEFT JOIN driverNames d2 ON srr.P2 = d2.driverId
+    LEFT JOIN driverNames d3 ON srr.P3 = d3.driverId
+    LEFT JOIN driverNames d4 ON srr.P4 = d4.driverId
+    LEFT JOIN driverNames d5 ON srr.P5 = d5.driverId
+    LEFT JOIN driverNames d6 ON srr.P6 = d6.driverId
+    LEFT JOIN driverNames d7 ON srr.P7 = d7.driverId
+    LEFT JOIN driverNames d8 ON srr.P8 = d8.driverId
+    LEFT JOIN driverNames d9 ON srr.P9 = d9.driverId
+    LEFT JOIN driverNames d10 ON srr.P10 = d10.driverId
+    LEFT JOIN driverNames d11 ON srr.P11 = d11.driverId
+    LEFT JOIN driverNames d12 ON srr.P12 = d12.driverId
+    LEFT JOIN driverNames d13 ON srr.P13 = d13.driverId
+    LEFT JOIN driverNames d14 ON srr.P14 = d14.driverId
+    LEFT JOIN driverNames d15 ON srr.P15 = d15.driverId
+    LEFT JOIN driverNames d16 ON srr.P16 = d16.driverId
+    LEFT JOIN driverNames d17 ON srr.P17 = d17.driverId
+    LEFT JOIN driverNames d18 ON srr.P18 = d18.driverId
+    LEFT JOIN driverNames d19 ON srr.P19 = d19.driverId
+    LEFT JOIN driverNames d20 ON srr.P20 = d20.driverId;
+`);
+});
 app.post('/news/saveRaceResults', (req, res) => {
     const { raceId, results } = req.body;
     const query = `
