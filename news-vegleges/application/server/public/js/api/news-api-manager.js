@@ -82,38 +82,3 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => console.log(error));
 
 });
-
-//Latest btn dropdown content
-document.addEventListener('DOMContentLoaded', () => {
-    const newsContent = document.getElementById('news-content');
-    fetch('/news/news')
-        .then(response => response.json())
-        .then(newsData => {
-            
-            
-            let count = 0;
-            newsData.forEach(article => {
-                if (count < 5) {
-                    newsContent.innerHTML += `
-                                                   <h5><a href="${article.url}" target="_newblank">${article.title} </a></h5>         
-                                                `;
-                count++;
-                }
-            }); //foreach end
-
-            const regularNewsBtn = document.getElementById('regular-news-btn');
-            const techNewsBtn = document.getElementById('tech-news-btn');
-
-            if(regularNewsBtn){
-                regularNewsBtn.addEventListener('click', () =>{
-                    window.location.href = "/news/news-layout.html/regular-news"
-                });
-            }
-            if(techNewsBtn){
-                techNewsBtn.addEventListener('click', () =>{
-                    window.location.href = "/news-layout.html/tech-news"
-                });
-            }   
-        })
-        .catch(error => console.log(error));
-});

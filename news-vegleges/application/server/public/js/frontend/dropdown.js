@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupDropdown('schedule-btn', `
         <div class="fullSchedule-container">
-            <a href="#" id="full-schedule-btn">Full schedule &gt;</a>
+        
+            <a href="#schedule" id="full-schedule-btn">Full schedule &gt;</a>
         </div>
         <div id="schedule-content">
             <!-- Schedule content goes here -->
@@ -64,11 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupDropdown('result-btn', `
         <div class="result-nav-div">
-            <nav>
-                <ul>
-                    <li><a href="#">See more</a></li>
-                </ul>
-            </nav>
+            <a href="/news/raceresult.html">See more &gt;</a></li>
         </div>
         <div id="result-content">
             <h3>Race results</h3>

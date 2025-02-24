@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/news/racenames')
         .then(response => response.json())
         .then(raceData => {
-            /*Dropdown API */
+            /**Race Schedule API */
             fetch('/news/race-schedule')
                 .then(response => response.json())
                 .then(scheduleData => {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
     // Standlist API-s
-    fetch('/news/driverStandlist')
+    fetch('/news/driverStandlist') /**Driver Standlist */
         .then(response => response.json())
         .then(driverData => {
             const driverPoints = {};
@@ -105,9 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/news/seasonRaceResults')
                 .then(response => response.json())
                 .then(results => {
-                    console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
+                     
                     if (!Array.isArray(results)) {
-                        console.error('Unexpected results format:', results);
+                       
                         results = [results]; // Egyedi objektumot tömbbé alakítjuk
                     }
 
@@ -141,29 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             </tr>
                         `;
                     });
-                    const resultTable = document.getElementById('raceTable');
-                    resultTable.innerHTML = `
-                        <tr>
-                            <th colspan="4">Adat</th>
-                        </tr>
-
-                    `
-                    driverData.forEach((driver, index) => {
-                        resultTable.innerHTML += `
-                            <tr>
-                                <td>Race</td>
-                                <td>First</td>
-                                <td>First</td>
-                                <td>First</td>
-                            </tr>
-                        `;
-                    });
             })
             .catch(error => console.error('Error fetching season race results:', error));
         })
         .catch(error => console.error('Error fetching driver standlist:', error));
 
-    fetch('/news/constructorStandlist')
+    fetch('/news/constructorStandlist') /**Constructor Standlist */
         .then(response => response.json())
         .then(constructorData => {
             const constructorPoints = {};
@@ -176,9 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/news/seasonRaceResults')
                 .then(response => response.json())
                 .then(results => {
-                    console.log('Season Race Results:', results); // Naplózzuk a results tartalmát
+                    // Naplózzuk a results tartalmát
                     if (!Array.isArray(results)) {
-                        console.error('Unexpected results format:', results);
+                        
                         results = [results]; // Egyedi objektumot tömbbé alakítjuk
                     }
 
@@ -228,6 +211,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(error => console.error('Error fetching season race results:', error));
         })
         .catch(error => console.error('Error fetching constructor standlist:', error));
+
+        fetch('/news/raceResults')
+        .then(response => response.json())
+        .then(resultData => {
+
+            if (!Array.isArray(resultData)) {
+               
+                resultData = [resultData]; // Egyedi objektumot tömbbé alakítjuk, hogy tudjuk vizsgálni a hosszát.
+            }
+            
+            const raceTable = document.getElementById('raceTable');
+            if (!resultData || resultData.length === 0) {
+                return;
+            } 
+            else if (resultData.length === 1) { //Jelenleg 1-re rakom, mert tesztadat miatt nem valós adatot mutatna. Későbbiekben változni fog!
+                raceTable.innerHTML = `
+                    <tr>
+                        <th><h4>Come back when first race is ended</h4></th>
+                    </tr>
+                `;
+            }
+            else{
+                raceTable.innerHTML = `
+                <tr>
+                    <th>Race Results</th>
+                </tr>
+                `;
+    
+            resultData.forEach(results => {
+                raceTable.insertAdjacentHTML('beforeend', `
+                    <tr>
+                        <td><a href="#">${results.raceName}</a></td>
+                    </tr>
+                `);
+            });
+            }
+            
+    
+        })
+        .catch(error => console.error('Error fetching season race results:', error));
+    
 });
 
 /*Methods*/
