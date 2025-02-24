@@ -13,7 +13,7 @@ const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
 })();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
 
@@ -161,7 +161,7 @@ app.post('/news/register', (req, res) => {
             return res.status(500).json({ message: 'Error hashing password' });
         }
 
-        const query = 'INSERT INTO user (usernames, emails, passwords) VALUES (?, ?, ?)';
+        const query = 'INSERT INTO user (permission,usernames, emails, passwords) VALUES (3,?, ?, ?)';
         conn.query(query, [username, email, hashedPassword], (err, result) => {
             if (err) {
                 return res.status(500).json({ message: 'Error registering user', error: err.message });
@@ -205,7 +205,10 @@ app.get('/news/get-profile', authorize, (req, res) => {
     const query = 'SELECT usernames, emails, permission FROM user WHERE id = ?';
     queryDB(res, query, [req.user.id]);
 });
-
+app.get('/news/get-all-profiles', authorize, (req, res) => {
+    const query = 'SELECT usernames, permission FROM user';
+    queryDB(res, query, [req.user.id]);
+});
 
 
 app.put('/news/update-username', authorize, (req, res) => {
