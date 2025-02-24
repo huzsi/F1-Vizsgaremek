@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: localhost
--- Létrehozás ideje: 2025. Feb 18. 17:17
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Feb 24. 14:59
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -207,10 +207,10 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullName`, `trackName`) VA
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `seasonRaceResult`
+-- Tábla szerkezet ehhez a táblához `seasonraceresult`
 --
 
-CREATE TABLE `seasonRaceResult` (
+CREATE TABLE `seasonraceresult` (
   `raceId` varchar(3) NOT NULL,
   `P1` int(11) NOT NULL,
   `P2` int(11) NOT NULL,
@@ -235,10 +235,10 @@ CREATE TABLE `seasonRaceResult` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `seasonRaceResult`
+-- A tábla adatainak kiíratása `seasonraceresult`
 --
 
-INSERT INTO `seasonRaceResult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
+INSERT INTO `seasonraceresult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
 ('au', 1, 2, 3, 7, 4, 5, 6, 9, 10, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
 -- --------------------------------------------------------
@@ -288,6 +288,7 @@ INSERT INTO `standlist` (`driverId`, `driverName`, `constructorId`, `constructor
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
+  `permission` int(11) NOT NULL,
   `usernames` varchar(255) NOT NULL,
   `emails` varchar(255) NOT NULL,
   `passwords` varchar(255) NOT NULL
@@ -297,8 +298,9 @@ CREATE TABLE `user` (
 -- A tábla adatainak kiíratása `user`
 --
 
-INSERT INTO `user` (`id`, `usernames`, `emails`, `passwords`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2b$10$sMLNILd7T.K/dNK8xvheuOIOrzHIUl6OnAi39b2faEtrCiy5KmHTK');
+INSERT INTO `user` (`id`, `permission`, `usernames`, `emails`, `passwords`) VALUES
+(1, 1, 'admin', 'admin@gmail.com', '$2b$10$sMLNILd7T.K/dNK8xvheuOIOrzHIUl6OnAi39b2faEtrCiy5KmHTK'),
+(2, 3, 'user', 'user@gmail.com', '$2b$10$WrhQzC3cHMXPKpTdT3mLJOIEVQbsDn2CEU.sv62MkjhrCyp.aBYJ2');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -336,9 +338,9 @@ ALTER TABLE `racenames`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `seasonRaceResult`
+-- A tábla indexei `seasonraceresult`
 --
-ALTER TABLE `seasonRaceResult`
+ALTER TABLE `seasonraceresult`
   ADD UNIQUE KEY `raceId` (`raceId`),
   ADD KEY `P1` (`P1`,`P2`,`P3`,`P4`,`P5`,`P6`,`P7`,`P8`,`P9`,`P10`,`P11`,`P12`,`P13`,`P14`,`P15`,`P16`,`P17`,`P18`,`P19`,`P20`);
 
@@ -375,7 +377,7 @@ ALTER TABLE `standlist`
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Megkötések a kiírt táblákhoz
