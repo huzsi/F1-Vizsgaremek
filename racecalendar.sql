@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 24. 14:59
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.0.30
+-- Gép: localhost
+-- Létrehozás ideje: 2025. Feb 24. 22:08
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,6 +94,45 @@ INSERT INTO `constructornames` (`constructorId`, `constructorName`) VALUES
 (8, 'Haas'),
 (9, 'Williams'),
 (10, 'Kick Sauber');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `driverNames`
+--
+
+CREATE TABLE `driverNames` (
+  `driverId` int(11) NOT NULL,
+  `driverName` varchar(255) NOT NULL,
+  `constructorId` int(11) NOT NULL,
+  `constructor` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `driverNames`
+--
+
+INSERT INTO `driverNames` (`driverId`, `driverName`, `constructorId`, `constructor`) VALUES
+(1, 'Oscar Piastri', 1, 'mclaren'),
+(2, 'Lando Norris', 1, 'mclaren'),
+(3, 'Charles Leclerc', 2, 'ferrari'),
+(4, 'Lewis Hamilton', 2, 'ferrari'),
+(5, 'Max Verstappen', 3, 'redbull'),
+(6, 'Liam Lawson', 3, 'redbull'),
+(7, 'George Russell', 4, 'mercedes'),
+(8, 'Andrea Kimi Antonelli', 4, 'mercedes'),
+(9, 'Lance Stroll', 5, 'astonmartin'),
+(10, 'Fernando Alonso', 5, 'astonmartin'),
+(11, 'Pierre Gasly', 6, 'alpine'),
+(12, 'Jack Doohan', 6, 'alpine'),
+(13, 'Isack Hadjar', 7, 'racingbulls'),
+(14, 'Yuki Tsunoda', 7, 'racingbulls'),
+(15, 'Esteban Ocon', 8, 'haas'),
+(16, 'Oliver Bearman', 8, 'haas'),
+(17, 'Alexander Albon', 9, 'williams'),
+(18, 'Carlos Sainz', 9, 'williams'),
+(19, 'Nico Hulkeberg', 10, 'sauber'),
+(20, 'Gabriel Bortoleto', 10, 'sauber');
 
 -- --------------------------------------------------------
 
@@ -207,10 +246,10 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullName`, `trackName`) VA
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `seasonraceresult`
+-- Tábla szerkezet ehhez a táblához `seasonRaceResult`
 --
 
-CREATE TABLE `seasonraceresult` (
+CREATE TABLE `seasonRaceResult` (
   `raceId` varchar(3) NOT NULL,
   `P1` int(11) NOT NULL,
   `P2` int(11) NOT NULL,
@@ -235,50 +274,12 @@ CREATE TABLE `seasonraceresult` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `seasonraceresult`
+-- A tábla adatainak kiíratása `seasonRaceResult`
 --
 
-INSERT INTO `seasonraceresult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
-('au', 1, 2, 3, 7, 4, 5, 6, 9, 10, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `standlist`
---
-
-CREATE TABLE `standlist` (
-  `driverId` int(11) NOT NULL,
-  `driverName` varchar(255) NOT NULL,
-  `constructorId` int(11) NOT NULL,
-  `constructor` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `standlist`
---
-
-INSERT INTO `standlist` (`driverId`, `driverName`, `constructorId`, `constructor`) VALUES
-(1, 'Oscar Piastri', 1, 'mclaren'),
-(2, 'Lando Norris', 1, 'mclaren'),
-(3, 'Charles Leclerc', 2, 'ferrari'),
-(4, 'Lewis Hamilton', 2, 'ferrari'),
-(5, 'Max Verstappen', 3, 'redbull'),
-(6, 'Liam Lawson', 3, 'redbull'),
-(7, 'George Russell', 4, 'mercedes'),
-(8, 'Andrea Kimi Antonelli', 4, 'mercedes'),
-(9, 'Lance Stroll', 5, 'astonmartin'),
-(10, 'Fernando Alonso', 5, 'astonmartin'),
-(11, 'Pierre Gasly', 6, 'alpine'),
-(12, 'Jack Doohan', 6, 'alpine'),
-(13, 'Isack Hadjar', 7, 'racingbulls'),
-(14, 'Yuki Tsunoda', 7, 'racingbulls'),
-(15, 'Esteban Ocon', 8, 'haas'),
-(16, 'Oliver Bearman', 8, 'haas'),
-(17, 'Alexander Albon', 9, 'williams'),
-(18, 'Carlos Sainz', 9, 'williams'),
-(19, 'Nico Hulkeberg', 10, 'sauber'),
-(20, 'Gabriel Bortoleto', 10, 'sauber');
+INSERT INTO `seasonRaceResult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
+('au', 1, 2, 3, 7, 4, 5, 6, 9, 10, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+('cn', 2, 1, 3, 4, 5, 6, 7, 9, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
 -- --------------------------------------------------------
 
@@ -300,7 +301,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `permission`, `usernames`, `emails`, `passwords`) VALUES
 (1, 1, 'admin', 'admin@gmail.com', '$2b$10$sMLNILd7T.K/dNK8xvheuOIOrzHIUl6OnAi39b2faEtrCiy5KmHTK'),
-(2, 3, 'user', 'user@gmail.com', '$2b$10$WrhQzC3cHMXPKpTdT3mLJOIEVQbsDn2CEU.sv62MkjhrCyp.aBYJ2');
+(2, 3, 'user', 'user@gmail.com', '$2b$10$38/iOdPkThhnD5nl3SBxBO6HvbhcLEbcTs6QI.lIX8mJqILR605W.');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -317,6 +318,13 @@ ALTER TABLE `circuitdatas`
 --
 ALTER TABLE `constructornames`
   ADD PRIMARY KEY (`constructorId`);
+
+--
+-- A tábla indexei `driverNames`
+--
+ALTER TABLE `driverNames`
+  ADD PRIMARY KEY (`driverId`),
+  ADD KEY `constructorId` (`constructorId`);
 
 --
 -- A tábla indexei `eventtype`
@@ -338,24 +346,18 @@ ALTER TABLE `racenames`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `seasonraceresult`
+-- A tábla indexei `seasonRaceResult`
 --
-ALTER TABLE `seasonraceresult`
+ALTER TABLE `seasonRaceResult`
   ADD UNIQUE KEY `raceId` (`raceId`),
   ADD KEY `P1` (`P1`,`P2`,`P3`,`P4`,`P5`,`P6`,`P7`,`P8`,`P9`,`P10`,`P11`,`P12`,`P13`,`P14`,`P15`,`P16`,`P17`,`P18`,`P19`,`P20`);
-
---
--- A tábla indexei `standlist`
---
-ALTER TABLE `standlist`
-  ADD PRIMARY KEY (`driverId`),
-  ADD KEY `constructorId` (`constructorId`);
 
 --
 -- A tábla indexei `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permission` (`permission`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -368,9 +370,9 @@ ALTER TABLE `constructornames`
   MODIFY `constructorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT a táblához `standlist`
+-- AUTO_INCREMENT a táblához `driverNames`
 --
-ALTER TABLE `standlist`
+ALTER TABLE `driverNames`
   MODIFY `driverId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
@@ -384,10 +386,10 @@ ALTER TABLE `user`
 --
 
 --
--- Megkötések a táblához `standlist`
+-- Megkötések a táblához `driverNames`
 --
-ALTER TABLE `standlist`
-  ADD CONSTRAINT `standlist_ibfk_1` FOREIGN KEY (`constructorId`) REFERENCES `constructornames` (`constructorId`);
+ALTER TABLE `driverNames`
+  ADD CONSTRAINT `drivernames_ibfk_1` FOREIGN KEY (`constructorId`) REFERENCES `constructornames` (`constructorId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
