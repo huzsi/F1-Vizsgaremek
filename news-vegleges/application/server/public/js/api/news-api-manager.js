@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const regularDailyNews = document.getElementById('regular-daily-news-container');
     const regularFeaturesNews = document.getElementById('regular-features-news-container');
-    const techDailyNews = document.getElementById('tech-daily-news-container');
-    const techFeaturesNews = document.getElementById('tech-features-news-container');
+    const techNewsContent = document.getElementById('tech-news-content');
 
     fetch('/news/news')
         .then(response => response.json())
@@ -35,10 +34,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             if(techNewsBtn){
-                techNewsBtn.addEventListener('click', () =>{
-                    window.location.href = "/news-layout.html/tech-news"
+                techNewsBtn.addEventListener('click',()=>{
+                    window.location.href = "/news/news-layout.html/tech-news"
                 });
-            }   
+            }
+        })
+        .catch(error => console.log(error));
+
+        fetch('/news/features')
+    .then(response => response.json())
+    .then(featuresData => {
+        console.log(featuresData);  // Log the data structure
+
+        if (!window.location.pathname.includes('/index.html')) {
+            return;
+        }
+        const featuresNewsContent = document.getElementById('features-news-container');
+
+        // Access the first element of the array
+        const newsItem = featuresData[0];
+
+        featuresNewsContent.innerHTML = `
+            <div class="newsDiv">
+                <img src=""https://www.ccn.com/wp-content/uploads/2025/02/dogecoin-price-analysis-correction.webp">
+                <a href="${newsItem.url}" target="_newblank">
+                    <h4>${newsItem.title}</h4>
+                    <p>${newsItem.description}</p>
+                </a>
+                <p>Author: ${newsItem.author}</p>
+            </div>
+        `;
+    })
+    .catch(error => console.log(error));
+
+
+    fetch('/news/tech-news')
+        .then(response => response.json())
+        .then(techNewsData => {
+            if(!window.location.pathname.includes('/index.html')){
+                return;
+            }
+            let count = 0;
+            techNewsData.forEach(techArticle => {
+                if (count < 12) {
+                    techNewsContent.innerHTML += `<div class="newsDiv">
+                                                        <a href="${techArticle.url}" target="_newblank">
+                                                            <h4>${techArticle.title}</h4>
+                                                            <p>${techArticle.content}</p>
+                                                        </a>
+                                                        <p>Author: ${techArticle.author}</p>
+                                                    </div>`;
+                count++;
+                }
+            });
         })
         .catch(error => console.log(error));
 });
@@ -47,38 +95,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!window.location.pathname.includes('/regular-news')){
         return;
     }
-    const regularNewsSection = document.getElementById('regular-news');
+    const newsSection = document.getElementById('news-section');
 
     fetch('/news/news')
         .then(response => response.json())
         .then(newsData => {
             newsData.forEach(article => {
-                regularNewsSection.innerHTML += `
+                newsSection.innerHTML += `
                                                 <div class="newsDiv">
                                                     <a href="/news-layout.html/article/${article.article}">
                                                         <h4>${article.title}</h4>
                                                         <p>${article.description}</p>
                                                         <p>${article.author}</p>
-                                                         </a>
+                                                        </a>
                                                 </div>`;
                 });
             })
         .catch(error => console.log(error));
 });
 document.addEventListener('DOMContentLoaded', () => {
-    if(!window.location.pathname.includes('/article')){
+    if(!window.location.pathname.includes('/tech-news')){
         return;
     }
-    fetch('/news')
-    .then(response => response.json())
-    .then(newsData => {
-            if(window.location.pathname.includes(`/${newsData.title}`)){
-                const mainContent = document.getElementById('main-content');
-
-                mainContent.innerHTML = `<h2>${newsData.title}</h2>
-                                        <p>${newsData.document}</p>`
-            }
-        })
-    .catch(error => console.log(error));
-
+    const newsSection = document.getElementById('news-section');
+    fetch('/news/tech-news')
+        .then(response => response.json())
+        .then(newsData => {
+            newsData.forEach(article => {
+                newsSection.innerHTML += `
+                                                <div class="newsDiv">
+                                                    <a href="/news-layout.html/article/${article.article}">
+                                                        <h4>${article.title}</h4>
+                                                        <p>${article.description}</p>
+                                                        <p>${article.author}</p>
+                                                        </a>
+                                                </div>`;
+                });
+            })
+        .catch(error => console.log(error));
 });

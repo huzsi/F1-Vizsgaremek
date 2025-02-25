@@ -18,10 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     raceListSection.innerHTML += `<div class="race-div" id="race-${raceId}">
                                                     <img src="/static/img/flags/${result.raceId}.svg" height="25px"></img>
                                                     <h2>${result.raceName}</h2>
-                                                    <button onclick="loadRaceResult(${index})">Load result</button>
+                                                    <button onclick="loadRaceResult(${index})" id="load-btn">Load result</button>
                                                 </div>`;
                 });
             }
+            document.getElementById('load-btn').addEventListener('click', () =>{
+                window.location.hash = "#race-${raceId}"
+            });
+            /**Nem működik a gomb kezelés. Későbbiekben javítani fogom! */
         })
         .catch(error => console.error('Error fetching race results: ' + error));
 });

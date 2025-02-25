@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const container = document.getElementById('racenames-container');
-    /*event API*/
+    
     fetch('/news/racenames')
         .then(response => response.json())
         .then(raceData => {

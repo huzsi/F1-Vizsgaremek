@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupDropdown('schedule-btn', `
         <div class="fullSchedule-container">
-        
             <a href="#schedule" id="full-schedule-btn">Full schedule &gt;</a>
         </div>
         <div id="schedule-content">
@@ -49,10 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="latest-nav-div">
             <nav>
                 <ul>
-                    <li><a href="#">Latest</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Daily</a></li>
-                    <li><a href="#techNews">Tech news</a></li>
+                    <li><a id="latest-btn" href="#">Latest</a></li>
+                    <li><a id="features-btn" href="#">Features</a></li>
+                    <li><a id="tech-news-btn" href="#">Tech news</a></li>
                 </ul>
             </nav>
         </div>

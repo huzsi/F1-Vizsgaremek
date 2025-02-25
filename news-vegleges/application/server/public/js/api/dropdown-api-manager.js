@@ -1,8 +1,9 @@
 /**Minden dropdown API kezelése itt található! */
+
 document.addEventListener('DOMContentLoaded', () => {
     const scheduleBtn = document.getElementById('schedule-btn');
 
-
+    /**Schedule dropdown gomb */
     scheduleBtn.addEventListener('click', () => {
         const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         const container = document.getElementById('racenames-container');
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!resultBtn){
         return
     }
-
+    /**Result dropdown gomb */
     resultBtn.addEventListener('click', () => {
         fetch('/news/raceResults')
             .then(response => response.json())
@@ -91,42 +92,52 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching season race results:', error));
     });
 });
-//Latest btn dropdown content
+//Latest dropdown gomb
 document.addEventListener('DOMContentLoaded', () => {
+    // Event listeners for buttons
     const latestBtn = document.getElementById('latest-btn');
-    if(!latestBtn){
-        return;
+    const featuresBtn = document.getElementById('features-btn');
+    const techNewsBtn = document.getElementById('tech-news-btn');
+
+    if (latestBtn) {
+        latestBtn.addEventListener('click', () => {
+            fetchAndDisplayNews('/news/news', 'news-content',5);
+        });
     }
-    latestBtn.addEventListener('click', () => {
-        
-        fetch('/news/news')
+
+    if (featuresBtn) {
+        featuresBtn.addEventListener('click', () => {
+            fetchAndDisplayNews('/news/features', 'news-content',5);
+        });
+    }
+
+    if (techNewsBtn) {
+        techNewsBtn.addEventListener('click', () => {
+            fetchAndDisplayNews('/news/tech-news', 'news-content',5);
+        });
+    }
+    // Function to fetch and display news articles
+    function fetchAndDisplayNews (apiEndpoint, containerId, articleCount) {
+        fetch(apiEndpoint)
             .then(response => response.json())
             .then(newsData => {
-                
-                const newsContent = document.getElementById('news-content');
+                const newsContent = document.getElementById(containerId);
+                newsContent.innerHTML = ''; // Clear previous content
                 let count = 0;
                 newsData.forEach(article => {
-                    if (count < 5) {
+                    if (count < articleCount) {
                         newsContent.innerHTML += `
-                                                    <h5><a href="${article.url}" target="_newblank">${article.title} </a></h5>         
-                                                    `;
-                    count++;
+                            <div>
+                                <h5><a href="${article.url}" target="_newblank">${article.title}</a></h5>
+                                <p>${article.description}</p>
+                                <p>Author: ${article.author}</p>
+                            </div>
+                        `;
+                        count++;
                     }
-                }); //foreach end
-                const regularNewsBtn = document.getElementById('regular-news-btn');
-                const techNewsBtn = document.getElementById('tech-news-btn');
-
-                if(regularNewsBtn){
-                    regularNewsBtn.addEventListener('click', () =>{
-                        window.location.href = "/news/news-layout.html/regular-news"
-                    });
-                }
-                if(techNewsBtn){
-                    techNewsBtn.addEventListener('click', () =>{
-                        window.location.href = "/news-layout.html/tech-news"
-                    });
-                }   
+                });
             })
             .catch(error => console.log(error));
-        });
+    };
+
 });
