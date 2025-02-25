@@ -11,11 +11,18 @@ const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
     const response = await fetch.default(`https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`);
     const data = await response.json();
 })();
+(async () => {
+    const fetch = await import('node-fetch');
+    const response = await fetch.default(`https://newsapi.org/v2/everything?q=F1 AND formula-1 AND technical&apiKey=${apiKey}`);
+    const data = await response.json();
+})();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
+const techUrl = `https://newsapi.org/v2/everything?q=F1 AND formula-1 AND technical&apiKey=${apiKey}`;
+const featuresUrl = `https://newsapi.org/v2/top-headlines?category=sport&q=F1&apiKey=${apiKey}`;
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -78,6 +85,40 @@ app.get('/news/news', async (req, res) => {
             res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
         }
     } catch (error) {
+        console.error('Hálózati hiba:', error);
+        res.status(500).json({ error: 'Hálózati hiba történt' });
+    }
+});
+app.get('/news/tech-news', async(req, res) => {
+    try{
+        const response = await fetch(techUrl);
+        if (!response.ok) {
+            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        if (data.status === 'ok') {
+            res.json(data.articles);
+        } else {
+            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
+        }
+    }catch(error){
+        console.error('Hálózati hiba:', error);
+        res.status(500).json({ error: 'Hálózati hiba történt' });
+    }
+});
+app.get('/news/features', async(req, res) => {
+    try{
+        const response = await fetch(featuresUrl);
+        if (!response.ok) {
+            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        if (data.status === 'ok') {
+            res.json(data.articles);
+        } else {
+            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
+        }
+    }catch(error){
         console.error('Hálózati hiba:', error);
         res.status(500).json({ error: 'Hálózati hiba történt' });
     }
