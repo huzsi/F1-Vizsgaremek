@@ -54,11 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </ul>
             </nav>
         </div>
-        <div id="latest-content">
+       
             <div id="news-content">
                 <!-- Latest news content goes here -->
             </div>
-        </div>
+        
     `);
 
     setupDropdown('result-btn', `

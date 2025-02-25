@@ -134,3 +134,30 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         .catch(error => console.log(error));
 });
+
+/**
+ * A server indításnál lefutó API Link lekérés annak érdekében, hogy ne lépjük túl a megengedett limitet.
+ * async function fetchNews() {
+    try {
+        const newsResponse = await fetch('https://example.com/news/news');
+        const featuresResponse = await fetch('https://example.com/news/features');
+        const techNewsResponse = await fetch('https://example.com/news/tech-news');
+        
+        cachedNews.news = await newsResponse.json();
+        cachedNews.features = await featuresResponse.json();
+        cachedNews.techNews = await techNewsResponse.json();
+        
+        console.log('News data cached successfully');
+    } catch (error) {
+        console.error('Error fetching news:', error);
+    }
+}
+
+// Fetch news when the server starts
+fetchNews();
+
+// Serve cached news to frontend
+app.get('/cached-news', (req, res) => {
+    res.json(cachedNews);
+});
+ */

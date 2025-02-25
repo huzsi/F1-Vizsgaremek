@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(trackData => {
                 const imgSection = document.querySelector('.track-img');
                 imgSection.innerHTML = `
-                    <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="" height="500px">
+                    <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="">
                 `;
                 
                 const headlineImg = document.getElementById("headline-flag");

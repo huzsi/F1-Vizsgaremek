@@ -127,11 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 newsData.forEach(article => {
                     if (count < articleCount) {
                         newsContent.innerHTML += `
-                            <div>
-                                <h5><a href="${article.url}" target="_newblank">${article.title}</a></h5>
-                                <p>${article.description}</p>
-                                <p>Author: ${article.author}</p>
-                            </div>
+                           
+                                <a href="${article.url}" target="_newblank">
+                                    <h5>${article.title}</h5>
+                                </a>
+                            
                         `;
                         count++;
                     }

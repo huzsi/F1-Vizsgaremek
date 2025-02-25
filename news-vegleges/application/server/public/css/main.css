@@ -72,7 +72,6 @@ fieldset{
 .dropdown-content div {
     text-decoration: none;
     display: flex;
-    gap: 15px;
     padding: 25px 150px;
 
 }
@@ -119,21 +118,16 @@ fieldset{
 .dropdown-content a{
     text-align: center;
 }
-#latest-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    text-align: left;
-}
 .latest-nav-div{
     border-bottom: 1px solid var(--primary-color);
 }
-#news-content{
-    flex: 1 2;
-   
+#news-content a{
+    border-right: 1px solid var(--primary-color);
+    padding: 15px;
 }
-#spacer{
-    flex: 2 1;
+#news-content a:last-child{
+    border-right: none;
+    padding-right: unset;
 }
 
 .result-nav-div{
