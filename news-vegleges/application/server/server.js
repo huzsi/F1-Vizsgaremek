@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
+const apiKey = 'bd49adc7fe7341ddb75478209aa97049';
 (async () => {
     const fetch = await import('node-fetch');
     const response = await fetch.default(`https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`);
@@ -13,7 +13,7 @@ const apiKey = 'dbe6c673af274063be29c9aa0d09e5ed';
 })();
 (async () => {
     const fetch = await import('node-fetch');
-    const response = await fetch.default(`https://newsapi.org/v2/everything?q=F1 AND formula-1 AND technical&apiKey=${apiKey}`);
+    const response = await fetch.default(`https://newsapi.org/v2/everything?q=F1 AND Formula-1 AND technical&qInTitle=Analysis&apiKey&apiKey=${apiKey}`);
     const data = await response.json();
 })();
 
@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
-const techUrl = `https://newsapi.org/v2/everything?q=F1 AND formula-1 AND technical&apiKey=${apiKey}`;
+const techUrl = `https://newsapi.org/v2/everything?q=F1 AND Formula 1 AND technical&qInTitle=Analysis&apiKey=${apiKey}`;
 const featuresUrl = `https://newsapi.org/v2/top-headlines?category=sport&q=F1&apiKey=${apiKey}`;
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
@@ -153,13 +153,12 @@ app.get('/news/race-schedule', (req, res) => {
         ORDER BY rn.raceNumber ASC
     `);
 });
-
+app.get('/news/racenames', (req, res) =>{
+    queryDB(res,'SELECT raceNumber, id, name, fullName, trackName FROM racenames ORDER BY raceNumber ASC',[req.query.id]);
+});
 app.get('/news/trackinfo', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT trackName, fullName FROM racenames WHERE id = ?', [req.query.id]);
-});
-app.get('/news/racenames', (req, res) =>{
-    queryDB(res,'SELECT raceNumber, id, name, fullName, trackName FROM racenames ORDER BY raceNumber ASC',[req.query.id]);
 });
 app.get('/news/circuitdatas', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
