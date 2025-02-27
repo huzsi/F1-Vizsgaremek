@@ -5,24 +5,39 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 3600 });
 const apiKey = 'bd49adc7fe7341ddb75478209aa97049';
-(async () => {
-    const fetch = await import('node-fetch');
-    const response = await fetch.default(`https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`);
-    const data = await response.json();
-})();
-(async () => {
-    const fetch = await import('node-fetch');
-    const response = await fetch.default(`https://newsapi.org/v2/everything?q=F1 AND Formula-1 AND technical&qInTitle=Analysis&apiKey&apiKey=${apiKey}`);
-    const data = await response.json();
-})();
-
 const app = express();
 const port = process.env.PORT || 3001;
-
 const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
 const techUrl = `https://newsapi.org/v2/everything?q=F1 AND Formula 1 AND technical&qInTitle=Analysis&apiKey=${apiKey}`;
-const featuresUrl = `https://newsapi.org/v2/top-headlines?category=sport&q=F1&apiKey=${apiKey}`;
+
+const updateCache = async () => {
+    const fetch = (await import('node-fetch')).default;
+    try {
+        const [newsResponse, techResponse, featuresResponse] = await Promise.all([
+            fetch(newsUrl),
+            fetch(techUrl),
+            fetch(featuresUrl)
+        ]);
+
+        const newsData = await newsResponse.json();
+        const techData = await techResponse.json();
+        const featuresData = await featuresResponse.json();
+
+        cache.set('news', newsData);
+        cache.set('techNews', techData);
+        cache.set('features', featuresData);
+
+        console.log('Cache frissítve');
+    } catch (error) {
+        console.error('Cache frissítési hiba:', error);
+    }
+};
+
+updateCache();
+setInterval(updateCache, 3600*1000); //Időzítő, hogy mindig frissüljön.
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -72,55 +87,22 @@ app.get('/news/tracks.html', servePage('tracks'));
 app.get('/news/start.html', servePage('start'));
 app.get('/news/profile.html', servePage('profile'));
 app.get('/news/raceresult.html', servePage('raceresult'));
-app.get('/news/news', async (req, res) => {
-    try {
-        const response = await fetch(newsUrl);
-        if (!response.ok) {
-            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
-        }
-        const data = await response.json();
-        if (data.status === 'ok') {
-            res.json(data.articles);
-        } else {
-            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
-        }
-    } catch (error) {
-        console.error('Hálózati hiba:', error);
-        res.status(500).json({ error: 'Hálózati hiba történt' });
+app.get('/news/test.html', servePage('test'));
+app.get('/news/news', (req, res) => {
+    const newsData = cache.get('news');
+    if (newsData) {
+        res.json(newsData.articles);
+    } else {
+        res.status(500).json({ error: 'Cache üres' });
     }
 });
-app.get('/news/tech-news', async(req, res) => {
-    try{
-        const response = await fetch(techUrl);
-        if (!response.ok) {
-            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
-        }
-        const data = await response.json();
-        if (data.status === 'ok') {
-            res.json(data.articles);
-        } else {
-            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
-        }
-    }catch(error){
-        console.error('Hálózati hiba:', error);
-        res.status(500).json({ error: 'Hálózati hiba történt' });
-    }
-});
-app.get('/news/features', async(req, res) => {
-    try{
-        const response = await fetch(featuresUrl);
-        if (!response.ok) {
-            throw new Error(`API kérés hiba: ${response.status} ${response.statusText}`);
-        }
-        const data = await response.json();
-        if (data.status === 'ok') {
-            res.json(data.articles);
-        } else {
-            res.status(500).json({ error: 'Hiba történt a hírek lekérése során' });
-        }
-    }catch(error){
-        console.error('Hálózati hiba:', error);
-        res.status(500).json({ error: 'Hálózati hiba történt' });
+
+app.get('/news/tech-news', (req, res) => {
+    const techData = cache.get('techNews');
+    if (techData) {
+        res.json(techData.articles);
+    } else {
+        res.status(500).json({ error: 'Cache üres' });
     }
 });
 app.get('/news/news-layout.html/:page', (req, res) => {
