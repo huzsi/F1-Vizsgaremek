@@ -20,31 +20,29 @@
 <body>
     <div class="header-container" id="header-container">
         <nav class="top-nav" id="topNav">
-            <!--JS code-->
+            <!--JS code: auth-check.js-->
         </nav>
         <!--Main header-->
         <header id="mainHeader" class="header-transparent">
-            <!--JS code-->
+             <!--JS code: header-renderer.js-->
         </header>
         <div class="dropdown-content" id="dropdown-content">
-            <!--JS code-->
+             <!--JS code: header-renderer.js-->
         </div>
         <!--section #1-->
         <div class="event-container">
             <div class="event">
-                <div id="race-div">
-                </div>
+                <div id="race-div"></div>
                 <div>
-                    <h4>Starts in</h4>
                     <p id="timerParagraph"></p>
                 </div>
                 <div>
                     <p>event dates</p>
                     <table id="regularEvent">
-                        <!--API-->
+                        <!--standlist-api-manager.js-->
                     </table>
                     <table id="sprintEvent" class="hidden">
-                        <!--API-->
+                        <!--standlist-api-manager.js-->
                     </table>
                     <a href="#">Where can I watch?</a>
                 </div>
@@ -59,23 +57,9 @@
         <section class="news" id="news">
             <fieldset>
                 <legend><h2>News</h2></legend>
-                <div class="news-container">
-                    
-                    <div class="daily-content" id="">
-                        <h3>Daily News</h3>
-                      
-                        <div class="dailyNews-container" id="regular-daily-news-container">
-                            <!--API-->
-                        </div>
-                    </div>
-                    <div class="features-content">
-                        <h3>Features</h3>
-                       
-                        <div class="featuresNews-container" id="features-news-container">
-                             <!--API-->
-                        </div>
-                    </div>
-                    
+                <h3>Daily News</h3>
+                <div class="news-container" id="regular-daily-news-container">
+                    <!--news-api-manager.js tölti be-->
                 </div>
                 <button id="regular-news-btn">Read more</button>
             </fieldset>
@@ -93,13 +77,13 @@
                     </ul>
                 </nav>
                 <table id="driverTable">
-                    <!--API-->
+                    <!--standlist-api-manager.js-->
                 </table>
                 <table id="constructorTable" class="hidden">
-                    <!--API-->
+                    <!--standlist-api-manager.js-->
                 </table>
                 <table id="raceTable" class="hidden">
-                    <!--API-->
+                    <!--standlist-api-manager.js-->
                 </table>
             </div>
         </section>
@@ -107,16 +91,15 @@
             <h3>Upcoming Races</h3>
             <div class="scrollmenu">
                 <div class="inner" id="racenames-container">
-                    <!--API-->
+                    <!--schedule-api-manager.js-->
                 </div>
             </div>
         </section>
-        <section class="tech-news" id="techNews">
+        <section class="tech-news">
             <fieldset>
-                <legend><h2>Technical</h2></legend>
-                <div class="techNews-container">
-                    <div id="tech-news-content">
-                    </div>
+                <legend><h2>Technical</h2></legend>  
+                <div class="news-container" id="tech-news-content">
+                    <!--news-api-manager.js tölti be-->
                 </div>
                 <button id="tech-news-btn">Read more</button> 
             </fieldset>
@@ -126,7 +109,6 @@
         <div>
             <h2><a href="https://www.formula1.com/">F1 website</a></h2>
             <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
-            
         </div>
         <div>
             <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
@@ -139,19 +121,20 @@
     </footer>
     <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
     <script src="/static/js/frontend/header-renderer.js"></script>
+    <script src="/static/js/frontend/dropdown.js"></script>
     <!--API Manager JS scripts-->
-    <script src="/static/js/api/index-api-manager.js"></script>
+    <script src="/static/js/api/schedule-api-manager.js"></script>
+    <script src="/static/js/api/standlist-api-manager.js"></script>
     <script src="/static/js/api/dropdown-api-manager.js"></script>
     <script src="/static/js/api/news-api-manager.js"></script>
     <!--Util JS scripts-->
     <script src="/static/js/utils/auth-check.js"></script>
     <!--Frontend JS scripts-->
     <script src="/static/js/frontend/theme.js"></script>
-    
+    <script src="/static/js/frontend/animation.js"></script>
     <script src="/static/js/frontend/index/header-slider.js"></script>
     <script src="/static/js/frontend/index/horizontal-scroll.js"></script>
     <script src="/static/js/frontend/index/table-switcher.js"></script>
-    <script src="/static/js/frontend/dropdown.js"></script>
     <script src="/static/js/frontend/footer-time-changer.js"></script>
 </body>
 </html>

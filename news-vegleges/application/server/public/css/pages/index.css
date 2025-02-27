@@ -58,25 +58,24 @@
 .news h2{
     padding: 0 10px;
 }
+.tech-news{
+    margin: 25px 150px;
+    justify-content: center;
+}
+.tech-news h2{
+    padding: 0 10px;
+}
 .news-container{
-    display: flex;
-    gap: 15px;
-}
-.news .daily-content{
-    flex: 3 1;
-    
-}
-.news .dailyNews-container{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
-.news .dailyNews-container > *{
+.news-container > *{
     flex: 1 0 20%;
     padding: 0px 15px;
     
 }
-.news .dailyNews-container .newsDiv{
+.newsDiv{
     border: 1px solid var(--primary-color);
     border-radius: 15px;
     -webkit-border-radius: 15px;
@@ -95,19 +94,6 @@
 }
 .newsDiv:hover{
     transform: scale(1.05);
-}
-.news .featuresNews-container .newsDiv{
-    border: 1px solid var(--primary-color);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    padding: 10px 15px;
-    margin: 15px 0;
-}
-.news .features-content{
-    flex: 1 3;
 }
 /*main-standlist-section*/
 .standlist{
@@ -139,7 +125,7 @@
 
 /*main-schedule section*/
 .schedule {
-    padding: 10px 150px; /* Lehet, Padding fog kelleni */
+    padding: 10px 150px; 
     text-align: center;
     border-bottom: 1px solid var(--primary-color);
 }
@@ -165,7 +151,6 @@
 .scrollmenu .inner::-webkit-scrollbar {
     display: none; /* Görgetősáv eltüntetése Chrome, Safari és Opera böngészőkben */
 }
-
 .scrollmenu a {
     display: inline-block;
     text-align: center;
@@ -190,50 +175,6 @@
 .scrollmenu a p > span {
     font-weight: bold;
     font-size: large;
-}
-/*main-tech news section*/
-.tech-news{
-    margin: 25px 150px;
-    justify-content: center;
-}
-.tech-news h2{
-    padding: 0 10px;
-}
-.techNews-container{
-    display: flex;
-    gap: 15px;
-}
-.tech-news .daily-content{
-    flex: 3 1;
-    
-}
-.tech-news .dailyNews-container{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-}
-.tech-news .dailyNews-container > *{
-    flex: 1 0 20%;
-    padding: 0px 15px;
-    
-}
-.newsDiv{
-    border: 1px solid var(--primary-color);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    padding: 10px 15px;
-}
-#tech-news-content{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-}
-#tech-news-content>*{
-    flex: 1 0 20%;
-    padding: 0px 15px;
 }
 img{
     height: 25px;

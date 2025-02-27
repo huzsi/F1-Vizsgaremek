@@ -1,21 +1,14 @@
 @media (max-width: 1700px) {
-    .top-nav{
-        padding: 0 100px;
-    }
-    header{
+    .top-nav, header{
         padding: 0 100px;
     }
     .event-container{
        margin: 20px 100px;
     }
-    .event-container .event{
-        flex: 1 1;
-  
-    }
-    .event-container .event-spacer{
+    .event-container .event, .event-container .event-spacer{
         flex: 1 1;
     }
-    .news{
+    .news, .tech-news{
         margin: 25px 100px;
     }
     .standlist{
@@ -34,20 +27,22 @@
     .standlist-content nav ul li:last-child{
         padding-right: 0;
     }
-
+    .schedule{
+        padding: 25px 100px;
+    }
+    .scrollmenu a{
+        width: 15%;
+    }
 }
 @media (max-width: 1350px) {
-    .top-nav{
-        padding: 0 100px;
-    }
-    header{
+    .top-nav, header {
         padding: 0 100px;
     }
     .event-container{
         margin: 25px 100px;
     }
-    .news{
-        margin: 0 100px;
+    .news, .tech-news{
+        margin: 25px 100px;
     }
     .standlist{
         padding: 25px 100px;
@@ -59,21 +54,18 @@
         flex: 1 0;
         margin: 0;
     }
-    .news .dailyNews-container > *{
-        flex: 1 0 30%;
-    }
     .schedule{
         padding: 15px 100px ;
     }
+    .scrollmenu a{
+        width: 20%;
+    }
 }
 @media (max-width: 992px) {
-    .top-nav{
+    .top-nav,header{
         padding: 0 75px;
     }
-    header{
-        padding: 0 75px;
-    }
-    .fullSchedule-container{
+    .full-schedule-container{
         justify-content: center;
     }
     .event-container{
@@ -85,14 +77,17 @@
     .event-container .event-spacer{
         flex: 1 1;
     }
-    .news{
-        margin: 0 75px;
+    .news, .tech-news{
+        margin: 10 75px;
     }
-    .news .dailyNews-container > *{
-        flex: 1 0 30%;
+    .news-container > *{
+        flex: 1 0 40%;
+        padding: 0px 15px;
+        
     }
     .standlist{
         padding: 25px 75px;
+        margin: unset;
     }
     .standlist-spacer{
         flex: 0 1;
@@ -104,45 +99,32 @@
     .schedule{
         padding: 15px 75px ;
     }
+    #schedule-content{
+        flex-direction: column;
+    }
+    .scrollmenu a{
+        width: 25%;
+    }
 }
 @media (max-width: 768px) {
-    .top-nav{
+    .top-nav, header{
         padding: 0px 20px;
-    }
-    header{
-        flex-direction: column;
-        padding: 0 20px;
-    }
-    .header-container{
-        background-color: var(--carbon-color) ;
-
     }
     #schedule-content{
         flex-direction: column;
     }
-    .fullSchedule-container{
+    .full-schedule-container{
         justify-content: center;
     }
     .event-container{
         margin: 0 120px;
         display: unset;
     }
-    .main-container{
-        
-        margin: 25px 0;
-    }
-    .podium-drivers-div img{
-       height: 100px;
-    }
-    
     .news-container{
         flex-direction: column;
     }
-    .news{
+    .news, .tech-news{
         margin: 10px 20px;
-    }
-    .news .dailyNews-container > *{
-        flex: 1 0 30%;
     }
     .standlist {
         flex-direction: column;
@@ -160,6 +142,12 @@
     .schedule{
         padding: 15px 20px ;
     }
+    #schedule-content{
+        flex-direction: column;
+    }
+    .scrollmenu a{
+        width: 25%;
+    }
 }
 @media (max-width: 576px) {
     .top-nav{
@@ -176,15 +164,11 @@
         margin: 0 120px;
         display: unset;
     }
-    
     .news-container{
         flex-direction: column;
     }
-    .news{
+    .news, .tech-news{
         margin: 15px 0;
-    }
-    .dailyNews-container{
-        flex-direction: column;
     }
     .standlist {
         flex-direction: column;
@@ -213,7 +197,7 @@
     #schedule-content{
         flex-direction: column;
     }
-    .fullSchedule-container{
-        justify-content: center;
+    .scrollmenu a{
+        width: 25%;
     }
 }

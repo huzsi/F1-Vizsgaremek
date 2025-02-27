@@ -75,12 +75,12 @@ fieldset{
     padding: 25px 150px;
 
 }
-.fullSchedule-container{
+.full-schedule-container{
     padding: 25px 0;
     border-bottom: 1px solid var(--primary-color);
     padding: 0 150px;
 }
-.fullSchedule-container a:hover{
+.full-schedule-container a:hover{
     color: var(--red-color);
 }
 #schedule-content{
