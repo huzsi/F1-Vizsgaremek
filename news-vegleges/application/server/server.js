@@ -16,19 +16,18 @@ const techUrl = `https://newsapi.org/v2/everything?q=F1 AND Formula 1 AND techni
 const updateCache = async () => {
     const fetch = (await import('node-fetch')).default;
     try {
-        const [newsResponse, techResponse, featuresResponse] = await Promise.all([
+        const [newsResponse, techResponse] = await Promise.all([
             fetch(newsUrl),
             fetch(techUrl),
-            fetch(featuresUrl)
         ]);
 
         const newsData = await newsResponse.json();
         const techData = await techResponse.json();
-        const featuresData = await featuresResponse.json();
+       
 
         cache.set('news', newsData);
         cache.set('techNews', techData);
-        cache.set('features', featuresData);
+      
 
         console.log('Cache frissítve');
     } catch (error) {
@@ -109,7 +108,7 @@ app.get('/news/news-layout.html/:page', (req, res) => {
     const { page } = req.params;
     let filePath = path.join(__dirname, 'public', 'html', 'news-layout.html');
 
-    if (page === 'article' || page === 'tech-news' || page === 'regular-news') {
+    if (page === 'tech-news' || page === 'regular-news' || page === 'news') {
         res.sendFile(filePath);
     } else {
         res.status(404).send('Page not found');
@@ -125,7 +124,17 @@ app.get('/news/script-layout.html/:page', (req, res) => {
         res.status(404).send('Page not found');
     }
 });
+app.get('/news/forum-layout.html/:page', (req, res) => {
+    const { page } = req.params;
+    let filePath = path.join(__dirname, 'public', 'html', 'forum-layout.html');
 
+    if(page === 'index' || page === 'race-discussion'){
+        res.sendFile(filePath);
+    }
+    else{
+        res.status(404).send('Page not found');
+    }
+})
 app.get('/news/race-schedule', (req, res) => {
     queryDB(res, `
         SELECT rd.id, rd.type, rd.event1, rd.event2, rd.event3, rd.event4, rd.event5, 
@@ -218,6 +227,66 @@ app.post('/news/saveRaceResults', (req, res) => {
         results.P6 || null, results.P7 || null, results.P8 || null, results.P9 || null, results.P10 || null,
         results.P11 || null, results.P12 || null, results.P13 || null, results.P14 || null, results.P15 || null,
         results.P16 || null, results.P17 || null, results.P18 || null, results.P19 || null, results.P20 || null,
+    ];
+    queryDB(res, query, values);
+});
+///'SELECT * FROM forumTopics'
+app.get('/news/forumTopics', (req, res) => {
+    queryDB(res, `SELECT * FROM forumTopics`);
+});
+app.get('/news/raceTopics', (req, res) => {
+    const query = `
+        SELECT 
+            rn.raceNumber,
+            rn.id,
+            rn.name,
+            rd.event1,
+            rd.event2,
+            rd.event3,
+            rd.event4,
+            rd.event5,
+            rd.type
+        FROM 
+            raceNames rn
+        JOIN 
+            racedates rd ON rn.id = rd.id
+        ORDER BY rn.raceNumber ASC
+    `;
+    queryDB(res, query);
+});
+app.get('/news/forumTopics/:topicId', (req, res) => {
+    const { userId, topicContent, date } = req.body;
+    const sql = 'INSERT INTO forumTopics (userId, topicContent, date) VALUES (?, ?, ?)';
+    db.query(sql, [userId, topicContent, date], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ id: result.insertId, userId, topicContent, date });
+    });
+});
+app.delete('/news/forumTopics/:topicId', (req, res) => {
+    const { topicId } = req.params;
+    const sql = 'DELETE FROM forumTopics WHERE topicId = ?';
+    db.query(sql, [topicId], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ message: 'Topic deleted successfully' });
+    });
+});
+// POST a new forum topic
+app.post('/news/forumTopics', (req, res) => {
+    const { userId, topicTitle, topicContent, date } = req.body;
+
+    const query = `
+        INSERT INTO forumTopics (userId, topicTitle, topicContent, date)
+        VALUES (?, ?, ?, ?)
+    `;
+    const values = [
+        userId,
+        topicTitle,
+        topicContent,
+        date
     ];
     queryDB(res, query, values);
 });
