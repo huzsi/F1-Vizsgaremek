@@ -1,0 +1,21 @@
+nav ul{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 15px 0px;
+    padding: 0;
+}
+nav ul li{
+    border-right: 1px solid var(--primary-color);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
