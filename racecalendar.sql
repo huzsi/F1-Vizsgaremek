@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2025. Feb 24. 22:08
+-- Létrehozás ideje: 2025. Már 02. 23:08
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -156,6 +156,29 @@ INSERT INTO `eventtype` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `forumtopics`
+--
+
+CREATE TABLE `forumtopics` (
+  `topicId` int(15) NOT NULL,
+  `userId` int(15) NOT NULL,
+  `topicTitle` varchar(255) NOT NULL,
+  `topicContent` varchar(255) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `forumtopics`
+--
+
+INSERT INTO `forumtopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
+(1, 1, 'sad', 'sad', '2025-03-04'),
+(2, 2, 'sad', 'sad', '2025-03-04'),
+(3, 2, 'dead', 'sad', '2025-03-04');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `racedates`
 --
 
@@ -198,6 +221,19 @@ INSERT INTO `racedates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `
 ('sa', 1, '2025-04-18 15:30:00', '2025-04-18 19:00:00', '2025-04-19 15:30:00', '2025-04-19 19:00:00', '2025-04-20 19:00:00'),
 ('sg', 1, '2025-10-03 11:30:00', '2025-10-03 15:00:00', '2025-10-04 11:30:00', '2025-10-04 15:00:00', '2025-10-05 14:00:00'),
 ('us', 2, '2025-10-17 19:30:00', '2025-10-17 23:30:00', '2025-10-18 19:00:00', '2025-10-18 23:00:00', '2025-10-19 21:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `raceForumTopics`
+--
+
+CREATE TABLE `raceForumTopics` (
+  `topicId` int(11) NOT NULL,
+  `event1` int(11) NOT NULL,
+  `event2` int(11) NOT NULL,
+  `event3` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -333,6 +369,13 @@ ALTER TABLE `eventtype`
   ADD PRIMARY KEY (`id`);
 
 --
+-- A tábla indexei `forumtopics`
+--
+ALTER TABLE `forumtopics`
+  ADD PRIMARY KEY (`topicId`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- A tábla indexei `racedates`
 --
 ALTER TABLE `racedates`
@@ -374,6 +417,12 @@ ALTER TABLE `constructornames`
 --
 ALTER TABLE `driverNames`
   MODIFY `driverId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT a táblához `forumtopics`
+--
+ALTER TABLE `forumtopics`
+  MODIFY `topicId` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `user`
