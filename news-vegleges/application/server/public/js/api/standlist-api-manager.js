@@ -1,8 +1,8 @@
-/**----------------------------------
+/**--------------------------------------------------------------------
  * 
  * API manager JS code for standlist tables displayed on index.html.
  * 
- * ----------------------------------
+ * --------------------------------------------------------------------
  * 
  * Invoked APIs:
  *  /driverStandlist
@@ -10,15 +10,14 @@
  *  /constructorStandlist
  *  /raceResults
  * 
- * ----------------------------------
+ * --------------------------------------------------------------------
  * 
  * The code functions in a coordinated manner to calculate the scores of drivers and teams.
  * Therefore, do not make modifications in that section.
  * 
- * ----------------------------------
- * Created by: Ináncsi Krisztián
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Ináncsi
  * Last Updated: 2025-03-02
- * 
  */
 
 document.addEventListener('DOMContentLoaded', async () => {

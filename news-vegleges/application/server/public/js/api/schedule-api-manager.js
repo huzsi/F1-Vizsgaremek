@@ -1,10 +1,19 @@
-/**Ezek az API-k csak az index oldalon jelennek meg
- * Az alábbi fájl a Következő futamot megjelenítő táblázatért (index.html elején taláható) felelős
- * illetve az Upcoming Race szekció scroll menüjéért.
- * Alábbi API-k kerülnek meghívásra:
+/**--------------------------------------------------------------------
+ * 
+ * The following JS code is responsible for displaying the "Next Race" table 
+ * (found at the top of index.html) and the Upcoming Race section's scroll menu.
+ * 
+ * These APIs are only displayed on the index page.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The following APIs are called:
  *  /racenames
  *  /race-schedule
- * Végleges kód, nem fog frissülni.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Ináncsi
+ * Last updated: 2025-02-05
  */
 document.addEventListener('DOMContentLoaded', async () => {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];

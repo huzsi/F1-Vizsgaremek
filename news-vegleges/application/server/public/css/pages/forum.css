@@ -1,8 +1,7 @@
-
 main{
-    
-    margin: 25px 150px;
+    margin: 0 150px;
 }
+
 .section-container{
     display: flex;
     justify-content: center;

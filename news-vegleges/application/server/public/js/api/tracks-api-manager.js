@@ -20,9 +20,8 @@
  *      - Highlights videos from the past 5 years.
  * 
  * --------------------------------------------------------------------
- * Created by: Ináncsi Krisztián
+ * Created by: Krisztián Ináncsi
  * Last updated: 2025-03-02
- * 
  */
 
 document.addEventListener('DOMContentLoaded', async () => {

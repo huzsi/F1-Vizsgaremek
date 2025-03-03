@@ -1,17 +1,40 @@
-/**----------------------------
+/**--------------------------------------------------------------------
  * 
- * Leírás lesz majd.
+ * Dynamically generating the navigation menu based on user authentication status.
+ * The top navigation bar is populated with different links depending on whether the user is logged in or not.
  * 
- * ----------------------------
+ * --------------------------------------------------------------------
  * 
- * Copyright protected
- * Use requires permission
+ * APIs used:
+ *      /news/get-profile - (GET)
  * 
- * ----------------------------
- * Created by: Bartók Krisztián
- * Last update: 2025-02-20
+ * --------------------------------------------------------------------
+ * 
+ * Data is loaded based on the presence of a valid token in localStorage.
+ * 
+ * Note: The token, username, and permission values are fetched from localStorage and used to build the navigation menu.
+ * If a valid token is found, a request is made to fetch the user's profile data from the server.
+ * 
+ * In case of successful authentication:
+ *      - A dynamic navigation menu is created.
+ *      - The user's profile information is displayed in the menu.
+ *      - Based on the user's permission level, different options are shown (e.g., Result upload, News creation).
+ * 
+ * In case of failed authentication or no token:
+ *      - The menu only includes general options such as Home, Stats, About, and Login/Register.
+ * 
+ * The profile dropdown is displayed when the user clicks on their profile name and contains additional options like "View Profile", 
+ * "Create News" (for users with permission), and "Logout".
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The async function fetches the profile data from the server and dynamically updates the navigation links.
+ * The logout functionality is also included, allowing the user to log out and clear the stored authentication data.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók
+ * Last updated: 2025-02-20
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     const topNav = document.getElementById('top-nav');
     const token = localStorage.getItem('token');

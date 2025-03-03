@@ -1,16 +1,53 @@
-/**----------------------------
+/**--------------------------------------------------------------------
  * 
- * Created by: Ináncsi Krisztián & Bartók Krisztián
+ * Race results submission form with dynamic driver selection and race details.
+ * This script fetches race names and driver information from the server,
+ * allows users to select drivers for each position in the race, 
+ * and submits the results to the server.
  * 
- * ----------------------------
+ * --------------------------------------------------------------------
  * 
- * Copyright protected
- * Use requires permission
+ * Features:
+ *      1. **Fetching Race Names:**
+ *         - The script fetches race names from the server (`/news/racenames`) and populates a dropdown menu.
+ *         - Upon selecting a race, the selected race's name is displayed on the page.
  * 
- * ----------------------------
- * Last update: 2025-02-12
+ *      2. **Dynamic Driver Selection:**
+ *         - A series of dropdowns (for each position from P1 to P20) are dynamically created based on the number of positions in the race.
+ *         - Each dropdown allows the user to choose a driver for that position.
+ *         - The driver options are fetched from the server (`/news/driverStandlist`), and each select element is populated with the available drivers.
+ *         - When a driver is selected, other dropdowns are updated to prevent selecting the same driver more than once.
+ * 
+ *      3. **Form Submission:**
+ *         - The user can submit the form with the selected drivers for each position.
+ *         - When the form is submitted, the selected drivers for each position are sent to the server (`/news/saveRaceResults`) in JSON format, along with the race ID.
+ *         - The form submission is handled using the `POST` method.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * Event Handlers:
+ *      - **Race Name Selection:** Updates the displayed race name when a new race is selected from the dropdown.
+ *      - **Driver Selection:** Dynamically populates the driver options, ensuring no driver is selected more than once for the positions.
+ *      - **Form Submission:** Sends the selected drivers for each position to the server as race results.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * DOM Structure:
+ *      - **Race Name Dropdown:** Contains the race names and is used to select a race.
+ *      - **Driver Dropdowns:** 20 dropdowns (for P1 to P20) are dynamically generated, where each dropdown lets the user select a driver.
+ *      - **Form Submission:** The form element submits the data when the "submit" event occurs.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * Key Functions:
+ *      - **populateDriverSelects:** Creates 20 dropdowns for driver selection and populates them with driver options.
+ *      - **updateDriverOptions:** Ensures that no driver is selected more than once in the various positions.
+ *      - **Form Submission Handler:** Collects all the selected drivers and sends them to the server as JSON.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók & Krisztián Ináncsi
+ * Last updated: 2025-03-03
  */
-
 document.addEventListener('DOMContentLoaded', function() {
     // Versenynevek lekérése
     fetch('/news/racenames')

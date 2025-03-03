@@ -1,4 +1,4 @@
-/**-------------------------------------
+/**--------------------------------------------------------------------
  * 
  * Profile data and settings and admin panel display code.
  * Functionalities:
@@ -7,7 +7,7 @@
  * 
  * The code is used only by profile.html.
  * 
- * -------------------------------------
+ * --------------------------------------------------------------------
  * 
  * APIs used by the code:
  *      - /news/get-profile (GET)
@@ -17,7 +17,7 @@
  *      - /news/update-password (PUT)
  *      - /news/get-all-profiles (GET)
  * 
- * -------------------------------------
+ * --------------------------------------------------------------------
  * 
  * Due to permissions, the token created during login needs to be encrypted.
  * As a result, the page will not have default access to profile-related APIs.
@@ -26,10 +26,9 @@
  *                  'Authorization': `Bearer ${token}`  // Bearer token
  *              }
  * 
- * -------------------------------------
- * Created by: Bartók Krisztián
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók
  * Last updated: 2025-03-02
- * 
  */
 
  document.addEventListener('DOMContentLoaded', async () => {

@@ -6,10 +6,10 @@
  * --------------------------------------------------------------------
  * 
  * APIs used:
- *      /race-schedule - (GET)
- *      /raceResults - (GET)
- *      /news - (GET - From Cache)
- *      /tech-news - (GET - From Cache)
+ *      /news/race-schedule - (GET)
+ *      /news/raceResults - (GET)
+ *      /news/news - (GET - From Cache)
+ *      /news/tech-news - (GET - From Cache)
  * 
  * --------------------------------------------------------------------
  * 
@@ -21,14 +21,25 @@
  * 
  * --------------------------------------------------------------------
  * 
- * The async functions at the end of the code are responsible for loading News API data from the Cache.
+ * The code includes functions for:
+ *      - Displaying the race schedule in the dropdown when the 'Schedule' button is clicked.
+ *      - Displaying the race results in the dropdown when the 'Result' button is clicked.
+ *      - Loading the latest news articles in the dropdown via the 'Latest' button.
+ *      - Handling the dropdown for tech news.
+ * 
+ * The fetchData function is used throughout to load data from the APIs.
+ * 
+ * The fetchAndDisplayNews function handles the fetching and displaying of news data based on the selected category (e.g., latest news or tech news).
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The async functions are responsible for fetching and displaying data, ensuring that the dropdown menus are populated dynamically.
  * Do not modify them under any circumstances!
  * 
  * --------------------------------------------------------------------
- * Created by: Ináncsi Krisztián
- * Last updated: 2025-02-28.
+ * Created by: Krisztián Ináncsi
+ * Last updated: 2025-01-31
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     const scheduleBtn = document.getElementById('schedule-btn');
     if(!scheduleBtn){
@@ -156,7 +167,6 @@ document.addEventListener('DOMContentLoaded', async() => {
         })
     }
 });
-
 async function fetchAndDisplayNews(apiEndpoint, containerId, articleCount) {
     try {
         const newsData = await fetchData(apiEndpoint);
@@ -176,7 +186,6 @@ async function fetchAndDisplayNews(apiEndpoint, containerId, articleCount) {
         console.error('Error fetching news:', error);
     }
 }
-
 async function fetchData(url) {
     const response = await fetch(url);
     if (!response.ok) {

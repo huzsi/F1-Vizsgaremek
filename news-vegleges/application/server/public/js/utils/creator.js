@@ -1,16 +1,49 @@
-/**----------------------------
+/**--------------------------------------------------------------------
  * 
- * Created by: Bartók Krisztián
+ * Dynamic content editor with preview functionality.
+ * This script allows the user to create a document with different types of elements (e.g., text, images, and paragraphs), 
+ * preview them instantly, and clear all inputs with a button click.
  * 
- * ----------------------------
+ * --------------------------------------------------------------------
  * 
- * Copyright protected
- * Use requires permission
+ * Features:
+ *      1. **Main Title Input:** 
+ *         - The user can input a main title, which will be displayed live in the preview section.
  * 
- * ----------------------------
- * Last update: 2025-02-17
+ *      2. **Element Addition:**
+ *         - The user can choose an element type (e.g., Paragraph, Image, Text input) from a dropdown and add it to the document.
+ *         - Depending on the selected element type, an appropriate input field (textarea, file input, or text input) will appear.
+ * 
+ *      3. **Element Modification:**
+ *         - Each added element has options to delete or modify it.
+ *         - The preview is updated immediately after any changes are made to the elements.
+ * 
+ *      4. **Preview Update:**
+ *         - The preview section reflects all the changes made in the editor in real-time.
+ *         - Paragraphs, images, and text inputs are displayed accordingly in the preview.
+ * 
+ *      5. **Clear All:**
+ *         - The user can click the "Clear" button to reset all inputs and clear the preview content.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * Event Handlers:
+ *      - **Main Title Input:** Updates the main title preview as the user types.
+ *      - **Add Element Button:** Adds the selected element type to the editor container.
+ *      - **Element Modification Buttons:** Each element has delete and change functionality, updating the preview as needed.
+ *      - **Clear Button:** Resets all inputs and clears the preview content.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * DOM Structure:
+ *      - Main title input is associated with the element preview.
+ *      - Added elements (text, image, etc.) are placed inside an editor container.
+ *      - The preview content is updated dynamically based on the elements added.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók & Krisztián Ináncsi
+ * Last updated: 2025-03-03
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Main title input
 const mainTitleInput = document.getElementById('main-title-input');
@@ -130,6 +163,3 @@ clearBtn.addEventListener('click', () => {
     previewContent.innerHTML = '';
 });
 });
-
-
-

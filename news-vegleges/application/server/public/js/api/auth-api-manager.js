@@ -1,32 +1,35 @@
 /**--------------------------------------------------------------------
  * 
- * This code is responsible for login and registration!
- * Only used by auth.html.
+ * Login and Registration Handling
+ * This script manages the user login and registration functionalities 
+ * specifically used by the auth.html page.
  * 
  * --------------------------------------------------------------------
  * 
  * APIs:
- *      /register - (POST)
- *      /login - (POST)
+ *      - /register (POST): Handles new user registration.
+ *      - /login (POST): Handles user login.
  * 
  * --------------------------------------------------------------------
  * 
- * Note: The permission field value for /register is set in server.js.
- * By default, a permission level of 3 is assigned.
- * Following that, the admin profile provides the ability to grant permissions to other profiles.
+ * Important Notes:
+ *      - The "permission" field for /register is set in the server.js file.
+ *        By default, new users are assigned a permission level of 3.
+ *        The admin profile can modify permissions for other users.
  * 
- * Password and token encryption also occur in the server.js file!
- * 
- * --------------------------------------------------------------------
- * 
- * Older version, needs development!
- *      - Allow login with username.
- *      - Consider registration acceptance fields.
- *      - Implement password reminder.
- *      - If time permits, add Google account registration/login option.
+ *      - Password and token encryption is handled in server.js. Ensure
+ *        appropriate security measures are in place.
  * 
  * --------------------------------------------------------------------
- * Created by: Bartók Krisztián
+ * 
+ * To-Do List (Older Version - Needs Further Development):
+ *      - Allow login with a username (currently email-based).
+ *      - Implement registration acceptance fields for terms and conditions.
+ *      - Add password reminder functionality.
+ *      - If time permits, integrate Google account registration/login.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók
  * Last updated: 2025-02-20
  */
 

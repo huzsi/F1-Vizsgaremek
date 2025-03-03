@@ -1,4 +1,27 @@
-
+/**--------------------------------------------------------------------
+ * 
+ * Code handling the JS API for loading race results.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * All data stored in the database will be displayed first.
+ * When clicking the "Load result" button, the final results of the given race will be listed.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * APIs used by the code:
+ *              /news/raceResults
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * In case of modification, make sure that the list of the previous race results is cleared by the code.
+ * The listing of the final results should remain in the event handler of the "Load result" button
+ * to avoid unnecessary reloads.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Ináncsi
+ * Last updated: 2025-02-05
+ */
 
 let allRaceResults = [];
 

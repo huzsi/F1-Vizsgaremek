@@ -30,7 +30,7 @@
  *      - Display full article content on our site.
  *      
  * --------------------------------------------------------------------
- * Created by: Bartók Krisztián
+ * Created by: Krisztián Bartók & Krisztián Ináncsi
  * Last Updated: 2025-03-01
  */
 
