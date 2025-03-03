@@ -4,38 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Stats &amp; News</title>
-    <link rel="stylesheet" href="/static/css/animista.css">
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/base/reset.css">
-    <link rel="stylesheet" href="/static/css/base/typography.css">
-    <link rel="stylesheet" href="/static/css/base/variables.css">
-    <link rel="stylesheet" href="/static/css/components/buttons.css">
-    <link rel="stylesheet" href="/static/css/components/table.css">
-    <link rel="stylesheet" href="/static/css/layout/nav.css">
-    <link rel="stylesheet" href="/static/css/layout/header.css">
-    <link rel="stylesheet" href="/static/css/layout/footer.css">
-    <link rel="stylesheet" href="/static/css/pages/auth.css">
-    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="/static/css/auth/style.css">
+    <link rel="stylesheet" href="/static/css/auth/responsive.css">
+    <link rel="stylesheet" href="/static/css/layout-header-footer.css">
+    <link rel="stylesheet" href="/static/css/profile-UI.css">
+    <link rel="stylesheet" href="/static/css/config.css">
 </head>
 <body>
-    <div class="header-container" id="header-container">
-        <nav class="top-nav" id="top-nav">
+    <div class="header-container">
+        <nav class="top-nav" id="topNav">
             <!--JS code-->
         </nav>
         <!--Main header-->
-        <header>
-            <!--JS code-->
+        <header id="mainHeader" class="header-transparent">
+            <div class="logo">
+                <h2><a href="/news/index.html">F1 News</a></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#news">Features</a></li>
+                    <li><a href="#techNews">Tech news</a></li>
+                    <li><a href="#standlist">Standlist</a></li>
+                    <li class="dropdown"><a href="#" id="scheduleBtn">Schedule</a></li>
+                </ul>
+            </nav>
         </header>
-        <div class="dropdown-content scale-up-ver-top" id="dropdown-content">
-            <!--JS code-->
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="fullSchedule-container">
+                <a href="#schedule">Full schedule &gt;</a>
+            </div>
+            <div id="schedule-content">
+                <!--API-->
+            </div>
         </div>
-       
     </div>
     <main>
         <nav>
             <ul>
-                <li><a href="#" id="login-btn">Login</a></li>
-                <li><a href="#" id="register-btn">Register</a></li>
+                <li><a href="#" id="loginBtn" class="active">Login</a></li>
+                <li><a href="#" id="registerBtn">Register</a></li>
             </ul>
         </nav>
         <section id="login-section">
@@ -53,7 +60,7 @@
                 <label><input type="checkbox"> Remember me</label>
                 <button class="btn" type="submit">Login</button>
             </form>
-            <h3 id="registerHeadline">Don't have an account? <a id="headline-btn">Register</a></h3>	
+            <h3 id="registerHeadline">Don't have an account? <a id="headlineBtn">Register</a></h3>	
         </section>
 
         <section id="register-section" class="hidden">
@@ -83,24 +90,20 @@
         </div>
         <div>
             <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
-            <p>All content and articles published are copyrighted and the property of their respective authors.</p>
+            <p>Links: - </p>
         </div>
         <div class="bottom-div">
             <p>&copy; <span id="yearSpan"></span></p>
             <p>Source: Github</p>
         </div>
     </footer>
-    <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
-    <script src="/static/js/frontend/header-renderer.js"></script>
     <!--API manager JS scripts-->
     <script src="/static/js/api/auth-api-manager.js"></script>
-    <script src="/static/js/api/dropdown-api-manager.js"></script>
+    <script src="/static/js/api/schedule-dropdown-api-manager.js"></script>
     <!--Util JS scripts-->
     <script src="/static/js/utils/auth-check.js"></script>
     <!--Frontend JS scripts-->
-
-    <script src="/static/js/frontend/multi-page-ui-manager.js"></script>
-    <script src="/static/js/frontend/dropdown.js"></script>
+    <script src="/static/js/frontend/auth/auth-panel-switcher.js"></script>
     <script src="/static/js/frontend/footer-time-changer.js"></script>
     
     

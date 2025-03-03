@@ -1,100 +1,83 @@
-/**--------------------------------------------------------------------
- * 
- * This code displays information about the tracks hosting individual races.
- * Only used by tracks.html.
- * 
- * --------------------------------------------------------------------
- * 
- * The track is determined by the data sent in the link.
- * Therefore, the correct implementation of schedule-api-manager.js and dropdown-api-manager.js
- * also affects the functionality of this code!
- * 
- * The code uses the following APIs:
- *      /trackinfo (GET)
- *      /circuitdatas (GET)
- *      /race-schedule (GET)
- * 
- * --------------------------------------------------------------------
- * 
- * Optional updates in the code:
- *      - Highlights videos from the past 5 years.
- * 
- * --------------------------------------------------------------------
- * Created by: Ináncsi Krisztián
- * Last updated: 2025-03-02
- * 
- */
-
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const raceId = urlParams.get('id');
     const trackName = urlParams.get('trackName');
     const raceName = urlParams.get('fullName');
-    const eventBtn = document.getElementById('event-btn');
+    const eventBtn = document.getElementById('eventBtn');
 
-    try {
-        // Felső timer betöltése
-        if (raceId) {
-            const trackData = await fetchData(`/news/trackinfo?id=${raceId}`); //Pálya id alapján szűrök az adathalmazban
-            document.querySelector('.track-img').innerHTML = `
-                <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="">
-            `;
-            document.getElementById("headline-flag").innerHTML = `
-                <img src="/static/img/flags/${raceId}.svg" alt="${raceId}" class="flag-icon"> `;
-            const raceFullname = document.getElementById("race-name-headline"); //HTML elem betöltése. (Ez a rész még változhat.)
-            if (raceFullname) {
-                raceFullname.textContent = raceName;
-            }
-
-            // Pályaadatok megjelenítése
-            const circuitData = await fetchData(`/news/circuitdatas?id=${raceId}`); //Pálya id alapján szűrök az adathalmazban
-            const datasSection = document.getElementById('circuit-datas-content'); //HTML elem betöltése.
-            if (datasSection) {
-                datasSection.innerHTML = `
-                    <h2 id="circuitName">${trackName}</h2>
-                    <div>
-                        <h3>First Grand Prix</h3>
-                        <p> - ${circuitData.firstGP}</p>
-                    </div>
-                    <div>
-                        <h3>Number of Laps</h3>
-                        <p> - ${circuitData.lapNumber}<span class="unit"> laps</span></p>
-                    </div>
-                    <div>
-                        <h3>Circuit Length</h3>
-                        <p> - ${circuitData.length}<span class="unit"> km</span></p> 
-                    </div>
-                    <div>
-                        <h3>Race Distance</h3>
-                        <p> - ${circuitData.raceDistance}<span class="unit"> km</span></p>
-                    </div>
-                    <div>
-                        <h3>Lap Record</h3>
-                        <p> - ${circuitData.record} <span class="driverSpan">(${circuitData.driver}</span> - <span class="yearSpan">${circuitData.recordYear})</span></p>
-                    </div>
+    if (raceId) {
+        fetch(`/news/trackinfo?id=${raceId}`)
+            .then(response => response.json())
+            .then(trackData => {
+                const imgSection = document.querySelector('.track-img');
+                imgSection.innerHTML = `
+                    <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="" height="500px">
                 `;
-            } else {
-                console.error('Element with ID "datas" not found.');
-            }
+                
+                const headlineImg = document.getElementById("headline-flag");
+                headlineImg.innerHTML = `<img src="/static/img/flags/${raceId}.svg" alt="${raceId}" class="flag-icon"> `;
+                
+                const raceFullname = document.getElementById("RaceName");
+                if (raceFullname) {
+                    raceFullname.textContent = raceName;
+                }
+            })
+            .catch(error => console.error('Error fetching track data:', error));
 
-            // Futam dátumok
-            const scheduleData = await fetchData('/news/race-schedule');
-            const events = scheduleData.filter(race => race.id === raceId); //ID alapján szűrök az adathalmazban.
+        fetch(`/news/circuitdatas?id=${raceId}`)
+            .then(response => response.json())
+            .then(circuitData => {
+                const datasSection = document.getElementById('datas');
+                if (datasSection) {
+                    datasSection.innerHTML = `
+                        <h2 id="circuitName">${trackName}</h2>
+                        <div>
+                            <h3>First Grand Prix</h3>
+                            <p> - ${circuitData.firstGP}</p>
+                        </div>
+                        <div>
+                            <h3>Number of Laps</h3>
+                            <p> - ${circuitData.lapNumber}<span class="unit"> laps</span></p>
+                        </div>
+                        <div>
+                            <h3>Circuit Length</h3>
+                            <p> - ${circuitData.length}<span class="unit"> km</span></p> 
+                        </div>
+                        <div>
+                            <h3>Race Distance</h3>
+                            <p> - ${circuitData.raceDistance}<span class="unit"> km</span></p>
+                        </div>
+                        <div>
+                            <h3>Lap Record</h3>
+                            <p> - ${circuitData.record} <span class="driverSpan">(${circuitData.driver}</span> - <span class="yearSpan">${circuitData.recordYear})</span></p>
+                        </div>
+                    `;
+                } else {
+                    console.error('Element with ID "datas" not found.');
+                }
+            })
+            .catch(error => console.error('Error fetching circuit data:', error));
+    }
+
+    // API feldolgozása
+    fetch('/news/race-schedule')
+        .then(response => response.json())
+        .then(data => {
+            const events = data.filter(race => race.id === raceId);
 
             if (events.length > 0) {
                 const eventDate = new Date(events[0].event1);
                 const countdownElem = document.createElement('p');
                 countdownElem.id = 'countdown';
-                document.getElementById("race-name-headline").appendChild(countdownElem); // Visszaszámláló betöltése a header alatt.
-                updateCountdown(countdownElem, eventDate);
-                setInterval(() => updateCountdown(countdownElem, eventDate), 60000); // Időzítő Frissítés percenként
+                document.getElementById("RaceName").appendChild(countdownElem);
+                updateCountdown(eventDate);
+                setInterval(() => updateCountdown(eventDate), 60000); // Frissítés percenként
 
-                //Gombnyomást követően jeleníti meg a táblázatot.
                 eventBtn.addEventListener('click', () => {
                     // Regular Events
                     const regularEvents = events.filter(event => event.type === 1);
                     if (regularEvents.length > 0) {
-                        createTable('regular-event-date-content', [
+                        createTable('regularEvent', [
                             { event: 'FP1', date: regularEvents[0].event1 },
                             { event: 'FP2', date: regularEvents[0].event2 },
                             { event: 'FP3', date: regularEvents[0].event3 },
@@ -106,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     // Sprint Events
                     const sprintEvents = events.filter(event => event.type === 2);
                     if (sprintEvents.length > 0) {
-                        createTable('sprint-event-date-content', [
+                        createTable('sprintEvent', [
                             { event: 'FP1', date: sprintEvents[0].event1 },
                             { event: 'Sprint Qualify', date: sprintEvents[0].event2 },
                             { event: 'Sprint', date: sprintEvents[0].event3 },
@@ -114,34 +97,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                             { event: 'Race', date: sprintEvents[0].event5 }
                         ]);
                     }
-                    /**
-                     * Mivel két féle hétvége kerülhet megrendezésre, így a type mező alapján szűröm ki,
-                     * hogy milyen adatok lehetnek a táblázatban. (Csak az első oszlop változhat a típus alapján, a dátumok adatosoronként
-                     * módosulhatnak.)
-                     * 
-                     */
                 });
             }
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
+        })
+        .catch(error => console.error('Error fetching race schedule:', error));
 });
 
-//API hívó függvény.
-async function fetchData(url) {
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch data from ${url}`);
-    }
-    return await response.json();
-}
-
-//táblázatot létrehozó függvény.
 function createTable(divId, events) {
     const div = document.getElementById(divId);
     div.classList.remove('hidden');
-    //Táblázat fejléce.
     div.innerHTML = `
         <h2>Grand Prix Events</h2>
         <table>
@@ -152,7 +116,7 @@ function createTable(divId, events) {
             ${events.map(event => {
                 const eventDate = new Date(event.date);
                 const day = eventDate.getDate();
-                const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]; //Date típus miatt a hónapokat számmal jelölné a rendszer. Így érem el, hogy a hónap rövidítése jelenjen meg helyette.
+                const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
                 const month = monthNames[eventDate.getMonth()];
                 const time = eventDate.toTimeString().slice(0, 5);  // HH:MM formátum
 
@@ -165,10 +129,9 @@ function createTable(divId, events) {
                 `;
             }).join('')}
         </table>
-    `
+    `;
 }
 
-//Időzítő.
 function updateCountdown(eventDate) {
     const now = new Date();
     const diff = eventDate - now;

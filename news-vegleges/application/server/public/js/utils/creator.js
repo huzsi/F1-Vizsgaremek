@@ -1,16 +1,3 @@
-/**----------------------------
- * 
- * Created by: Bartók Krisztián
- * 
- * ----------------------------
- * 
- * Copyright protected
- * Use requires permission
- * 
- * ----------------------------
- * Last update: 2025-02-17
- */
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Main title input
 const mainTitleInput = document.getElementById('main-title-input');

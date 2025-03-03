@@ -5,109 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Stats &amp; News</title>
 
-    <link rel="stylesheet" href="/static/css/animista.css">
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/base/reset.css">
-    <link rel="stylesheet" href="/static/css/base/typography.css">
-    <link rel="stylesheet" href="/static/css/base/variables.css">
-    <link rel="stylesheet" href="/static/css/components/buttons.css">
-    <link rel="stylesheet" href="/static/css/components/table.css">
-    <link rel="stylesheet" href="/static/css/layout/nav.css">
-    <link rel="stylesheet" href="/static/css/layout/header.css">
-    <link rel="stylesheet" href="/static/css/layout/footer.css">
-    <link rel="stylesheet" href="/static/css/pages/index.css">
-    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="/static/css/index/style.css">
+    <link rel="stylesheet" href="/static/css/index/responsive.css">
+    <link rel="stylesheet" href="/static/css/layout-header-footer.css">
+    <link rel="stylesheet" href="/static/css/profile-UI.css">
+    <link rel="stylesheet" href="/static/css/config.css">
 </head>
 <body>
     <div class="header-container" id="header-container">
-        <nav class="top-nav" id="top-nav">
-            <!-- JS code: auth-check.js -->
+        <nav class="top-nav" id="topNav">
+            <!--JS code-->
         </nav>
-        <!-- Main header -->
-        <header>
-             <!-- JS code: header-renderer.js -->
+        <!--Main header-->
+        <header id="mainHeader" class="header-transparent">
+            <div class="logo">
+                <h2><a href="/news/index.html">F1 News</a></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#news">Features</a></li>
+                    <li><a href="#techNews">Tech news</a></li>
+                    <li><a href="#standlist">Standlist</a></li>
+                    <li class="dropdown"><a href="#" id="scheduleBtn">Schedule</a></li>
+                </ul>
+            </nav>
         </header>
-        <div class="dropdown-content scale-up-ver-top " id="dropdown-content">
-             <!-- JS code: header-renderer.js -->
-             <!-- API manager JS code: dropdown-api-manager.js-->
+        <div class="dropdown-content" id="dropdownContent">
+            <div class="fullSchedule-container">
+                <a href="#" id="full-schedule-btn">Full schedule &gt;</a>
+            </div>
+            <div id="schedule-content">
+                <!--API-->
+            </div>
+            
         </div>
-        <!-- section #1 -->
+        <!--section #1-->
         <div class="event-container">
-            <div class="event-content">
-                <div id="race-div">
-                    <!-- API manager JS code: schedule-api-manager.js-->
-                </div>
-                <div>
-                    <h3>Next race in</h3>
-                    <p id="timer-paragraph"><!-- API manager JS code: schedule-api-manager.js--></p>
-                </div>
-                <div>
-                    <p>event dates</p>
-                    <table id="regular-event-table">
-                        <!-- API manager JS code: schedule-api-manager.js-->
-                    </table>
-                    <table id="sprint-event-table" class="hidden">
-                        <!-- API manager JS code: schedule-api-manager.js-->
-                    </table>
-                    <a href="#">Where can I watch?</a>
-                </div>
+            <div class="event">
+                <h3 id="RaceName"></h3>
+                <p id="timerParagraph"></p>
+                
+                <table id="regularEvent">
+                    <!--API-->
+                </table>
+                <table id="sprintEvent" class="hidden">
+                    <!--API-->
+                </table>
             </div>
             <div class="event-spacer">
-                <!-- Spacer for 2:3 flex -->
+                <!--Spacer for 2:3 flex-->
             </div>
         </div>
     </div>
     <main>
-        <!-- section #2 -->
+        <!--section #2-->
         <section class="news" id="news">
             <fieldset>
                 <legend><h2>News</h2></legend>
-                <h3>Daily News</h3>
-                <div class="news-container" id="daily-news-container">
-                    <!--API manager JS code: news-api-manager.js-->
+                <div class="news-container">
+                    
+                    <div class="daily-content" id="">
+                        <h3>Daily News</h3>
+                      
+                        <div class="dailyNews-container" id="regular-daily-news-container">
+                            <!--API-->
+                        </div>
+                    </div>
+                    <div class="features-content">
+                        <h3>Features</h3>
+                       
+                        <div class="featuresNews-container" id="regular-features-news-container">
+                             <!--API-->
+                        </div>
+                    </div>
+                    
                 </div>
                 <button id="regular-news-btn">Read more</button>
             </fieldset>
         </section>
         <section class="standlist" id="standlist">
             <div class="standlist-spacer">
-                <!-- Spacer for 2:1 flex -->
+                <!--Spacer for 2:1 flex-->
             </div>
             <div class="standlist-content">
                 <nav>
                     <ul>
-                        <!-- Táblák cserélése: index/table-switcher.js -->
-                        <li><a href="#" id="driver-standlist-btn" class="active">Driver standlist</a></li>
-                        <li><a href="#" id="constructor-standlist-btn">Constructor standlist</a></li>
-                        <li><a href="#" id="race-result-btn">Race results</a></li>
+                        <li><a href="#" id="driverBtn" class="active">Driver standlist</a></li>
+                        <li><a href="#" id="constructorBtn">Constructor standlist</a></li>
+                        <li><a href="#" id="raceBtn">Race results</a></li>
                     </ul>
                 </nav>
-                <table id="driver-standlist-table">
-                    <!-- API manager JS code: standlist-api-manager.js-->
+                <table id="driverTable">
+                    <!--API-->
                 </table>
-                <table id="constructor-standlist-table" class="hidden">
-                    <!-- API manager JS code: standlist-api-manager.js-->
+                <table id="constructorTable" class="hidden">
+                    <!--API-->
                 </table>
-                <table id="race-result-table" class="hidden">
-                    <!-- API manager JS code: standlist-api-manager.js-->
+                <table id="raceTable" class="hidden">
+                    <!--API-->
                 </table>
             </div>
         </section>
-        <!-- section #3 -->
         <section class="schedule" id="schedule">
             <h3>Upcoming Races</h3>
             <div class="scrollmenu">
                 <div class="inner" id="racenames-container">
-                    <!-- API manager JS code: schedule-api-manager.js-->
+                    <!--API-->
                 </div>
             </div>
         </section>
-         <!-- section #4 -->
-        <section class="tech-news">
+        <section class="tech-news" id="techNews">
             <fieldset>
-                <legend><h2>Technical</h2></legend>  
-                <div class="news-container" id="tech-news-container">
-                    <!-- API manager JS code: news-api-manager.js-->
+                <legend><h2>Tech News</h2></legend>
+                <div class="techNews-container">
+                    
+                    <div class="daily-content">
+                        <h3>Daily News</h3>
+                        
+                        <div class="dailyNews-container" id="tech-daily-news-container">
+                            <!--API-->
+                        </div>
+                    </div>
+                    <div class="features-content">
+                        <h3>Features</h3>
+                        
+                        <div class="featuresNews-container" id="tech-features-news-container">
+                            <!--API-->
+                        </div>
+                    </div>
+                    
                 </div>
                 <button id="tech-news-btn">Read more</button> 
             </fieldset>
@@ -117,31 +143,29 @@
         <div>
             <h2><a href="https://www.formula1.com/">F1 website</a></h2>
             <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            
         </div>
         <div>
             <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
-            <p>All content and articles published are copyrighted and the property of their respective authors.</p>
+            <p>Links: - </p>
         </div>
         <div class="bottom-div">
-            <p>&copy; <span id="yearSpan"><!-- JS code: footer-time-canger.js --></span></p>
+            <p>&copy; <span id="yearSpan"></span></p>
             <p>Source: Github</p>
         </div>
     </footer>
-    <!--Dropdown menüben megjelenő API-k miatt ezzel a scriptekkel kell kezdeni a betöltést.-->
-    <script src="/static/js/frontend/header-renderer.js"></script>
-    <script src="/static/js/frontend/dropdown.js"></script>
+
     <!--API Manager JS scripts-->
-    <script src="/static/js/api/schedule-api-manager.js"></script>
-    <script src="/static/js/api/standlist-api-manager.js"></script>
-    <script src="/static/js/api/dropdown-api-manager.js"></script>
+    <script src="/static/js/api/index-api-manager.js"></script>
+    <script src="/static/js/api/schedule-dropdown-api-manager.js"></script>
     <script src="/static/js/api/news-api-manager.js"></script>
     <!--Util JS scripts-->
     <script src="/static/js/utils/auth-check.js"></script>
     <!--Frontend JS scripts-->
-    <script src="/static/js/frontend/theme.js"></script>
     <script src="/static/js/frontend/index/header-slider.js"></script>
     <script src="/static/js/frontend/index/horizontal-scroll.js"></script>
-    <script src="/static/js/frontend/multi-page-ui-manager.js"></script>
+    <script src="/static/js/frontend/index/table-switcher.js"></script>
+    <script src="/static/js/frontend/schedule-dropdown.js"></script>
     <script src="/static/js/frontend/footer-time-changer.js"></script>
 </body>
 </html>

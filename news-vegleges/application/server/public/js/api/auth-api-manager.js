@@ -1,34 +1,3 @@
-/**--------------------------------------------------------------------
- * 
- * This code is responsible for login and registration!
- * Only used by auth.html.
- * 
- * --------------------------------------------------------------------
- * 
- * APIs:
- *      /register - (POST)
- *      /login - (POST)
- * 
- * --------------------------------------------------------------------
- * 
- * Note: The permission field value for /register is set in server.js.
- * By default, a permission level of 3 is assigned. Following that, the admin profile provides the ability to grant permissions to other profiles.
- * 
- * Password and token encryption also occur in the server.js file!
- * 
- * --------------------------------------------------------------------
- * 
- * Older version, needs development!
- *      - Allow login with username.
- *      - Consider registration acceptance fields.
- *      - Implement password reminder.
- *      - If time permits, add Google account registration/login option.
- * 
- * --------------------------------------------------------------------
- * Created by: Bartók Krisztián
- * Last updated: 2025-02-20
- */
-
 document.getElementById('register-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;

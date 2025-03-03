@@ -1,16 +1,3 @@
-/**----------------------------
- * 
- * Created by: Ináncsi Krisztián & Bartók Krisztián
- * 
- * ----------------------------
- * 
- * Copyright protected
- * Use requires permission
- * 
- * ----------------------------
- * Last update: 2025-02-12
- */
-
 document.addEventListener('DOMContentLoaded', function() {
     // Versenynevek lekérése
     fetch('/news/racenames')
