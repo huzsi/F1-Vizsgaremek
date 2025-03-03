@@ -128,7 +128,7 @@ app.get('/news/forum-layout.html/:page', (req, res) => {
     const { page } = req.params;
     let filePath = path.join(__dirname, 'public', 'html', 'forum-layout.html');
 
-    if(page === 'index' || page === 'race-discussion'){
+    if(page === 'index' || page === 'topic'){
         res.sendFile(filePath);
     }
     else{
@@ -232,7 +232,7 @@ app.post('/news/saveRaceResults', (req, res) => {
 });
 ///'SELECT * FROM forumTopics'
 app.get('/news/forumTopics', (req, res) => {
-    queryDB(res, `SELECT * FROM forumTopics`);
+    queryDB(res, `SELECT tc.topicId, u.usernames, tc.topicTitle, tc.topicContent, tc.date FROM forumTopics tc JOIN user u ON tc.userId = u.id`);
 });
 app.get('/news/raceTopics', (req, res) => {
     const query = `
@@ -255,19 +255,51 @@ app.get('/news/raceTopics', (req, res) => {
     queryDB(res, query);
 });
 app.get('/news/forumTopics/:topicId', (req, res) => {
-    const { userId, topicContent, date } = req.body;
-    const sql = 'INSERT INTO forumTopics (userId, topicContent, date) VALUES (?, ?, ?)';
-    db.query(sql, [userId, topicContent, date], (err, result) => {
+    const { topicId } = req.params;
+    const query = 'SELECT fp.topicId,u.usernames, fp.topicTitle, fp.topicContent, fp.date FROM forumTopics fp JOIN user u ON fp.userId = u.id WHERE topicId = ?';
+    queryDB(res, query, [topicId], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ id: result.insertId, userId, topicContent, date });
+        res.json(result);
     });
 });
-app.delete('/news/forumTopics/:topicId', (req, res) => {
+
+app.get('/news/forumComments/:topicId', (req, res) => {
     const { topicId } = req.params;
-    const sql = 'DELETE FROM forumTopics WHERE topicId = ?';
-    db.query(sql, [topicId], (err, result) => {
+
+    const query = 'SELECT tc.topicId, tc.commentId, tc.userId, u.usernames, tc.commentContent, tc.date FROM topicComments tc INNER JOIN user u ON tc.userId = u.id WHERE tc.topicId = ?';
+
+    queryDB(res, query, [topicId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err.message);
+            return res.status(500).json({ error: 'Error fetching comments', details: err.message });
+        }
+        res.json(result);
+    });
+});
+app.get('/news/last-topicComment', (req, res) => {
+    const { topicId } = req.query; // Extract topicId from query parameters
+    const query = 'SELECT u.usernames, tc.date FROM topicComments tc JOIN user u ON tc.userId = u.id WHERE tc.topicId = ? ORDER BY ABS(TIMESTAMPDIFF(SECOND, tc.date, NOW())) LIMIT 1';
+
+    queryDB(res, query, [topicId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err.message);
+            return res.status(500).json({ error: 'Error fetching comment', details: err.message });
+        }
+        res.json(result);
+    });
+});
+
+app.get('/news/popular-topics', (req, res) => {
+    queryDB(res, 'SELECT tc.topicId, ft.topicTitle, u.usernames, COUNT(tc.commentId) AS commentCount FROM topicComments tc JOIN user u ON tc.userId = u.id LEFT JOIN forumtopics ft ON tc.topicId = ft.topicId GROUP BY tc.topicId ORDER BY commentCount DESC LIMIT 10;');
+});
+
+
+app.delete('/news/forumTopics/:topicId', (req, res) => {
+    const { topicId } = req.params.id;
+    const query = 'DELETE FROM forumTopics WHERE topicId = ?';
+    queryDB(res, query, [topicId], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
@@ -290,7 +322,19 @@ app.post('/news/forumTopics', (req, res) => {
     ];
     queryDB(res, query, values);
 });
+app.post('/news/upload-comment', (req, res) => {
+    const { topicId, userId, commentContent, date } = req.body;
+    const query = 'INSERT INTO topicComments (topicId, userId, commentContent, date) VALUES (?, ?, ?, ?)';
+    const values = [topicId, userId, commentContent, date];
 
+    queryDB(res, query, values, (err, result) => {
+        if (err) {
+            console.error('Error inserting comment:', err);
+            return res.status(500).json({ error: 'Error inserting comment', details: err });
+        }
+        res.status(201).json({ id: result.insertId, topicId, userId, commentContent, date });
+    });
+});
 app.post('/news/register', (req, res) => {
     const { username, email, password } = req.body;
 
@@ -340,7 +384,7 @@ app.post('/news/login', (req, res) => {
 });
 
 app.get('/news/get-profile', authorize, (req, res) => {
-    const query = 'SELECT usernames, emails, permission FROM user WHERE id = ?';
+    const query = 'SELECT id, usernames, emails, permission FROM user WHERE id = ?';
     queryDB(res, query, [req.user.id]);
 });
 app.get('/news/get-all-profiles', authorize, (req, res) => {
