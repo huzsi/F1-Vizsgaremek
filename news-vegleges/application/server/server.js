@@ -232,27 +232,7 @@ app.post('/news/saveRaceResults', (req, res) => {
 });
 ///'SELECT * FROM forumTopics'
 app.get('/news/forumTopics', (req, res) => {
-    queryDB(res, `SELECT tc.topicId, u.usernames, tc.topicTitle, tc.topicContent, tc.date FROM forumTopics tc JOIN user u ON tc.userId = u.id`);
-});
-app.get('/news/raceTopics', (req, res) => {
-    const query = `
-        SELECT 
-            rn.raceNumber,
-            rn.id,
-            rn.name,
-            rd.event1,
-            rd.event2,
-            rd.event3,
-            rd.event4,
-            rd.event5,
-            rd.type
-        FROM 
-            raceNames rn
-        JOIN 
-            racedates rd ON rn.id = rd.id
-        ORDER BY rn.raceNumber ASC
-    `;
-    queryDB(res, query);
+    queryDB(res, `SELECT tc.topicId, u.usernames, tc.userId, tc.topicTitle, tc.topicContent, tc.date FROM forumTopics tc JOIN user u ON tc.userId = u.id`);
 });
 app.get('/news/forumTopics/:topicId', (req, res) => {
     const { topicId } = req.params;
@@ -264,7 +244,6 @@ app.get('/news/forumTopics/:topicId', (req, res) => {
         res.json(result);
     });
 });
-
 app.get('/news/forumComments/:topicId', (req, res) => {
     const { topicId } = req.params;
 
@@ -294,8 +273,6 @@ app.get('/news/last-topicComment', (req, res) => {
 app.get('/news/popular-topics', (req, res) => {
     queryDB(res, 'SELECT tc.topicId, ft.topicTitle, u.usernames, COUNT(tc.commentId) AS commentCount FROM topicComments tc JOIN user u ON tc.userId = u.id LEFT JOIN forumtopics ft ON tc.topicId = ft.topicId GROUP BY tc.topicId ORDER BY commentCount DESC LIMIT 10;');
 });
-
-
 app.delete('/news/forumTopics/:topicId', (req, res) => {
     const { topicId } = req.params.id;
     const query = 'DELETE FROM forumTopics WHERE topicId = ?';
