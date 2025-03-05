@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', async() => {
             if (dpTechNewsBtn) {
                 dpTechNewsBtn.addEventListener('click', () => {
                     navBtnUsed = true;
-                    console.log("megnyomva");
                     fetchAndDisplayNews('/news/tech-news', 'news-content', 5);
                 });
             }    

@@ -39,13 +39,9 @@
         console.error('Hiba: Az "profile-datas" elem nem található.');
         return;
     }
-
-    // Ellenőrizzük, hogy van-e token
-    console.log('Token:', token);  // Ellenőrizd a token tartalmát
-
     // Ellenőrizni, hogy a token nem üres-e
     if (token && token.trim() !== "") {
-        console.log("Token érvényes:", token);
+      
 
         try {
             const response = await fetch('/news/get-profile', {
@@ -56,8 +52,6 @@
             });
 
             const data = await response.json();
-            console.log('Profile data:', data);  // Az API válasza
-
             if (data.usernames && data.emails) {
                 const { usernames, emails } = data;
 
@@ -120,7 +114,6 @@
             profileDataContent.innerHTML = `<p>Hiba történt az adatok lekérésekor.</p>`;
         }
     } else {
-        console.log('Nincs token vagy a token üres!');
         profileDataContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
     }
 

@@ -38,10 +38,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const topNav = document.getElementById('top-nav');
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    const permission = localStorage.getItem('permission');
-    console.log('token:', token, 'username:', username, 'permission:', permission);
- 
+    
     if (token && token.trim() !== "" ) {
         // Token van, le kérjük a profil adatokat
         fetch('/news/get-profile', {
@@ -51,14 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .then(response => {
-            console.log('response status:', response.status);
             if (!response.ok) {
                 throw new Error('Authorization failed');
             }
             return response.json();
         })
         .then(data => {
-            console.log('profile data:', data);
             if (data.usernames && data.emails && data.permission) {
                 localStorage.setItem('permission', data.permission); // permission érték beállítása
 
@@ -89,10 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks += profileMenu;
 
                 topNav.innerHTML = navLinks;
-                console.log('navLinks:', navLinks);
+              
                 const profileBtn = document.getElementById("profileBtn");
                 const dropdownContent = document.getElementById("dropdownContent");
-                console.log('profileBtn:', profileBtn, 'dropdownContent:', dropdownContent);
        
                 const createBtn = document.getElementById('news-creator-btn');
                 const resultBtn = document.getElementById('uploader-btn');

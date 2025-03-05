@@ -73,17 +73,13 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             localStorage.setItem('username', data.username);
             localStorage.setItem('permission', data.permission);
 
-            console.log('Login successful:', data); // Ellenőrzéshez
-
             // Átirányítás
             window.location.href = '/news/index.html';
         } else {
             alert('Login failed: ' + data.message);
-            console.log('Login failed:', data); // Hibák logolása
         }
     })
     .catch(error => {
         alert('Login failed: ' + error);
-        console.log('Login error:', error); // Hibák logolása
     });
 });
