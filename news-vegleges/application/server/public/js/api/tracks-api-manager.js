@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const countdownElem = document.createElement('p');
                 countdownElem.id = 'countdown';
                 document.getElementById("race-name-headline").appendChild(countdownElem); // Visszaszámláló betöltése a header alatt.
-                updateCountdown(countdownElem, eventDate);
-                setInterval(() => updateCountdown(countdownElem, eventDate), 60000); // Időzítő Frissítés percenként
+                updateCountdown(eventDate);
+                setInterval(() => updateCountdown(eventDate), 60000); // Időzítő Frissítés percenként
 
                 //Gombnyomást követően jeleníti meg a táblázatot.
                 eventBtn.addEventListener('click', () => {
@@ -167,17 +167,25 @@ function createTable(divId, events) {
     `
 }
 
-//Időzítő.
 function updateCountdown(eventDate) {
-    const now = new Date();
-    const diff = eventDate - now;
+    const now = new Date(); // Jelenlegi idő
+    const diff = eventDate - now; // Különbség az időpontok között
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    // Ellenőrizzük, hogy a `diff` pozitív-e
+    if (diff >= 0) {
+        // Időkülönbség napokra, órákra és percekre bontása
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-    const countdownElem = document.getElementById('countdown');
-    if (countdownElem) {
-        countdownElem.textContent = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
+        const countdownElem = document.getElementById('countdown');
+        if (countdownElem) {
+            countdownElem.textContent = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
+        }
+    } else {
+        const countdownElem = document.getElementById('countdown');
+        if (countdownElem) {
+            countdownElem.textContent = "Event has started!";
+        }
     }
 }

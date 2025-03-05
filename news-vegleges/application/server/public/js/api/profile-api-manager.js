@@ -65,15 +65,15 @@
                 profileDataContent.innerHTML = `
                         <h1>Your Profile</h1>
                         <div class="username-div">
-                            <h3>Username</h3>
+                            <h3>Username:</h3>
                             <p>${usernames}</p>
                         </div>
                         <div class="email-div">
-                            <h3>Email</h3>
+                            <h3>Email:</h3>
                             <p>${emails}</p>  
                         </div>
                         <div>
-                            <h3>Last interactions</h3>
+                            <h3>Last interactions:</h3>
                             <ul>
                                 <li><a href="#">Interaction1</a></li>
                                 <li><a href="#">Interaction2</a></li>

@@ -10,6 +10,7 @@
  * A kód még alpha verzióban van.
  * 
  * --------------------------
+ * Készítette: Krisztián Bartók
  * Utolsó Frissítés: 2025-03-01.
  * 
  */

@@ -28,7 +28,8 @@
     --Később Javítani fogom--   
  */
 document.addEventListener("DOMContentLoaded", function() {
-    
+    const mainContent = document.querySelector('main');
+    const footer = document.querySelector('footer');
     const totalHeight = mainContent.height + footer.height;
     document.documentElement.style.height = `${totalHeight}px`;
     window.addEventListener('scroll', function() {

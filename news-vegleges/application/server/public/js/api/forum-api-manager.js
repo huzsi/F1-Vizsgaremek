@@ -68,8 +68,8 @@ function loadRaceTopics() {
         let count = 0;
         topicDatas.forEach(datas => {
             if (count++ < 25) {
-                const links = datas.type === 1 ? `<a href="#">Practice</a><a href="#">Qualify</a><a href="#">Race</a>` : 
-                              datas.type === 2 ? `<a href="#">Sprint</a><a href="#">Qualify</a><a href="#">Race</a>` : '';
+                const links = datas.type === 1 ? `<a href="/news/forum-layout.html/topic?id=${datas.id}">Practice</a><a href="/news/forum-layout.html/topic?id=${datas.id}">Qualify</a><a href="/news/forum-layout.html/topic?id=${datas.id}">Race</a>` : 
+                              datas.type === 2 ? `<a href="/news/forum-layout.html/topic?id=${datas.id}">Sprint</a><a href="/news/forum-layout.html/topic?id=${datas.id}">Qualify</a><a href="/news/forum-layout.html/topic?id=${datas.id}">Race</a>` : '';
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'race-topic';
                 topicDiv.innerHTML = `<div><img src="/static/img/flags/${datas.id}.svg" alt=""><h3>${datas.name}</h3>${links}</div><p>Last comment:</p>`;
