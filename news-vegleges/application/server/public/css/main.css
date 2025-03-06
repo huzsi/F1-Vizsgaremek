@@ -60,7 +60,8 @@ fieldset{
     margin: 0 10px;
 }
 .Profile-dropdown-content a:hover{
-    background-color: #1d1d2a;
+    border: none !important;
+    padding: 15px 25px !important;
 }
 .Profile-dropdown:hover .Profile-dropdown-content {
     display: block;

@@ -68,6 +68,10 @@
     .track-container img{
         height: 400px !important;
     }
+    /*layouts page*/
+    .container{
+        margin: 25px 125px;
+    }
 }
 @media (max-width: 1350px) {
     .top-nav, header{
@@ -126,7 +130,13 @@
         height: 450px !important;
         width: auto ;
     }
-    
+    /*layouts page*/
+    .container{
+        margin: 25px 100px;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(25%);
+    }
 }
 
 @media (max-width: 1200px) { 
@@ -172,6 +182,22 @@
     .track-img img {
         height: 400px !important;
         width: auto ;
+    }
+    /*layouts page*/
+    .container{
+        margin: 25px 75px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(30%);
     }
 }
 
@@ -220,6 +246,22 @@
     .track-img img {
         height: 400px !important;
         width: auto ;
+    }
+    /*layouts page*/
+    .container{
+        margin: 20px 50px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(33%);
     }
 }
 
@@ -275,6 +317,22 @@
         height: 350px !important;
         width: auto ;
     }
+    /*layouts page*/
+    .container{
+        margin: 10px 25px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section{
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 576px) { 
@@ -329,5 +387,21 @@
         height: 300px !important;
         width: auto ;
     }
-    
+    /*layouts page*/
+    .container{
+        margin: 15px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+
+    .container #news-section{
+        flex-direction: column;
+    }
 }

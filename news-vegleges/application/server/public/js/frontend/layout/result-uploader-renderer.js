@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () =>{
       return; // Ha nem a profil oldal, akkor kilépünk a scriptből
     }
   
-    const mainContent = document.querySelector('main');
+    const container = document.getElementById('container');
   
-    mainContent.innerHTML = `
+    container.innerHTML = `
       <form id="raceResultsForm">
               <select id="raceName">
                   <option value="">Válassz egy futamot</option>

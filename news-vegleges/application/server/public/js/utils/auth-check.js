@@ -38,37 +38,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     const topNav = document.getElementById('top-nav');
     const token = localStorage.getItem('token');
-    
-    if (token && token.trim() !== "" ) {
-        // Token van, le kérjük a profil adatokat
+    const currentPath = window.location.pathname;
+
+    const getActiveClass = (path) => currentPath.includes(path) ? 'active' : '';
+
+    let navLinks = `
+        <ul>
+            <li><a href="/news/index.html" class="${getActiveClass('/news/index.html')}">Home</a></li>
+            <li><a href="#" class="${getActiveClass('/news/stats.html')}">Stats</a></li>
+            <li><a href="/news/about.html" class="${getActiveClass('/news/about.html')}">About</a></li>
+            <li><a href="/news/forum-layout.html/index" class="${getActiveClass('/news/forum-layout.html/index')}">Forum</a></li>
+        </ul>`;
+
+    if (token && token.trim() !== "") {
         fetch('/news/get-profile', {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`  // Bearer token
-            }
+            headers: { 'Authorization': `Bearer ${token}` }
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Authorization failed');
-            }
+            if (!response.ok) throw new Error('Authorization failed');
             return response.json();
         })
         .then(data => {
-            if (data.usernames && data.emails && data.permission) {
-                localStorage.setItem('permission', data.permission); // permission érték beállítása
+            if (data.usernames && data.permission) {
+                localStorage.setItem('permission', data.permission);
 
-                let navLinks = `
-                    <ul>
-                        <li><a href="/news/index.html" class="active">Home</a></li>
-                        <li><a href="">Stats</a></li>
-                        <li><a href="/news/about.html">About</a></li>
-                        <li><a href="/news/forum-layout.html/index">Forum</a></li>
-                `;
-               
-                navLinks += `</ul>`;
-
-              // Profil és kijelentkezés menü generálása dinamikusan
-                const profileMenu = `
+                navLinks += `
                 <ul class="Profile-dropdown">
                     <li>
                         <a href="#" id="profileBtn">${data.usernames}</a>
@@ -79,92 +74,52 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="#" id="logoutBtn">Logout</a></li>
                         </ul>
                     </li>
-                </ul>
-                `;
-                navLinks += profileMenu;
-
+                </ul>`;
+                
                 topNav.innerHTML = navLinks;
-              
-                const profileBtn = document.getElementById("profileBtn");
-                const dropdownContent = document.getElementById("dropdownContent");
-       
-                const createBtn = document.getElementById('news-creator-btn');
-                const resultBtn = document.getElementById('uploader-btn');
-                 // About button doesn't require login
-                 
-                if (resultBtn) {
-                    resultBtn.addEventListener('click', () => {
-                        window.location.href = "/news/script-layout.html/result-uploader";
-                    });
-                }
-                // News-creator button requires login
-                if (createBtn) {
-                    createBtn.addEventListener('click', () => {
-                        if (!token) {
-                            alert("Please log in first.");
-                            window.location.href = "/news/auth.html"; // Redirect to login page
-                        } else {
-                            window.location.href = "/news/script-layout.html/news-creator";
-                        }
-                    });
-                }
 
-                // Profile button requires login
-                profileBtn.addEventListener("click", (event) => {
+                document.getElementById("profileBtn").addEventListener("click", (event) => {
                     event.preventDefault();
-                    if (!token) {
-                        alert("Please log in first.");
-                        window.location.href = "/news/auth.html"; // Redirect to login page
-                    } else {
-                        if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-                            dropdownContent.style.display = "block";
-                        } else {
-                            dropdownContent.style.display = "none";
-                        }
+                    const dropdownContent = document.getElementById("dropdownContent");
+                    dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
+                });
+
+                document.addEventListener("click", function(event) {
+                    if (!document.getElementById("profileBtn").contains(event.target) && 
+                        !document.getElementById("dropdownContent").contains(event.target)) {
+                        document.getElementById("dropdownContent").style.display = "none";
                     }
                 });
 
-                // Close the dropdown if clicked elsewhere
-                document.addEventListener("click", function(event) {
-                    if (!profileBtn.contains(event.target) && !dropdownContent.contains(event.target)) {
-                        dropdownContent.style.display = "none";
+                document.getElementById("logoutBtn").addEventListener("click", () => {
+                    if (confirm("Are you sure you want to log out?")) {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("permission");
+                        window.location.href = "/news/index.html";
                     }
                 });
-                // Kijelentkezés kezelése
-                document.getElementById("logoutBtn").addEventListener("click", () => {
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("permission");
-                    window.location.href = "/news/index.html"; // Újratöltés
+                document.getElementById("uploader-btn").addEventListener("click", () => {
+                    window.location.href = "/news/script-layout.html/result-uploader";
+                });
+                document.getElementById("news-creator-btn").addEventListener("click", () => {
+                    window.location.href = "/news/script-layout.html/news-creator";
                 });
             }
         })
         .catch(error => {
             console.error('Error fetching profile:', error);
-            topNav.innerHTML = `
-                <ul>
-                    <li><a href="/news/index.html" class="active">Home</a></li>
-                    <li><a href="#">Stats</a></li>
-                    <li><a href="/news/about.html">About</a></li>
-                </ul>
-                <ul>
-                    <li><a href="/news/auth.html">Login</a></li>
-                    <li><a href="/news/auth.html">Register</a></li>
-                </ul>
-            `;
-        });
-    } else {
-        // Ha nincs token, akkor a nem bejelentkezett menü
-        topNav.innerHTML = `
-            <ul>
-                <li><a href="/news/index.html" class="active">Home</a></li>
-                <li><a href="#">Stats</a></li>
-                <li><a href="/news/about.html">About</a></li>
-            </ul>
+            topNav.innerHTML = navLinks + `
             <ul>
                 <li><a href="/news/auth.html">Login</a></li>
                 <li><a href="/news/auth.html">Register</a></li>
-            </ul>
-        `;
+            </ul>`;
+        });
+    } else {
+        topNav.innerHTML = navLinks + `
+        <ul>
+            <li><a href="/news/auth.html">Login</a></li>
+            <li><a href="/news/auth.html">Register</a></li>
+        </ul>`;
     }
 });

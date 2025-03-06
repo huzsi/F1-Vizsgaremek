@@ -33,43 +33,51 @@
        
     </div>
     <main id="main-content">
-        <section class="profile-datas-container" id="profile-datas">
-            <!--profile-api-manager create elements dynamically-->
-            
-        </section>
-        <section class="settings-container">
-            <h2>Settings</h2>
-            <form id="settings-form">
-                <div>
-                    <p id="profile-picture">Select profile picture</p>
-                    <input type="file" id="profile-picture-input" name="profile-picture">
-                </div>
-                <div class="username-div">
-                    <h3>Change username</h3>
-                    <input type="text" id="new-username" name="new-username" placeholder="New Username">
-                    <button type="button" id="save-username">Save Username</button>
-                    <button type="button" id="clear-username-input">Clear</button>
-                </div>
-                <div class="email-div">
-                    <h3>Change email</h3>
-                    <input type="email" id="new-email" name="new-email" placeholder="New Email">
-                    <button type="button" id="save-email">Save Email</button>
-                    <button type="button" id="clear-email-input">Clear</button>
-                </div>
-                <div class="password-div">
-                    <h3>Change Password</h3>
-                    <input type="password" id="new-password" name="new-password" placeholder="New Password">
-                    <button type="button" id="save-password">Save Password</button>
-                    <button type="button" id="clear-password-input">Clear</button>
-                </div>
-            </form>
-            <nav>
-                <ul>
-                    <li id="logout">Log out</li>
-                    <li id="delete-account">Delete account</li>
-                </ul>
-            </nav>
-        </section>
+        <div class="container">
+            <section class="profile-datas-container" id="profile-datas">
+                <!--profile-api-manager create elements dynamically-->
+                
+            </section>
+            <section class="settings-container">
+                <h2>Settings</h2>
+                <form id="settings-form">
+                    <div>
+                        <p id="profile-picture">Select profile picture</p>
+                        <input type="file" id="profile-picture-input" name="profile-picture">
+                    </div>
+                    <div class="username-div">
+                        <h3>Change username</h3>
+                        <input type="text" id="new-username" name="new-username" placeholder="New Username">
+                        <div>
+                            <button type="button" id="save-username">Save Username</button>
+                            <button type="button" id="clear-username-input">Clear</button>
+                        </div>
+                    </div>
+                    <div class="email-div">
+                        <h3>Change email</h3>
+                        <input type="email" id="new-email" name="new-email" placeholder="New Email">
+                        <div>
+                            <button type="button" id="save-email">Save Email</button>
+                            <button type="button" id="clear-email-input">Clear</button>
+                        </div>
+                    </div>
+                    <div class="password-div">
+                        <h3>Change Password</h3>
+                        <input type="password" id="new-password" name="new-password" placeholder="New Password">
+                        <div>
+                            <button type="button" id="save-password">Save Password</button>
+                            <button type="button" id="clear-password-input">Clear</button>
+                        </div>
+                    </div>
+                </form>
+                <nav>
+                    <ul>
+                        <li><a id="logout" href="#">Log out</a></li>
+                        <li"><a id="delete-account" href="#">Delete account</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
     </main>
     <footer>
         <div>

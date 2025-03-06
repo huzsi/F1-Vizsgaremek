@@ -15,6 +15,9 @@
 .dropdown-content a:hover, fieldset:hover{
     border-color: var(--secondary-color);
 }
+.settings-container a:hover{
+    color: var(--secondary-color);
+}
 button{
     color: white;
     background-color: var(--secondary-color);

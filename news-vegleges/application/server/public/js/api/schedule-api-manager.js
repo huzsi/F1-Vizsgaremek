@@ -7,8 +7,7 @@
  * 
  * --------------------------------------------------------------------
  * 
- * The following APIs are called:
- *  /racenames
+ * The following API is called:
  *  /race-schedule
  * 
  * --------------------------------------------------------------------
@@ -19,14 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const container = document.getElementById('racenames-container');
 
-    //Szükséges API-k meghívása (fetchData metóduson keresztül:)
     try {
-        // Fetch race names
-        const raceData = await fetchData('/news/racenames');
-        // Fetch race schedule
+        // Fetch race schedule (includes race names)
         const scheduleData = await fetchData('/news/race-schedule');
 
-        displayRaceSchedule(scheduleData, raceData, monthNames, container);
+        displayRaceSchedule(scheduleData, monthNames, container);
         
         const nextRace = getNextRace(scheduleData);
         if (nextRace) {
@@ -45,19 +41,18 @@ async function fetchData(url) {
     return await response.json();
 }//--//
 
-//scroll-menü-t integráló függvény:
-function displayRaceSchedule(scheduleData, raceData, monthNames, container) {
-        scheduleData.forEach(schedule => {
+// Scroll-menü-t integráló függvény:
+function displayRaceSchedule(scheduleData, monthNames, container) {
+    scheduleData.forEach(schedule => {
         const event1Date = new Date(schedule.event1);
-        const correspondingRace = raceData.find(race => race.id === schedule.id);
         const day = event1Date.getDate();
         const month = monthNames[event1Date.getMonth()];
 
         container.innerHTML += `
-            <a href="/news/tracks.html?id=${correspondingRace.id}&trackName=${correspondingRace.trackName}&fullName=${correspondingRace.fullName}" id="${correspondingRace.id}">
-                <img src="/static/img/flags/${correspondingRace.id}.svg" alt="${correspondingRace.name}">
+            <a href="/news/tracks.html?id=${schedule.id}&trackName=${schedule.trackName}&fullName=${schedule.fullName}" id="${schedule.id}">
+                <img src="/static/img/flags/${schedule.id}.svg" alt="${schedule.name}">
                     <br>
-                ${correspondingRace.name}
+                ${schedule.name}
                 <hr>
                 <p>
                     <span>${day}</span><br>
@@ -68,12 +63,12 @@ function displayRaceSchedule(scheduleData, raceData, monthNames, container) {
     });
 }//--//
 
-//Következő futam függvénye:
+// Következő futam függvénye:
 function getNextRace(scheduleData) {
     return scheduleData.find(schedule => new Date(schedule.event1) > new Date());
 }//--//
 
-//Következő futam megjelenítése és visszaszámláló integrálása
+// Következő futam megjelenítése és visszaszámláló integrálása
 function displayNextRace(nextRace, monthNames) {
     const event1Date = new Date(nextRace.event1);
     const day = event1Date.getDate();
@@ -87,7 +82,6 @@ function displayNextRace(nextRace, monthNames) {
         <h3 id="RaceName">${nextRace.name}</h3>
     `;
 
-    //Döntés, mivel két féle fajta hétvége típus lehetséges:
     const events = nextRace.type === 1 ? [
             { event: 'FP1', date: nextRace.event1 },
             { event: 'FP2', date: nextRace.event2 },
@@ -102,9 +96,8 @@ function displayNextRace(nextRace, monthNames) {
             { event: 'Race', date: nextRace.event5 }
         ];
 
-    //táblázat feltöltése:
     const targetTable = nextRace.type === 1 ? document.getElementById('regular-event-table') : document.getElementById('sprint-event-table');
-        if (targetTable) {
+    if (targetTable) {
         targetTable.innerHTML = `
             <table class="event-Table">
                 ${events.map(event => {
@@ -119,17 +112,17 @@ function displayNextRace(nextRace, monthNames) {
                             <td>${day} <br> ${month}</td>
                             <td>${time}</td>
                         </tr>
-                        `;
-                    }).join('')}
-                </table>
-            `;
-        }
-        //Frissítés:
-        updateCountdown(timerParagraph, new Date(nextRace.event1));
-        setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
+                    `;
+                }).join('')}
+            </table>
+        `;
+    }
+    
+    updateCountdown(timerParagraph, new Date(nextRace.event1));
+    setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
 }//--//
 
-//Stopper függvény:
+// Stopper függvény:
 function updateCountdown(element, targetDate) {
     const now = new Date();
     const distance = targetDate - now;

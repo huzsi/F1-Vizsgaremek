@@ -31,7 +31,7 @@ function loadTopics() {
            
             if (data.userId === 0) {
                 const topicDiv = document.createElement('div');
-                topicDiv.className = 'race-topic';
+                topicDiv.className = 'topic';
                 topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
                                         <h2>${data.topicTitle}</h2>
                                         <p>Opened: ${data.usernames}</p>
@@ -40,7 +40,7 @@ function loadTopics() {
                 raceSection.appendChild(topicDiv);
             } else {
                 const topicDiv = document.createElement('div');
-                topicDiv.className = 'race-topic';
+                topicDiv.className = 'topic';
                 topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
                                         <h2>${data.topicTitle}</h2>
                                         <p>Opened: ${data.usernames}</p>
@@ -58,7 +58,22 @@ function loadTopicDetails(){
     fetch(`/news/forumTopics/${topicId}`)
         .then(response => response.json())
         .then(topicDetails => {
-            document.querySelector('main').innerHTML = `<div class="topic-meta"><p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p></div><div class="topic-content"><h1>${topicDetails.topicTitle}</h1><p>${topicDetails.topicContent}</p><form id="comment-form" class="comment-form"><textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea><button type="submit">Submit Comment</button></form><div id="comments-content" class="comments-content"></div></div>`;
+            document.getElementById('container').innerHTML = `
+                                                            <div class="topic-meta">
+                                                                <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
+                                                            </div>
+                                                            <div class="topic-content">
+                                                                <h1>${topicDetails.topicTitle}</h1>
+                                                                <p>${topicDetails.topicContent}</p>
+                                                                <form id="comment-form" class="comment-form">
+                                                                    <textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea>
+                                                                    <div>
+                                                                        <button type="submit">Submit Comment</button>
+                                                                    </div>
+                                                                </form>
+                                                                <div id="comments-content" class="comments-content">
+                                                                </div>
+                                                            </div>`;
             document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
             loadComments(topicId);
         });
@@ -123,18 +138,20 @@ function setupCreateTopic() {
         const token = localStorage.getItem('token');
         if (!token) return alert('Please log in to create a topic.');
         fetchData('/news/get-profile', { headers: { 'Authorization': `Bearer ${token}` } }).then(profileData => {
-            const mainContent = document.querySelector('main');
-            mainContent.innerHTML = `
+            const container = document.getElementById('container');
+            container.innerHTML = `
                                     <form id="create-topic-form">
-                                        <div>
+                                        
                                             <label for="topicTitle">Topic Title:</label>
                                             <input type="text" id="topicTitle" required>
-                                        </div>
-                                        <div>
+                                        
+                                        
                                             <label for="topicContent">Topic Content:</label>
-                                            <textarea id="topicContent" maxlength="255" required></textarea>
+                                            <textarea id="topicContent" required></textarea>
+                                        
+                                        <div>
+                                            <button type="submit">Submit</button>
                                         </div>
-                                        <button type="submit">Submit</button>
                                     </form>`;
 
             document.getElementById('create-topic-form').addEventListener('submit', (e) => {

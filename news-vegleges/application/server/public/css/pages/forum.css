@@ -1,7 +1,9 @@
-main{
+.container{
     margin: 0 150px;
 }
-
+.container nav a:hover{
+    color: var(--secondary-color);
+}
 .section-container{
     display: flex;
     justify-content: center;
@@ -13,33 +15,31 @@ main{
     width: 33.33%; /* Ha bármilyen böngésző specifikus probléma lenne, ezzel a beállítással is biztosítjuk az egyenlő szélességet */
     box-sizing: border-box; /* Ha padding vagy border van a szekciókon, akkor is megfelelően viselkedjen */
 }
-
-.race-section div, .user-section div{
+.topic{
     border: 1px solid var(--primary-color);
     border-radius: 15px;
     margin: 15px 0;
     padding: 10px;
-    
 }
-.race-section .race-topic>div{
-    text-align: center;
-}
-
-.race-section a , .user-section a{
-    padding: 0 15px;
-}
-.race-section a:hover, .user-section a:hover{
-    color: var(--secondary-color);
-}
-.race-section p {
-    color: rgb(101, 101, 101);
-    font-size: smaller;
-}
-.race-section img{
-    height: 25px;
-    width: 32px;
-    border-radius: 5px;
+.topic:hover{
+    border-color: var(--secondary-color);
 }
 input{
     color: black;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+form textarea{
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+form input{
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: medium;
+    border: none;
 }

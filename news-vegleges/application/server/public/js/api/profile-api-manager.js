@@ -84,8 +84,10 @@
 
                 // Kijelentkezés
                 document.getElementById('logout').addEventListener('click', () => {
-                    localStorage.removeItem('token');
-                    window.location.href = '/news/auth.html';
+                    if(confirm("Are you sure you want to log out?")){
+                        localStorage.removeItem('token');
+                        window.location.href = '/news/auth.html';
+                    }
                 });
 
                 // Fiók törlése
@@ -144,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
     const profileDataContent = document.getElementById('profile-datas');
 
-    if (token && token.trim() != "") {
+    if (token && token.trim() !== "") {
         try {
             const response = await fetch('/news/get-profile', {
                 method: 'GET',
@@ -157,30 +159,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (userData.permission == 1) {
                 profileDataContent.innerHTML += `
                     <hr>
-                    <h3>Admin Panel</h3>
-                    <form>
-                        <div>
+                    <div>
+                        <h3>Admin Panel</h3>
+                        <form>
                             <p>Give Permission</p>
-                            <table>
-                                <tr>
-                                    <th>Choose Profile</th>
-                                    <th>Permission level</th>
-                                </tr>
-                                <tr>
-                                    <td><select id="profile-select"></select></td>
-                                    <td>
-                                        <select id="permission-select">
-                                            <option>admin</option>
-                                            <option>Moderator</option>
-                                            <option>User</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                            <button id="submit">Submit changes</button>
-                        </div>
-                    </form>
+                            <div>
+                                <h4>Choose Profile</h4>
+                                <select id="profile-select"></select>
+                            </div>
+                            <div>
+                                <h4>Permission level</h4>
+                                <select id="permission-select">
+                                    <option value="1">admin</option>
+                                    <option value="2">Moderator</option>
+                                    <option value="3">User</option>
+                                </select>
+                            </div>
+                            <button id="submit">Submit changes</button>                    
+                        </form>
+                    </div>
+
                 `;
+
                 const profileResponse = await fetch('/news/get-all-profiles', {
                     method: 'GET',
                     headers: {
@@ -192,9 +192,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const profileSelect = document.getElementById('profile-select');
 
                 datas.forEach(user => {
-                    profileSelect.innerHTML += `
-                        <option>${user.usernames}</option>
+                    if(user.id > 0){
+                        profileSelect.innerHTML += `
+                        <option value="${user.id}">${user.usernames}</option>
                     `;
+                    }
+                });
+
+                document.getElementById('submit').addEventListener('click', async (event) => {
+                    event.preventDefault();
+                    const selectedProfile = document.getElementById('profile-select').value;
+                    const selectedPermission = document.getElementById('permission-select').value;
+
+                    if (confirm('Are you sure you want to update the permission of the selected profile?')) {
+                        try {
+                            const response = await fetch('/news/update-permission', {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`  // Bearer token
+                                },
+                                body: JSON.stringify({
+                                    id: selectedProfile,
+                                    permission: selectedPermission
+                                })
+                            });
+
+                            const data = await response.json();
+                            alert('Permission successfully updated');
+                        } catch (error) {
+                            console.error('Error updating permission:', error);
+                        }
+                    }
                 });
             }
         } catch (error) {

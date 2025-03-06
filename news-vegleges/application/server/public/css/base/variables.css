@@ -4,6 +4,7 @@
     --background-color: #15151E;
     --red-hover-color: #af0034;
     --font-color: #ffffee;
+    --secondary-font-color: #646464;
 }
 [data-theme="light"] {
     --primary-color: #15151E;
