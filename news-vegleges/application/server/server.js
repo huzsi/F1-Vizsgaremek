@@ -1,3 +1,20 @@
+/**Teendők:
+ *      scrollmenü elemek méretezése reszponzivitásnál.
+ *      profile.html - last interaction rész megcsinálása
+ *      adminpanel - profilok törlése
+ *      creator script átnézése.
+ *      frontedjét is.
+ *      Standlist gomb megcsinálása az indexen.
+ *      Profilkép lehetőség.
+ *      driver fotók kigyűjtése
+ *      forum, topicok törlése.
+ *      admin profil esetén oda is egy adminpanel.
+ * 
+ * Megoldani, hogy egy adatsor esetén is belegyenek töltve adatok, ne csak 2 vagy annál több. (Race result, Fórum - commentek, result.html).
+ *      adatbázis bővítés - utolsó 5 futamgyőztes.
+ *      Where can I watch - gomb megcsinálása.
+ *      animációk.
+ */
 const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
@@ -144,9 +161,6 @@ app.get('/news/race-schedule', (req, res) => {
         ORDER BY rn.raceNumber ASC
     `);
 });
-app.get('/news/racenames', (req, res) =>{
-    queryDB(res,'SELECT raceNumber, id, name, fullName, trackName FROM racenames ORDER BY raceNumber ASC',[req.query.id]);
-});
 app.get('/news/trackinfo', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT trackName, fullName FROM racenames WHERE id = ?', [req.query.id]);
@@ -168,52 +182,36 @@ app.get('/news/seasonRaceResults', (req, res) => {
     queryDB(res, `SELECT * FROM seasonRaceResult`);
 });
 app.get('/news/raceResults', (req, res) => {
-    queryDB(res, `SELECT 
-    srr.raceId,
-    rn.name AS raceName,
-    d1.driverName AS P1,
-    d2.driverName AS P2,
-    d3.driverName AS P3,
-    d4.driverName AS P4,
-    d5.driverName AS P5,
-    d6.driverName AS P6,
-    d7.driverName AS P7,
-    d8.driverName AS P8,
-    d9.driverName AS P9,
-    d10.driverName AS P10,
-    d11.driverName AS P11,
-    d12.driverName AS P12,
-    d13.driverName AS P13,
-    d14.driverName AS P14,
-    d15.driverName AS P15,
-    d16.driverName AS P16,
-    d17.driverName AS P17,
-    d18.driverName AS P18,
-    d19.driverName AS P19,
-    d20.driverName AS P20
-    FROM seasonRaceResult srr
-    JOIN raceNames rn ON srr.raceId = rn.id
-    LEFT JOIN driverNames d1 ON srr.P1 = d1.driverId
-    LEFT JOIN driverNames d2 ON srr.P2 = d2.driverId
-    LEFT JOIN driverNames d3 ON srr.P3 = d3.driverId
-    LEFT JOIN driverNames d4 ON srr.P4 = d4.driverId
-    LEFT JOIN driverNames d5 ON srr.P5 = d5.driverId
-    LEFT JOIN driverNames d6 ON srr.P6 = d6.driverId
-    LEFT JOIN driverNames d7 ON srr.P7 = d7.driverId
-    LEFT JOIN driverNames d8 ON srr.P8 = d8.driverId
-    LEFT JOIN driverNames d9 ON srr.P9 = d9.driverId
-    LEFT JOIN driverNames d10 ON srr.P10 = d10.driverId
-    LEFT JOIN driverNames d11 ON srr.P11 = d11.driverId
-    LEFT JOIN driverNames d12 ON srr.P12 = d12.driverId
-    LEFT JOIN driverNames d13 ON srr.P13 = d13.driverId
-    LEFT JOIN driverNames d14 ON srr.P14 = d14.driverId
-    LEFT JOIN driverNames d15 ON srr.P15 = d15.driverId
-    LEFT JOIN driverNames d16 ON srr.P16 = d16.driverId
-    LEFT JOIN driverNames d17 ON srr.P17 = d17.driverId
-    LEFT JOIN driverNames d18 ON srr.P18 = d18.driverId
-    LEFT JOIN driverNames d19 ON srr.P19 = d19.driverId
-    LEFT JOIN driverNames d20 ON srr.P20 = d20.driverId;
-`);
+    queryDB(res, `  SELECT 
+                    srr.raceId,
+                    rn.name AS raceName,
+                    d1.driverName AS P1, d2.driverName AS P2, d3.driverName AS P3, d4.driverName AS P4, d5.driverName AS P5,
+                    d6.driverName AS P6, d7.driverName AS P7, d8.driverName AS P8, d9.driverName AS P9, d10.driverName AS P10,
+                    d11.driverName AS P11, d12.driverName AS P12, d13.driverName AS P13, d14.driverName AS P14, d15.driverName AS P15,
+                    d16.driverName AS P16, d17.driverName AS P17, d18.driverName AS P18, d19.driverName AS P19,d20.driverName AS P20
+                    FROM seasonRaceResult srr
+                    JOIN raceNames rn ON srr.raceId = rn.id
+                    LEFT JOIN driverNames d1 ON srr.P1 = d1.driverId
+                    LEFT JOIN driverNames d2 ON srr.P2 = d2.driverId
+                    LEFT JOIN driverNames d3 ON srr.P3 = d3.driverId
+                    LEFT JOIN driverNames d4 ON srr.P4 = d4.driverId
+                    LEFT JOIN driverNames d5 ON srr.P5 = d5.driverId
+                    LEFT JOIN driverNames d6 ON srr.P6 = d6.driverId
+                    LEFT JOIN driverNames d7 ON srr.P7 = d7.driverId
+                    LEFT JOIN driverNames d8 ON srr.P8 = d8.driverId
+                    LEFT JOIN driverNames d9 ON srr.P9 = d9.driverId
+                    LEFT JOIN driverNames d10 ON srr.P10 = d10.driverId
+                    LEFT JOIN driverNames d11 ON srr.P11 = d11.driverId
+                    LEFT JOIN driverNames d12 ON srr.P12 = d12.driverId
+                    LEFT JOIN driverNames d13 ON srr.P13 = d13.driverId
+                    LEFT JOIN driverNames d14 ON srr.P14 = d14.driverId
+                    LEFT JOIN driverNames d15 ON srr.P15 = d15.driverId
+                    LEFT JOIN driverNames d16 ON srr.P16 = d16.driverId
+                    LEFT JOIN driverNames d17 ON srr.P17 = d17.driverId
+                    LEFT JOIN driverNames d18 ON srr.P18 = d18.driverId
+                    LEFT JOIN driverNames d19 ON srr.P19 = d19.driverId
+                    LEFT JOIN driverNames d20 ON srr.P20 = d20.driverId;
+                `);
 });
 app.post('/news/saveRaceResults', (req, res) => {
     const { raceId, results } = req.body;
@@ -365,10 +363,15 @@ app.get('/news/get-profile', authorize, (req, res) => {
     queryDB(res, query, [req.user.id]);
 });
 app.get('/news/get-all-profiles', authorize, (req, res) => {
-    const query = 'SELECT usernames, permission FROM user';
+    const query = 'SELECT id ,usernames, permission FROM user';
     queryDB(res, query, [req.user.id]);
 });
 
+app.put('/news/update-permission', authorize, (req, res) => {
+    const { permission, id } = req.body;
+    const query = 'UPDATE user SET permission = ? WHERE id = ?';
+    queryDB(res, query, [permission, id]);
+});
 
 app.put('/news/update-username', authorize, (req, res) => {
     const { username } = req.body;
