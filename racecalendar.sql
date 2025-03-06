@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2025. Már 02. 23:08
+-- Létrehozás ideje: 2025. Már 06. 20:49
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -163,8 +163,8 @@ CREATE TABLE `forumtopics` (
   `topicId` int(15) NOT NULL,
   `userId` int(15) NOT NULL,
   `topicTitle` varchar(255) NOT NULL,
-  `topicContent` varchar(255) NOT NULL,
-  `date` date NOT NULL
+  `topicContent` text NOT NULL,
+  `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -172,9 +172,8 @@ CREATE TABLE `forumtopics` (
 --
 
 INSERT INTO `forumtopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
-(1, 1, 'sad', 'sad', '2025-03-04'),
-(2, 2, 'sad', 'sad', '2025-03-04'),
-(3, 2, 'dead', 'sad', '2025-03-04');
+(3, 2, 'aaa', 'aaa', '2025-03-05 20:51:50'),
+(4, 0, 'Australia', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events', '2025-03-05 20:52:30');
 
 -- --------------------------------------------------------
 
@@ -221,19 +220,6 @@ INSERT INTO `racedates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `
 ('sa', 1, '2025-04-18 15:30:00', '2025-04-18 19:00:00', '2025-04-19 15:30:00', '2025-04-19 19:00:00', '2025-04-20 19:00:00'),
 ('sg', 1, '2025-10-03 11:30:00', '2025-10-03 15:00:00', '2025-10-04 11:30:00', '2025-10-04 15:00:00', '2025-10-05 14:00:00'),
 ('us', 2, '2025-10-17 19:30:00', '2025-10-17 23:30:00', '2025-10-18 19:00:00', '2025-10-18 23:00:00', '2025-10-19 21:00:00');
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `raceForumTopics`
---
-
-CREATE TABLE `raceForumTopics` (
-  `topicId` int(11) NOT NULL,
-  `event1` int(11) NOT NULL,
-  `event2` int(11) NOT NULL,
-  `event3` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -320,6 +306,39 @@ INSERT INTO `seasonRaceResult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `topicComments`
+--
+
+CREATE TABLE `topicComments` (
+  `topicId` int(11) NOT NULL,
+  `commentId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `commentContent` varchar(255) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `topicComments`
+--
+
+INSERT INTO `topicComments` (`topicId`, `commentId`, `userId`, `commentContent`, `date`) VALUES
+(3, 1, 1, 'Szeja', '2025-03-06 15:40:59'),
+(3, 2, 1, 'Szeja', '2025-03-06 15:41:02'),
+(3, 3, 1, 'Szeja', '2025-03-06 15:41:03'),
+(3, 4, 1, 'Szeja', '2025-03-06 15:41:03'),
+(3, 5, 1, 'Szeja', '2025-03-06 15:41:03'),
+(3, 6, 1, 'Szeja', '2025-03-06 15:41:03'),
+(3, 7, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 8, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 9, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 10, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 11, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 12, 1, 'Szeja', '2025-03-06 15:41:04'),
+(3, 13, 1, 'Szeja', '2025-03-06 15:41:04');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `user`
 --
 
@@ -336,7 +355,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `permission`, `usernames`, `emails`, `passwords`) VALUES
-(1, 1, 'admin', 'admin@gmail.com', '$2b$10$sMLNILd7T.K/dNK8xvheuOIOrzHIUl6OnAi39b2faEtrCiy5KmHTK'),
+(0, 1, 'System', '-', '-'),
+(1, 1, 'admin', 'admin@gmail.com', '$2b$10$zjkJojt2.zFCZfvjBO3X.u2nFe3ymMEQHVpgGrirmBMi1ThD.nss.'),
 (2, 3, 'user', 'user@gmail.com', '$2b$10$38/iOdPkThhnD5nl3SBxBO6HvbhcLEbcTs6QI.lIX8mJqILR605W.');
 
 --
@@ -396,6 +416,14 @@ ALTER TABLE `seasonRaceResult`
   ADD KEY `P1` (`P1`,`P2`,`P3`,`P4`,`P5`,`P6`,`P7`,`P8`,`P9`,`P10`,`P11`,`P12`,`P13`,`P14`,`P15`,`P16`,`P17`,`P18`,`P19`,`P20`);
 
 --
+-- A tábla indexei `topicComments`
+--
+ALTER TABLE `topicComments`
+  ADD PRIMARY KEY (`commentId`),
+  ADD KEY `topicId` (`topicId`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- A tábla indexei `user`
 --
 ALTER TABLE `user`
@@ -422,13 +450,19 @@ ALTER TABLE `driverNames`
 -- AUTO_INCREMENT a táblához `forumtopics`
 --
 ALTER TABLE `forumtopics`
-  MODIFY `topicId` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `topicId` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT a táblához `topicComments`
+--
+ALTER TABLE `topicComments`
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Megkötések a kiírt táblákhoz
