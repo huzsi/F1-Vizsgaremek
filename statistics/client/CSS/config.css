@@ -1,0 +1,29 @@
+@font-face {
+    font-family: F1-Bold;
+    font-weight: bold;
+    src: url(../Fonts/Formula1-Bold.otf);
+}
+
+@font-face {
+    font-family: F1-Regular;
+    src: url(../Fonts/Formula1-Regular.otf);
+}
+
+@font-face {
+    font-family: F1-Wide;
+    src: url(../Fonts/Formula1-Wide.otf);
+}
+
+:root {
+    --warm-red: #FF1E00;
+    --carbon-black: #15151E;
+    --gray-color: #C3C4C6;
+    --nav-color: #EDEDED;
+    /**/
+    --primary-color: #cfcfc4;
+    --secondary-color: #ff232b;
+    --background-color: #15151E;
+    --red-hover-color: #af0034;
+    --font-color: #ffffee;
+}
+

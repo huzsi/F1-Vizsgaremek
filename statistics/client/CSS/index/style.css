@@ -1,0 +1,247 @@
+/* ===============================
+   Stílus fájl
+   =============================== */
+
+body {
+    background-color: var(--carbon-black);
+}
+
+/*-------------------------HEADER--------------------------*/
+
+header { /*Header Style*/
+    border: 5px solid var(--warm-red);
+    border-radius: 25px;
+    /*---------------------*/
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 50px;
+    align-items: center;
+    /*---------------------*/
+    box-shadow: 0px 0px 10px 0px var(--warm-red);
+}
+
+header>h2 { /*H2 Headline style*/
+    color: var(--warm-red);
+    /*---------------------*/
+    font-family: F1-Bold;
+    font-size: 40px;
+    /*---------------------*/
+    flex: 5;
+}
+
+header>a { /*Header Button style*/
+    color: var(--warm-red);
+    /*---------------------*/
+    border: 1px transparent solid;
+    border-radius: 3px;
+    /*---------------------*/
+    font-family: F1-Bold;
+    text-decoration: none;
+    /*---------------------*/
+    padding: 15px;
+    position: relative;
+    transition: ease 0.3s;
+}
+
+header>a:hover { /*Header Button hover style*/
+    border: 1px var(--warm-red) solid;
+    border-radius: 3px;
+    /*---------------------*/
+    transition: ease 0.3s;
+}
+
+/*-------------------------HEADER END-----------------------*/
+
+/*-------------------------COLUMNS--------------------------*/
+
+.columns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+.subColumns {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px;
+    margin-bottom: 180px auto;
+    /*---------------------*/
+    animation: scale-in-ver-bottom 1s cubic-bezier(0.075, 0.820, 0.165, 1.000) both;
+}
+
+.subColumns>h2 {
+    color: var(--gray-color);
+    /*---------------------*/
+    font-family: "Montserrat", sans-serif;
+    font-weight: 350;
+    text-align: center;
+}
+
+.seasonRow {
+    gap: 10px;
+    overflow: auto;
+    white-space: nowrap;
+    /*---------------------*/
+    scrollbar-width: thin;
+    scrollbar-color: var(--warm-red);
+    padding: 10px;
+}
+
+.seasonRow button {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    padding: 14px; 
+}
+
+.raceRow {
+    gap: 10px;
+    overflow: auto;
+    white-space: nowrap;
+    /*---------------------*/
+    scrollbar-width: thin;
+    scrollbar-color: var(--warm-red);
+    padding: 10px;
+}
+
+.raceRow button {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    padding: 14px; 
+}
+
+/*-----------------------COLUMNS END------------------------*/
+
+/*------------------------ BUTTONS -------------------------*/
+
+button {
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    /*---------------------*/
+    color: var(--gray-color);
+    background: transparent;
+    /*---------------------*/
+    box-shadow: 0px 0px 3px 0px var(--gray-color);
+    /*---------------------*/
+    font-family: "Montserrat", sans-serif;
+    font-weight: 350;
+    text-decoration: none;
+    text-align: center;
+    /*---------------------*/
+    padding: 10px;
+    width: 200px;
+    /*---------------------*/
+    transition: ease 0.3s;
+}
+
+button:hover {
+    background-color: var(--gray-color);
+    color: var(--carbon-black);
+    /*---------------------*/
+    transition: ease 0.3s;
+}
+
+/*-----------------------BUTTONS END------------------------*/
+
+/*--------------------------TABLE---------------------------*/
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    color: var(--gray-color);
+    font-family: "Montserrat", sans-serif;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    border-bottom: solid 1px var(--gray-color);
+
+}
+
+table th {
+    background-color: var(--warm-red);
+    color: var(--carbon-black);
+    font-family: "Montserrat", sans-serif;
+}
+
+.tableButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/*------------------------TABLE END-------------------------*/
+
+/*--------------------------FOOTER--------------------------*/
+
+footer{
+    text-align: center;
+    background-color: var(--background-color);
+    border-top: 1px var(--primary-color) solid;
+    border-bottom: 1px var(--primary-color) solid;
+    font-family: F1-Bold;
+}
+
+footer p{
+    color: var(--font-color);
+}
+
+footer a {
+    color: var(--font-color);
+    text-decoration: none; 
+}
+
+footer .bottom-div{
+    display: flex;
+    justify-content: space-between;
+    font-size: smaller;
+    color: #777;
+}
+
+footer div{
+    padding: 0 150px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/*------------------------FOOTER END------------------------*/
+
+/*--------------------------LOADER--------------------------*/
+
+.loader {
+    width: 90px;
+    height: 12px;
+    --c:#000 50%,#ffffff 0;
+    background: 
+      linear-gradient(90deg ,var(--c)) 0 0%,
+      linear-gradient(-90deg,var(--c)) 0 50%,
+      linear-gradient(90deg ,var(--c)) 0 100%;
+    background-size: 8px calc(100%/3);
+    background-repeat: repeat-x;
+    animation: l8 .25s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  @keyframes l8 {
+      100% {background-position: -8px 0%,-8px 50%,-8px 100%}
+  }
+
+/*------------------------LOADER END-------------------------*/
+
+/*--------------------------CONTENT--------------------------*/
+
+.content {
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/*------------------------CONTENT END-------------------------*/

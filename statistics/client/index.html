@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Statistics</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="static/CSS/webkit.css">
+    <link rel="stylesheet" href="static/CSS/config.css">
+    <!------------------------------------------------->
+    <link rel="stylesheet" href="static/CSS/index/responsive.css">
+    <link rel="stylesheet" href="static/CSS/index/style.css">
+    <!------------------------------------------------->
+    <link rel="stylesheet" href="static/CSS/index/animista.css">
+    <link rel="stylesheet" href="static/CSS/index/loader.css">
+
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="loader"></div>
+    <div class="content hidden">
+        <header>
+            <h2>F<span style="color: white;">1</span> stats</h2>
+    
+            <a href="index.html">HOME</a>
+            <a href="http://localhost:3002/news/index.html">NEWS</a>
+            <a href="">ABOUT</a>
+        </header>
+        <br>
+        <main id="main">
+            <div class="columns">
+                <div id="pilotStats" class="subColumns">
+                    <h2 style="text-align: center;">Pilot stats</h2>
+                    <button id="loadPilotList">Pilot list</button> <br>
+                    <button id="loadRaceStarts"> Race starts</button> <br>
+                    <button id="loadChampionship">Championship standings</button> <br>
+                    <button id="loadRaceWins">Race wins</button> <br>
+                    <button id="loadPodiums">Podiums</button> <br>
+                    <button id="loadPolePositions">Pole positions</button> <br>
+                    <button id="loadPoints">Points (HAMIS EREDMÉNY)</button>
+                </div>
+                <div id="constructorStats" class="subColumns">
+                    <h2 style="text-align: center;">Construtor stats</h2>
+                    <button id="loadConstructorList">Construtor list</button> <br>
+                    <button id="loadConstructorStarts">Race starts (NINCS EREDMÉNY)</button> <br>
+                    <button id="loadConstructorChampionship">Championship wins</button> <br>
+                    <button id="loadConstructorWins">Race wins (NINCS EREDMÉNY)</button> <br>
+                    <button id="loadConstructorPodiums">Podiums(NINCS EREDMÉNY)</button> <br>
+                    <button id="loadConstructorPoints">Points(NINCS EREDMÉNY)</button>
+                </div>
+                <div id="otherStats" class="subColumns">
+                    <h2 style="text-align: center;">Other stats</h2>
+                    <button class="loadYearsSeason">Season results</button> <br>
+                    <button class="loadYearsRace">Race results</button> <br>
+                </div>
+            </div>
+			<div id="dataTable" class="hidden">
+                <table>
+                    <thead id="tableHead">
+                        <!--Table Header -->
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table Content -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <div id="yearButtons" class="seasonRow" style="display: none;">
+            <script>
+                for (let year = 1950; year <= 2024; year++) {
+                    document.write(`<button class="years" onclick="fetchSeasonData(${year})">${year}</button> <br>`);
+                }
+            </script>
+        </div>
+        <br>
+        <div id="raceButtons" class="raceRow" style="display: none;"></div>
+        <br>
+        <footer>
+            <div>
+                <h2><a  style="color: var(--font-color);" href="https://www.formula1.com/">F1 website</a></h2>
+                <h3 style="color: var(--font-color);">Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            </div>
+            <div>
+                <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+                <p>All content and articles published are copyrighted and the property of their respective authors.</p>
+            </div>
+            <div class="bottom-div">
+                <p>&copy; <span id="yearSpan"></span></p>
+                <p>Source: Github</p>
+            </div>
+        </footer>
+    </div>
+
+    <!--Pilots Statistics Script -->
+
+    <script src="static/JS/pilotStats/pilotList.js"></script>
+    <script src="static/JS/pilotStats/raceStarts.js"></script>
+    <script src="static/JS/pilotStats/championshipStandings.js"></script>
+    <script src="static/JS/pilotStats/raceWins.js"></script>
+    <script src="static/JS/pilotStats/podiums.js"></script>
+    <script src="static/JS/pilotStats/polePositions.js"></script>
+    <script src="static/JS/pilotStats/points.js"></script>
+
+    <!--Constructors Statistics Scripts-->
+
+    <script src="static/JS/constructorStats/counstructorList.js"></script>
+    <script src="static/JS/constructorStats/championshipStandings.js"></script>
+    <script src="static/JS/constructorStats/podiums.js"></script>
+    <script src="static/JS/constructorStats/points.js"></script>
+    <script src="static/JS/constructorStats/raceStarts.js"></script>
+    <script src="static/JS/constructorStats/raceWins.js"></script>
+
+    <!--Other Statistics Scripts-->
+
+    <script src="static/JS/otherStats/otherStatsMain.js"></script>
+    <script src="static/JS/otherStats/seasonStats.js"></script>
+
+    <script src="static/JS/loading.js"></script>
+    
+
+    <script src="https://kit.fontawesome.com/8c9be19cd8.js" crossorigin="anonymous"></script>
+</body>
+</html>

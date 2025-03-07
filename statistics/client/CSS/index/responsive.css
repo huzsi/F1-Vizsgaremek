@@ -1,0 +1,49 @@
+/* ===============================
+   Reszponzív stílusok
+   =============================== */
+
+/*
+Laptop Reszponzivitás
+*/
+
+@media (min-width: 1024px) {
+    .columns {
+        gap: 100px;
+    }
+}
+
+/* 
+Tablet Reszponzivitás  
+*/
+
+@media (min-width: 610px) and (max-width: 1023px) {
+    
+    .columns {
+        gap: 0 !important;
+       
+    }
+
+    .subColumns {
+        padding: 0;
+    }
+
+}
+
+/* 
+Mobil Reszponzivitás 
+*/
+
+@media (max-width: 609px) {
+    header { /*Header Style*/
+        flex-direction: column;
+    }
+
+    header>a {
+        right: 0;
+    }
+
+    .columns {
+        flex-direction: column;
+    }
+
+}

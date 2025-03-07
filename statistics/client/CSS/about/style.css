@@ -1,0 +1,80 @@
+:root{
+    --carbon-color: ##15151E;
+    --red-color: red;
+    --grey-color: #808080;
+}
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Bold.otf");
+}
+body{
+    margin: 0;
+    background-color: #15151E;
+    font-family: F1Font;
+    color: white;
+    height: 300vh;
+}
+body{
+    margin: 0;
+    background-color: #15151E;
+    font-family: F1Font;
+    color: white;
+    height: 300vh;
+}
+nav ul{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 15px 0px;
+    padding: 0;
+}
+nav ul li{
+    border-right: 1px solid rgb(129, 128, 128);
+    padding: 0 25px;
+}
+nav ul li:last-child{
+    border-right: none;
+    padding-right: 0;
+
+}
+nav ul li:first-child{
+    padding-left: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.active{
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--red-color);
+}
+.hidden{
+    display: none;
+}
+table{
+    margin: 25px;
+    text-align: center;
+}
+th,td{
+    padding: 5px;
+    border-bottom: 1px solid var(--grey-color);
+    width: 100px;
+}
+.top-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: smaller;
+    padding: 0 150px;
+    border-bottom: 1px solid var(--grey-color);
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px var(--grey-color) solid;
+    padding: 0 150px;
+    top: 0;
+}
