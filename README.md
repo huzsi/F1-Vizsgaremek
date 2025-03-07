@@ -20,46 +20,38 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 
 # Mappastruktúra
 ```
-├── !News / # Weboldal mappa
-|    └── Frontend / # Frontend fájlok (HTML, CSS, FONTS, JS)
-|        └── html / # HTML fájlok        
-|        └── css / # Stílusfájlok
-|        └── fonts / # Betűtípusok
-|        └── img / # Képek
-|        └── js / # Javascript fájlok 
-|    └── Backend / # Backend fájlok (Django, js)
-|        └── js / # Javascript fájlok
-|        └── application / # Django konfiguráló fájlok (Settings, URLs)
-|            └──  __pycache__/ # Django Cache fájlok
-|            └── application / # Django konfiguráló fájlok (Settings, URLs)
-|                └──  __pycache__/ # Django Cache fájlok
-|            └── static_files/ # Ide illesztjük be a Frontend fájlok Statikus részét (CSS, JS, IMGs)
-|                └── admin/ # Django alap admin panel
-|                └── index/ # Countdown
-|                └── statics/ # Frontend mappából be másolt statikus fájlok
-|            └── templates/ # Megjeleníthető HTML fájlok
-|                └── static_pages/ # HTMLs
-|            └── tmp/ # Temp Fájlok
-├── !Stats / # Weboldal mappa
-|    └── Frontend / # Frontend fájlok (HTML, CSS, FONTS, JS)
-|        └── html / # HTML fájlok        
-|        └── css / # Stílusfájlok
-|        └── fonts / # Betűtípusok
-|        └── img / # Képek
-|        └── js / # Javascript fájlok 
-|    └── Backend / # Backend fájlok (Django, js)
-|        └── js / # Javascript fájlok
-|        └── application / # Django konfiguráló fájlok (Settings, URLs)
-|            └──  __pycache__/ # Django Cache fájlok
-|            └── application / # Django konfiguráló fájlok (Settings, URLs)
-|                └──  __pycache__/ # Django Cache fájlok
-|            └── static_files/ # Ide illesztjük be a Frontend fájlok Statikus részét (CSS, JS, IMGs)
-|                └── admin/ # Django alap admin panel
-|                └── index/ # Countdown
-|                └── statics/ # Frontend mappából be másolt statikus fájlok
-|            └── templates/ # Megjeleníthető HTML fájlok
-|                └── static_pages/ # HTMLs
-|            └── tmp/ # Temp Fájlok
+├── .temp / # Olyan fájlok amik nem szükségesek az oldal működéséhez
+|    └── Bet Oldal /
+├──  hub / # Az elosztó oldal fájljai
+|    └── client / # Frontend fájlok (HTML, CSS, FONTS, JS)       
+|        └── CSS / # Stílusfájlok
+|        └── Fonts / # Betűtípusok
+|        └── images / # Képek
+|        └── JS / # Javascript fájlok 
+├──  news / # A hír oldal fájljai
+|    └── public / # Javascript fájlok
+|        └── CSS / # Stílusfájlok
+|            └── base # Alap CSS fájlok
+|            └── components # Komponensek CSS fájljai
+|            └── layout # Egyes tag-ek CSS fájljai
+|            └── pages # Oldalak CSS fájljai
+|        └── HTML / # Weboldalfájlok
+|        └── Fonts / # Betűtípusok
+|        └── images / # Képek
+|            └── drivers # Versenyzők képei
+|            └── flags # Zászlók képei
+|            └── tracks # Pályák képei
+|        └── JS / # Javascript fájlok 
+|            └── api # API Javascript fájlok
+|            └── frontend # Frontend Javascript fájlok
+|            └── utils # Egyéb Javascript fájlok
+├──  node_modules / # Az oldalhoz szükséges modulok
+├──  statistics / # Az oldalhoz szükséges modulok
+|    └── client / # Frontend fájlok (CSS, FONTS, JS)
+|        └── CSS / # Stílusfájlok
+|        └── Fonts / # Betűtípusok
+|        └── images / # Képek
+|    └── node_modules / # Az oldalhoz szükséges modulok
 ```
 
 # Szerepek
