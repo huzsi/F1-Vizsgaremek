@@ -1,0 +1,25 @@
+table{
+    margin: 15px;
+    text-align: center;
+    border-collapse: collapse;
+}
+tr{
+    border-bottom: 10px solid transparent;
+}
+th,td{
+    text-align: center;
+    border-spacing: 0;
+    margin: 10px;
+}
+td{
+    border-right: 1px solid var(--primary-color);
+    padding: 5px 15px;
+    
+}
+td:last-child{
+   border: none;
+  
+}
+tr{
+    margin: 0;
+}

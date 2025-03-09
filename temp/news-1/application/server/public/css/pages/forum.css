@@ -1,0 +1,45 @@
+.container{
+    margin: 0 150px;
+}
+.container nav a:hover{
+    color: var(--secondary-color);
+}
+.section-container{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%; /* Ezzel biztosítjuk, hogy a szülő elem teljes szélességét kihasználja */
+}
+.race-section, .user-section, .popular-section {
+    flex: 1 1 33.33%; /* Minden elem egyenlően osztozik a szélességen */
+    width: 33.33%; /* Ha bármilyen böngésző specifikus probléma lenne, ezzel a beállítással is biztosítjuk az egyenlő szélességet */
+    box-sizing: border-box; /* Ha padding vagy border van a szekciókon, akkor is megfelelően viselkedjen */
+}
+.topic{
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    margin: 15px 0;
+    padding: 10px;
+}
+.topic:hover{
+    border-color: var(--secondary-color);
+}
+input{
+    color: black;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+form textarea{
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+form input{
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: medium;
+    border: none;
+}

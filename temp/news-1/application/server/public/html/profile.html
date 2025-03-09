@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Stats &amp; News</title>
+    <link rel="stylesheet" href="/static/css/animista.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/base/reset.css">
+    <link rel="stylesheet" href="/static/css/base/typography.css">
+    <link rel="stylesheet" href="/static/css/base/variables.css">
+    <link rel="stylesheet" href="/static/css/components/buttons.css">
+    <link rel="stylesheet" href="/static/css/components/table.css">
+    <link rel="stylesheet" href="/static/css/layout/nav.css">
+    <link rel="stylesheet" href="/static/css/layout/header.css">
+    <link rel="stylesheet" href="/static/css/layout/footer.css">
+    <link rel="stylesheet" href="/static/css/pages/profile.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body>
+    <div class="header-container" id="header-container">
+        <nav class="top-nav" id="top-nav">
+            <!--JS code-->
+        </nav>
+        <!--Main header-->
+        <header>
+            <!--JS code-->
+        </header>
+        <div class="dropdown-content scale-up-ver-top" id="dropdown-content">
+            <!--JS code-->
+        </div>
+       
+    </div>
+    <main id="main-content">
+        <div class="container">
+            <section class="profile-datas-container" id="profile-datas">
+                <!--profile-api-manager create elements dynamically-->
+                
+            </section>
+            <section class="settings-container">
+                <h2>Settings</h2>
+                <form id="settings-form">
+                    <div>
+                        <p id="profile-picture">Select profile picture</p>
+                        <input type="file" id="profile-picture-input" name="profile-picture">
+                    </div>
+                    <div class="username-div">
+                        <h3>Change username</h3>
+                        <input type="text" id="new-username" name="new-username" placeholder="New Username">
+                        <div>
+                            <button type="button" id="save-username">Save Username</button>
+                            <button type="button" id="clear-username-input">Clear</button>
+                        </div>
+                    </div>
+                    <div class="email-div">
+                        <h3>Change email</h3>
+                        <input type="email" id="new-email" name="new-email" placeholder="New Email">
+                        <div>
+                            <button type="button" id="save-email">Save Email</button>
+                            <button type="button" id="clear-email-input">Clear</button>
+                        </div>
+                    </div>
+                    <div class="password-div">
+                        <h3>Change Password</h3>
+                        <input type="password" id="new-password" name="new-password" placeholder="New Password">
+                        <div>
+                            <button type="button" id="save-password">Save Password</button>
+                            <button type="button" id="clear-password-input">Clear</button>
+                        </div>
+                    </div>
+                </form>
+                <nav>
+                    <ul>
+                        <li><a id="logout" href="#">Log out</a></li>
+                        <li"><a id="delete-account" href="#">Delete account</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
+            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            
+        </div>
+        <div>
+            <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+            <p>All content and articles published are copyrighted and the property of their respective authors.</p>
+        </div>
+        <div class="bottom-div">
+            <p>&copy; <span id="yearSpan"></span></p>
+            <p>Source: <a href="https://github.com/huzsi/F1-Vizsgaremek">Github</a></p>
+        </div>
+    </footer>
+    <script src="/static/js/utils/auth-check.js"></script>
+     <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
+     <script src="/static/js/frontend/header-renderer.js"></script>
+    <script src="/static/js/api/profile-api-manager.js"></script>
+    <script src="/static/js/api/dropdown-api-manager.js"></script>
+    
+    <script src="/static/js/frontend/dropdown.js"></script>
+    <script src="/static/js/frontend/footer-time-changer.js"></script>
+
+   
+</body>
+</html>

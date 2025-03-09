@@ -1,0 +1,34 @@
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Regular.otf");
+}
+/*További betűtípusok, elemek egyedi betűtípus beállításai várhatóak*/
+body{
+    font-family: F1Font;
+    color: var(--font-color);
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: bold;
+}
+header a, .top-nav a{
+    color: var(--font-color);
+}
+.top-nav, .top-nav-black{
+    font-size: smaller;
+}
+a{
+    color: var(--font-color);
+}
+.newsDiv p{
+    font-family: Arial;
+}
+input{
+    color: var(--font-color);
+}
+footer .bottom-div, footer .bottom-div p>a{
+    color: #777 !important;   
+}
+.topic p{
+    color: var(--secondary-font-color);
+    font-family: Arial;
+}
