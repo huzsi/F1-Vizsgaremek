@@ -18,6 +18,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const NodeCache = require('node-cache');
+const { Server } = require('http');
 const cache = new NodeCache({ stdTTL: 3600 });
 const apiKey = 'bd49adc7fe7341ddb75478209aa97049';
 const app = express();
@@ -59,7 +60,7 @@ const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'racecalendar'
+    database: 'F1-news'
 });
 
 conn.connect(err => {
@@ -92,6 +93,7 @@ const authorize = (req, res, next) => {
 //A weboldal által használt aloldalak elérése:
 const servePage = (page) => (req, res) => res.sendFile(path.join(__dirname, 'public', 'html', `${page}.html`));
 app.get('/', servePage('start'));
+app.get('/news/loader.html', servePage('loader'));
 app.get('/news/index.html', servePage('index'));
 app.get('/news/about.html', servePage('about'));
 app.get('/news/auth.html', servePage('auth'));
@@ -257,6 +259,9 @@ app.get('/news/last-topicComment', (req, res) => {
 app.get('/news/popular-topics', (req, res) => {
     queryDB(res, 'SELECT tc.topicId, ft.topicTitle, u.usernames, COUNT(tc.commentId) AS commentCount FROM topicComments tc JOIN user u ON tc.userId = u.id LEFT JOIN forumtopics ft ON tc.topicId = ft.topicId GROUP BY tc.topicId ORDER BY commentCount DESC LIMIT 10;');
 });
+app.get('/news/loadReports', (req, res) => {
+    queryDB(res, 'SELECT tr.reportId, tr.topicId , u.usernames, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
+})
 app.delete('/news/forumTopics/:topicId', (req, res) => {
     const { topicId } = req.params;  // Helyes destrukturálás
     const query = 'DELETE FROM forumTopics WHERE topicId = ?';
@@ -302,6 +307,21 @@ app.post('/news/upload-comment', (req, res) => {
         res.status(201).json({ id: result.insertId, topicId, userId, commentContent, date });
     });
 });
+app.post('/news/report-topic', authorize, (req, res) => {
+    const { userId, topicId, date } = req.body;
+    const query = 'INSERT INTO topicReports (userId, topicId, date) VALUES (?, ?, ?)';
+    const params = [userId, topicId, date];
+
+    queryDB(res, query, params, (err, result) => {
+        if (err) {
+            console.error('Error inserting comment:', err);
+            return res.status(500).json({ error: 'Error inserting comment', details: err });
+        }
+        res.status(201).json({ id: result.insertId, topicId, userId, date });
+    });
+});
+
+
 app.post('/news/register', (req, res) => {
     const { username, email, password } = req.body;
 
