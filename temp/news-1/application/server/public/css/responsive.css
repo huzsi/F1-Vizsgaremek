@@ -39,6 +39,9 @@
     .schedule{
         padding: 25px 125px;
     }
+    .scrollmenu a {
+        width: 15%;
+    }
     /*tracks.html*/
     main{
         margin:  25px 0;
@@ -98,6 +101,9 @@
     }
     .schedule{
         padding: 25px 100px;
+    }
+    .scrollmenu a {
+        width: 15%;
     }
     /*tracks.html*/
     main{
@@ -165,7 +171,9 @@
     .schedule{
         padding: 25px 75px;
     }
-
+    .scrollmenu a {
+        width: 20%;
+    }
     /*tracks.html*/
     main{
         margin: 0;
@@ -227,6 +235,9 @@
     }
     .schedule{
         padding:  25px 50px ;
+    }
+    .scrollmenu a {
+        width: 20%;
     }
     /*tracks.html*/
     .timer{
@@ -317,6 +328,9 @@
         height: 350px !important;
         width: auto ;
     }
+    .scrollmenu a {
+        width: 30%;
+    }
     /*layouts page*/
     .container{
         margin: 10px 25px;
@@ -365,6 +379,9 @@
     }
     .schedule{
         padding:  25px 0;
+    }
+    .scrollmenu a {
+        width: 30%;
     }
     /*tracks.html*/
     .timer{
