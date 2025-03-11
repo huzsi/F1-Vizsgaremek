@@ -1,105 +1,112 @@
-document.addEventListener('DOMContentLoaded', () => {
+/**--------------------------------------------------------------------
+ * 
+ * Forum Topic Management: forum-layout.html
+ * API data is fetched during server.js startup
+ * Subsequently, new requests are made every hour to keep the forum up-to-date.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * APIs used on the site:
+ *      /news/forumTopics (GET - loaded from Cache)
+ *      /news/forumComments (GET - loaded from Cache)
+ *      /news/upload-comment (POST - upload comment)
+ *      /news/report-topic (POST - report topic)
+ *      /news/get-profile (GET - fetch user profile)
+ *      /news/loadReports (GET - load reported topics)
+ * 
+ * --------------------------------------------------------------------
+ *  
+ * The `fetchData` async function ensures that data is loaded efficiently from Cache.
+ * This prevents unnecessary API requests every time a user visits the page.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * Data is sourced from the backend API hosted on our platform. All data is property of the website.
+ * Users are redirected to the original topic for further interaction or reporting purposes.
+ * 
+ * --------------------------------------------------------------------
+ * Created by: Krisztián Bartók & Krisztián Ináncsi
+ * Last Updated: 2025-03-11
+ */
+document.addEventListener('DOMContentLoaded', async () => {
 
-    if(location.pathname.includes('/index')){
-        loadTopics();
-        setInterval(createSystemTopic(), 3600*1000); //Óránkénti frissítés.
+    if (location.pathname.includes('/index')) {
+        await loadTopics();
+        setInterval(async () => await createSystemTopic(), 3600 * 1000);
+    } else if (location.pathname.includes('/topic')) {
+        await loadTopicDetails();
     }
-    else if(location.pathname.includes('/topic')){
-        loadTopicDetails();
-    }   
-    setupCreateTopic();
-})
-function fetchData(url, options = {}) {
-    return fetch(url, options).then(response => response.json()).catch(console.error);
+    await setupCreateTopic();
+    await setupReportButton();
+});
+async function fetchData(url, options = {}) {
+    try {
+        const response = await fetch(url, options);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+    }
 }
-function loadTopics() {
+async function loadTopics() {
     const token = localStorage.getItem('token');
-    fetch('/news/forumTopics', {
+    const topicData = await fetchData('/news/forumTopics', {
         headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(response => response.json())
-    .then(topicData => {
-        const raceSection = document.getElementById('race-section');
-        const userSection = document.getElementById('user-section');
+    });
 
-        // Ensure topicData is an array
-        if (!Array.isArray(topicData)) {
-            topicData = [topicData];
-        }
+    const raceSection = document.getElementById('race-section');
+    const userSection = document.getElementById('user-section');
 
-        topicData.forEach(data => {
-           
-            if (data.userId === 0) {
-                const topicDiv = document.createElement('div');
-                topicDiv.className = 'topic';
-                topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
-                                        <h2>${data.topicTitle}</h2>
-                                        <p>Opened: ${data.usernames}</p>
-                                        <p id="last-comment-${data.id}">Last comment:<span></span></p>
-                                      </a>`;
-                raceSection.appendChild(topicDiv);
-            } else {
-                const topicDiv = document.createElement('div');
-                topicDiv.className = 'topic';
-                topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
-                                        <h2>${data.topicTitle}</h2>
-                                        <p>Opened: ${data.usernames}</p>
-                                        <p id="last-comment-${data.id}">Last comment:<span></span></p>
-                                      </a>`;
-                userSection.appendChild(topicDiv);
-            }
-        });
-    })
-    .catch(console.error);
+    const topics = Array.isArray(topicData) ? topicData : [topicData];
+
+    topics.forEach(data => {
+        const section = data.userId === 0 ? raceSection : userSection;
+        const topicDiv = document.createElement('div');
+        topicDiv.className = 'topic';
+        topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
+                                <h2>${data.topicTitle}</h2>
+                                <p>Opened: ${data.usernames}</p>
+                                <p id="last-comment-${data.id}">Last comment:<span></span></p>
+                              </a>`;
+        section.appendChild(topicDiv);
+    });
 }
-
-function loadTopicDetails(){
+async function loadTopicDetails() {
     const token = localStorage.getItem('token');
     const topicId = new URLSearchParams(window.location.search).get('id');
-    fetch(`/news/forumTopics/${topicId}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => response.json())
-        .then(topicDetails => {
-            console.log(topicDetails.userId);
-            document.getElementById('container').innerHTML = `
-                                                            <div class="topic-meta" id="topic-meta">
-                                                                <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
-                                                            </div>
-                                                            <div class="topic-content">
-                                                                <h1>${topicDetails.topicTitle}</h1>
-                                                                <p>${topicDetails.topicContent}</p>
-                                                                <form id="comment-form" class="comment-form">
-                                                                    <textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea>
-                                                                    <div>
-                                                                        <button type="submit">Submit Comment</button>
-                                                                    </div>
-                                                                </form>
-                                                                <div id="comments-content" class="comments-content">
-                                                                </div>
-                                                            </div>`;
-            document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
-            loadComments(topicId);
-            
-            //Topic törlése gomb. Csak a létrehozó, az admin profil bármelyiket tudja törölni.
-            fetchData('/news/get-profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }     
-            })
-            .then(profileData => {
-                console.log(topicDetails.userId);
-                console.log(profileData.id);
 
-                if(profileData.permission === 1 || topicDetails.userId === profileData.id){
-                    document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
-                    return;
-                }
-            })
-            .catch(error => console.log('error fetching profile data',error));
-        });
+    const topicDetails = await fetchData(`/news/forumTopics/${topicId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    document.getElementById('container').innerHTML = `
+        <div class="topic-meta" id="topic-meta">
+            <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
+            <button onclick="reportTopic(${topicId})">Report</button>
+        </div>
+        <div class="topic-content">
+            <h1>${topicDetails.topicTitle}</h1>
+            <p>${topicDetails.topicContent}</p>
+            <form id="comment-form" class="comment-form">
+                <textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea>
+                <div>
+                    <button type="submit">Submit Comment</button>
+                </div>
+            </form>
+            <hr>
+            <div id="comments-content" class="comments-content"></div>
+        `;
+
+    document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
+
+    await loadComments(topicId);
+
+    const profileData = await fetchData('/news/get-profile', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (profileData.permission === 1 || topicDetails.userId === profileData.id) {
+        document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
+    }
 }
 async function createSystemTopic() {
     const token = localStorage.getItem('token');
@@ -147,102 +154,165 @@ async function createSystemTopic() {
         console.error('Error creating topic:', error);
     }
 }
-function loadComments(topicId) {
-    fetchData(`/news/forumComments/${topicId}`).then(commentData => {
-        const commentsContent = document.getElementById('comments-content');
-        commentsContent.innerHTML = commentData.length ? commentData.map(data => `<div class="comment"><p>${data.commentContent}</p><p>By: ${data.usernames} <span>${formatDateForMySQL(new Date(data.date))}</span></p></div>`).join('') : '<h4>There is no comment here.</h4>';
-    });
-}
-/**Feltöltések */
-function setupCreateTopic() {
-    const createBtn = document.getElementById('create-btn');
-    if (!createBtn) return;
-    createBtn.addEventListener('click', () => {
-        const token = localStorage.getItem('token');
-        if (!token) return alert('Please log in to create a topic.');
-        fetchData('/news/get-profile', { headers: { 'Authorization': `Bearer ${token}` } }).then(profileData => {
-            const container = document.getElementById('container');
-            container.innerHTML = `
-                                    <form id="create-topic-form">
-                                        
-                                            <label for="topicTitle">Topic Title:</label>
-                                            <input type="text" id="topicTitle" required>
-                                        
-                                        
-                                            <label for="topicContent">Topic Content:</label>
-                                            <textarea id="topicContent" required></textarea>
-                                        
-                                        <div>
-                                            <button type="submit">Submit</button>
-                                        </div>
-                                    </form>`;
-
-            document.getElementById('create-topic-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                fetch('/news/forumTopics', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                    body: JSON.stringify({
-                        userId: profileData.id,
-                        topicTitle: document.getElementById('topicTitle').value,
-                        topicContent: document.getElementById('topicContent').value,
-                        date: formatDateForMySQL(new Date())
-                    })
-                })
-                .then(() => {
-                    alert('Topic created successfully!');
-                    window.location.href="/news/forum-layout.html/index";
-                })
-                .catch(console.error);
-            });
-        });
-    });
-
-}
-function submitComment(e, topicId) {
-    e.preventDefault();
+async function loadComments(topicId) {
     const token = localStorage.getItem('token');
-    fetch('/news/get-profile', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(profileData => {
-        fetch('/news/upload-comment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    topicId: topicId,
-                    userId: profileData.id,
-                    commentContent: document.getElementById('comment-content-textarea').value,
-                    date: formatDateForMySQL(new Date())
-                })
-            })
-            .then(() => loadComments(topicId))
-        .catch(console.error);
-    });
+    // Fetch the user's profile
+    const profileResponse = await fetch('/news/get-profile', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    const profile = await profileResponse.json();
 
-}
-async function deleteTopic(topicId) {
-    const confirmation = confirm("Are you sure you want to delete this topic? This action cannot be undone.");
-    if (!confirmation) {
-        return; // Megszakítja a folyamatot, ha a felhasználó visszavonja
+    // Fetch the comments data
+    let commentData = await fetchData(`/news/forumComments/${topicId}`);
+    if (!Array.isArray(commentData)) {
+        commentData = [commentData];
     }
 
+    const commentsContent = document.getElementById('comments-content');
+    commentsContent.innerHTML = commentData.length
+        ? commentData.map(data => {
+            let deleteButton = '';
+            if (profile.id === data.userId || profile.permission === 1) {
+                deleteButton = `<button onclick="deleteComment(${data.commentId})">Delete Comment</button>`;
+            }
+            return `<div class="comment">
+                        <p>${data.commentContent}</p>
+                        <p>By: ${data.usernames} <span>${formatDateForMySQL(new Date(data.date))}</span></p>
+                        ${deleteButton}
+                    </div>`;
+        }).join('')
+        : '<h4>There is no comment here.</h4>';
+}
+
+async function deleteComment(commentId, topicId) {
+        const response = await fetch(`/news/forumComments/${commentId}`, { method: 'DELETE' });
+        // Ha a válasz 204 (No Content), akkor nem próbáljuk meg JSON-t értelmezni
+        const result = response.status !== 204 ? await response.json() : { success: true };
+        if (response.status === 200) {
+            alert('Comment deleted successfully');
+            window.location.reload();
+        }  
+}
+
+
+
+/**Feltöltések */
+async function setupCreateTopic() {
+    const createBtn = document.getElementById('create-btn');
+    if (!createBtn) return;
+
+    createBtn.addEventListener('click', async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Please log in to create a topic.');
+            return;
+        }
+
+        try {
+            const profileResponse = await fetch('/news/get-profile', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            // Ellenőrizzük, hogy a profil válasz sikeres-e
+            if (!profileResponse.ok) {
+                window.location.href = '/news/auth.html';
+                return;
+            }
+
+            const profileData = await profileResponse.json();
+            const container = document.getElementById('container');
+            container.innerHTML = `
+                <form id="create-topic-form">
+                    <label for="topicTitle">Topic Title:</label>
+                    <input type="text" id="topicTitle" required>
+                    <label for="topicContent">Topic Content:</label>
+                    <textarea id="topicContent" required></textarea>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>`;
+
+            document.getElementById('create-topic-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                try {
+                    await fetch('/news/forumTopics', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({
+                            userId: profileData.id,
+                            topicTitle: document.getElementById('topicTitle').value,
+                            topicContent: document.getElementById('topicContent').value,
+                            date: formatDateForMySQL(new Date())
+                        })
+                    });
+
+                    alert('Topic created successfully!');
+                    window.location.href = "/news/forum-layout.html/index";
+                } catch (error) {
+                    console.error('Error creating topic:', error);
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching profile:', error);
+        }
+    });
+}
+
+async function submitComment(e, topicId) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+
+    // Ellenőrizzük, hogy van-e token
+    if (!token) {
+        confirm("Please login first!")
+        window.location.href = '/news/auth.html';
+        return;
+    }
+
+    // Lekérjük a profil adatokat
+    const profileResponse = await fetch('/news/get-profile', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    // Ellenőrizzük, hogy a profil válasz sikeres-e
+    if (!profileResponse.ok) {
+        window.location.href = '/news/auth.html';
+        return;
+    }
+
+    const profileData = await profileResponse.json();
+
+    // Komment feltöltése
+    await fetch('/news/upload-comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({
+            topicId: topicId,
+            userId: profileData.id,
+            commentContent: document.getElementById('comment-content-textarea').value,
+            date: formatDateForMySQL(new Date())
+        })
+    });
+
+    // Hozzászólások újratöltése
+    await loadComments(topicId);
+}
+
+
+async function deleteTopic(topicId) {
+    const confirmation = confirm("Are you sure you want to delete this topic? This action cannot be undone.");
+    if (!confirmation) return;
+
     try {
-        const response = await fetch(`/news/forumTopics/${topicId}`, {
-            method: 'DELETE'
-        });
+        const response = await fetch(`/news/forumTopics/${topicId}`, { method: 'DELETE' });
         const data = await response.json();
 
         if (response.ok) {
             alert('Topic successfully deleted');
-            window.location.href = "/news/forum-layout.html/index"; // Áthelyezés csak siker esetén
+            window.location.href = "/news/forum-layout.html/index";
         } else {
             alert(`Error: ${data.error || 'Failed to delete topic'}`);
         }
@@ -251,7 +321,114 @@ async function deleteTopic(topicId) {
     }
 }
 
+async function setupReportButton() {
+    if(!window.location.pathname.includes('index')) return;
+    const response = await fetch('/news/get-profile', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
 
+    if (response.ok) {
+        const userProfile = await response.json();
+        if (userProfile.permission === 1) {
+            const navUl = document.querySelector('#topic-controls ul');
+            const reportLi = document.createElement('li');
+            const reportLink = document.createElement('a');
+            
+            reportLink.href = '#';
+            reportLink.id = 'load-report-btn';
+            reportLink.textContent = 'Report';
+            
+            reportLi.appendChild(reportLink);
+            navUl.appendChild(reportLi);
+        }
+    }
+
+    document.getElementById('load-report-btn').addEventListener('click', () => {
+        const container = document.getElementById('container');
+        container.innerHTML = `
+            <button id="back-btn">Back</button>
+            <table id="reports-table">
+                <tr>
+                    <th>Topic title</th>
+                    <th>Reported by</th>
+                    <th>Report date</th>
+                    <th>Path</th>
+                </tr>
+            </table>
+        `;
+        loadReports();
+        document.getElementById('back-btn').addEventListener('click', () => {
+            window.location.href = "/news/forum-layout.html/index";
+        })
+    });
+}
+function reportTopic(topicId) {
+    const confirmReport = confirm('Do you really want to report this topic?');
+
+    if (!confirmReport) {
+        alert('Report canceled');
+        return;
+    }
+
+    const token = localStorage.getItem('token');
+    const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    fetch('/news/get-profile', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => response.json())
+    .then(profileData => {
+        const userId = profileData.id;
+        const reportData = { userId, topicId, date };
+
+        fetch('/news/report-topic', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(reportData)
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert('You have successfully reported the topic! We will review your report shortly.');
+        })
+        .catch(error => console.log('error reporting topic', error));
+    })
+    .catch(error => console.log('error fetching profile data', error));
+}
+
+function loadReports() {
+    
+    fetch('/news/loadReports', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+    .then(response => response.json())
+    .then(reportData => {
+        const reportsTable = document.getElementById('reports-table');
+        if(!reportsTable) return;
+
+        reportData.forEach(data => {
+            reportsTable.innerHTML += `
+                
+                <tr>
+                        <td>${data.topicTitle}</a></td>
+                        <td> &#126 By: ${data.usernames} &#126 </td>
+                        <td>${formatDateForMySQL(data.date)}</td>
+                        <td><a href="/news/forum-layout.html/topic?id=${data.topicId}">View topic &gt; </a></td>   
+                </tr>
+                
+            `;
+        });
+    })
+    .catch(error => console.error('error fetching Reports'));
+}
 function formatDateForMySQL(date) {
     return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }

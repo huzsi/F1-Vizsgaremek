@@ -18,79 +18,69 @@
     <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
 <body>
-    <div class="header-container" id="header-container">
-        <nav class="top-nav" id="top-nav">
-            <!--JS code-->
-        </nav>
-        <!--Main header-->
-        <header>
-            <!--JS code-->
-        </header>
-        <div class="dropdown-content scale-up-ver-top" id="dropdown-content">
-            <!--JS code-->
+    <iframe src="/news/loader.html" id="loader-frame" style="border: none; width: 100%; height: 100vh;"></iframe>
+   <div class="content" style="display: none;">
+        <div class="header-container" id="header-container">
+                <nav class="top-nav" id="top-nav">
+                    <!--JS code-->
+                </nav>
+                <!--Main header-->
+                <header>
+                    <!--JS code-->
+                </header>
+                <div class="dropdown-content scale-up-ver-top" id="dropdown-content">
+                    <!--JS code-->
+                </div>
+               
         </div>
-       
-    </div>
-    <main>
-        <nav>
-            <ul>
-                <li><a href="#" id="login-btn">Login</a></li>
-                <li><a href="#" id="register-btn">Register</a></li>
-            </ul>
-        </nav>
-        <section id="login-section">
-            <h2>Welcome back</h2>
-            <p>Please enter your details to login</p>
-            <form id="login-form">
-                <div class="input-container">
-                    <input type="text" id="login-identifier" required>
-                    <label>Username or email</label>		
-                </div>
-                <div class="input-container">		
-                    <input type="password" id="login-password" required>
-                    <label>Password</label>
-                </div>
-                <label><input type="checkbox"> Remember me</label>
-                
-                <button class="btn" type="submit">Login</button>
-            </form>
-            <h3 id="registerHeadline">Don't have an account? <a id="headline-btn">Register</a></h3>	
-        </section>
-
-        <section id="register-section" class="hidden">
-            <h2>Register</h2>
-            <form id="register-form">
-                <div class="input-container">
-                    <input type="text" id="username" required>
-                    <label>Username</label>		
-                </div>
-                <div class="input-container">
-                    <input type="email" id="email" required>
-                    <label>Email</label>		
-                </div>
-                <div class="input-container">		
-                    <input type="password" id="password" required>
-                    <label>Password</label>
-                </div>
-                <button type="submit" class="btn">Register</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <div>
-            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
-            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
-            
-        </div>
-        <div>
-            <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
-            <p>All content and articles published are copyrighted and the property of their respective authors.</p>
-        </div>
-        <div class="bottom-div">
-            <p>&copy; <span id="yearSpan"></span></p>
-            <p>Source: <a href="https://github.com/huzsi/F1-Vizsgaremek">Github</a></p>
-        </div>
-    </footer>
+        <main>
+                <nav>
+                    <ul>
+                        <li><a href="#" id="login-btn">Login</a></li>
+                        <li><a href="#" id="register-btn">Register</a></li>
+                    </ul>
+                </nav>
+                <section id="login-section">
+                    <h2>Welcome back</h2>
+                    <p>Please enter your details to login</p>
+                    <form id="login-form">
+                        <div class="input-container">
+                            <input type="text" id="login-identifier" required>
+                            <label>Username or email</label>		
+                        </div>
+                        <div class="input-container">		
+                            <input type="password" id="login-password" required>
+                            <label>Password</label>
+                        </div>
+                        <button class="btn" type="submit">Login</button>
+                    </form>
+                    <h3 id="registerHeadline">Don't have an account? <a id="headline-btn">Register</a></h3>	
+                </section>
+        
+                <section id="register-section" class="hidden">
+                    <h2>Register</h2>
+                    <form id="register-form">
+                        <div class="input-container">
+                            <input type="text" id="username" required>
+                            <label>Username</label>		
+                        </div>
+                        <div class="input-container">
+                            <input type="email" id="email" required>
+                            <label>Email</label>		
+                        </div>
+                        <div class="input-container">		
+                            <input type="password" id="password" required>
+                            <label>Password</label>
+                        </div>
+                        <label><input type="checkbox" required>I accept that this website is a school project and that the content on this site is the property of others.</label>
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </section>
+        </main>
+        <footer>
+            <!--footer-renderer.js-->
+        </footer>
+   </div>
     <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->
     <script src="/static/js/frontend/header-renderer.js"></script>
     <!--API manager JS scripts-->
@@ -102,8 +92,9 @@
 
     <script src="/static/js/frontend/multi-page-ui-manager.js"></script>
     <script src="/static/js/frontend/dropdown.js"></script>
-    <script src="/static/js/frontend/footer-time-changer.js"></script>
-    
+    <script src="/static/js/frontend/footer-renderer.js"></script>
+    <!-- A loader script betöltése -->
+    <script src="/static/js/frontend/loader-script.js"></script>
     
 </body>
 </html>

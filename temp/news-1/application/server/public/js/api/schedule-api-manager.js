@@ -1,19 +1,45 @@
 /**--------------------------------------------------------------------
  * 
- * The following JS code is responsible for displaying the "Next Race" table 
- * (found at the top of index.html) and the Upcoming Race section's scroll menu.
- * 
- * These APIs are only displayed on the index page.
+ * Handling race schedule and next race display with countdown.
+ * The race schedule is fetched from the API and displayed in a 
+ * scrollable menu. The next race information is displayed with 
+ * a countdown timer.
  * 
  * --------------------------------------------------------------------
  * 
- * The following API is called:
- *  /race-schedule
+ * APIs used:
+ *      /news/race-schedule - (GET)
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * Data is fetched and displayed when the page loads.
+ * The next race is identified and displayed with a countdown timer.
+ * 
+ * Note: If the countdown reaches zero, it is replaced with a 
+ * button that redirects to the F1TV website.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The code includes functions for:
+ *      - Fetching race schedule and populating the scrollable menu.
+ *      - Displaying the next race and updating the countdown timer.
+ * 
+ * The fetchData function is used to load data from the API.
+ * 
+ * The generatePodiumDriverHTML and generateTableHTML functions handle the 
+ * generation of HTML content for the race results.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The async functions ensure that the data fetching and display 
+ * operations are performed efficiently.
+ * Do not modify them under any circumstances!
  * 
  * --------------------------------------------------------------------
  * Created by: Krisztián Ináncsi
- * Last updated: 2025-02-05
+ * Last updated: 2025-03-11
  */
+
 document.addEventListener('DOMContentLoaded', async () => {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const container = document.getElementById('racenames-container');
@@ -68,7 +94,6 @@ function getNextRace(scheduleData) {
     return scheduleData.find(schedule => new Date(schedule.event1) > new Date());
 }//--//
 
-// Következő futam megjelenítése és visszaszámláló integrálása
 function displayNextRace(nextRace, monthNames) {
     const event1Date = new Date(nextRace.event1);
     const day = event1Date.getDate();
@@ -117,19 +142,24 @@ function displayNextRace(nextRace, monthNames) {
             </table>
         `;
     }
-    
+
     updateCountdown(timerParagraph, new Date(nextRace.event1));
     setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
-}//--//
+}
 
 // Stopper függvény:
 function updateCountdown(element, targetDate) {
     const now = new Date();
     const distance = targetDate - now;
 
+    if (distance <= 0) {
+        element.innerHTML = `<a href="https://f1tv.formula1.com" class="btn">Watch Live on F1TV</a>`;
+        return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
     element.innerHTML = `${days} DAY ${hours} HRS ${minutes} MIN`;
-}//--//
+}

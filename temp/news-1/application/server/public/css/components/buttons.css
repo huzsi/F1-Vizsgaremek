@@ -3,11 +3,27 @@
     padding-bottom: 5px;
     border-bottom: 2px solid var(--secondary-color);
 }
-.top-nav a:hover{
-    color: var(--secondary-color);
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--secondary-color);
+.top-nav a {
+    position: relative;
+    padding-bottom: 5px; /* Adds padding below the text to match .active */
 }
+
+.top-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px; /* Aligns the line with .active's bottom border */
+    left: 50%;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.top-nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
 .event a:hover, .dropdown-content a:hover{
     color: var(--secondary-color);
    

@@ -154,9 +154,9 @@ function updateRaceResults(resultData) {
     }
 
     const raceTable = document.getElementById('race-result-table');
-    if (!resultData || resultData.length === 0) {
+    if (!resultData) {
         return;
-    } else if (resultData.length === 1) { // Tesztadat miatt nem valós adatot mutat
+    } else if (resultData.length === 0) { // Tesztadat miatt nem valós adatot mutat
         raceTable.innerHTML = `
             <tr>
                 <th><h4>Come back when first race is ended</h4></th>
@@ -172,7 +172,7 @@ function updateRaceResults(resultData) {
         resultData.forEach(results => {
             raceTable.insertAdjacentHTML('beforeend', `
                 <tr>
-                    <td><a href="#">${results.raceName}</a></td>
+                    <td><a href="/news/raceresult.html?id=${results.raceId}">${results.raceName}</a></td>
                 </tr>
             `);
         });

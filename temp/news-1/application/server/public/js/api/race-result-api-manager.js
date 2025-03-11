@@ -1,62 +1,87 @@
 /**--------------------------------------------------------------------
  * 
- * Code handling the JS API for loading race results.
+ * Loading and displaying race results dynamically.
+ * The race results are fetched from the API and displayed in the 
+ * designated section of the HTML page.
  * 
  * --------------------------------------------------------------------
  * 
- * All data stored in the database will be displayed first.
- * When clicking the "Load result" button, the final results of the given race will be listed.
+ * APIs used:
+ *      /news/raceResults - (GET)
  * 
  * --------------------------------------------------------------------
  * 
- * APIs used by the code:
- *              /news/raceResults
+ * Data is fetched when the page loads, and the race list is populated.
+ * When a race result button is clicked, the corresponding race results 
+ * are displayed.
+ * 
+ * Note: If only one race result is available, it is automatically 
+ * displayed when the page loads.
  * 
  * --------------------------------------------------------------------
  * 
- * In case of modification, make sure that the list of the previous race results is cleared by the code.
- * The listing of the final results should remain in the event handler of the "Load result" button
- * to avoid unnecessary reloads.
+ * The code includes functions for:
+ *      - Fetching all race results and populating the race list.
+ *      - Displaying the race results when the "Load result" button is clicked.
+ * 
+ * The fetchData function is used to load data from the API.
+ * 
+ * The generatePodiumDriverHTML and generateTableHTML functions handle the 
+ * generation of HTML content for the race results.
+ * 
+ * --------------------------------------------------------------------
+ * 
+ * The async functions ensure that the data fetching and display 
+ * operations are performed efficiently.
+ * Do not modify them under any circumstances!
  * 
  * --------------------------------------------------------------------
  * Created by: Krisztián Ináncsi
- * Last updated: 2025-02-05
+ * Last updated: 2025-03-11
  */
-
 let allRaceResults = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Az összes futam adatainak betöltése
-    fetch('/news/raceResults')
-        .then(response => response.json())
-        .then(resultData => {
-            
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Az összes futam adatainak betöltése
+        const response = await fetch('/news/raceResults');
+        let resultData = await response.json();
 
-            allRaceResults = resultData;
-            const raceListSection = document.getElementById('race-list-section');
-            if (!Array.isArray(resultData)) {
-                resultData = [resultData];
-            }
-            if (!resultData || resultData.length === 0) {
-                raceListSection.innerHTML = `<h2>The Season has not started yet. Please come back when the first race is finished.</h2>`;
-            } else {
-                resultData.forEach((result, index) => {
-                    const raceId = result.raceId;
-                    raceListSection.innerHTML += `<div class="race-div" id="race-${raceId}">
-                                                    <img src="/static/img/flags/${result.raceId}.svg" height="25px"></img>
-                                                    <h2>${result.raceName}</h2>
-                                                    <button onclick="loadRaceResult(${index})" id="load-btn">Load result</button>
-                                                </div>`;
-                });
-            }
+        // Ha csak egy adatsor van, alakítsuk tömbbé
+        if (!Array.isArray(resultData)) {
+            resultData = [resultData];
+        }
+
+        allRaceResults = resultData;
+        const raceListSection = document.getElementById('race-list-section');
+
+        if (!resultData || resultData.length === 0) {
+            raceListSection.innerHTML = `<h2>The Season has not started yet. Please come back when the first race is finished.</h2>`;
+        } else {
+            resultData.forEach((result, index) => {
+                const raceId = result.raceId;
+                raceListSection.innerHTML += `<div class="race-div" id="race-${raceId}">
+                                                <img src="/static/img/flags/${result.raceId}.svg" height="25px"></img>
+                                                <h2>${result.raceName}</h2>
+                                                <button onclick="loadRaceResult(${index})" id="load-btn-${raceId}">Load result</button>
+                                            </div>`;
+            });
+
+            // Ellenőrizzük az URL paramétereket és az egyetlen futam esetét
             const urlParams = new URLSearchParams(window.location.search);
-            const racenumber = urlParams.get('id');
-            loadRaceResult(racenumber-1);
-        })
-        .catch(error => console.error('Error fetching race results: ' + error));
+            const raceNumber = urlParams.get('id');
+            if (raceNumber !== null && raceNumber >= 1 && raceNumber <= resultData.length) {
+                loadRaceResult(raceNumber - 1);
+            } else if (resultData.length === 1) {
+                loadRaceResult(0);
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching race results: ' + error);
+    }
 });
 
-function loadRaceResult(index) {
+async function loadRaceResult(index) {
     const raceData = allRaceResults[index];
     if (!raceData) return;
 

@@ -54,7 +54,7 @@
         display: block;
     }
     .track-container nav ul li{
-        padding: 0;
+        padding: 5px 0;
         margin: 15px;
         border: unset;
     }
@@ -71,9 +71,23 @@
     .track-container img{
         height: 400px !important;
     }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 125px;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-list-section{
+        width: auto;
+    }
     /*layouts page*/
     .container{
         margin: 25px 125px;
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 125px;
     }
 }
 @media (max-width: 1350px) {
@@ -136,12 +150,27 @@
         height: 450px !important;
         width: auto ;
     }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 100px;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+
     /*layouts page*/
     .container{
         margin: 25px 100px;
     }
     .container #news-section .newsDiv{
         flex: 1 1 calc(25%);
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 100px;
     }
 }
 
@@ -191,6 +220,17 @@
         height: 400px !important;
         width: auto ;
     }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 75px;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+
     /*layouts page*/
     .container{
         margin: 25px 75px;
@@ -207,6 +247,10 @@
     .container #news-section .newsDiv{
         flex: 1 1 calc(30%);
     }
+    /*about.html*/
+    .about-section{
+        padding: 25px 75px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -218,6 +262,9 @@
         justify-content: center;
         align-items: center;
         padding: 15px;
+    }
+    #news-content a{
+        border: unset;
     }
     /*index.html*/
     .event-container{
@@ -258,6 +305,21 @@
         height: 400px !important;
         width: auto ;
     }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 50px;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+    #race-list-section{
+        width: auto;
+    }
+
     /*layouts page*/
     .container{
         margin: 20px 50px;
@@ -274,6 +336,10 @@
     .container #news-section .newsDiv{
         flex: 1 1 calc(33%);
     }
+    /*about.html*/
+    .about-section{
+        padding: 25px 50px;
+    }
 }
 
 @media (max-width: 768px) { 
@@ -285,6 +351,9 @@
         justify-content: center;
         align-items: center;
         padding: 15px;
+    }
+    #news-content a{
+        border: unset;
     }
     /*index.html*/
     .event-container{
@@ -331,6 +400,20 @@
     .scrollmenu a {
         width: 30%;
     }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 0;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+    #race-list-section{
+        width: auto;
+    }
     /*layouts page*/
     .container{
         margin: 10px 25px;
@@ -347,6 +430,10 @@
     .container #news-section{
         flex-direction: column;
     }
+    /*about.html*/
+    .about-section{
+        padding: 25px;
+    }
 }
 
 @media (max-width: 576px) { 
@@ -358,6 +445,9 @@
         justify-content: center;
         align-items: center;
         padding: 15px;
+    }
+    #news-content a{
+        border: unset;
     }
     /*index.html*/
     .event-container{
@@ -404,6 +494,18 @@
         height: 300px !important;
         width: auto ;
     }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 0;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-list-section{
+        width: auto;
+    }
+
     /*layouts page*/
     .container{
         margin: 15px;
@@ -417,8 +519,11 @@
         flex: 1 1;
         width: 100%;
     }
-
     .container #news-section{
         flex-direction: column;
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 15px;
     }
 }

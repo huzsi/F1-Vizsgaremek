@@ -23,9 +23,6 @@
  * --------------------------------------------------------------------
  * 
  * To-Do List (Older Version - Needs Further Development):
- *      - Allow login with a username (currently email-based).
- *      - Implement registration acceptance fields for terms and conditions.
- *      - Add password reminder functionality.
  *      - If time permits, integrate Google account registration/login.
  * 
  * --------------------------------------------------------------------

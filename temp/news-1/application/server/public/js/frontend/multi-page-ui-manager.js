@@ -56,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { btn: 'race-result-btn', show: 'race-result-table', hide: ['driver-standlist-table', 'constructor-standlist-table'] }
         ],
         'tracks.html': [
-            { btn: 'circuit-btn', show: 'circuit-datas-content', hide: ['last-winners-content', 'event-container'] },
-            { btn: 'winners-btn', show: 'last-winners-content', hide: ['circuit-datas-content', 'event-container'] },
-            { btn: 'event-btn', show: 'event-container', hide: ['circuit-datas-content', 'last-winners-content'] }
+            { btn: 'circuit-btn', show: 'circuit-datas-content', hide: ['event-container'] },
+            { btn: 'event-btn', show: 'event-container', hide: ['circuit-datas-content'] }
         ],
         'auth.html': [
             { btn: 'login-btn', show: 'login-section', hide: ['register-section', 'register-headline'] },
