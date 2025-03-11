@@ -256,9 +256,6 @@ app.get('/news/last-topicComment', (req, res) => {
         res.json(result);
     });
 });
-app.get('/news/popular-topics', (req, res) => {
-    queryDB(res, 'SELECT tc.topicId, ft.topicTitle, u.usernames, COUNT(tc.commentId) AS commentCount FROM topicComments tc JOIN user u ON tc.userId = u.id LEFT JOIN forumtopics ft ON tc.topicId = ft.topicId GROUP BY tc.topicId ORDER BY commentCount DESC LIMIT 10;');
-});
 app.get('/news/loadReports', (req, res) => {
     queryDB(res, 'SELECT tr.reportId, tr.topicId , u.usernames, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
 })
@@ -276,6 +273,24 @@ app.delete('/news/forumTopics/:topicId', (req, res) => {
         }
 
         res.json({ success: true, message: 'Topic deleted successfully' });
+    });
+});
+app.delete('/news/forumComments/:commentId', (req, res) => {
+    const commentId = req.params.commentId; // Correctly reference the commentId from the request parameters
+    const query = 'DELETE FROM topicComments WHERE commentId = ?';
+
+    queryDB(res, query, [commentId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err);  // Hibakeresési segítség
+            return res.status(500).json({ error: 'Database error occurred.' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Comment not found.' });
+        }
+
+        // Explicit set the response to 204 No Content to indicate success without a body
+        res.status(204).end();  // HTTP 204 - No Content (Nincs tartalom)
     });
 });
 // POST a new forum topic
@@ -320,8 +335,6 @@ app.post('/news/report-topic', authorize, (req, res) => {
         res.status(201).json({ id: result.insertId, topicId, userId, date });
     });
 });
-
-
 app.post('/news/register', (req, res) => {
     const { username, email, password } = req.body;
 
