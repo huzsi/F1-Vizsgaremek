@@ -19,120 +19,114 @@
     <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
 <body>
-    <iframe src="/news/loader.html" id="loader-frame" style="border: none; width: 100%; height: 100vh;"></iframe>
-    
-    <div class="content" style="display: none;">
-        <!-- Az eredeti tartalom ide kerül -->
-        <div class="header-container" id="header-container">
-            <nav class="top-nav" id="top-nav">
-                <!-- JS code: auth-check.js -->
-            </nav>
-            <!-- Main header -->
-            <header>
-                <!-- JS code: header-renderer.js -->
-            </header>
-            <div class="dropdown-content scale-up-ver-top " id="dropdown-content">
-                <!-- JS code: header-renderer.js -->
-                <!-- API manager JS code: dropdown-api-manager.js-->
-            </div>
-            <!-- section #1 -->
-            <div class="event-container">
-                <div class="event-content">
-                    <div id="race-div">
+    <div class="header-container" id="header-container">
+        <nav class="top-nav" id="top-nav">
+            <!-- JS code: auth-check.js -->
+        </nav>
+        <!-- Main header -->
+        <header>
+             <!-- JS code: header-renderer.js -->
+        </header>
+        <div class="dropdown-content scale-up-ver-top " id="dropdown-content">
+             <!-- JS code: header-renderer.js -->
+             <!-- API manager JS code: dropdown-api-manager.js-->
+        </div>
+        <!-- section #1 -->
+        <div class="event-container">
+            <div class="event-content">
+                <div id="race-div">
+                    <!-- API manager JS code: schedule-api-manager.js-->
+                </div>
+                <div>
+                    <h3>Next race in</h3>
+                    <p id="timer-paragraph"><!-- API manager JS code: schedule-api-manager.js--></p>
+                </div>
+                <div>
+                    <p>event dates</p>
+                    <table id="regular-event-table">
                         <!-- API manager JS code: schedule-api-manager.js-->
-                    </div>
-                    <div>
-                        <h3>Next race in</h3>
-                        <p id="timer-paragraph"><!-- API manager JS code: schedule-api-manager.js--></p>
-                    </div>
-                    <div>
-                        <p>event dates</p>
-                        <table id="regular-event-table">
-                            <!-- API manager JS code: schedule-api-manager.js-->
-                        </table>
-                        <table id="sprint-event-table" class="hidden">
-                            <!-- API manager JS code: schedule-api-manager.js-->
-                        </table>
-                        <a href="#">Where can I watch?</a>
-                    </div>
+                    </table>
+                    <table id="sprint-event-table" class="hidden">
+                        <!-- API manager JS code: schedule-api-manager.js-->
+                    </table>
+                    <a href="#">Where can I watch?</a>
                 </div>
-                <div class="event-spacer">
-                    <!-- Spacer for 2:3 flex -->
-                </div>
+            </div>
+            <div class="event-spacer">
+                <!-- Spacer for 2:3 flex -->
             </div>
         </div>
-        <main>
-            <!-- section #2 -->
-            <section class="news" id="news">
-                <fieldset>
-                    <legend><h2>News</h2></legend>
-                    <h3>Top Stories</h3>
-                    <div class="news-container" id="daily-news-container">
-                        <!--API manager JS code: news-api-manager.js-->
-                    </div>
-                    <button id="regular-news-btn">Read more</button>
-                </fieldset>
-            </section>
-            <section class="standlist" id="standlist">
-                <div class="standlist-spacer">
-                    <!-- Spacer for 2:1 flex -->
-                </div>
-                <div class="standlist-content">
-                    <nav>
-                        <ul>
-                            <!-- Táblák cserélése: multi-page-ui-manager.js -->
-                            <li><a href="#" id="driver-standlist-btn" class="active">Driver standlist</a></li>
-                            <li><a href="#" id="constructor-standlist-btn">Constructor standlist</a></li>
-                            <li><a href="#" id="race-result-btn">Race results</a></li>
-                        </ul>
-                    </nav>
-                    <table id="driver-standlist-table">
-                        <!-- API manager JS code: standlist-api-manager.js-->
-                    </table>
-                    <table id="constructor-standlist-table" class="hidden">
-                        <!-- API manager JS code: standlist-api-manager.js-->
-                    </table>
-                    <table id="race-result-table" class="hidden">
-                        <!-- API manager JS code: standlist-api-manager.js-->
-                    </table>
-                </div>
-            </section>
-            <!-- section #3 -->
-            <section class="schedule" id="schedule">
-                <h3>Upcoming Races</h3>
-                <div class="scrollmenu">
-                    <div class="inner" id="racenames-container">
-                        <!-- API manager JS code: schedule-api-manager.js-->
-                    </div>
-                </div>
-            </section>
-            <!-- section #4 -->
-            <section class="tech-news">
-                <fieldset>
-                    <legend><h2>Technical</h2></legend>  
-                    <div class="news-container" id="tech-news-container">
-                        <!-- API manager JS code: news-api-manager.js-->
-                    </div>
-                    <button id="tech-news-btn">Read more</button> 
-                </fieldset>
-            </section>
-        </main>
-        <footer>
-            <div>
-                <h2><a href="https://www.formula1.com/">F1 website</a></h2>
-                <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
-            </div>
-            <div>
-                <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
-                <p>All content and articles published are copyrighted and the property of their respective authors.</p>
-            </div>
-            <div class="bottom-div">
-                <p>&copy; <span id="yearSpan"><!-- JS code: footer-time-changer.js --></span></p>
-                <p>Source: <a href="https://github.com/huzsi/F1-Vizsgaremek">Github</a></p>
-            </div>
-        </footer>
     </div>
-
+    <main>
+        <!-- section #2 -->
+        <section class="news" id="news">
+            <fieldset>
+                <legend><h2>News</h2></legend>
+                <h3>Daily News</h3>
+                <div class="news-container" id="daily-news-container">
+                    <!--API manager JS code: news-api-manager.js-->
+                </div>
+                <button id="regular-news-btn">Read more</button>
+            </fieldset>
+        </section>
+        <section class="standlist" id="standlist">
+            <div class="standlist-spacer">
+                <!-- Spacer for 2:1 flex -->
+            </div>
+            <div class="standlist-content">
+                <nav>
+                    <ul>
+                        <!-- Táblák cserélése: multi-page-ui-manager.js -->
+                        <li><a href="#" id="driver-standlist-btn" class="active">Driver standlist</a></li>
+                        <li><a href="#" id="constructor-standlist-btn">Constructor standlist</a></li>
+                        <li><a href="#" id="race-result-btn">Race results</a></li>
+                    </ul>
+                </nav>
+                <table id="driver-standlist-table">
+                    <!-- API manager JS code: standlist-api-manager.js-->
+                </table>
+                <table id="constructor-standlist-table" class="hidden">
+                    <!-- API manager JS code: standlist-api-manager.js-->
+                </table>
+                <table id="race-result-table" class="hidden">
+                    <!-- API manager JS code: standlist-api-manager.js-->
+                </table>
+            </div>
+        </section>
+        <!-- section #3 -->
+        <section class="schedule" id="schedule">
+            <h3>Upcoming Races</h3>
+            <div class="scrollmenu">
+                <div class="inner" id="racenames-container">
+                    <!-- API manager JS code: schedule-api-manager.js-->
+                </div>
+            </div>
+        </section>
+         <!-- section #4 -->
+        <section class="tech-news">
+            <fieldset>
+                <legend><h2>Technical</h2></legend>  
+                <div class="news-container" id="tech-news-container">
+                    <!-- API manager JS code: news-api-manager.js-->
+                </div>
+                <button id="tech-news-btn">Read more</button> 
+            </fieldset>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
+            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+        </div>
+        <div>
+            <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
+            <p>All content and articles published are copyrighted and the property of their respective authors.</p>
+        </div>
+        <div class="bottom-div">
+            <p>&copy; <span id="yearSpan"><!-- JS code: footer-time-canger.js --></span></p>
+            <p>Source: <a href="https://github.com/huzsi/F1-Vizsgaremek">Github</a></p>
+        </div>
+    </footer>
     <!--Dropdown menüben megjelenő API-k miatt ezzel a scriptekkel kell kezdeni a betöltést.-->
     <script src="/static/js/frontend/header-renderer.js"></script>
     <script src="/static/js/frontend/dropdown.js"></script>
@@ -148,7 +142,5 @@
     <script src="/static/js/frontend/index/horizontal-scroll.js"></script>
     <script src="/static/js/frontend/multi-page-ui-manager.js"></script>
     <script src="/static/js/frontend/footer-time-changer.js"></script>
-    <!-- A loader script betöltése -->
-    <script src="/static/js/frontend/loader-script.js"></script>
 </body>
 </html>

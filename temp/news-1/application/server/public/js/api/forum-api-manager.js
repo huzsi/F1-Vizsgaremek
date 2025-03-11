@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTopicDetails();
     }   
     setupCreateTopic();
-     setupReportButton();
 })
 function fetchData(url, options = {}) {
     return fetch(url, options).then(response => response.json()).catch(console.error);
@@ -53,58 +52,55 @@ function loadTopics() {
     })
     .catch(console.error);
 }
-function loadTopicDetails() {
+
+function loadTopicDetails(){
     const token = localStorage.getItem('token');
     const topicId = new URLSearchParams(window.location.search).get('id');
-
     fetch(`/news/forumTopics/${topicId}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(topicDetails => {
-
-        document.getElementById('container').innerHTML = `
-            <div class="topic-meta" id="topic-meta">
-                <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
-                <button onclick="reportTopic(${topicId})">Report</button>
-            </div>
-            <div class="topic-content">
-                <h1>${topicDetails.topicTitle}</h1>
-                <p>${topicDetails.topicContent}</p>
-                <form id="comment-form" class="comment-form">
-                    <textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea>
-                    <div>
-                        <button type="submit">Submit Comment</button>
-                    </div>
-                </form>
-                <div id="comments-content" class="comments-content">
-                </div>`;
-
-        // Itt helyezzük el az eseménykezelőt a gomb létrehozása után
-       
-
-        document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
-        
-        loadComments(topicId);
-
-        fetchData('/news/get-profile', {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }     
-        })
-        .then(profileData => {
-            if (profileData.permission === 1 || topicDetails.userId === profileData.id) {
-                document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
             }
         })
-        .catch(error => console.log('error fetching profile data', error));
-    })
-    .catch(error => console.log('error loading topic details', error));
+        .then(response => response.json())
+        .then(topicDetails => {
+            console.log(topicDetails.userId);
+            document.getElementById('container').innerHTML = `
+                                                            <div class="topic-meta" id="topic-meta">
+                                                                <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
+                                                            </div>
+                                                            <div class="topic-content">
+                                                                <h1>${topicDetails.topicTitle}</h1>
+                                                                <p>${topicDetails.topicContent}</p>
+                                                                <form id="comment-form" class="comment-form">
+                                                                    <textarea id="comment-content-textarea" required placeholder="Write your comment here..."></textarea>
+                                                                    <div>
+                                                                        <button type="submit">Submit Comment</button>
+                                                                    </div>
+                                                                </form>
+                                                                <div id="comments-content" class="comments-content">
+                                                                </div>
+                                                            </div>`;
+            document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
+            loadComments(topicId);
+            
+            //Topic törlése gomb. Csak a létrehozó, az admin profil bármelyiket tudja törölni.
+            fetchData('/news/get-profile', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }     
+            })
+            .then(profileData => {
+                console.log(topicDetails.userId);
+                console.log(profileData.id);
+
+                if(profileData.permission === 1 || topicDetails.userId === profileData.id){
+                    document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
+                    return;
+                }
+            })
+            .catch(error => console.log('error fetching profile data',error));
+        });
 }
-
-
 async function createSystemTopic() {
     const token = localStorage.getItem('token');
 
@@ -254,114 +250,8 @@ async function deleteTopic(topicId) {
         console.error('Error deleting topic:', error);
     }
 }
-async function setupReportButton() {
-    if(!window.location.pathname.includes('index')) return;
-    const response = await fetch('/news/get-profile', {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    });
 
-    if (response.ok) {
-        const userProfile = await response.json();
-        if (userProfile.permission === 1) {
-            const navUl = document.querySelector('#topic-controls ul');
-            const reportLi = document.createElement('li');
-            const reportLink = document.createElement('a');
-            
-            reportLink.href = '#';
-            reportLink.id = 'load-report-btn';
-            reportLink.textContent = 'Report';
-            
-            reportLi.appendChild(reportLink);
-            navUl.appendChild(reportLi);
-        }
-    }
 
-    document.getElementById('load-report-btn').addEventListener('click', () => {
-        const container = document.getElementById('container');
-        container.innerHTML = `
-            <button id="back-btn">Back</button>
-            <table id="reports-table">
-                <tr>
-                    <th>Topic title</th>
-                    <th>Reported by</th>
-                    <th>Report date</th>
-                    <th>Path</th>
-                </tr>
-            </table>
-        `;
-        loadReports();
-        document.getElementById('back-btn').addEventListener('click', () => {
-            window.location.href = "/news/forum-layout.html/index";
-        })
-    });
-}
-function reportTopic(topicId) {
-    const confirmReport = confirm('Do you really want to report this topic?');
-
-    if (!confirmReport) {
-        alert('Report canceled');
-        return;
-    }
-
-    const token = localStorage.getItem('token');
-    const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-    fetch('/news/get-profile', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(profileData => {
-        const userId = profileData.id;
-        const reportData = { userId, topicId, date };
-
-        fetch('/news/report-topic', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(reportData)
-        })
-        .then(response => response.json())
-        .then(result => {
-            alert('You have successfully reported the topic! We will review your report shortly.');
-        })
-        .catch(error => console.log('error reporting topic', error));
-    })
-    .catch(error => console.log('error fetching profile data', error));
-}
-
-function loadReports() {
-    
-    fetch('/news/loadReports', {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-    .then(response => response.json())
-    .then(reportData => {
-        const reportsTable = document.getElementById('reports-table');
-        if(!reportsTable) return;
-
-        reportData.forEach(data => {
-            reportsTable.innerHTML += `
-                
-                <tr>
-                        <td>${data.topicTitle}</a></td>
-                        <td> &#126 By: ${data.usernames} &#126 </td>
-                        <td>${formatDateForMySQL(data.date)}</td>
-                        <td><a href="/news/forum-layout.html/topic?id=${data.topicId}">View topic &gt; </a></td>   
-                </tr>
-                
-            `;
-        });
-    })
-    .catch(error => console.error('error fetching Reports'));
-}
 function formatDateForMySQL(date) {
     return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
