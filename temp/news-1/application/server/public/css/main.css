@@ -66,10 +66,7 @@ fieldset{
     white-space: nowrap; /* Megakadályozza, hogy a szöveg több sorba törjön */
     margin: 0 10px;
 }
-.Profile-dropdown-content a:hover{
-    border: none !important;
-    padding: 15px 25px !important;
-}
+
 .Profile-dropdown:hover .Profile-dropdown-content {
     display: block;
 }

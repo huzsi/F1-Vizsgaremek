@@ -35,19 +35,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Felső timer betöltése
         if (raceId) {
             const trackData = await fetchData(`/news/trackinfo?id=${raceId}`); //Pálya id alapján szűrök az adathalmazban
-            document.querySelector('.track-img').innerHTML = `
+            document.querySelector('.track-img').innerHTML = ` 
                 <img class="circuit-image" src="/static/img/tracks/${raceId}_Circuit.avif" alt="">
             `;
             document.getElementById("headline-flag").innerHTML = `
                 <img class="flag" src="/static/img/flags/${raceId}.svg" alt="${raceId}" class="flag-icon"> `;
-            const raceFullname = document.getElementById("race-name-headline"); //HTML elem betöltése. (Ez a rész még változhat.)
+            const raceFullname = document.getElementById("race-name-headline");
             if (raceFullname) {
                 raceFullname.textContent = raceName;
             }
 
             // Pályaadatok megjelenítése
             const circuitData = await fetchData(`/news/circuitdatas?id=${raceId}`); //Pálya id alapján szűrök az adathalmazban
-            const datasSection = document.getElementById('circuit-datas-content'); //HTML elem betöltése.
+            const datasSection = document.getElementById('circuit-datas-content');
             if (datasSection) {
                 datasSection.innerHTML = `
                     <h2 id="circuitName">${trackName}</h2>
@@ -72,25 +72,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p> - ${circuitData.record} <span class="driverSpan">(${circuitData.driver}</span> - <span class="yearSpan">${circuitData.recordYear})</span></p>
                     </div>
                 `;
-            } else {
-                console.error('Element with ID "datas" not found.');
             }
 
             // Futam dátumok
             const scheduleData = await fetchData('/news/race-schedule');
-            const events = scheduleData.filter(race => race.id === raceId); //ID alapján szűrök az adathalmazban.
+            const events = scheduleData.filter(race => race.id === raceId);
 
             if (events.length > 0) {
                 const eventDate = new Date(events[0].event1);
                 const countdownElem = document.createElement('p');
                 countdownElem.id = 'countdown';
-                document.getElementById("race-name-headline").appendChild(countdownElem); // Visszaszámláló betöltése a header alatt.
-                updateCountdown(eventDate);
-                setInterval(() => updateCountdown(eventDate), 60000); // Időzítő Frissítés percenként
+                document.getElementById("race-name-headline").appendChild(countdownElem); // Visszaszámláló betöltése
+                updateCountdown(eventDate); // Visszaszámláló frissítése
+                setInterval(() => updateCountdown(eventDate), 60000); // Időzítő frissítés percenként
 
                 //Gombnyomást követően jeleníti meg a táblázatot.
                 eventBtn.addEventListener('click', () => {
-                    // Regular Events
                     const regularEvents = events.filter(event => event.type === 1);
                     if (regularEvents.length > 0) {
                         createTable('regular-event-date-content', [
@@ -102,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         ]);
                     }
 
-                    // Sprint Events
                     const sprintEvents = events.filter(event => event.type === 2);
                     if (sprintEvents.length > 0) {
                         createTable('sprint-event-date-content', [
@@ -113,12 +109,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                             { event: 'Race', date: sprintEvents[0].event5 }
                         ]);
                     }
-                    /**
-                     * Mivel két féle hétvége kerülhet megrendezésre, így a type mező alapján szűröm ki,
-                     * hogy milyen adatok lehetnek a táblázatban. (Csak az első oszlop változhat a típus alapján, a dátumok adatosoronként
-                     * módosulhatnak.)
-                     * 
-                     */
                 });
             }
         }
@@ -140,7 +130,6 @@ async function fetchData(url) {
 function createTable(divId, events) {
     const div = document.getElementById(divId);
     div.classList.remove('hidden');
-    //Táblázat fejléce.
     div.innerHTML = `
         <h2>Grand Prix Events</h2>
         <table>
@@ -151,7 +140,7 @@ function createTable(divId, events) {
             ${events.map(event => {
                 const eventDate = new Date(event.date);
                 const day = eventDate.getDate();
-                const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]; //Date típus miatt a hónapokat számmal jelölné a rendszer. Így érem el, hogy a hónap rövidítése jelenjen meg helyette.
+                const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
                 const month = monthNames[eventDate.getMonth()];
                 const time = eventDate.toTimeString().slice(0, 5);  // HH:MM formátum
 
@@ -164,16 +153,14 @@ function createTable(divId, events) {
                 `;
             }).join('')}
         </table>
-    `
+    `;
 }
 
 function updateCountdown(eventDate) {
-    const now = new Date(); // Jelenlegi idő
-    const diff = eventDate - now; // Különbség az időpontok között
+    const now = new Date();
+    const diff = eventDate - now;
 
-    // Ellenőrizzük, hogy a `diff` pozitív-e
     if (diff >= 0) {
-        // Időkülönbség napokra, órákra és percekre bontása
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -182,10 +169,14 @@ function updateCountdown(eventDate) {
         if (countdownElem) {
             countdownElem.textContent = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
         }
-    } else {
-        const countdownElem = document.getElementById('countdown');
-        if (countdownElem) {
-            countdownElem.textContent = "Event has started!";
+
+        // Ha elértük a versenyt, megjelenítjük a gombot
+        const watchBtnContainer = document.getElementById('watch-btn-container');
+        if (diff <= 0 && watchBtnContainer) {
+            watchBtnContainer.innerHTML = `
+                <a href="https://f1tv.formula1.com/" target="_blank" class="watch-btn">Watch on F1 TV</a>
+            `;
         }
-    }
+    } 
 }
+

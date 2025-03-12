@@ -147,13 +147,20 @@ function displayNextRace(nextRace, monthNames) {
     setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
 }
 
-// Stopper függvény:
-function updateCountdown(element, targetDate) {
+function updateCountdown(element, targetDate, nextRaceData, monthNames) {
     const now = new Date();
     const distance = targetDate - now;
 
     if (distance <= 0) {
-        element.innerHTML = `<a href="https://f1tv.formula1.com" class="btn">Watch Live on F1TV</a>`;
+        element.innerHTML = `<a href="https://f1tv.formula1.com" class="btn">Watch live on F1TV</a>`;
+
+        setTimeout(() => {
+            const nextRace = getNextRace(nextRaceData);
+            if (nextRace) {
+                const nextEventDate = new Date(nextRace.event1);
+                updateCountdown(element, nextEventDate, nextRaceData, monthNames);
+            }
+        }, 60 * 60 * 1000); // 1 óra után újraindít
         return;
     }
 
@@ -163,3 +170,4 @@ function updateCountdown(element, targetDate) {
 
     element.innerHTML = `${days} DAY ${hours} HRS ${minutes} MIN`;
 }
+

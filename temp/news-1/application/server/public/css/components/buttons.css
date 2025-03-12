@@ -3,12 +3,12 @@
     padding-bottom: 5px;
     border-bottom: 2px solid var(--secondary-color);
 }
-.top-nav a {
+.top-nav>ul a {
     position: relative;
     padding-bottom: 5px; /* Adds padding below the text to match .active */
 }
 
-.top-nav a::after {
+.top-nav>ul a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -19,7 +19,7 @@
     transition: width 0.3s ease, left 0.3s ease;
 }
 
-.top-nav a:hover::after {
+.top-nav>ul a:hover::after {
     width: 100%;
     left: 0;
 }
@@ -46,4 +46,13 @@ button{
 }
 button:hover{
     background-color: var(--red-hover-color);
+}
+.Profile-dropdown-content>li>a:hover{
+    border: none !important;
+    padding: 15px 25px !important;
+
+    background-color: #20202b;
+}
+.Profile-dropdown-content>li>a::after{
+    transition: none !important;
 }

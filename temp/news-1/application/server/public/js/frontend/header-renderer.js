@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const headerContainer = document.querySelector('header');
     let logoText = 'F1 News';
-    let standlistHref = '#standlist';
+    let standlistHref = '#standlist';  // Kezdetben csak egy #standlist hivatkozás
 
     if (window.location.pathname.includes('/news/about.html') || window.location.pathname.includes('/news/auth.html')) {
         logoText = 'F1 Stats &amp; News';
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!window.location.pathname.includes('/news/index.html')) {
-        standlistHref = '/news/index.html#standlist';
+        standlistHref = ''; // Ha nem az index oldalon vagyunk, ne jelenjen meg a Standlist gomb
     }
 
     headerContainer.innerHTML += `
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="#" id="latest-btn">Latest</a></li>
                 <li><a href="#" id="schedule-btn">Schedule</a></li>
                 <li><a href="#" id="result-btn">Results</a></li>
-                <li><a href="${standlistHref}">Standlist</a></li>
+                ${standlistHref ? `<li><a href="${standlistHref}">Standlist</a></li>` : ''}  <!-- Csak akkor jelenik meg, ha standlistHref nem üres -->
             </ul>
         </nav>
     `;

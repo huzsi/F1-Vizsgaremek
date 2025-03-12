@@ -78,9 +78,13 @@ async function loadTopicDetails() {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
+    // Convert UTC to local time
+    const topicDate = new Date(topicDetails.date);
+    const formattedDate = topicDate.toLocaleString();  // Localized date format
+
     document.getElementById('container').innerHTML = `
         <div class="topic-meta" id="topic-meta">
-            <p>Opened by: ${topicDetails.usernames} - ${formatDateForMySQL(topicDetails.date)}</p>
+            <p>Opened by: ${topicDetails.usernames} - ${formattedDate}</p>
             <button onclick="reportTopic(${topicId})">Report</button>
         </div>
         <div class="topic-content">
@@ -94,7 +98,7 @@ async function loadTopicDetails() {
             </form>
             <hr>
             <div id="comments-content" class="comments-content"></div>
-        `;
+    `;
 
     document.getElementById('comment-form').addEventListener('submit', (e) => submitComment(e, topicId));
 
@@ -108,6 +112,7 @@ async function loadTopicDetails() {
         document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
     }
 }
+
 async function createSystemTopic() {
     const token = localStorage.getItem('token');
 
@@ -177,14 +182,20 @@ async function loadComments(topicId) {
             if (profile.id === data.userId || profile.permission === 1) {
                 deleteButton = `<button onclick="deleteComment(${data.commentId})">Delete Comment</button>`;
             }
+
+            // Convert UTC to local time
+            const commentDate = new Date(data.date);
+            const formattedDate = commentDate.toLocaleString();  // Localized date format
+
             return `<div class="comment">
                         <p>${data.commentContent}</p>
-                        <p>By: ${data.usernames} <span>${formatDateForMySQL(new Date(data.date))}</span></p>
+                        <p>By: ${data.usernames} <span>${formattedDate}</span></p>
                         ${deleteButton}
                     </div>`;
-        }).join('')
+        }).join('') 
         : '<h4>There is no comment here.</h4>';
 }
+
 
 async function deleteComment(commentId, topicId) {
         const response = await fetch(`/news/forumComments/${commentId}`, { method: 'DELETE' });
@@ -430,5 +441,7 @@ function loadReports() {
     .catch(error => console.error('error fetching Reports'));
 }
 function formatDateForMySQL(date) {
+    // Ha az időpontot lokálisan szeretnénk formázni, ezt itt is hozzáadhatjuk,
+    // de most csak biztosítjuk, hogy UTC-t használjunk
     return new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 }
