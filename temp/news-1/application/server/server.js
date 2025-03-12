@@ -123,7 +123,7 @@ app.get('/news/news-layout.html/:page', (req, res) => {
     const { page } = req.params;
     let filePath = path.join(__dirname, 'public', 'html', 'news-layout.html');
 
-    if (page === 'tech-news' || page === 'regular-news' || page === 'news') {
+    if (page === 'tech-news' || page === 'regular-news') {
         res.sendFile(filePath);
     } else {
         res.status(404).send('Page not found');
@@ -416,13 +416,15 @@ app.put('/news/update-permission', authorize, (req, res) => {
 app.put('/news/update-username', authorize, (req, res) => {
     const { username } = req.body;
     const query = 'UPDATE user SET usernames = ? WHERE id = ?';
-    queryDB(res, query, [username, req.user.id]);
+    queryDB(res, query, [username, req.user.id], null, 'Username updated successfully!');
 });
+
 app.put('/news/update-email', authorize, (req, res) => {
     const { email } = req.body;
     const query = 'UPDATE user SET emails = ? WHERE id = ?';
-    queryDB(res, query, [email, req.user.id]);
+    queryDB(res, query, [email, req.user.id], null, 'Email updated successfully!');
 });
+
 app.put('/news/update-password', authorize, (req, res) => {
     const { password } = req.body;
     bcrypt.hash(password, 10, (err, hashedPassword) => {
@@ -431,13 +433,26 @@ app.put('/news/update-password', authorize, (req, res) => {
         }
 
         const query = 'UPDATE user SET passwords = ? WHERE id = ?';
-        queryDB(res, query, [hashedPassword, req.user.id]);
+        queryDB(res, query, [hashedPassword, req.user.id], null, 'Password updated successfully!');
     });
 });
 app.delete('/news/delete-account', authorize, (req, res) => {
     const query = 'DELETE FROM user WHERE id = ?';
-    queryDB(res, query, [req.user.id]);
+    queryDB(res, query, [req.user.id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error deleting account', error: err.message });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(400).json({ message: 'Account not found or already deleted' });
+        }
+        res.json({
+            message: 'Account successfully deleted!',
+            ok: true
+        });
+    });
 });
+
+
 app.get('/news/check-auth', authorize, (req, res) => {
     res.json({ loggedIn: true, username: req.user.username });
 });
