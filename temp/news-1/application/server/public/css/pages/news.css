@@ -27,14 +27,3 @@
 .newsDiv:hover{
     transform: scale(1.05);
 }
-
-#daily-news-content{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-#daily-news-content > *{
-    flex: 1 0 20%;
-    padding: 0px 15px;
-    
-}

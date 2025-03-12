@@ -74,22 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching news:', error);
     }
 });
-document.addEventListener('DOMContentLoaded', async() => {
-    
-    const dailyContent = document.getElementById('daily-news-content');
-    const techContent = document.getElementById('tech-news-content')
 
-    try{
-        if(location.pathname.includes('/news/news-layout.html/news')){
-            await displayNews('/news/news', dailyContent , 25);
-            await displayNews('/news/tech-news',techContent, 25 );
-        }
-        
-    }
-    catch(error){
-        console.error('Error fetching news: ', error);
-    }
-});
 async function fetchData(url) {
     const response = await fetch(url);
     if (!response.ok) {

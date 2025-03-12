@@ -48,7 +48,7 @@ async function fetchData(url, options = {}) {
     }
 }
 async function loadTopics() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const topicData = await fetchData('/news/forumTopics', {
         headers: { 'Authorization': `Bearer ${token}` }
     });
@@ -71,7 +71,7 @@ async function loadTopics() {
     });
 }
 async function loadTopicDetails() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const topicId = new URLSearchParams(window.location.search).get('id');
 
     const topicDetails = await fetchData(`/news/forumTopics/${topicId}`, {
@@ -114,7 +114,7 @@ async function loadTopicDetails() {
 }
 
 async function createSystemTopic() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
     try {
         const topicResponse = await fetch('/news/forumTopics', { 
@@ -160,7 +160,7 @@ async function createSystemTopic() {
     }
 }
 async function loadComments(topicId) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     // Fetch the user's profile
     const profileResponse = await fetch('/news/get-profile', {
             headers: {
@@ -201,9 +201,9 @@ async function deleteComment(commentId, topicId) {
         const response = await fetch(`/news/forumComments/${commentId}`, { method: 'DELETE' });
         // Ha a válasz 204 (No Content), akkor nem próbáljuk meg JSON-t értelmezni
         const result = response.status !== 204 ? await response.json() : { success: true };
-        if (response.status === 200) {
+        if (response.ok) {
             alert('Comment deleted successfully');
-            window.location.reload();
+            location.reload();
         }  
 }
 
@@ -215,7 +215,7 @@ async function setupCreateTopic() {
     if (!createBtn) return;
 
     createBtn.addEventListener('click', async () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if (!token) {
             alert('Please log in to create a topic.');
             return;
@@ -274,7 +274,7 @@ async function setupCreateTopic() {
 
 async function submitComment(e, topicId) {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
     // Ellenőrizzük, hogy van-e token
     if (!token) {
@@ -333,10 +333,11 @@ async function deleteTopic(topicId) {
 }
 
 async function setupReportButton() {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if(!window.location.pathname.includes('index')) return;
     const response = await fetch('/news/get-profile', {
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
         }
     });
 
@@ -383,7 +384,7 @@ function reportTopic(topicId) {
         return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     fetch('/news/get-profile', {
@@ -414,10 +415,10 @@ function reportTopic(topicId) {
 }
 
 function loadReports() {
-    
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     fetch('/news/loadReports', {
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
             }
         })
     .then(response => response.json())

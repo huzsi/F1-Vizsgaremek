@@ -32,7 +32,7 @@
  */
 
  document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const profileDataContent = document.getElementById('profile-datas');
 
     if (!profileDataContent) {
@@ -82,21 +82,41 @@
 
                 // Fiók törlése
                 document.getElementById('delete-account').addEventListener('click', async () => {
+                    // Kérjünk megerősítést a felhasználótól
+                    const isConfirmed = confirm('Are you sure you want to delete your account? This action is irreversible.');
+                
+                    if (!isConfirmed) {
+                        // Ha nem erősítette meg, kilépünk a törlés folyamatából
+                        return;
+                    }
+                
                     try {
                         const response = await fetch('/news/delete-account', {
                             method: 'DELETE',
                             headers: { 'Authorization': `Bearer ${token}` } // Bearer típusú token
                         });
-                        const data = await response.json();
-                        alert(data.message);
-                        if (data.success) {
+                
+                        if (!response.ok) {
+                            // Ha a válasz nem 200-as, akkor hibát dobunk
+                            throw new Error('Failed to delete account. Please try again.');
+                        } else {
+                            // Ha sikerült törölni a fiókot
+                            alert('Account removed successfully');
                             localStorage.removeItem('token');
-                            window.location.href = '/news/auth.html';
+                            window.location.href = '/news/auth.html?form=login';
                         }
+                
+                        const data = await response.json();
+                        console.log(data);
+                        
                     } catch (error) {
                         console.error('Error deleting account:', error);
+                        // Ha valami hiba történik a kérés közben
+                        alert(`Error: ${error.message}`);
                     }
                 });
+                
+                
 
             } else {
                 profileDataContent.innerHTML = `<p>Nincs bejelentkezve.</p>`;
@@ -116,25 +136,35 @@
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Bearer típusú token
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ [fieldName]: newValue })
             });
-
+    
             const data = await response.json();
-            alert(data.message);
-            if (data.success) {
+            console.log(data); // Ha szükséges, itt látod a válasz részleteit
+    
+            // Az affectedRows vagy changedRows alapján ellenőrizzük a sikerességet
+            if (data.affectedRows && data.affectedRows > 0) {
+                alert(`${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} updated successfully.`);
                 location.reload();
+            } else {
+                alert(`Failed to update ${fieldName}. The value might be the same as before.`);
             }
         } catch (error) {
             console.error(`Error updating ${fieldName}:`, error);
+            alert('An error occurred while updating. Please try again.');
         }
     }
+    
+    
+    
+    
 });
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const profileDataContent = document.getElementById('profile-datas');
 
     if (token && token.trim() !== "") {

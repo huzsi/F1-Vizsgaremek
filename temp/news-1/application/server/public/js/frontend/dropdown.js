@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <ul>
                     <li><a href="#" id="dropdown-latest-btn">Daily News</a></li>
                     <li><a href="#" id="dropdown-tech-news-btn">Tech news</a></li>
-                    <li><a href="/news/news-layout.html/news" id="more-btn">Read more</a></li>
                 </ul>
             </nav>
         </div>

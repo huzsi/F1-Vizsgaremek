@@ -81,7 +81,7 @@ form{
 	font-size:14px;
 	
 }
-label{
-    display: flex;
-    align-items: center;
-}
+label {
+    display: flex !important; 
+    justify-content: center;
+  }

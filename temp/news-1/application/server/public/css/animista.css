@@ -38,7 +38,24 @@
               transform-origin: 100% 0%;
     }
   }
-  
+  .underline-animation>li>a{
+        position: relative;
+        padding-bottom: 5px;
+  }
+  .underline-animation>li>a::after{
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px; /* Aligns the line with .active's bottom border */
+        left: 50%;
+        background-color: var(--secondary-color);
+        transition: width 0.3s ease, left 0.3s ease;
+  }
+  .underline-animation>li>a:hover::after{
+        width: 100%;
+        left: 0;
+  }
 /* HTML: <div class="loader"></div> */
 .loader {
         height: 4px;
