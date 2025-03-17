@@ -1,0 +1,87 @@
+.header-container{
+    border-bottom: none;
+}
+/*main*/
+main{
+    margin: 25px 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    text-align: center;
+}
+main section{
+    padding: 25px;  
+    top: 0;
+}
+main h3{  
+    font-size: small;
+}
+main h3>a{
+    color: var(--primary-color);
+}
+main h3>a:hover{
+    color: var(--secondary-color);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    margin: 50px 0;
+}
+.input-container{
+	position: relative;
+	margin-bottom:25px;
+    font-family: F1Font;
+}
+.input-container label{
+	position: absolute;
+	top:0px;
+	left:0px;
+	font-size:18px;	
+    pointer-events: none;
+	transition: all 0.5s ease-in-out;
+}
+.input-container input{ 
+    border:0;
+    border-bottom:1px solid var(--primary-color);  
+    background:transparent;
+    padding: 10px 0;
+    font-size:18px;
+}
+.input-container input:focus{ 
+    border:none;	
+    outline:none;
+    border-bottom:1px solid var(--primary-color);	
+}
+.btn{
+    font-family: F1Font;
+    text-align: center;
+	color:#fff;
+	background-color:var(--secondary-color);
+	outline: none;
+    border: 0;
+    color: #fff;
+	padding:10px 20px;
+	text-transform:uppercase;
+	margin-top:25px;
+	border-radius:5px;
+	position:relative;
+    width: fit-content;
+}
+.btn:hover{
+    background-color: var(--red-hover-color);
+}
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+	top:-12px;
+	font-size:14px;
+	
+}
+label {
+    display: flex !important; 
+    justify-content: center;
+  }

@@ -1,0 +1,536 @@
+/*-----------------------------
+* 
+* Responsive styles for each HTML file.
+*
+*-----------------------------
+*
+* Each page's responsive section is marked with a comment.
+* Along with the basic screen sizes, a 1700px breakpoint is included
+* because the appearance of some HTML files was not suitable for larger laptops.
+*
+*-----------------------------
+*Created by: Ináncsi Krisztián
+*Last updated: 2025-03-02
+*/
+
+@media (max-width: 1700px) {
+    .top-nav, header{
+        padding: 0 125px;
+    }
+    .dropdown-content div{
+        padding: 25px 125px;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 25px 125px;
+    }
+    .event-container div{
+        flex: 1;
+    }
+    .news, .tech-news{
+        margin: 25px 125px;
+    }
+    .standlist-content{
+        margin: 25px 125px;
+    }
+    .standlist div{
+        flex: 1;
+    }
+    .schedule{
+        padding: 25px 125px;
+    }
+    .scrollmenu a {
+        width: 15%;
+    }
+    /*tracks.html*/
+    main{
+        margin:  25px 0;
+    }
+    .track-container{
+        margin: 0 125px;
+        width: fit-content; 
+    }
+    .track-container nav ul{
+        display: block;
+    }
+    .track-container nav ul li{
+        padding: 5px 0;
+        margin: 15px;
+        border: unset;
+    }
+    .track-container nav ul li:first-child{
+        padding-left: 0px;
+        margin: 0;
+       
+    }
+    .track-container nav ul li:last-child{
+        padding-right: 0px;
+        margin: 0;
+       
+    }
+    .track-container img{
+        height: 400px !important;
+    }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 125px;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-list-section{
+        width: auto;
+    }
+    /*layouts page*/
+    .container{
+        margin: 25px 125px;
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 125px;
+    }
+}
+@media (max-width: 1350px) {
+    .top-nav, header{
+        padding: 0 100px;
+    }
+    .dropdown-content div{
+        padding: 25px 100px;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 25px 100px;
+    }
+    .event-container div{
+        flex: 1;
+    }
+    .news, .tech-news{
+        margin: 25px 100px;
+    }
+    .standlist{
+        display: block;
+    }
+    .standlist-content{
+        margin: 25px 100px;
+    }
+    .schedule{
+        padding: 25px 100px;
+    }
+    .scrollmenu a {
+        width: 15%;
+    }
+    /*tracks.html*/
+    main{
+        margin: 0;
+        
+    }
+    .track-container{
+        margin: 25px 100px;
+        align-items: center;
+        gap: 25px;
+    }
+    .track-container{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: 0 75px;
+        width: unset !important;
+    }
+    .track-container nav ul{
+        display: block;
+    }
+    .track-container nav ul li{
+        padding: 0;
+        margin: 15px;
+        border: unset;
+    }
+    .track-img img {
+        height: 450px !important;
+        width: auto ;
+    }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 100px;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+
+    /*layouts page*/
+    .container{
+        margin: 25px 100px;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(25%);
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 100px;
+    }
+}
+
+@media (max-width: 1200px) { 
+    .top-nav, header{
+        padding: 0 75px;
+    }
+    .dropdown-content div{
+        padding: 25px 75px;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 25px 75px;
+    }
+    .event-container div{
+        flex: 1;
+    }
+    .news, .tech-news{
+        margin: 25px 75px;
+    }
+    .standlist{
+        display: block;
+    }
+    .standlist-content{
+        margin: 25px 75px;
+    }
+    .schedule{
+        padding: 25px 75px;
+    }
+    .scrollmenu a {
+        width: 20%;
+    }
+    /*tracks.html*/
+    main{
+        margin: 0;
+    }
+    .track-container{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: 0 75px;
+        width: unset !important;
+    }
+    .track-img img {
+        height: 400px !important;
+        width: auto ;
+    }
+    /*race-result.html*/
+    .main-container{
+        margin: 25px 75px;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+
+    /*layouts page*/
+    .container{
+        margin: 25px 75px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(30%);
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 75px;
+    }
+}
+
+@media (max-width: 992px) {
+    .top-nav, header{
+        flex-direction: column;
+    }
+    .dropdown-content div{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
+    #news-content a{
+        border: unset;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 25px 50px;
+        display: block;
+    }
+    .news, .tech-news{
+        margin: 25px 50px;
+    }
+    .standlist{
+        display: block; 
+    }
+    .standlist-content{
+        margin: 25px 50px;
+    }
+    .schedule{
+        padding:  25px 50px ;
+    }
+    .scrollmenu a {
+        width: 20%;
+    }
+    /*tracks.html*/
+    .timer{
+        margin: 25px 50px;
+    }
+    main{
+        margin: 0;
+    }
+    .track-container{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: unset !important;
+    }
+    .track-img img {
+        height: 400px !important;
+        width: auto ;
+    }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 50px;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+    #race-list-section{
+        width: auto;
+    }
+
+    /*layouts page*/
+    .container{
+        margin: 20px 50px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section .newsDiv{
+        flex: 1 1 calc(33%);
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 50px;
+    }
+}
+
+@media (max-width: 768px) { 
+    .top-nav, header{
+        flex-direction: column;
+    }
+    .dropdown-content div{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
+    #news-content a{
+        border: unset;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 25px;
+        display: block;
+    }
+    .news, .tech-news{
+        margin: 25px;
+    }
+    .news-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .standlist{
+        display: block; 
+    }
+    .standlist-content{
+        margin: 0;
+    }
+    .schedule{
+        padding:  25px ;
+    }
+
+    /*tracks.html*/
+    .timer{
+        margin: 25px;
+    }
+    main{
+        margin: 0px;
+    }
+    .track-container{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: unset !important;
+        margin: unset !important;
+    }
+    .track-img img {
+        height: 350px !important;
+        width: auto ;
+    }
+    .scrollmenu a {
+        width: 30%;
+    }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 0;
+    }
+    .podium-drivers-div img{
+       height: 125px;
+    }
+    #race-result-section div{
+        width: auto;
+    }
+    #race-list-section{
+        width: auto;
+    }
+    /*layouts page*/
+    .container{
+        margin: 10px 25px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section{
+        flex-direction: column;
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px;
+    }
+}
+
+@media (max-width: 576px) { 
+    .top-nav, header{
+        flex-direction: column;
+    }
+    .dropdown-content div{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
+    #news-content a{
+        border: unset;
+    }
+    /*index.html*/
+    .event-container{
+        margin: 0;
+        display: block;
+    }
+    .news, .tech-news{
+        margin: 25px 0;
+    }
+    .news-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .standlist{
+        display: block;
+    }
+    .standlist nav ul {
+        flex-direction: column;
+    }
+    .standlist nav ul li{
+        padding: 5px 0;
+        border: unset;
+    }
+    .standlist-content{
+        margin: 0;
+    }
+    .schedule{
+        padding:  25px 0;
+    }
+    .scrollmenu a {
+        width: 30%;
+    }
+    /*tracks.html*/
+    .timer{
+        margin: 25px 0;
+    }
+    main{
+        margin: 25px 0;
+       
+    }
+    .track-container{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: unset !important;
+        margin: unset !important;
+    }
+    .track-img img {
+        height: 300px !important;
+        width: auto ;
+    }
+    /*race-result.html*/
+    .main-container{
+        flex-direction: column;
+        margin: 25px 0;
+    }
+    .podium-drivers-div img{
+       height: 100px;
+    }
+    #race-list-section{
+        width: auto;
+    }
+
+    /*layouts page*/
+    .container{
+        margin: 15px;
+    }
+    .section-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .race-section, .user-section, .popular-section {
+        flex: 1 1;
+        width: 100%;
+    }
+    .container #news-section{
+        flex-direction: column;
+    }
+    /*about.html*/
+    .about-section{
+        padding: 25px 15px;
+    }
+}

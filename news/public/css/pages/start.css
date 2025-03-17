@@ -1,0 +1,57 @@
+@font-face {
+    font-family: F1Font;
+    src: url("../../fonts/Formula1-Regular.otf");
+}
+body{
+    margin: 0;
+    background-image: url(../../img/mercedes_amg_f1_w12_e_performance_8_4k_hd_cars-3840x2160.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-family: F1Font;
+}
+main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+main a{
+    background-color: #000000f1;
+    padding: 150px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    margin: 20px;
+    font-size: 64px;
+    border: 1px solid rgb(129, 129, 129);
+}
+main a:hover{
+    background-color: #161616f1 ;
+}
+header{
+    text-align: center;
+    border-bottom: 1px solid rgb(129, 129, 129);
+    color: white;
+}
+footer{
+    background-color: #000000e3 !important;
+    color: white;
+    text-align: center;
+    border-top: 1px rgb(129, 128, 128) solid;
+    border-bottom: 1px rgb(129, 128, 128) solid;
+}
+
+@media (max-width: 576px){
+    main{
+        flex-direction: column;
+       
+    }
+    main a{
+        margin: 25px 0;
+    }
+}
