@@ -1,8 +1,8 @@
 const urls = [
-    '/static/img/mcl60_wallpaper_3840x2160.jpg',
-    '/static/img/dark_mercw14.jpg',
-
-    '/static/img/240213_SF-Media31_0bc3335f-5c3f-461c-afff-ba3d9dad52fd.webp'
+    '/static/img/index-header/mcl60.jpg',
+    '/static/img/index-header/sf25.jpg',
+    '/static/img/index-header/w15.jpg',
+    '/static/img/index-header/amr24.jpeg'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,5 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
     changeBackgroundImage();
 
     // Háttérkép váltása 50 másodpercenként
-    setInterval(changeBackgroundImage, 60000); // 50 másodperc = 50000 ms
+    setInterval(changeBackgroundImage, 60000); // 60 másodperc = 60000 ms
 });

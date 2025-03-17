@@ -34,9 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const formType = urlParams.get('form');
 
-    if(localStorage.getItem('token') || sessionStorage.getItem('token')){
-        window.location.href = "/news/index.html";
-    }
+   
     // Alapértelmezetten a login form legyen aktív, ha nincs paraméter megadva
     if (formType === 'register') {
         document.getElementById('register-section').classList.remove('hidden');

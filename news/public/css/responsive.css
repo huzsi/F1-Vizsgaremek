@@ -516,6 +516,7 @@
     /*layouts page*/
     .container{
         margin: 15px;
+        flex-direction: column;
     }
     .section-container{
         flex-direction: column;
@@ -533,4 +534,5 @@
     .about-section{
         padding: 25px 15px;
     }
+
 }
