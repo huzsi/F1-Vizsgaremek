@@ -45,15 +45,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('racenames-container');
 
     try {
-        // Fetch race schedule (includes race names)
         const scheduleData = await fetchData('/news/race-schedule');
-
         displayRaceSchedule(scheduleData, monthNames, container);
         
-        const nextRace = getNextRace(scheduleData);
+        const nextRace = getNextClosestEvent(scheduleData);
         if (nextRace) {
             displayNextRace(nextRace, monthNames);
         }
+        
+        displayEventTables(scheduleData, monthNames);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -65,9 +65,8 @@ async function fetchData(url) {
         throw new Error(`Failed to fetch data from ${url}`);
     }
     return await response.json();
-}//--//
+}
 
-// Scroll-menü-t integráló függvény:
 function displayRaceSchedule(scheduleData, monthNames, container) {
     scheduleData.forEach(schedule => {
         const event1Date = new Date(schedule.event1);
@@ -87,80 +86,121 @@ function displayRaceSchedule(scheduleData, monthNames, container) {
             </a>
         `;
     });
-}//--//
+}
 
-// Következő futam függvénye:
-function getNextRace(scheduleData) {
-    return scheduleData.find(schedule => new Date(schedule.event1) > new Date());
-}//--//
+function getNextClosestEvent(scheduleData) {
+    if (!Array.isArray(scheduleData)) return null;  // Ellenőrzés, hogy a scheduleData tömb-e
+
+    const now = new Date();
+
+    for (let schedule of scheduleData) {
+        const events = schedule.type === 1 ? [
+            { event: 'FP1', date: new Date(schedule.event1) },
+            { event: 'FP2', date: new Date(schedule.event2) },
+            { event: 'FP3', date: new Date(schedule.event3) },
+            { event: 'Qualify', date: new Date(schedule.event4) },
+            { event: 'Race', date: new Date(schedule.event5) }
+        ] : [
+            { event: 'FP1', date: new Date(schedule.event1) },
+            { event: 'Sprint Qualify', date: new Date(schedule.event2) },
+            { event: 'Sprint', date: new Date(schedule.event3) },
+            { event: 'Qualify', date: new Date(schedule.event4) },
+            { event: 'Race', date: new Date(schedule.event5) }
+        ];
+
+        const closestEvent = events.find(e => e.date > now);
+       
+        if (closestEvent) return { ...schedule, nextEvent: closestEvent };
+    }
+    return null;
+}
 
 function displayNextRace(nextRace, monthNames) {
-    const event1Date = new Date(nextRace.event1);
-    const day = event1Date.getDate();
-    const month = monthNames[event1Date.getMonth()];
+    const { nextEvent } = nextRace;
+    const eventDate = new Date(nextEvent.date);
+    const day = eventDate.getDate();
+    const month = monthNames[eventDate.getMonth()];
     const raceDiv = document.getElementById('race-div');
     const timerParagraph = document.getElementById('timer-paragraph');
 
     raceDiv.innerHTML = `
-        <h2>Next Race</h2>
+        
         <img class="flag" src="/static/img/flags/${nextRace.id}.svg" alt="${nextRace.name}">
         <h3 id="RaceName">${nextRace.name}</h3>
+        <h2>Next Event: ${nextEvent.event}</h2>
     `;
-
-    const events = nextRace.type === 1 ? [
-            { event: 'FP1', date: nextRace.event1 },
-            { event: 'FP2', date: nextRace.event2 },
-            { event: 'FP3', date: nextRace.event3 },
-            { event: 'Qualify', date: nextRace.event4 },
-            { event: 'Race', date: nextRace.event5 }
-        ] : [
-            { event: 'FP1', date: nextRace.event1 },
-            { event: 'Sprint Qualify', date: nextRace.event2 },
-            { event: 'Sprint', date: nextRace.event3 },
-            { event: 'Qualify', date: nextRace.event4 },
-            { event: 'Race', date: nextRace.event5 }
-        ];
-
-    const targetTable = nextRace.type === 1 ? document.getElementById('regular-event-table') : document.getElementById('sprint-event-table');
-    if (targetTable) {
-        targetTable.innerHTML = `
-            <table class="event-Table">
-                ${events.map(event => {
-                    const eventDate = new Date(event.date);
-                    const day = eventDate.getDate();
-                    const month = monthNames[eventDate.getMonth()];
-                    const time = eventDate.toTimeString().slice(0, 5);
-
-                    return `
-                        <tr>
-                            <td>${event.event}</td>
-                            <td>${day} <br> ${month}</td>
-                            <td>${time}</td>
-                        </tr>
-                    `;
-                }).join('')}
-            </table>
-        `;
-    }
-
-    updateCountdown(timerParagraph, new Date(nextRace.event1));
-    setInterval(() => updateCountdown(timerParagraph, new Date(nextRace.event1)), 60000);
+    
+    updateCountdown(timerParagraph, eventDate, nextRace, monthNames);
+    setInterval(() => updateCountdown(timerParagraph, eventDate, nextRace, monthNames),3600);
 }
+function displayEventTables(scheduleData, monthNames) {
+    const regularTable = document.getElementById('regular-event-table');
+    const sprintTable = document.getElementById('sprint-event-table');
+    regularTable.innerHTML = '';
+    sprintTable.innerHTML = '';
 
+    const now = new Date();
+
+    const nextRace = scheduleData.find(schedule => {
+        const events = [
+            new Date(schedule.event1),
+            new Date(schedule.event2),
+            new Date(schedule.event3),
+            new Date(schedule.event4),
+            new Date(schedule.event5)
+        ];
+        return events.some(eventDate => eventDate > now);
+    });
+
+    if (!nextRace) return; // Ha nincs közelgő esemény, ne tegyen semmit
+
+    const isRegular = nextRace.type === 1;
+    const targetTable = isRegular ? regularTable : sprintTable;
+    
+    const events = isRegular ? [
+        { event: 'FP1', date: nextRace.event1 },
+        { event: 'FP2', date: nextRace.event2 },
+        { event: 'FP3', date: nextRace.event3 },
+        { event: 'Qualify', date: nextRace.event4 },
+        { event: 'Race', date: nextRace.event5 }
+    ] : [
+        { event: 'FP1', date: nextRace.event1 },
+        { event: 'Sprint Qualify', date: nextRace.event2 },
+        { event: 'Sprint', date: nextRace.event3 },
+        { event: 'Qualify', date: nextRace.event4 },
+        { event: 'Race', date: nextRace.event5 }
+    ];
+
+    targetTable.innerHTML = `
+        <table class="event-Table">
+            ${events.map(event => {
+                const eventDate = new Date(event.date);
+                if (isNaN(eventDate)) return ''; // Hibás dátumokat kihagyjuk
+
+                const day = eventDate.getDate();
+                const month = monthNames[eventDate.getMonth()];
+                const time = eventDate.toTimeString().slice(0, 5);
+
+                return `
+                    <tr>
+                        <td>${event.event}</td>
+                        <td>${day} <br> ${month}</td>
+                        <td>${time}</td>
+                    </tr>
+                `;
+            }).join('')}
+        </table>
+    `;
+    
+    regularTable.classList.toggle('hidden', !isRegular);
+    sprintTable.classList.toggle('hidden', isRegular);
+}
 function updateCountdown(element, targetDate, nextRaceData, monthNames) {
     const now = new Date();
+   
     const distance = targetDate - now;
 
     if (distance <= 0) {
-        element.innerHTML = `<a href="https://f1tv.formula1.com" class="btn">Watch live on F1TV</a>`;
-
-        setTimeout(() => {
-            const nextRace = getNextRace(nextRaceData);
-            if (nextRace) {
-                const nextEventDate = new Date(nextRace.event1);
-                updateCountdown(element, nextEventDate, nextRaceData, monthNames);
-            }
-        }, 60 * 60 * 1000); // 1 óra után újraindít
         return;
     }
 
@@ -168,6 +208,5 @@ function updateCountdown(element, targetDate, nextRaceData, monthNames) {
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-    element.innerHTML = `${days} DAY ${hours} HRS ${minutes} MIN`;
+    element.innerHTML = `${days} DAY | ${hours} HRS | ${minutes} MIN`;
 }
-

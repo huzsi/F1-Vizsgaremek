@@ -1,6 +1,6 @@
 @font-face {
     font-family: F1Font;
-    src: url("../../fonts/Formula1-Bold.otf");
+    src: url("../../fonts/Formula1-Regular.otf");
 }
 body{
     margin: 0;
@@ -44,4 +44,14 @@ footer{
     text-align: center;
     border-top: 1px rgb(129, 128, 128) solid;
     border-bottom: 1px rgb(129, 128, 128) solid;
+}
+
+@media (max-width: 576px){
+    main{
+        flex-direction: column;
+       
+    }
+    main a{
+        margin: 25px 0;
+    }
 }

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (location.pathname.includes('/index')) {
         await loadTopics();
-        setInterval(async () => await createSystemTopic(), 3600 * 1000);
+        setInterval(async () => await createSystemTopic(),36);
     } else if (location.pathname.includes('/topic')) {
         await loadTopicDetails();
     }
@@ -115,50 +115,68 @@ async function loadTopicDetails() {
 
 async function createSystemTopic() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    if (!token) {
+        console.error('Token not found.');
+        return;
+    }
 
     try {
-        const topicResponse = await fetch('/news/forumTopics', { 
+        const topicResponse = await fetch('/news/forumTopics', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const topicData = await topicResponse.json();
-        
+
         const raceScheduleResponse = await fetch('/news/race-schedule');
         const raceScheduleData = await raceScheduleResponse.json();
-        
-        // Ensure topicData is an array
-        const existingTitles = Array.isArray(topicData) ? topicData.map(topic => topic.topicTitle) : [];
-        const currentDate = new Date();
 
-        for (let datas of raceScheduleData) {
-            const eventDate = new Date(datas.event1);
-            if (eventDate <= currentDate) {
-                const title = datas.name;
-                if (!existingTitles.includes(title)) {
-                    await fetch('/news/forumTopics', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify({
-                            userId: 0, // System ID
-                            topicTitle: title,
-                            topicContent: `Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.`,
-                            date: formatDateForMySQL(new Date())
-                        })
-                    })
-                    .then(() => console.log('Topic created successfully!'))
-                    .catch(console.error);
+        if (!Array.isArray(topicData) || !Array.isArray(raceScheduleData)) {
+            console.error('Invalid data format.');
+            return;
+        }
 
-                    // Stop after creating one topic
-                    break;
-                }
-            }
+        const existingTitles = topicData.map(topic => topic.topicTitle);
+        const currentDate = new Date().setHours(0, 0, 0, 0);
+
+        // Keresd meg azt az eseményt, amelynek az event1 dátumát elértük legközelebb
+        const closestEvent = raceScheduleData.reduce((closest, race) => {
+            const eventDate = new Date(race.event1).setHours(0, 0, 0, 0);
+            return (eventDate <= currentDate && (!closest || eventDate > closest.date))
+                ? { ...race, date: eventDate }
+                : closest;
+        }, null);
+
+
+        if (!closestEvent) {
+            console.log('No eligible race found.');
+            return;
+        }
+
+        const title = closestEvent.name;
+        if (!existingTitles.includes(title)) {
+            await fetch('/news/forumTopics', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    userId: 0,
+                    topicTitle: title,
+                    topicContent: `Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.`,
+                    date: formatDateForMySQL(new Date())
+                })
+            });
+
+            console.log('Topic created successfully!');
+        } else {
+            console.log('Topic already exists for this race.');
         }
     } catch (error) {
         console.error('Error creating topic:', error);
     }
 }
+
+
 async function loadComments(topicId) {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     // Fetch the user's profile

@@ -45,7 +45,7 @@
  *      - **Form Submission Handler:** Collects all the selected drivers and sends them to the server as JSON.
  * 
  * --------------------------------------------------------------------
- * Created by: Krisztián Bartók & Krisztián Ináncsi
+ * Created by: Krisztián Bartók
  * Last updated: 2025-03-03
  */
 document.addEventListener('DOMContentLoaded', function() {

@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="#" id="profileBtn">${data.usernames}</a>
                         <ul class="Profile-dropdown-content" id="dropdownContent" style="display: none;">
                             <li><a href="/news/profile.html">View Profile</a></li>
-                            ${data.permission === 1 ? '<li><a href="#" id="uploader-btn">Result</a></li>' : ''}
+                            ${data.permission === 1 ? '<li><a href="/news/result-uploader.html" id="uploader-btn">Result</a></li>' : ''}
                             <li><a href="#" id="logoutBtn">Logout</a></li>
                         </ul>
                     </li>
