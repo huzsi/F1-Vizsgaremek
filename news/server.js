@@ -360,7 +360,7 @@ app.post('/news/register', (req, res) => {
                 }
 
                 // Automatikus bejelentkezés
-                const token = jwt.sign({ id: result.insertId, username }, 'secret_key', { expiresIn: '1h' });
+                const token = jwt.sign({ id: result.insertId, username }, 'secret_key', { expiresIn: '72h' });
                 res.status(201).json({
                     message: 'User registered successfully',
                     token,
