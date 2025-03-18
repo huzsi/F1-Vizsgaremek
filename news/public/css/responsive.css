@@ -142,8 +142,8 @@
         display: block;
     }
     .track-container nav ul li{
-        padding: 0;
-        margin: 15px;
+        padding: 10px 0;
+       
         border: unset;
     }
     .track-img img {
@@ -215,6 +215,9 @@
         align-items: center;
         margin: 0 75px;
         width: unset !important;
+    }
+    .track-container nav ul li{
+        padding: 15px 0;
     }
     .track-img img {
         height: 400px !important;
@@ -300,6 +303,9 @@
         justify-content: center;
         align-items: center;
         width: unset !important;
+    }
+    .track-container nav ul li{
+        padding: 15px 0;
     }
     .track-img img {
         height: 400px !important;
@@ -392,6 +398,9 @@
         align-items: center;
         width: unset !important;
         margin: unset !important;
+    }
+    .track-container nav ul li{
+        padding: 15px 0;
     }
     .track-img img {
         height: 350px !important;
@@ -500,6 +509,10 @@
     .track-img img {
         height: 300px !important;
         width: auto ;
+    }
+    
+    .track-container nav ul li{
+        padding: 15px 0;
     }
     /*race-result.html*/
     .main-container{
