@@ -18,6 +18,10 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 - JavaScript
 - MySQL
 
+
+# Telepítési útmutató
+
+
 # Mappastruktúra
 ```
 ├── .temp / # Olyan fájlok amik nem szükségesek az oldal működéséhez
@@ -55,6 +59,16 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 ```
 
 # Szerepek
-- Bartók Krisztián (Adatok elérése, Hír oldalak felkeresése, Fogadás oldal elkészítése)
-- Ináncsi Krisztián (Frontend - Stílusfájlok, UI/UX tervezése & elkészítése)
-- Fábián Tamás (Backend - Adatbázis elkészítése, a frontend összekötése Djangó segítségével.)
+•	Ináncsi Krisztián 
+o	    Statisztikai oldal kinézetének megtervezése, megvalósítása
+o	    Híroldal kinézetének megtervezése, megvalósítása
+o	    Híroldal működése: Főoldal funkciók, dropdown funkciók, pályainformációk
+•	Bartók Krisztán
+o	    Híroldal adatbázisa.
+o	    Híroldal működése: Fórum oldal, Hír részleg, Bejelentkezés és Regisztráció, Profil funkciók, futam végeredmények.
+•	Fábián Tamás
+o	    HUB részleg megvalósítása.
+o	    Domain és webszerver megvalósítása.
+o	    Statisztikai oldal kinézetének megtervezése, megvalósítása.
+o	    Statisztikai oldal teljes funkciójának megvalósítása.
+
