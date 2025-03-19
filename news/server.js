@@ -22,7 +22,7 @@ const { Server } = require('http');
 const cache = new NodeCache({ stdTTL: 3600 });
 const apiKey = 'bd49adc7fe7341ddb75478209aa97049';
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 const newsUrl = `https://newsapi.org/v2/everything?q=Formula%201&apiKey=${apiKey}`;
 const techUrl = `https://newsapi.org/v2/everything?q=F1 AND Formula 1 AND technical&qInTitle=Analysis&apiKey=${apiKey}`;
 
@@ -159,16 +159,16 @@ app.get('/news/circuitdatas', (req, res) => {
     if (!req.query.id) return res.status(400).json({ error: "Missing required parameter: id" });
     queryDB(res, 'SELECT firstGP, lapNumber, length, raceDistance, record, driver, recordYear FROM circuitdatas WHERE id = ?', [req.query.id]);
 });
-app.get('/news/driverStandlist', (req, res) => {
+app.get('/news/driver-standlist', (req, res) => {
     queryDB(res, `SELECT driverId,driverName,constructor FROM driverNames`);
 });
-app.get('/news/constructorStandlist', (req, res) => {
+app.get('/news/constructor-standlist', (req, res) => {
     queryDB(res, `SELECT DISTINCT constructorName, driverNames.constructor FROM constructornames INNER JOIN driverNames ON constructornames.constructorId = driverNames.constructorId`);
 });
-app.get('/news/seasonRaceResults', (req, res) => {
+app.get('/news/season-race-results', (req, res) => {
     queryDB(res, `SELECT * FROM seasonRaceResult`);
 });
-app.get('/news/raceResults', (req, res) => {
+app.get('/news/race-results', (req, res) => {
     queryDB(res, `  SELECT
                     rn.raceNumber, 
                     srr.raceId,
@@ -202,7 +202,7 @@ app.get('/news/raceResults', (req, res) => {
 					ORDER BY rn.raceNumber;
                 `);
 });
-app.post('/news/saveRaceResults', (req, res) => {
+app.post('/news/save-race-results', (req, res) => {
     const { raceId, results } = req.body;
     const query = `
         INSERT INTO seasonRaceResult (raceId, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20)
@@ -218,10 +218,10 @@ app.post('/news/saveRaceResults', (req, res) => {
     queryDB(res, query, values);
 });
 ///'SELECT * FROM forumTopics'
-app.get('/news/forumTopics', (req, res) => {
+app.get('/news/forum-topics', (req, res) => {
     queryDB(res, `SELECT tc.topicId, u.username, tc.userId, tc.topicTitle, tc.topicContent, tc.date FROM forumTopics tc JOIN user u ON tc.userId = u.id`);
 });
-app.get('/news/forumTopics/:topicId', (req, res) => {
+app.get('/news/forum-topics/:topicId', (req, res) => {
     const { topicId } = req.params;
     const query = 'SELECT fp.topicId, fp.userId, u.username, fp.topicTitle, fp.topicContent, fp.date FROM forumTopics fp JOIN user u ON fp.userId = u.id WHERE topicId = ?';
     queryDB(res, query, [topicId], (err, result) => {
@@ -231,7 +231,7 @@ app.get('/news/forumTopics/:topicId', (req, res) => {
         res.json(result);
     });
 });
-app.get('/news/forumComments/:topicId', (req, res) => {
+app.get('/news/forum-comments/:topicId', (req, res) => {
     const { topicId } = req.params;
 
     const query = 'SELECT tc.topicId, tc.commentId, tc.userId, u.username, tc.commentContent, tc.date FROM topicComments tc INNER JOIN user u ON tc.userId = u.id WHERE tc.topicId = ?';
@@ -244,7 +244,7 @@ app.get('/news/forumComments/:topicId', (req, res) => {
         res.json(result);
     });
 });
-app.get('/news/last-topicComment', (req, res) => {
+app.get('/news/last-topic-comment', (req, res) => {
     const { topicId } = req.query; // Extract topicId from query parameters
     const query = 'SELECT u.username, tc.date FROM topicComments tc JOIN user u ON tc.userId = u.id WHERE tc.topicId = ? ORDER BY ABS(TIMESTAMPDIFF(SECOND, tc.date, NOW())) LIMIT 1';
 
@@ -256,10 +256,10 @@ app.get('/news/last-topicComment', (req, res) => {
         res.json(result);
     });
 });
-app.get('/news/loadReports', (req, res) => {
+app.get('/news/load-reports', (req, res) => {
     queryDB(res, 'SELECT tr.reportId, tr.topicId , u.username, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
 })
-app.delete('/news/forumTopics/:topicId', (req, res) => {
+app.delete('/news/forum-topics/:topicId', (req, res) => {
     const { topicId } = req.params;  // Helyes destrukturálás
     const query = 'DELETE FROM forumTopics WHERE topicId = ?';
     
@@ -275,7 +275,7 @@ app.delete('/news/forumTopics/:topicId', (req, res) => {
         res.json({ success: true, message: 'Topic deleted successfully' });
     });
 });
-app.delete('/news/forumComments/:commentId', (req, res) => {
+app.delete('/news/forum-comments/:commentId', (req, res) => {
     const commentId = req.params.commentId; // Correctly reference the commentId from the request parameters
     const query = 'DELETE FROM topicComments WHERE commentId = ?';
 
@@ -294,7 +294,7 @@ app.delete('/news/forumComments/:commentId', (req, res) => {
     });
 });
 // POST a new forum topic
-app.post('/news/forumTopics', (req, res) => {
+app.post('/news/forum-topics', (req, res) => {
     const { userId, topicTitle, topicContent, date } = req.body;
 
     const query = `

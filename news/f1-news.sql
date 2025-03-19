@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 17. 15:07
+-- Létrehozás ideje: 2025. Már 19. 14:57
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.0.30
 
@@ -176,8 +176,8 @@ CREATE TABLE `forumtopics` (
 INSERT INTO `forumtopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
 (3, 2, 'aaa', 'aaa', '2025-03-05 20:51:50'),
 (7, 1, 'asdsadasd', 'dasdasdas', '2025-03-09 14:36:54'),
-(8, 1, 'bbbb', 'asdasd', '2025-03-10 18:43:01'),
-(11, 0, 'Australia', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-17 13:53:29');
+(14, 0, 'Australia', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-19 13:04:17'),
+(15, 1, 'asdasd', 'dsadasd', '2025-03-19 13:15:35');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ CREATE TABLE `seasonraceresult` (
 --
 
 INSERT INTO `seasonraceresult` (`raceId`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
-('au', 1, 2, 3, 7, 4, 5, 6, 9, 10, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+('au', 2, 5, 7, 8, 17, 9, 19, 3, 1, 4, 11, 14, 15, 16, 6, 20, 10, 18, 12, 13);
 
 -- --------------------------------------------------------
 
@@ -325,9 +325,7 @@ CREATE TABLE `topiccomments` (
 --
 
 INSERT INTO `topiccomments` (`topicId`, `commentId`, `userId`, `commentContent`, `date`) VALUES
-(10, 1, 1, 'adsadsad', '2025-03-17 13:05:21'),
-(10, 2, 1, 'aaa', '2025-03-17 13:37:13'),
-(10, 3, 1, 'aaa', '2025-03-17 13:37:14');
+(3, 1, 3, 'sadasd', '2025-03-19 13:29:36');
 
 -- --------------------------------------------------------
 
@@ -347,13 +345,8 @@ CREATE TABLE `topicreports` (
 --
 
 INSERT INTO `topicreports` (`reportId`, `userId`, `topicId`, `date`) VALUES
-(1, 1, 3, '2025-03-10 17:23:33'),
-(2, 1, 3, '2025-03-10 17:26:31'),
-(3, 1, 3, '2025-03-10 17:27:33'),
-(4, 1, 4, '2025-03-10 17:27:55'),
-(5, 1, 4, '2025-03-10 17:28:00'),
-(6, 1, 8, '2025-03-10 18:43:07'),
-(7, 2, 3, '2025-03-10 18:44:52');
+(1, 3, 3, '2025-03-19 13:29:39'),
+(2, 3, 7, '2025-03-19 13:29:44');
 
 -- --------------------------------------------------------
 
@@ -377,6 +370,9 @@ INSERT INTO `user` (`id`, `permission`, `username`, `email`, `password`) VALUES
 (0, 1, 'System', '-', '-'),
 (1, 1, 'admin', 'admin@gmail.com', '$2b$10$zjkJojt2.zFCZfvjBO3X.u2nFe3ymMEQHVpgGrirmBMi1ThD.nss.'),
 (2, 3, 'user', 'user@gmail.com', '$2b$10$38/iOdPkThhnD5nl3SBxBO6HvbhcLEbcTs6QI.lIX8mJqILR605W.'),
+(3, 1, 'inancsikrisztian', 'inancsikrisztian@icloud.com', '$2b$10$2T1I1YvAZPy1rPIoPRlEIehmJ3BvBdbpbquqg1edkhqjxAoihYbFO'),
+(4, 1, 'fabiant0104', 'fabiantamas@huzsi.hu', '$2b$10$m8dOEaJyjcZ48HuqzPNODOOcn6yQtSvMPFELIiO.1ikFR96Iuctuy'),
+(5, 1, 'kisbartok2', 'kisbartok2@gmail.com', '$2b$10$E.PxiVSgsQd7pn7DpAGGweJ0P/s6IOKM2l5HY5bjUayQL4HnmjKVy'),
 (6, 3, 'user2', 'user2@gmail.com', '$2b$10$Zp.mdvLQSdZQc9yS38b7kObstJOKa3XXwHgGjJnPkrX.lfYOUU/xi'),
 (7, 3, 'user3', 'user3@gmail.com', '$2b$10$tenLbVfOscldLdr90j4hqOp3gQaQIofAb0m1fWX0JuffTFSbmti4y');
 
@@ -479,19 +475,19 @@ ALTER TABLE `drivernames`
 -- AUTO_INCREMENT a táblához `forumtopics`
 --
 ALTER TABLE `forumtopics`
-  MODIFY `topicId` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `topicId` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT a táblához `topiccomments`
 --
 ALTER TABLE `topiccomments`
-  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `topicreports`
 --
 ALTER TABLE `topicreports`
-  MODIFY `reportId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `reportId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `user`
