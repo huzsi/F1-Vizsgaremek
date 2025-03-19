@@ -60,15 +60,17 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 
 # Szerepek
 •	Ináncsi Krisztián 
-o	    Statisztikai oldal kinézetének megtervezése, megvalósítása
-o	    Híroldal kinézetének megtervezése, megvalósítása
-o	    Híroldal működése: Főoldal funkciók, dropdown funkciók, pályainformációk
+-   Statisztikai oldal kinézetének megtervezése, megvalósítása
+-   Híroldal kinézetének megtervezése, megvalósítása
+-   Híroldal működése: Főoldal funkciók, dropdown funkciók, pályainformációk
+  
 •	Bartók Krisztán
-o	    Híroldal adatbázisa.
-o	    Híroldal működése: Fórum oldal, Hír részleg, Bejelentkezés és Regisztráció, Profil funkciók, futam végeredmények.
+-    Híroldal adatbázisa.
+-    Híroldal működése: Fórum oldal, Hír részleg, Bejelentkezés és Regisztráció, Profil funkciók, futam végeredmények.
+  
 •	Fábián Tamás
-o	    HUB részleg megvalósítása.
-o	    Domain és webszerver megvalósítása.
-o	    Statisztikai oldal kinézetének megtervezése, megvalósítása.
-o	    Statisztikai oldal teljes funkciójának megvalósítása.
+-    HUB részleg megvalósítása.
+-    Statisztikai oldal kinézetének megtervezése, megvalósítása.
+-    Statisztikai oldal teljes funkciójának megvalósítása
+
 
