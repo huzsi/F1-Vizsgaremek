@@ -47,6 +47,7 @@ async function fetchData(url, options = {}) {
         console.error(error);
     }
 }
+//
 async function loadTopics() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const topicData = await fetchData('/news/forum-topics', {
@@ -70,6 +71,7 @@ async function loadTopics() {
         section.appendChild(topicDiv);
     });
 }
+//
 async function loadTopicDetails() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const topicId = new URLSearchParams(window.location.search).get('id');
@@ -80,12 +82,14 @@ async function loadTopicDetails() {
 
     // Convert UTC to local time
     const topicDate = new Date(topicDetails.date);
-    const formattedDate = topicDate.toLocaleString();  // Localized date format
+    const formattedDate = topicDate.toLocaleString(); // Localized date format
+
+    const isLoggedIn = !!token; // Check if the user is logged in
 
     document.getElementById('container').innerHTML = `
         <div class="topic-meta" id="topic-meta">
             <p>Opened by: ${topicDetails.username} - ${formattedDate}</p>
-            <button onclick="reportTopic(${topicId})">Report</button>
+            ${isLoggedIn ? `<button onclick="reportTopic(${topicId})">Report</button>` : ''}
         </div>
         <div class="topic-content">
             <h1>${topicDetails.topicTitle}</h1>
@@ -112,6 +116,7 @@ async function loadTopicDetails() {
         document.getElementById('topic-meta').innerHTML += `<button onclick="deleteTopic(${topicDetails.topicId})">Delete topic</button>`;
     }
 }
+
 
 async function createSystemTopic() {
     
@@ -168,8 +173,6 @@ async function createSystemTopic() {
         console.error('Error creating topic:', error);
     }
 }
-
-
 async function loadComments(topicId) {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     // Fetch the user's profile
@@ -206,8 +209,6 @@ async function loadComments(topicId) {
         }).join('') 
         : '<h4>There is no comment here.</h4>';
 }
-
-
 async function deleteComment(commentId, topicId) {
         const response = await fetch(`/news/forum-comments/${commentId}`, { method: 'DELETE' });
         // Ha a válasz 204 (No Content), akkor nem próbáljuk meg JSON-t értelmezni
@@ -217,9 +218,6 @@ async function deleteComment(commentId, topicId) {
             location.reload();
         }  
 }
-
-
-
 /**Feltöltések */
 async function setupCreateTopic() {
     const createBtn = document.getElementById('create-btn');
