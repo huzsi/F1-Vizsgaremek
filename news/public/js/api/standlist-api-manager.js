@@ -5,10 +5,10 @@
  * --------------------------------------------------------------------
  * 
  * Invoked APIs:
- *  /driverStandlist
- *  /seasonRaceResults
- *  /constructorStandlist
- *  /raceResults
+ *  /news/driver-standlist
+ *  /news/season-race-results
+ *  /news/constructor-standlist
+ *  /news/race-results
  * 
  * --------------------------------------------------------------------
  * 
@@ -24,19 +24,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //API-k mehívása
     try {
-        const driverData = await fetchData('/news/driverStandlist');
-        const seasonRaceResults = await fetchData('/news/seasonRaceResults');
+        const driverData = await fetchData('/news/driver-standlist');
+        const seasonRaceResults = await fetchData('/news/season-race-results');
 
         const driverPoints = calculateDriverPoints(driverData, seasonRaceResults);
         updateDriverStandlist(driverData, driverPoints);
 
-        const constructorData = await fetchData('/news/constructorStandlist');
+        const constructorData = await fetchData('/news/constructor-standlist');
         const driverConstructorMap = createDriverConstructorMap(driverData); //Map-et csinálok, mivel a pilóták pontjai alapján számítunk pontot a csapatoknak.
 
         const constructorPoints = calculateConstructorPoints(constructorData, seasonRaceResults, driverConstructorMap);
         updateConstructorStandlist(constructorData, constructorPoints);
 
-        const raceResults = await fetchData('/news/raceResults'); //Race-result táblához lett létrehozva, ha tudom akkor ezt fogom beleépíteni a /seasonRaceResults helyett.
+        const raceResults = await fetchData('/news/race-results'); //Race-result táblához lett létrehozva, ha tudom akkor ezt fogom beleépíteni a /seasonRaceResults helyett.
         updateRaceResults(raceResults);
     } catch (error) {
         console.error('Error:', error);

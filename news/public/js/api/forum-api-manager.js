@@ -7,12 +7,12 @@
  * --------------------------------------------------------------------
  * 
  * APIs used on the site:
- *      /news/forumTopics (GET - loaded from Cache)
- *      /news/forumComments (GET - loaded from Cache)
+ *      /news/forum-topics (GET - loaded from Cache)
+ *      /news/forum-comments (GET - loaded from Cache)
  *      /news/upload-comment (POST - upload comment)
  *      /news/report-topic (POST - report topic)
  *      /news/get-profile (GET - fetch user profile)
- *      /news/loadReports (GET - load reported topics)
+ *      /news/load-reports (GET - load reported topics)
  * 
  * --------------------------------------------------------------------
  *  
@@ -49,7 +49,7 @@ async function fetchData(url, options = {}) {
 }
 async function loadTopics() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    const topicData = await fetchData('/news/forumTopics', {
+    const topicData = await fetchData('/news/forum-topics', {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -74,7 +74,7 @@ async function loadTopicDetails() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const topicId = new URLSearchParams(window.location.search).get('id');
 
-    const topicDetails = await fetchData(`/news/forumTopics/${topicId}`, {
+    const topicDetails = await fetchData(`/news/forum-topics/${topicId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -114,16 +114,10 @@ async function loadTopicDetails() {
 }
 
 async function createSystemTopic() {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    if (!token) {
-        console.error('Token not found.');
-        return;
-    }
+    
 
     try {
-        const topicResponse = await fetch('/news/forumTopics', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const topicResponse = await fetch('/news/forum-topics');
         const topicData = await topicResponse.json();
 
         const raceScheduleResponse = await fetch('/news/race-schedule');
@@ -153,11 +147,10 @@ async function createSystemTopic() {
 
         const title = closestEvent.name;
         if (!existingTitles.includes(title)) {
-            await fetch('/news/forumTopics', {
+            await fetch('/news/forum-topics', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     userId: 0,
@@ -188,7 +181,7 @@ async function loadComments(topicId) {
     const profile = await profileResponse.json();
 
     // Fetch the comments data
-    let commentData = await fetchData(`/news/forumComments/${topicId}`);
+    let commentData = await fetchData(`/news/forum-comments/${topicId}`);
     if (!Array.isArray(commentData)) {
         commentData = [commentData];
     }
@@ -216,7 +209,7 @@ async function loadComments(topicId) {
 
 
 async function deleteComment(commentId, topicId) {
-        const response = await fetch(`/news/forumComments/${commentId}`, { method: 'DELETE' });
+        const response = await fetch(`/news/forum-comments/${commentId}`, { method: 'DELETE' });
         // Ha a válasz 204 (No Content), akkor nem próbáljuk meg JSON-t értelmezni
         const result = response.status !== 204 ? await response.json() : { success: true };
         if (response.ok) {
@@ -267,7 +260,7 @@ async function setupCreateTopic() {
                 e.preventDefault();
 
                 try {
-                    await fetch('/news/forumTopics', {
+                    await fetch('/news/forum-topics', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                         body: JSON.stringify({
@@ -336,7 +329,7 @@ async function deleteTopic(topicId) {
     if (!confirmation) return;
 
     try {
-        const response = await fetch(`/news/forumTopics/${topicId}`, { method: 'DELETE' });
+        const response = await fetch(`/news/forum-topics/${topicId}`, { method: 'DELETE' });
         const data = await response.json();
 
         if (response.ok) {
@@ -434,7 +427,7 @@ function reportTopic(topicId) {
 
 function loadReports() {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    fetch('/news/loadReports', {
+    fetch('/news/load-reports', {
         headers: {
             'Authorization': `Bearer ${token}`
             }

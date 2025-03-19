@@ -10,9 +10,9 @@
  * also affects the functionality of this code!
  * 
  * The code uses the following APIs:
- *      /trackinfo (GET)
- *      /circuitdatas (GET)
- *      /race-schedule (GET)
+ *      /news/trackinfo (GET)
+ *      /news/circuitdatas (GET)
+ *      /news/race-schedule (GET)
  * 
  * --------------------------------------------------------------------
  * 

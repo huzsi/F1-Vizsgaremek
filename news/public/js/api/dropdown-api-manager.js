@@ -7,7 +7,7 @@
  * 
  * APIs used:
  *      /news/race-schedule - (GET)
- *      /news/raceResults - (GET)
+ *      /news/race-results - (GET)
  *      /news/news - (GET - From Cache)
  *      /news/tech-news - (GET - From Cache)
  * 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Result dropdown gomb */
     resultBtn.addEventListener('click', () => {
-        fetch('/news/raceResults')
+        fetch('/news/race-results')
             .then(response => response.json())
             .then(resultData => {
                 const resultContent = document.getElementById('result-content');

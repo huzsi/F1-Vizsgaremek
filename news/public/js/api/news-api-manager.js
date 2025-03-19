@@ -7,8 +7,8 @@
  * --------------------------------------------------------------------
  * 
  * APIs used on the site:
- *      /news (GET - loaded from Cache)
- *      /tech-news (GET - loaded from Cache)
+ *      /news/news (GET - loaded from Cache)
+ *      /news/tech-news (GET - loaded from Cache)
  * 
  * --------------------------------------------------------------------
  *  

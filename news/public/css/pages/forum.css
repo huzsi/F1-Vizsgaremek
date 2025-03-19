@@ -1,5 +1,5 @@
 .container{
-    margin: 0 150px;
+    margin: 25px 150px;
 }
 .container nav a:hover{
     color: var(--secondary-color);

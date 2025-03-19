@@ -7,7 +7,7 @@
  * --------------------------------------------------------------------
  * 
  * APIs used:
- *      /news/raceResults - (GET)
+ *      /news/race-results - (GET)
  * 
  * --------------------------------------------------------------------
  * 
@@ -44,7 +44,7 @@ let allRaceResults = [];
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Az összes futam adatainak betöltése
-        const response = await fetch('/news/raceResults');
+        const response = await fetch('/news/race-results');
         let resultData = await response.json();
 
         // Ha csak egy adatsor van, alakítsuk tömbbé

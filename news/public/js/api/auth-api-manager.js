@@ -7,8 +7,8 @@
  * --------------------------------------------------------------------
  * 
  * APIs:
- *      - /register (POST): Handles new user registration.
- *      - /login (POST): Handles user login.
+ *      - /news/register (POST): Handles new user registration.
+ *      - /news/login (POST): Handles user login.
  * 
  * --------------------------------------------------------------------
  * 

@@ -15,12 +15,12 @@
  *      2. **Dynamic Driver Selection:**
  *         - A series of dropdowns (for each position from P1 to P20) are dynamically created based on the number of positions in the race.
  *         - Each dropdown allows the user to choose a driver for that position.
- *         - The driver options are fetched from the server (`/news/driverStandlist`), and each select element is populated with the available drivers.
+ *         - The driver options are fetched from the server (`/news/driver-standlist`), and each select element is populated with the available drivers.
  *         - When a driver is selected, other dropdowns are updated to prevent selecting the same driver more than once.
  * 
  *      3. **Form Submission:**
  *         - The user can submit the form with the selected drivers for each position.
- *         - When the form is submitted, the selected drivers for each position are sent to the server (`/news/saveRaceResults`) in JSON format, along with the race ID.
+ *         - When the form is submitted, the selected drivers for each position are sent to the server (`/news/save-race-results`) in JSON format, along with the race ID.
  *         - The form submission is handled using the `POST` method.
  * 
  * --------------------------------------------------------------------
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(error => console.error('Error fetching race names:', error));
 
     // Pilóták listájának lekérése
-    fetch('/news/driverStandlist')
+    fetch('/news/driver-standlist')
       .then(response => response.json())
       .then(drivers => {
         const raceDataContainer = document.getElementById('raceData-input-container');
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Adatok küldése a szerverre
-      fetch('/news/saveRaceResults', {
+      fetch('/news/save-race-results', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
