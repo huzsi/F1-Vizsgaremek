@@ -244,18 +244,6 @@ app.get('/news/forum-comments/:topicId', (req, res) => {
         res.json(result);
     });
 });
-app.get('/news/last-topic-comment', (req, res) => {
-    const { topicId } = req.query; // Extract topicId from query parameters
-    const query = 'SELECT u.username, tc.date FROM topicComments tc JOIN user u ON tc.userId = u.id WHERE tc.topicId = ? ORDER BY ABS(TIMESTAMPDIFF(SECOND, tc.date, NOW())) LIMIT 1';
-
-    queryDB(res, query, [topicId], (err, result) => {
-        if (err) {
-            console.error('Database error:', err.message);
-            return res.status(500).json({ error: 'Error fetching comment', details: err.message });
-        }
-        res.json(result);
-    });
-});
 app.get('/news/load-reports', (req, res) => {
     queryDB(res, 'SELECT tr.reportId, tr.topicId , u.username, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
 })
