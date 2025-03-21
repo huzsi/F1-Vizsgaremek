@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (location.pathname.includes('/index')) {
         await loadTopics();
+        locatio
         setInterval(async () => await createSystemTopic(),36);
     } else if (location.pathname.includes('/topic')) {
         await loadTopicDetails();
@@ -66,7 +67,7 @@ async function loadTopics() {
         topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
                                 <h2>${data.topicTitle}</h2>
                                 <p>Opened: ${data.username}</p>
-                                <p id="last-comment-${data.id}">Last comment:<span></span></p>
+                                
                               </a>`;
         section.appendChild(topicDiv);
     });

@@ -29,12 +29,10 @@
  * Created by: Krisztián Bartók
  * Last updated: 2025-02-20
  */
-
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const formType = urlParams.get('form');
 
-   
     // Alapértelmezetten a login form legyen aktív, ha nincs paraméter megadva
     if (formType === 'register') {
         document.getElementById('register-section').classList.remove('hidden');
@@ -73,7 +71,6 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     })
     .catch(error => alert('Registration failed: ' + error));
 });
-
 // Bejelentkezési űrlap kezelése
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -111,4 +108,3 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     })
     .catch(error => alert('Login failed: ' + error));
 });
-
