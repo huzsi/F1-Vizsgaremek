@@ -1,7 +1,7 @@
 // Az API hívása és az adatok megjelenítése
-async function fetchDataChampionshipStandings(tableId) {
+async function fetchDataConstructorChampionship(tableId) {
     try {
-      const response = await fetch("/api/championshipStandings"); // Az API végpont
+      const response = await fetch("/api/constructorChampionship"); // Az API végpont
       const data = await response.json();
 
       const tableHead =document.getElementById("tableHead");
@@ -25,11 +25,11 @@ async function fetchDataChampionshipStandings(tableId) {
         function renderRows() {
         const endIndex = Math.min(currentIndex + rowsPerPage, data.length);
         for (let i = currentIndex; i < endIndex; i++) {
-            const drivers = data[i];
+            const constructors = data[i];
             const row = document.createElement("tr");
             row.innerHTML = `
-            <td>${drivers.FirstName} ${drivers.LastName}</td>
-            <td>${drivers.WorldChampionships}</td>
+            <td>${constructors.constructorName}</td>
+            <td>${constructors.championshipTitles}</td>
             `;
             tableBody.appendChild(row);
         }
@@ -67,13 +67,15 @@ async function fetchDataChampionshipStandings(tableId) {
       console.error("Hiba történt az adatok betöltésekor:", error);
     }
   }
-  
+
   // Adatok betöltése gombnyomásra
   document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("loadChampionship");
+    const button = document.getElementById("loadConstructorChampionship");
     button.addEventListener("click", () => {
-        fetchDataChampionshipStandings("dataTable");
-      document.getElementById("pilotStats").style.display = "none";
-    });
+        fetchDataConstructorChampionship("dataTable");
+        document.getElementById("pilotStats").style.display = "none";
+        document.getElementById("constructorStats").style.display = "none";
+        document.getElementById("otherStats").style.display = "none";   
+        document.getElementById("statisticsGPT").style.display = "none"; });
   });
   

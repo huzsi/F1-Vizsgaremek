@@ -29,7 +29,7 @@ async function fetchDataConstructorList(tableId) {
             const constructors = data[i];
             const row = document.createElement("tr");
             row.innerHTML = `
-            <td>${constructors.ConstructorName}</td>
+            <td>${constructors.name}</td>
             <td>${constructors.nationality}</td>
             <td><a href="${constructors.url}" target="_blank"><i class="fa-brands fa-wikipedia-w"></i></a></td>
             `;
@@ -78,6 +78,7 @@ async function fetchDataConstructorList(tableId) {
       document.getElementById("pilotStats").style.display = "none";
       document.getElementById("constructorStats").style.display = "none";
       document.getElementById("otherStats").style.display = "none"; 
+      document.getElementById("statisticsGPT").style.display = "none";
     });
   });
   

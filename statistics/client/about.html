@@ -5,32 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Stats &amp; News</title>
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/base/reset.css">
-    <link rel="stylesheet" href="/static/css/base/typography.css">
-    <link rel="stylesheet" href="/static/css/base/variables.css">
-    <link rel="stylesheet" href="/static/css/components/buttons.css">
-    <link rel="stylesheet" href="/static/css/components/table.css">
-    <link rel="stylesheet" href="/static/css/layout/nav.css">
-    <link rel="stylesheet" href="/static/css/layout/header.css">
-    <link rel="stylesheet" href="/static/css/layout/footer.css">
-    <link rel="stylesheet" href="/static/css/pages/about.css">
-    <link rel="stylesheet" href="/static/css/responsive.css">
+
+        <!--CSS-->
+        <link rel="stylesheet" href="static/CSS/webkit.css">
+        <link rel="stylesheet" href="static/CSS/config.css">
+        <!------------------------------------------------->
+        <link rel="stylesheet" href="static/CSS/index/responsive.css">
+        <link rel="stylesheet" href="static/CSS/about/style.css">
+        <!------------------------------------------------->
+        <link rel="stylesheet" href="static/CSS/index/animista.css">
 </head>
 <body>
-    <div class="header-container" id="header-container">
-        <nav class="top-nav" id="topNav">
-            <!--JS code-->
-        </nav>
-        <!--Main header-->
-        <header id="mainHeader" class="header-transparent">
-            <!--JS code-->
-        </header>
-        <div class="dropdown-content" id="dropdown-content">
-            <!--JS code-->
-        </div>
-       
-    </div>
+    <header>
+        <h2>F<span style="color: white;">1</span> stats</h2>
+
+        <a href="http://localhost:3001">HOME</a>
+        <a href="http://localhost:3002/news/index.html">NEWS</a>
+        <a href="about.html">ABOUT</a>
+    </header>
     <main id="main-content">
         <h2>All content displayed on this website is the property of the owners indicated in the footer. This website was created as part of a school qualification project and is intended solely for educational purposes. The website, it does not generate any profit.</h2>
         <section class="about-section">
@@ -56,18 +48,15 @@
             </div>
         </section>
     </main>
+    <br>
     <footer>
         <div>
-            <h2><a href="https://www.formula1.com/">F1 website</a></h2>
-            <h3>Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
+            <h2><a  style="color: var(--font-color);" href="https://www.formula1.com/">F1 website</a></h2>
+            <h3 style="color: var(--font-color);">Created by - Ináncsi Krisztián | Bartók Krisztián | Fábián Tamás</h3>
         </div>
         <div>
             <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
             <p>All content and articles published are copyrighted and the property of their respective authors.</p>
-        </div>
-        <div class="bottom-div">
-            <p>&copy; <span id="yearSpan"></span></p>
-            <p>Source: Github</p>
         </div>
     </footer>
     <!--Dropdown menüben megjelenő API-k miatt ezzel a scripttel kell kezdeni!!-->

@@ -146,6 +146,36 @@ button:hover {
 
 /*-----------------------BUTTONS END------------------------*/
 
+/*--------------------------GPT---------------------------*/
+
+.statisticsGPT {
+    border: 2px solid var(--gray-color);
+    border-radius: 25px;
+    /*---------------------*/
+    color: var(--gray-color);
+    font-family: f1-regular;
+}
+
+.statisticsGPT h2 {
+    text-align: center;
+}
+
+.statisticsGPT input[type="text"] {
+    width: 90%;
+    padding: 5px;
+    margin: 40px 40px 40px 40px;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    /*---------------------*/
+    color: var(--gray-color);
+    background-color: var(--carbon-black);
+    font-family: "Montserrat", sans-serif;
+}
+
+.statisticsGPT #results {
+    text-align: center;
+}
+
 /*--------------------------TABLE---------------------------*/
 
 table {
@@ -181,33 +211,15 @@ table th {
 
 /*--------------------------FOOTER--------------------------*/
 
-footer{
+footer {
+    border: 5px solid var(--warm-red);
+    border-radius: 25px;
+    /*---------------------*/
+    color: var(--gray-color);
+    font-family: f1-regular;
+    /*---------------------*/
     text-align: center;
-    background-color: var(--background-color);
-    border-top: 1px var(--primary-color) solid;
-    border-bottom: 1px var(--primary-color) solid;
-    font-family: F1-Bold;
-}
-
-footer p{
-    color: var(--font-color);
-}
-
-footer a {
-    color: var(--font-color);
-    text-decoration: none; 
-}
-
-footer .bottom-div{
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
-    color: #777;
-}
-
-footer div{
-    padding: 0 150px;
-    border-bottom: 1px solid var(--primary-color);
+    box-shadow: 0px 0px 10px 0px var(--warm-red);
 }
 
 /*------------------------FOOTER END------------------------*/

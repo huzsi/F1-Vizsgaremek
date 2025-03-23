@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="static/CSS/index/style.css">
     <!------------------------------------------------->
     <link rel="stylesheet" href="static/CSS/index/animista.css">
-    <link rel="stylesheet" href="static/CSS/index/loader.css">
 
-
+    <script src="static/JS/gptQuery.js"></script>
+    
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,14 +23,13 @@
 
 </head>
 <body>
-    <div class="loader"></div>
-    <div class="content hidden">
+    <div>
         <header>
             <h2>F<span style="color: white;">1</span> stats</h2>
     
-            <a href="index.html">HOME</a>
+            <a href="http://localhost:3001">HOME</a>
             <a href="http://localhost:3002/news/index.html">NEWS</a>
-            <a href="">ABOUT</a>
+            <a href="about.html">ABOUT</a>
         </header>
         <br>
         <main id="main">
@@ -43,22 +42,24 @@
                     <button id="loadRaceWins">Race wins</button> <br>
                     <button id="loadPodiums">Podiums</button> <br>
                     <button id="loadPolePositions">Pole positions</button> <br>
-                    <button id="loadPoints">Points (HAMIS EREDMÉNY)</button>
                 </div>
                 <div id="constructorStats" class="subColumns">
                     <h2 style="text-align: center;">Construtor stats</h2>
                     <button id="loadConstructorList">Construtor list</button> <br>
-                    <button id="loadConstructorStarts">Race starts (NINCS EREDMÉNY)</button> <br>
                     <button id="loadConstructorChampionship">Championship wins</button> <br>
-                    <button id="loadConstructorWins">Race wins (NINCS EREDMÉNY)</button> <br>
-                    <button id="loadConstructorPodiums">Podiums(NINCS EREDMÉNY)</button> <br>
-                    <button id="loadConstructorPoints">Points(NINCS EREDMÉNY)</button>
+                    <button id="loadConstructorPolePositions">Pole Positions</button>
                 </div>
                 <div id="otherStats" class="subColumns">
                     <h2 style="text-align: center;">Other stats</h2>
                     <button class="loadYearsSeason">Season results</button> <br>
                     <button class="loadYearsRace">Race results</button> <br>
                 </div>
+            </div>
+            <br>
+            <div class="statisticsGPT" id="statisticsGPT">
+                <h2>Ask me about statistics in Formula 1</h2>
+                <input type="text" id="searchInput" placeholder="Type here...">
+                <div id="results"></div>
             </div>
 			<div id="dataTable" class="hidden">
                 <table>
@@ -80,7 +81,7 @@
         </div>
         <br>
         <div id="raceButtons" class="raceRow" style="display: none;"></div>
-        <br>
+        <br><br>
         <footer>
             <div>
                 <h2><a  style="color: var(--font-color);" href="https://www.formula1.com/">F1 website</a></h2>
@@ -89,10 +90,6 @@
             <div>
                 <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
                 <p>All content and articles published are copyrighted and the property of their respective authors.</p>
-            </div>
-            <div class="bottom-div">
-                <p>&copy; <span id="yearSpan"></span></p>
-                <p>Source: Github</p>
             </div>
         </footer>
     </div>
@@ -105,24 +102,21 @@
     <script src="static/JS/pilotStats/raceWins.js"></script>
     <script src="static/JS/pilotStats/podiums.js"></script>
     <script src="static/JS/pilotStats/polePositions.js"></script>
-    <script src="static/JS/pilotStats/points.js"></script>
 
     <!--Constructors Statistics Scripts-->
 
     <script src="static/JS/constructorStats/counstructorList.js"></script>
     <script src="static/JS/constructorStats/championshipStandings.js"></script>
-    <script src="static/JS/constructorStats/podiums.js"></script>
-    <script src="static/JS/constructorStats/points.js"></script>
-    <script src="static/JS/constructorStats/raceStarts.js"></script>
-    <script src="static/JS/constructorStats/raceWins.js"></script>
+    <script src="static/JS/constructorStats/polePositions.js"></script>
 
     <!--Other Statistics Scripts-->
 
-    <script src="static/JS/otherStats/otherStatsMain.js"></script>
+    <script src="static/JS/otherStats/otherStatsDisplay.js"></script>
     <script src="static/JS/otherStats/seasonStats.js"></script>
+    <script src="static/JS/otherStats/inYearRaceStatistics.js"></script>
 
     <script src="static/JS/loading.js"></script>
-    
+
 
     <script src="https://kit.fontawesome.com/8c9be19cd8.js" crossorigin="anonymous"></script>
 </body>

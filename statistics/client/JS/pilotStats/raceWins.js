@@ -75,6 +75,8 @@ async function fetchDataRaceWins(tableId) {
       fetchDataRaceWins("dataTable");
       document.getElementById("pilotStats").style.display = "none";
       document.getElementById("constructorStats").style.display = "none";
-      document.getElementById("otherStats").style.display = "none";    });
+      document.getElementById("otherStats").style.display = "none";    
+      document.getElementById("statisticsGPT").style.display = "none";
+    });
   });
   

@@ -2,32 +2,17 @@
 ÁLTALÁNOS STATISZTIKA JAVASCRIPT KÓDJA
 =============== */
 
-const mysql = require('mysql2'); // MySQL Modul
-require('dotenv').config(); // Betölti a .env fájlt
+require('dotenv').config();
+const mysql = require('mysql2');
 
-// MySQL kapcsolat beállítása a környezeti változókból
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'f1stats'
 });
 
-// Versenyek adatainak lekérdezése év szerint
-const getRacesByYear = (year) => {
-  return new Promise((resolve, reject) => {
-    const query = `
-      SELECT raceId, year, round, name as race_name, date, time, circuitId 
-      FROM races 
-      WHERE year = ? 
-      ORDER BY round;
-    `;
-    pool.query(query, [year], (err, results) => {
-      if (err) reject(err);
-      else resolve(results);
-    });
-  });
-};
+module.exports = pool.promise();
 
 // Egy szezon statisztikáinak lekérdezése (pilóták és konstruktőrök)
 const getSeasonStats = (year) => {
@@ -85,20 +70,41 @@ const getSeasonStats = (year) => {
 };
 
 // Versenyek adatainak lekérdezése év szerint
+const getRacesByYear = (year) => {
+  return new Promise((resolve, reject) => {
+    const query = `
+      SELECT raceId, year, round, name as race_name, date, time, circuitId 
+      FROM races 
+      WHERE year = ? 
+      ORDER BY round;
+    `;
+    pool.query(query, [year], (err, results) => {
+      if (err) reject(err);
+      else resolve(results);
+    });
+  });
+};
+
+// Versenyek adatainak lekérdezése év szerint
 const getRaceResults = (year) => {
   return new Promise((resolve, reject) => {
     const query = `
       SELECT 
-        d.driverId,
-        CONCAT(d.forename, ' ', d.surname) AS driver_name,
-        c.name AS constructor_name,
-        r.position,
-        r.points
+          d.driverId,
+          CONCAT(d.forename, ' ', d.surname) AS driver_name,
+          c.name AS constructor_name,
+          r.position,
+          r.points
       FROM results r
       JOIN drivers d ON r.driverId = d.driverId
       JOIN constructors c ON r.constructorId = c.constructorId
       WHERE r.raceId = ?
-      ORDER BY r.position ASC
+      ORDER BY 
+          CASE 
+              WHEN r.position IS NULL THEN 1 
+              ELSE 0 
+          END, 
+          r.position ASC;
     `;
     pool.query(query, [year], (err, results) => {
       if (err) reject(err);
@@ -108,30 +114,33 @@ const getRaceResults = (year) => {
 };
 
 // Lekérdezés indítása
-const getQueryResults = (queryType, res) => {
-  let queryPromise;
+const getQueryResults = (queryType, year, res) => {
+  console.log("Kapott queryType:", queryType); // Debug log
 
+  let queryPromise;
   switch (queryType) {
-    case 'pilotList':
-      queryPromise = getRacesByYear();
+    case 'raceStats':
+      queryPromise = getRacesByYear(year);
       break;
-    case 'raceStarts':
-      queryPromise = getSeasonStats();
+    case 'seasonStats':
+      queryPromise = getSeasonStats(year);
       break;
-    case 'championshipStandings':
-      queryPromise = getRaceResults();
+    case 'inYearRaceStatistics':
+      queryPromise = getRaceResults(year);
       break;
     default:
+      console.error("Ismeretlen lekérdezés típus:", queryType);
       return res.status(400).send('Ismeretlen lekérdezés típus');
   }
 
   queryPromise
-    .then(results => res.json(results)) // Eredmények visszaadása JSON formátumban
+    .then(results => res.json(results))
     .catch(err => {
       console.error(err);
       res.status(500).send('Hiba történt a lekérdezés során');
     });
 };
+
 
 module.exports = {
   getQueryResults,
