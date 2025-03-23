@@ -38,7 +38,20 @@
         </div>
         <main>
             <div class="container" id="container">
-    
+                <form id="raceResultsForm">
+                    <select id="raceName">
+                        <option value="">Válassz egy futamot</option>
+                    </select>
+                    <h1 id="race-Name" ></h1>
+                    <select name="event-type" id="event-type">
+                        <option value="1">Race</option>
+                        <option value="2">Sprint</option>
+                    </select>
+                    <div id="raceData-input-container">
+                        <!--Többi helyezett-->
+                    </div>
+                    <button type="submit">Eredmények Mentése</button>
+               </form>
                 
             </div>
         </main>
@@ -49,13 +62,9 @@
      <!--Dropdown menüben megjelenő API-k miatt ezzel a $scripttel kell kezdeni!!-->
     <script src="/static/js/frontend/header-renderer.js"></script>
     <script src="/static/js/api/dropdown-api-manager.js"></script>
-
-    
     <script src="/static/js/frontend/dropdown.js"></script>
-    <script src="/static/js/frontend/layout/result-uploader-renderer.js"></script>
+    <script src="/static/js/frontend/result-uploader-renderer.js"></script>
     <script src="/static/js/frontend/footer-renderer.js"></script>
-
-
     <script src="/static/js/utils/nav-auth-controller.js"></script>
     <script src="/static/js/utils/result-uploader-script.js"></script>
     <!-- A loader script betöltése -->

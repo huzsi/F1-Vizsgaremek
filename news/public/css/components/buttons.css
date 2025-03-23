@@ -4,7 +4,6 @@
     border-bottom: 2px solid var(--secondary-color);
 }
 
-
 .event a:hover, .dropdown-content a:hover{
     color: var(--secondary-color);
    
@@ -24,6 +23,7 @@ button{
     font-family: F1Font;
     font-size: 10px;
     margin: 15px 0;
+    cursor: pointer;
 }
 button:hover{
     background-color: var(--red-hover-color);
