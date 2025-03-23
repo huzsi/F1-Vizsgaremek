@@ -173,6 +173,7 @@ app.get('/news/race-results', (req, res) => {
                     rn.raceNumber, 
                     srr.raceId,
                     rn.name AS raceName,
+                    srr.type,
                     d1.driverName AS P1, d2.driverName AS P2, d3.driverName AS P3, d4.driverName AS P4, d5.driverName AS P5,
                     d6.driverName AS P6, d7.driverName AS P7, d8.driverName AS P8, d9.driverName AS P9, d10.driverName AS P10,
                     d11.driverName AS P11, d12.driverName AS P12, d13.driverName AS P13, d14.driverName AS P14, d15.driverName AS P15,
@@ -203,20 +204,24 @@ app.get('/news/race-results', (req, res) => {
                 `);
 });
 app.post('/news/save-race-results', (req, res) => {
-    const { raceId, results } = req.body;
+    const { raceId, type, results } = req.body; // Itt kicsomagoltam a `type` mezőt
     const query = `
-        INSERT INTO seasonRaceResult (raceId, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO seasonRaceResult (raceId, type, 
+                                        P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, 
+                                        P11, P12, P13, P14, P15, P16, P17, P18, P19, P20)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const values = [
-        raceId,
+        raceId, type,  // Most már helyesen kerül be
         results.P1 || null, results.P2 || null, results.P3 || null, results.P4 || null, results.P5 || null, 
         results.P6 || null, results.P7 || null, results.P8 || null, results.P9 || null, results.P10 || null,
         results.P11 || null, results.P12 || null, results.P13 || null, results.P14 || null, results.P15 || null,
         results.P16 || null, results.P17 || null, results.P18 || null, results.P19 || null, results.P20 || null,
     ];
+    
     queryDB(res, query, values);
 });
+
 ///'SELECT * FROM forumTopics'
 app.get('/news/forum-topics', (req, res) => {
     queryDB(res, `SELECT tc.topicId, u.username, tc.userId, tc.topicTitle, tc.topicContent, tc.date FROM forumTopics tc JOIN user u ON tc.userId = u.id`);
@@ -281,6 +286,34 @@ app.delete('/news/forum-comments/:commentId', (req, res) => {
         res.status(204).end();  // HTTP 204 - No Content (Nincs tartalom)
     });
 });
+app.delete('/news/delete-report/:topicId', (req, res) => {
+    const topicId = req.params.topicId;
+
+    // Ellenőrizd először, hogy létezik-e ilyen report
+    const checkQuery = 'SELECT * FROM topicReports WHERE topicId = ?';
+    queryDB(res, checkQuery, [topicId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Database error occurred.' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Report not found.' });
+        }
+
+        // Ha van report, töröld
+        const deleteQuery = 'DELETE FROM topicReports WHERE topicId = ?';
+        queryDB(res, deleteQuery, [topicId], (err, deleteResult) => {
+            if (err) {
+                console.error('Database error:', err);
+                return res.status(500).json({ error: 'Database error occurred during deletion.' });
+            }
+
+            res.status(204).end();
+        });
+    });
+});
+
 // POST a new forum topic
 app.post('/news/forum-topics', (req, res) => {
     const { userId, topicTitle, topicContent, date } = req.body;
@@ -383,7 +416,7 @@ app.post('/news/login', (req, res) => {
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
 
-            const token = jwt.sign({ id: user.id, username: user.username }, 'secret_key', { expiresIn: '1h' });
+            const token = jwt.sign({ id: user.id, username: user.username }, 'secret_key', { expiresIn: '72h' });
             res.json({ token, username: user.username, permission: user.permission });
         });
     });

@@ -1,0 +1,124 @@
+### GET Race Schedule
+GET http://localhost:3002/news/race-schedule
+
+### GET Track Info
+GET http://localhost:3002/news/trackinfo?id=1
+
+### GET Circuit Datas
+GET http://localhost:3002/news/circuitdatas?id=1
+
+### GET Driver Standings
+GET http://localhost:3002/news/driver-standlist
+
+### GET Constructor Standings
+GET http://localhost:3002/news/constructor-standlist
+
+### GET Season Race Results
+GET http://localhost:3002/news/season-race-results
+
+### GET Race Results
+GET http://localhost:3002/news/race-results
+
+### POST Save Race Results
+POST http://localhost:3002/news/save-race-results
+Content-Type: application/json
+
+{
+    "raceId": "au",
+    "type": 1,
+    "results": {
+        "P1": 1,
+        "P2": 2,
+        "P3": 3,
+        "P4": 4,
+        "P5": 5,
+        "P6": 6,
+        "P7": 7,
+        "P8": 8,
+        "P9": 9,
+        "P10": 10,
+        "P11": 11,
+        "P12": 12,
+        "P13": 13,
+        "P14": 14,
+        "P15": 15,
+        "P16": 16,
+        "P17": 17,
+        "P18": 18,
+        "P19": 19,
+        "P20": 20
+        
+    }
+}
+
+### GET Forum Topics
+GET http://localhost:3002/news/forum-topics
+
+### GET Forum Topic Details
+GET http://localhost:3002/news/forum-topics/1
+
+### GET Forum Comments
+GET http://localhost:3002/news/forum-comments/1
+
+### GET Load Reports
+GET http://localhost:3002/news/load-reports
+
+### DELETE Forum Topic
+DELETE http://localhost:3002/news/forum-topics/3
+
+### DELETE Forum Comment
+DELETE http://localhost:3002/news/forum-comments/1
+
+###
+DELETE http://localhost:3002/news/delete-report/3
+### POST Create Forum Topic
+POST http://localhost:3002/news/forum-topics
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "topicTitle": "New Topic",
+    "topicContent": "This is a new topic content",
+    "date": "2025-03-23"
+}
+
+### POST Upload Comment
+POST http://localhost:3002/news/upload-comment
+Content-Type: application/json
+
+{
+    "topicId": 1,
+    "userId": 2,
+    "commentContent": "This is a new comment",
+    "date": "2025-03-23"
+}
+
+### POST Report Topic
+POST http://localhost:3002/news/report-topic
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTc0MjczODYxMywiZXhwIjoxNzQyNzQyMjEzfQ.Ti9jrOhxLxr6znr5K8OMT3_M-S07TMSVX37RkaueWQg
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "topicId": 1,
+    "date": "2025-03-23"
+}
+
+### POST Register
+POST http://localhost:3002/news/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+
+### POST Login
+POST http://localhost:3002/news/login
+Content-Type: application/json
+
+{
+    "email": "testuser@example.com",
+    "password": "password123"
+}
