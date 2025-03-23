@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+require('dotenv').config(); // .env fájl beolvasása
 
 // Importáljuk az al-szervereket (ezek mind külön porton futnak)
 const hubServer = require('./hub/server');
