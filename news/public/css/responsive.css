@@ -329,6 +329,7 @@
     /*layouts page*/
     .container{
         margin: 20px 50px;
+        flex-direction: column;
     }
     .section-container{
         flex-direction: column;
@@ -426,6 +427,7 @@
     /*layouts page*/
     .container{
         margin: 10px 25px;
+        flex-direction: column;
     }
     .section-container{
         flex-direction: column;

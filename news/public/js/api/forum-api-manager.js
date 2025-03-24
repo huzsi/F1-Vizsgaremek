@@ -200,7 +200,7 @@ async function loadComments(topicId) {
             // Convert UTC to local time
             const commentDate = new Date(data.date);
             const formattedDate = commentDate.toLocaleString();  // Localized date format
-
+           
             return `<div class="comment">
                         <p>${data.commentContent}</p>
                         <p>By: ${data.username} <span>${formattedDate}</span></p>

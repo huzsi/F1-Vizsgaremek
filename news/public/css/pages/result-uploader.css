@@ -1,3 +1,20 @@
 .container{
     margin: 25px 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form div{
+    padding: 5px;
+    
+}
+label{
+    padding: 0 5px;
 }
