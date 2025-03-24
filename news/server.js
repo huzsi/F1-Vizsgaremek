@@ -249,6 +249,9 @@ app.get('/news/forum-comments/:topicId', (req, res) => {
         res.json(result);
     });
 });
+app.get('/news/forum-comments', (req, res) => {
+    queryDB(res, 'SELECT * FROM topicComments' );
+});
 app.get('/news/load-reports', (req, res) => {
     queryDB(res, 'SELECT tr.reportId, tr.topicId , u.username, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
 })
@@ -286,21 +289,11 @@ app.delete('/news/forum-comments/:commentId', (req, res) => {
         res.status(204).end();  // HTTP 204 - No Content (Nincs tartalom)
     });
 });
-app.delete('/news/delete-report/:topicId', (req, res) => {
+app.delete('/news/delete-reports/:topicId', (req, res) => {
     const topicId = req.params.topicId;
 
     // Ellenőrizd először, hogy létezik-e ilyen report
-    const checkQuery = 'SELECT * FROM topicReports WHERE topicId = ?';
-    queryDB(res, checkQuery, [topicId], (err, result) => {
-        if (err) {
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Database error occurred.' });
-        }
-
-        if (result.length === 0) {
-            return res.status(404).json({ error: 'Report not found.' });
-        }
-
+   
         // Ha van report, töröld
         const deleteQuery = 'DELETE FROM topicReports WHERE topicId = ?';
         queryDB(res, deleteQuery, [topicId], (err, deleteResult) => {
@@ -311,7 +304,7 @@ app.delete('/news/delete-report/:topicId', (req, res) => {
 
             res.status(204).end();
         });
-    });
+   
 });
 
 // POST a new forum topic
