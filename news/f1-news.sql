@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: localhost
--- Létrehozás ideje: 2025. Már 23. 21:25
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Már 24. 14:28
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,13 +26,12 @@ USE `f1-news`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `circuitDatas`
+-- Tábla szerkezet ehhez a táblához `circuitdatas`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:38
+-- Létrehozva: 2025. Már 24. 12:49
 --
 
-CREATE TABLE `circuitDatas` (
+CREATE TABLE `circuitdatas` (
   `id` varchar(5) DEFAULT NULL,
   `firstGP` year(4) DEFAULT NULL,
   `lapNumber` int(11) DEFAULT NULL,
@@ -44,16 +43,16 @@ CREATE TABLE `circuitDatas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `circuitDatas`:
+-- TÁBLA KAPCSOLATAI `circuitdatas`:
 --   `id`
---       `raceNames` -> `id`
+--       `racenames` -> `id`
 --
 
 --
--- A tábla adatainak kiíratása `circuitDatas`
+-- A tábla adatainak kiíratása `circuitdatas`
 --
 
-INSERT INTO `circuitDatas` (`id`, `firstGP`, `lapNumber`, `length`, `raceDistance`, `record`, `driver`, `recordYear`) VALUES
+INSERT INTO `circuitdatas` (`id`, `firstGP`, `lapNumber`, `length`, `raceDistance`, `record`, `driver`, `recordYear`) VALUES
 ('au', '1996', 58, 5.278, 306.124, '1:19.813', 'LEC', '2024'),
 ('cn', '2004', 56, 5.451, 305.066, '1:32.238', 'MSC', '2004'),
 ('jp', '1987', 53, 5.807, 307.471, '1:30.983', 'HAM', '2019'),
@@ -82,26 +81,25 @@ INSERT INTO `circuitDatas` (`id`, `firstGP`, `lapNumber`, `length`, `raceDistanc
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `constructorNames`
+-- Tábla szerkezet ehhez a táblához `constructornames`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:38
+-- Létrehozva: 2025. Már 24. 12:49
 --
 
-CREATE TABLE `constructorNames` (
+CREATE TABLE `constructornames` (
   `constructorId` int(11) NOT NULL,
   `constructorName` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `constructorNames`:
+-- TÁBLA KAPCSOLATAI `constructornames`:
 --
 
 --
--- A tábla adatainak kiíratása `constructorNames`
+-- A tábla adatainak kiíratása `constructornames`
 --
 
-INSERT INTO `constructorNames` (`constructorId`, `constructorName`) VALUES
+INSERT INTO `constructornames` (`constructorId`, `constructorName`) VALUES
 (1, 'McLaren'),
 (2, 'Ferrari'),
 (3, 'Red Bull Racing'),
@@ -116,13 +114,12 @@ INSERT INTO `constructorNames` (`constructorId`, `constructorName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `driverNames`
+-- Tábla szerkezet ehhez a táblához `drivernames`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:38
+-- Létrehozva: 2025. Már 24. 12:49
 --
 
-CREATE TABLE `driverNames` (
+CREATE TABLE `drivernames` (
   `driverId` int(11) NOT NULL,
   `driverName` varchar(255) DEFAULT NULL,
   `constructorId` int(11) DEFAULT NULL,
@@ -130,16 +127,16 @@ CREATE TABLE `driverNames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `driverNames`:
+-- TÁBLA KAPCSOLATAI `drivernames`:
 --   `constructorId`
---       `constructorNames` -> `constructorId`
+--       `constructornames` -> `constructorId`
 --
 
 --
--- A tábla adatainak kiíratása `driverNames`
+-- A tábla adatainak kiíratása `drivernames`
 --
 
-INSERT INTO `driverNames` (`driverId`, `driverName`, `constructorId`, `constructor`) VALUES
+INSERT INTO `drivernames` (`driverId`, `driverName`, `constructorId`, `constructor`) VALUES
 (1, 'Oscar Piastri', 1, 'mclaren'),
 (2, 'Lando Norris', 1, 'mclaren'),
 (3, 'Charles Leclerc', 2, 'ferrari'),
@@ -164,13 +161,13 @@ INSERT INTO `driverNames` (`driverId`, `driverName`, `constructorId`, `construct
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `forumTopics`
+-- Tábla szerkezet ehhez a táblához `forumtopics`
 --
--- Létrehozva: 2025. Már 23. 20:21
--- Utolsó frissítés: 2025. Már 23. 20:23
+-- Létrehozva: 2025. Már 24. 13:04
+-- Utolsó frissítés: 2025. Már 24. 13:08
 --
 
-CREATE TABLE `forumTopics` (
+CREATE TABLE `forumtopics` (
   `topicId` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `topicTitle` varchar(255) DEFAULT NULL,
@@ -179,30 +176,28 @@ CREATE TABLE `forumTopics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `forumTopics`:
---   `userId`
---       `user` -> `id`
+-- TÁBLA KAPCSOLATAI `forumtopics`:
 --
 
 --
--- A tábla adatainak kiíratása `forumTopics`
+-- A tábla adatainak kiíratása `forumtopics`
 --
 
-INSERT INTO `forumTopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
+INSERT INTO `forumtopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
 (1, 0, 'Australia', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-19 13:04:17'),
 (3, 1, 'Leclerc and Hamilton DSQ', 'What do you think, was the disqualification of the two pilots justified?', '2025-03-23 20:22:41'),
-(4, 0, 'China', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-23 20:23:05');
+(4, 0, 'China', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-23 20:23:05'),
+(5, 2, 'asdad', 'dasdasd', '2025-03-24 13:08:29');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `raceDates`
+-- Tábla szerkezet ehhez a táblához `racedates`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:32
+-- Létrehozva: 2025. Már 24. 12:49
 --
 
-CREATE TABLE `raceDates` (
+CREATE TABLE `racedates` (
   `id` varchar(5) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   `event1` datetime DEFAULT NULL,
@@ -213,16 +208,16 @@ CREATE TABLE `raceDates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `raceDates`:
+-- TÁBLA KAPCSOLATAI `racedates`:
 --   `id`
---       `raceNames` -> `id`
+--       `racenames` -> `id`
 --
 
 --
--- A tábla adatainak kiíratása `raceDates`
+-- A tábla adatainak kiíratása `racedates`
 --
 
-INSERT INTO `raceDates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `event5`) VALUES
+INSERT INTO `racedates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `event5`) VALUES
 ('ae', 1, '2025-12-05 10:30:00', '2025-12-05 14:00:00', '2025-12-06 11:30:00', '2025-12-06 15:00:00', '2025-12-07 14:00:00'),
 ('at', 1, '2025-06-27 13:30:00', '2025-06-27 17:00:00', '2025-06-28 12:30:00', '2025-06-28 16:00:00', '2025-06-29 15:00:00'),
 ('au', 1, '2025-03-14 02:30:00', '2025-03-14 06:00:00', '2025-03-15 02:30:00', '2025-03-15 06:00:00', '2025-03-16 05:00:00'),
@@ -251,13 +246,12 @@ INSERT INTO `raceDates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `raceNames`
+-- Tábla szerkezet ehhez a táblához `racenames`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:32
+-- Létrehozva: 2025. Már 24. 12:49
 --
 
-CREATE TABLE `raceNames` (
+CREATE TABLE `racenames` (
   `raceNumber` int(11) NOT NULL,
   `id` varchar(5) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -266,14 +260,14 @@ CREATE TABLE `raceNames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `raceNames`:
+-- TÁBLA KAPCSOLATAI `racenames`:
 --
 
 --
--- A tábla adatainak kiíratása `raceNames`
+-- A tábla adatainak kiíratása `racenames`
 --
 
-INSERT INTO `raceNames` (`raceNumber`, `id`, `name`, `fullname`, `trackName`) VALUES
+INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullname`, `trackName`) VALUES
 (25, 'ae', 'Abu Dhabi', 'FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025', 'Yas Marina Circuit'),
 (11, 'at', 'Austria', 'FORMULA 1 MSC CRUISES AUSTRIAN GRAND PRIX 2025', 'Red Bull Ring'),
 (1, 'au', 'Australia', 'FORMULA 1 AUSTRALIAN GRAND PRIX 2025', 'Albert Park Grand Prix Circuit'),
@@ -302,13 +296,13 @@ INSERT INTO `raceNames` (`raceNumber`, `id`, `name`, `fullname`, `trackName`) VA
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `seasonRaceResult`
+-- Tábla szerkezet ehhez a táblához `seasonraceresult`
 --
--- Létrehozva: 2025. Már 23. 18:30
--- Utolsó frissítés: 2025. Már 23. 18:39
+-- Létrehozva: 2025. Már 24. 12:49
+-- Utolsó frissítés: 2025. Már 24. 13:27
 --
 
-CREATE TABLE `seasonRaceResult` (
+CREATE TABLE `seasonraceresult` (
   `id` int(11) NOT NULL,
   `raceId` varchar(5) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
@@ -335,68 +329,70 @@ CREATE TABLE `seasonRaceResult` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `seasonRaceResult`:
+-- TÁBLA KAPCSOLATAI `seasonraceresult`:
 --   `raceId`
---       `raceNames` -> `id`
+--       `racenames` -> `id`
 --   `P9`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P10`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P11`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P12`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P13`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P14`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P15`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P16`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P17`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P18`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P1`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P19`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P20`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P2`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P3`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P4`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P5`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P6`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P7`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --   `P8`
---       `driverNames` -> `driverId`
+--       `drivernames` -> `driverId`
 --
 
 --
--- A tábla adatainak kiíratása `seasonRaceResult`
+-- A tábla adatainak kiíratása `seasonraceresult`
 --
 
-INSERT INTO `seasonRaceResult` (`id`, `raceId`, `type`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
-(1, 'au', 1, 2, 5, 7, 8, 17, 9, 19, 3, 1, 4, 11, 14, 15, 16, 6, 20, 10, 18, 12, 13);
+INSERT INTO `seasonraceresult` (`id`, `raceId`, `type`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`, `P10`, `P11`, `P12`, `P13`, `P14`, `P15`, `P16`, `P17`, `P18`, `P19`, `P20`) VALUES
+(1, 'au', 1, 2, 5, 7, 8, 17, 9, 19, 3, 1, 4, 11, 14, 15, 16, 6, 20, 10, 18, 12, 13),
+(2, 'cn', 1, 1, 2, 7, 5, 15, 8, 17, 16, 9, 18, 13, 6, 12, 20, 19, 14, 10, 3, 4, 11),
+(3, 'cn', 2, 4, 1, 5, 7, 3, 14, 8, 2, 9, 10, 17, 11, 13, 6, 16, 15, 18, 20, 19, 12);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `topicComments`
+-- Tábla szerkezet ehhez a táblához `topiccomments`
 --
--- Létrehozva: 2025. Már 23. 20:23
--- Utolsó frissítés: 2025. Már 23. 20:23
+-- Létrehozva: 2025. Már 24. 13:05
+-- Utolsó frissítés: 2025. Már 24. 13:13
 --
 
-CREATE TABLE `topicComments` (
+CREATE TABLE `topiccomments` (
   `topicId` int(11) NOT NULL,
   `commentId` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
@@ -405,23 +401,28 @@ CREATE TABLE `topicComments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `topicComments`:
+-- TÁBLA KAPCSOLATAI `topiccomments`:
 --   `topicId`
---       `forumTopics` -> `topicId`
---   `userId`
---       `user` -> `id`
+--       `forumtopics` -> `topicId`
 --
+
+--
+-- A tábla adatainak kiíratása `topiccomments`
+--
+
+INSERT INTO `topiccomments` (`topicId`, `commentId`, `userId`, `commentContent`, `date`) VALUES
+(1, 6, 1, 'a', '2025-03-24 13:13:13'),
+(1, 7, 1, 'ab', '2025-03-24 13:13:16');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `topicReports`
+-- Tábla szerkezet ehhez a táblához `topicreports`
 --
--- Létrehozva: 2025. Már 23. 20:23
--- Utolsó frissítés: 2025. Már 23. 20:19
+-- Létrehozva: 2025. Már 24. 13:04
 --
 
-CREATE TABLE `topicReports` (
+CREATE TABLE `topicreports` (
   `reportId` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `topicId` int(11) DEFAULT NULL,
@@ -429,11 +430,9 @@ CREATE TABLE `topicReports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `topicReports`:
+-- TÁBLA KAPCSOLATAI `topicreports`:
 --   `topicId`
---       `forumTopics` -> `topicId`
---   `userId`
---       `user` -> `id`
+--       `forumtopics` -> `topicId`
 --
 
 -- --------------------------------------------------------
@@ -441,8 +440,8 @@ CREATE TABLE `topicReports` (
 --
 -- Tábla szerkezet ehhez a táblához `user`
 --
--- Létrehozva: 2025. Már 23. 18:36
--- Utolsó frissítés: 2025. Már 23. 20:23
+-- Létrehozva: 2025. Már 24. 12:49
+-- Utolsó frissítés: 2025. Már 24. 13:08
 --
 
 CREATE TABLE `user` (
@@ -464,7 +463,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `permission`, `username`, `email`, `password`) VALUES
 (0, 1, 'System', '-', '-'),
 (1, 1, 'admin', 'admin@gmail.com', '$2b$10$zjkJojt2.zFCZfvjBO3X.u2nFe3ymMEQHVpgGrirmBMi1ThD.nss.'),
-(2, 3, 'user', 'user@gmail.com', '$2b$10$38/iOdPkThhnD5nl3SBxBO6HvbhcLEbcTs6QI.lIX8mJqILR605W.'),
 (3, 1, 'inancsikrisztian', 'inancsikrisztian@icloud.com', '$2b$10$2T1I1YvAZPy1rPIoPRlEIehmJ3BvBdbpbquqg1edkhqjxAoihYbFO'),
 (4, 1, 'fabiant0104', 'fabiantamas@huzsi.hu', '$2b$10$m8dOEaJyjcZ48HuqzPNODOOcn6yQtSvMPFELIiO.1ikFR96Iuctuy'),
 (5, 1, 'kisbartok2', 'kisbartok2@gmail.com', '$2b$10$E.PxiVSgsQd7pn7DpAGGweJ0P/s6IOKM2l5HY5bjUayQL4HnmjKVy'),
@@ -476,47 +474,47 @@ INSERT INTO `user` (`id`, `permission`, `username`, `email`, `password`) VALUES
 --
 
 --
--- A tábla indexei `circuitDatas`
+-- A tábla indexei `circuitdatas`
 --
-ALTER TABLE `circuitDatas`
+ALTER TABLE `circuitdatas`
   ADD KEY `id` (`id`);
 
 --
--- A tábla indexei `constructorNames`
+-- A tábla indexei `constructornames`
 --
-ALTER TABLE `constructorNames`
+ALTER TABLE `constructornames`
   ADD PRIMARY KEY (`constructorId`);
 
 --
--- A tábla indexei `driverNames`
+-- A tábla indexei `drivernames`
 --
-ALTER TABLE `driverNames`
+ALTER TABLE `drivernames`
   ADD PRIMARY KEY (`driverId`),
   ADD KEY `constructorId` (`constructorId`);
 
 --
--- A tábla indexei `forumTopics`
+-- A tábla indexei `forumtopics`
 --
-ALTER TABLE `forumTopics`
+ALTER TABLE `forumtopics`
   ADD PRIMARY KEY (`topicId`),
   ADD KEY `userId` (`userId`);
 
 --
--- A tábla indexei `raceDates`
+-- A tábla indexei `racedates`
 --
-ALTER TABLE `raceDates`
+ALTER TABLE `racedates`
   ADD KEY `id` (`id`);
 
 --
--- A tábla indexei `raceNames`
+-- A tábla indexei `racenames`
 --
-ALTER TABLE `raceNames`
+ALTER TABLE `racenames`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `seasonRaceResult`
+-- A tábla indexei `seasonraceresult`
 --
-ALTER TABLE `seasonRaceResult`
+ALTER TABLE `seasonraceresult`
   ADD PRIMARY KEY (`id`),
   ADD KEY `raceId` (`raceId`),
   ADD KEY `P1` (`P1`),
@@ -541,17 +539,17 @@ ALTER TABLE `seasonRaceResult`
   ADD KEY `P20` (`P20`);
 
 --
--- A tábla indexei `topicComments`
+-- A tábla indexei `topiccomments`
 --
-ALTER TABLE `topicComments`
+ALTER TABLE `topiccomments`
   ADD PRIMARY KEY (`commentId`),
   ADD KEY `topicId` (`topicId`),
   ADD KEY `userId` (`userId`);
 
 --
--- A tábla indexei `topicReports`
+-- A tábla indexei `topicreports`
 --
-ALTER TABLE `topicReports`
+ALTER TABLE `topicreports`
   ADD PRIMARY KEY (`reportId`),
   ADD KEY `topicId` (`topicId`),
   ADD KEY `userId` (`userId`);
@@ -567,27 +565,27 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT a táblához `forumTopics`
+-- AUTO_INCREMENT a táblához `forumtopics`
 --
-ALTER TABLE `forumTopics`
-  MODIFY `topicId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `forumtopics`
+  MODIFY `topicId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT a táblához `seasonRaceResult`
+-- AUTO_INCREMENT a táblához `seasonraceresult`
 --
-ALTER TABLE `seasonRaceResult`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `seasonraceresult`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `topicComments`
+-- AUTO_INCREMENT a táblához `topiccomments`
 --
-ALTER TABLE `topicComments`
-  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `topiccomments`
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT a táblához `topicReports`
+-- AUTO_INCREMENT a táblához `topicreports`
 --
-ALTER TABLE `topicReports`
+ALTER TABLE `topicreports`
   MODIFY `reportId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -601,68 +599,60 @@ ALTER TABLE `user`
 --
 
 --
--- Megkötések a táblához `circuitDatas`
+-- Megkötések a táblához `circuitdatas`
 --
-ALTER TABLE `circuitDatas`
-  ADD CONSTRAINT `circuitdatas_ibfk_1` FOREIGN KEY (`id`) REFERENCES `raceNames` (`id`);
+ALTER TABLE `circuitdatas`
+  ADD CONSTRAINT `circuitdatas_ibfk_1` FOREIGN KEY (`id`) REFERENCES `racenames` (`id`);
 
 --
--- Megkötések a táblához `driverNames`
+-- Megkötések a táblához `drivernames`
 --
-ALTER TABLE `driverNames`
-  ADD CONSTRAINT `drivernames_ibfk_1` FOREIGN KEY (`constructorId`) REFERENCES `constructorNames` (`constructorId`);
+ALTER TABLE `drivernames`
+  ADD CONSTRAINT `drivernames_ibfk_1` FOREIGN KEY (`constructorId`) REFERENCES `constructornames` (`constructorId`);
 
 --
--- Megkötések a táblához `forumTopics`
+-- Megkötések a táblához `racedates`
 --
-ALTER TABLE `forumTopics`
-  ADD CONSTRAINT `forumtopics_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+ALTER TABLE `racedates`
+  ADD CONSTRAINT `racedates_ibfk_1` FOREIGN KEY (`id`) REFERENCES `racenames` (`id`);
 
 --
--- Megkötések a táblához `raceDates`
+-- Megkötések a táblához `seasonraceresult`
 --
-ALTER TABLE `raceDates`
-  ADD CONSTRAINT `racedates_ibfk_1` FOREIGN KEY (`id`) REFERENCES `raceNames` (`id`);
+ALTER TABLE `seasonraceresult`
+  ADD CONSTRAINT `seasonraceresult_ibfk_1` FOREIGN KEY (`raceId`) REFERENCES `racenames` (`id`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_10` FOREIGN KEY (`P9`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_11` FOREIGN KEY (`P10`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_12` FOREIGN KEY (`P11`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_13` FOREIGN KEY (`P12`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_14` FOREIGN KEY (`P13`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_15` FOREIGN KEY (`P14`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_16` FOREIGN KEY (`P15`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_17` FOREIGN KEY (`P16`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_18` FOREIGN KEY (`P17`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_19` FOREIGN KEY (`P18`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_2` FOREIGN KEY (`P1`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_20` FOREIGN KEY (`P19`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_21` FOREIGN KEY (`P20`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_3` FOREIGN KEY (`P2`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_4` FOREIGN KEY (`P3`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_5` FOREIGN KEY (`P4`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_6` FOREIGN KEY (`P5`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_7` FOREIGN KEY (`P6`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_8` FOREIGN KEY (`P7`) REFERENCES `drivernames` (`driverId`),
+  ADD CONSTRAINT `seasonraceresult_ibfk_9` FOREIGN KEY (`P8`) REFERENCES `drivernames` (`driverId`);
 
 --
--- Megkötések a táblához `seasonRaceResult`
+-- Megkötések a táblához `topiccomments`
 --
-ALTER TABLE `seasonRaceResult`
-  ADD CONSTRAINT `seasonraceresult_ibfk_1` FOREIGN KEY (`raceId`) REFERENCES `raceNames` (`id`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_10` FOREIGN KEY (`P9`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_11` FOREIGN KEY (`P10`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_12` FOREIGN KEY (`P11`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_13` FOREIGN KEY (`P12`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_14` FOREIGN KEY (`P13`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_15` FOREIGN KEY (`P14`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_16` FOREIGN KEY (`P15`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_17` FOREIGN KEY (`P16`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_18` FOREIGN KEY (`P17`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_19` FOREIGN KEY (`P18`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_2` FOREIGN KEY (`P1`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_20` FOREIGN KEY (`P19`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_21` FOREIGN KEY (`P20`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_3` FOREIGN KEY (`P2`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_4` FOREIGN KEY (`P3`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_5` FOREIGN KEY (`P4`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_6` FOREIGN KEY (`P5`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_7` FOREIGN KEY (`P6`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_8` FOREIGN KEY (`P7`) REFERENCES `driverNames` (`driverId`),
-  ADD CONSTRAINT `seasonraceresult_ibfk_9` FOREIGN KEY (`P8`) REFERENCES `driverNames` (`driverId`);
+ALTER TABLE `topiccomments`
+  ADD CONSTRAINT `topiccomments_ibfk_1` FOREIGN KEY (`topicId`) REFERENCES `forumtopics` (`topicId`);
 
 --
--- Megkötések a táblához `topicComments`
+-- Megkötések a táblához `topicreports`
 --
-ALTER TABLE `topicComments`
-  ADD CONSTRAINT `topiccomments_ibfk_1` FOREIGN KEY (`topicId`) REFERENCES `forumTopics` (`topicId`),
-  ADD CONSTRAINT `topiccomments_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
-
---
--- Megkötések a táblához `topicReports`
---
-ALTER TABLE `topicReports`
-  ADD CONSTRAINT `topicreports_ibfk_1` FOREIGN KEY (`topicId`) REFERENCES `forumTopics` (`topicId`),
-  ADD CONSTRAINT `topicreports_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+ALTER TABLE `topicreports`
+  ADD CONSTRAINT `topicreports_ibfk_1` FOREIGN KEY (`topicId`) REFERENCES `forumtopics` (`topicId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
