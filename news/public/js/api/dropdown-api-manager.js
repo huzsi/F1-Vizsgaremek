@@ -108,8 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3>Season is not started yet. Come back when first race is finished.</h3>
                     `;
                 } else {
+                    console.log(resultData);
                     resultData.reverse().forEach((results, index) => {
-                        if (index !== 3) {
+                        if (index !== 3 && results.type !== 2) {
                             resultContent.insertAdjacentHTML('beforeend', `
                                 <div>
                                     <a href="/news/raceresult.html?id=${results.raceNumber}">
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <legend><p>Round ${results.raceNumber}</p></legend>
                                             <img class="flag" src="/static/img/flags/${results.raceId}.svg" alt="${results.name}">
                                             <h4>${results.raceName}</h4>
-                                            <p>${results.type === 2 ? 'Sprint' : 'Race'}</p>
+                                            <p>Race</p>
                                         </fieldset>
                                     </a>
                                 </div>
