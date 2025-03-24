@@ -66,7 +66,6 @@ async function loadTopics() {
         topicDiv.innerHTML = `<a href="/news/forum-layout.html/topic?id=${data.topicId}">
                                 <h2>${data.topicTitle}</h2>
                                 <p>Opened: ${data.username}</p>
-                                
                               </a>`;
         section.appendChild(topicDiv);
     });
@@ -326,29 +325,22 @@ async function deleteTopic(topicId) {
     if (!confirmation) return;
 
     try {
-        // Ellenőrzés, hogy vannak-e kommentek
-        // Ellenőrzés, hogy vannak-e kommentek
         const commentsResponse = await fetch(`/news/forum-comments/${topicId}`);
         let commentsData = await commentsResponse.json();
 
-        // Mindig tömbbé alakítás
         commentsData = Array.isArray(commentsData) ? commentsData : [commentsData];
 
         if (commentsData.length > 0) {
-            // Kommentek törlése
             for (const comment of commentsData) {
                 await fetch(`/news/forum-comments/${comment.commentId}`, { method: 'DELETE' });
             }
         }
 
-        // Ellenőrzés, hogy vannak-e reportok
         const reportsResponse = await fetch(`/news/load-reports`);
         let reportsData = await reportsResponse.json();
 
-        // Mindig tömbbé alakítás
         reportsData = Array.isArray(reportsData) ? reportsData : [reportsData];
 
-        // Szűrés topicId alapján
         const topicReports = reportsData.filter(report => report.topicId === topicId);
 
         console.log(topicReports);
@@ -362,8 +354,6 @@ async function deleteTopic(topicId) {
             }
         }
 
-
-        // Téma törlése
         const response = await fetch(`/news/forum-topics/${topicId}`, { method: 'DELETE' });
         const data = await response.json();
 

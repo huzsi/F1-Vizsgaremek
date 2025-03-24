@@ -89,6 +89,22 @@
                         // Ha nem erősítette meg, kilépünk a törlés folyamatából
                         return;
                     }
+                    try{
+                        const forumdatas = await fetch('/news/forum-topics', error);
+                        const commentdatas = await fetch('/news/forum-comments',error);
+                        const reportdatas = await fetch('/news/load-reports', error);
+                        const profiledatas = await fetch('/news/get-profile', {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`  // Bearer token
+                            }
+                        });
+                        
+
+                    }
+                    catch(error){
+                        console.error('Error fetching profile interactions:', error);
+                    }
                     try {
                         const response = await fetch('/news/delete-account', {
                             method: 'DELETE',
