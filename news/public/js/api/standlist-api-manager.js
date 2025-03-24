@@ -178,11 +178,13 @@ function updateRaceResults(resultData) {
         `;
 
         resultData.forEach(results => {
+            const raceType = results.type === 1 ? 'Race' : results.type === 2 ? 'Sprint' : 'Unknown'; // Meghatározzuk a type alapján
             raceTable.insertAdjacentHTML('beforeend', `
                 <tr>
-                    <td><a href="/news/raceresult.html?id=${results.raceId}">${results.raceName}</a></td>
+                    <td><a href="/news/raceresult.html?id=${results.raceId}">${results.raceName} - ${raceType}</a></td>
                 </tr>
             `);
         });
     }
 }
+
