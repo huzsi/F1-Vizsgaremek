@@ -1,15 +1,3 @@
-/**Teendők:
- *      scrollmenü elemek méretezése reszponzivitásnál. //Suliban megvan csinálva
- *      Profilkép lehetőség. //suliban
- *      
- *      admin profil esetén oda is egy adminpanel: reportok miatt.
- *      track-html - ha egy futam véget ért akkor a végeredményt lehessen megtekinteni (visszaszámláló helyére).
- * 
- * Megoldani, hogy egy adatsor esetén is belegyenek töltve adatok, ne csak 2 vagy annál több. (Race result, Fórum - commentek, result.html).
- *      adatbázis bővítés - utolsó 5 futamgyőztes. //Suliban megcsinálom
- *      Where can I watch - gomb megcsinálása.
- *      animációk.
- */
 const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
@@ -59,7 +47,7 @@ app.use(cors());
 const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'ViCu3972@',
     database: 'F1-news'
 });
 

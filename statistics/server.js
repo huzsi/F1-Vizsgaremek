@@ -5,9 +5,6 @@ const path = require("path");
 const axios = require("axios");
 require("dotenv").config({ path: path.join(__dirname, ".env") }); // <- Itt direkt beállítjuk az elérési utat
 
-console.log("🔑 API kulcs:", process.env.OPENAI_API); // <- Ezzel ellenőrzöd, hogy betöltötte-e
-
-
 const app = express();
 const port = 3001;
 
