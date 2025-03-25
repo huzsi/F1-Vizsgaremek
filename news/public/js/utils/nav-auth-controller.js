@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let navLinks = `
         <ul class="underline-animation">
             <li><a href="/news/index.html" class="${getActiveClass('/news/index.html')}">Home</a></li>
-            <li><a href="#" class="${getActiveClass('/news/stats.html')}">Stats</a></li>
+            <li><a target="_blank" href="http://localhost:3001" class="${getActiveClass('/news/stats.html')}">Stats</a></li>
             <li><a href="/news/about.html" class="${getActiveClass('/news/about.html')}">About</a></li>
             <li><a href="/news/forum-layout.html/index" class="${getActiveClass('/news/forum-layout.html/index')}">Forum</a></li>
         </ul>`;

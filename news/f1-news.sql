@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 24. 14:28
+-- Létrehozás ideje: 2025. Már 25. 08:29
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.0.30
 
@@ -28,8 +28,6 @@ USE `f1-news`;
 --
 -- Tábla szerkezet ehhez a táblához `circuitdatas`
 --
--- Létrehozva: 2025. Már 24. 12:49
---
 
 CREATE TABLE `circuitdatas` (
   `id` varchar(5) DEFAULT NULL,
@@ -41,12 +39,6 @@ CREATE TABLE `circuitdatas` (
   `driver` varchar(5) DEFAULT NULL,
   `recordYear` year(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `circuitdatas`:
---   `id`
---       `racenames` -> `id`
---
 
 --
 -- A tábla adatainak kiíratása `circuitdatas`
@@ -83,17 +75,11 @@ INSERT INTO `circuitdatas` (`id`, `firstGP`, `lapNumber`, `length`, `raceDistanc
 --
 -- Tábla szerkezet ehhez a táblához `constructornames`
 --
--- Létrehozva: 2025. Már 24. 12:49
---
 
 CREATE TABLE `constructornames` (
   `constructorId` int(11) NOT NULL,
   `constructorName` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `constructornames`:
---
 
 --
 -- A tábla adatainak kiíratása `constructornames`
@@ -116,8 +102,6 @@ INSERT INTO `constructornames` (`constructorId`, `constructorName`) VALUES
 --
 -- Tábla szerkezet ehhez a táblához `drivernames`
 --
--- Létrehozva: 2025. Már 24. 12:49
---
 
 CREATE TABLE `drivernames` (
   `driverId` int(11) NOT NULL,
@@ -125,12 +109,6 @@ CREATE TABLE `drivernames` (
   `constructorId` int(11) DEFAULT NULL,
   `constructor` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `drivernames`:
---   `constructorId`
---       `constructornames` -> `constructorId`
---
 
 --
 -- A tábla adatainak kiíratása `drivernames`
@@ -163,9 +141,6 @@ INSERT INTO `drivernames` (`driverId`, `driverName`, `constructorId`, `construct
 --
 -- Tábla szerkezet ehhez a táblához `forumtopics`
 --
--- Létrehozva: 2025. Már 24. 13:04
--- Utolsó frissítés: 2025. Már 24. 13:08
---
 
 CREATE TABLE `forumtopics` (
   `topicId` int(11) NOT NULL,
@@ -176,25 +151,18 @@ CREATE TABLE `forumtopics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `forumtopics`:
---
-
---
 -- A tábla adatainak kiíratása `forumtopics`
 --
 
 INSERT INTO `forumtopics` (`topicId`, `userId`, `topicTitle`, `topicContent`, `date`) VALUES
 (1, 0, 'Australia', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-19 13:04:17'),
 (3, 1, 'Leclerc and Hamilton DSQ', 'What do you think, was the disqualification of the two pilots justified?', '2025-03-23 20:22:41'),
-(4, 0, 'China', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-23 20:23:05'),
-(5, 2, 'asdad', 'dasdasd', '2025-03-24 13:08:29');
+(4, 0, 'China', 'Welcome to the official discussion topic for race! Share your thoughts, opinions, and experiences about the race events.', '2025-03-23 20:23:05');
 
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `racedates`
---
--- Létrehozva: 2025. Már 24. 12:49
 --
 
 CREATE TABLE `racedates` (
@@ -206,12 +174,6 @@ CREATE TABLE `racedates` (
   `event4` datetime DEFAULT NULL,
   `event5` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `racedates`:
---   `id`
---       `racenames` -> `id`
---
 
 --
 -- A tábla adatainak kiíratása `racedates`
@@ -248,8 +210,6 @@ INSERT INTO `racedates` (`id`, `type`, `event1`, `event2`, `event3`, `event4`, `
 --
 -- Tábla szerkezet ehhez a táblához `racenames`
 --
--- Létrehozva: 2025. Már 24. 12:49
---
 
 CREATE TABLE `racenames` (
   `raceNumber` int(11) NOT NULL,
@@ -258,10 +218,6 @@ CREATE TABLE `racenames` (
   `fullname` varchar(255) DEFAULT NULL,
   `trackName` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `racenames`:
---
 
 --
 -- A tábla adatainak kiíratása `racenames`
@@ -298,9 +254,6 @@ INSERT INTO `racenames` (`raceNumber`, `id`, `name`, `fullname`, `trackName`) VA
 --
 -- Tábla szerkezet ehhez a táblához `seasonraceresult`
 --
--- Létrehozva: 2025. Már 24. 12:49
--- Utolsó frissítés: 2025. Már 24. 13:27
---
 
 CREATE TABLE `seasonraceresult` (
   `id` int(11) NOT NULL,
@@ -329,52 +282,6 @@ CREATE TABLE `seasonraceresult` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- TÁBLA KAPCSOLATAI `seasonraceresult`:
---   `raceId`
---       `racenames` -> `id`
---   `P9`
---       `drivernames` -> `driverId`
---   `P10`
---       `drivernames` -> `driverId`
---   `P11`
---       `drivernames` -> `driverId`
---   `P12`
---       `drivernames` -> `driverId`
---   `P13`
---       `drivernames` -> `driverId`
---   `P14`
---       `drivernames` -> `driverId`
---   `P15`
---       `drivernames` -> `driverId`
---   `P16`
---       `drivernames` -> `driverId`
---   `P17`
---       `drivernames` -> `driverId`
---   `P18`
---       `drivernames` -> `driverId`
---   `P1`
---       `drivernames` -> `driverId`
---   `P19`
---       `drivernames` -> `driverId`
---   `P20`
---       `drivernames` -> `driverId`
---   `P2`
---       `drivernames` -> `driverId`
---   `P3`
---       `drivernames` -> `driverId`
---   `P4`
---       `drivernames` -> `driverId`
---   `P5`
---       `drivernames` -> `driverId`
---   `P6`
---       `drivernames` -> `driverId`
---   `P7`
---       `drivernames` -> `driverId`
---   `P8`
---       `drivernames` -> `driverId`
---
-
---
 -- A tábla adatainak kiíratása `seasonraceresult`
 --
 
@@ -388,9 +295,6 @@ INSERT INTO `seasonraceresult` (`id`, `raceId`, `type`, `P1`, `P2`, `P3`, `P4`, 
 --
 -- Tábla szerkezet ehhez a táblához `topiccomments`
 --
--- Létrehozva: 2025. Már 24. 13:05
--- Utolsó frissítés: 2025. Már 24. 13:13
---
 
 CREATE TABLE `topiccomments` (
   `topicId` int(11) NOT NULL,
@@ -400,26 +304,10 @@ CREATE TABLE `topiccomments` (
   `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
---
--- TÁBLA KAPCSOLATAI `topiccomments`:
---   `topicId`
---       `forumtopics` -> `topicId`
---
-
---
--- A tábla adatainak kiíratása `topiccomments`
---
-
-INSERT INTO `topiccomments` (`topicId`, `commentId`, `userId`, `commentContent`, `date`) VALUES
-(1, 6, 1, 'a', '2025-03-24 13:13:13'),
-(1, 7, 1, 'ab', '2025-03-24 13:13:16');
-
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `topicreports`
---
--- Létrehozva: 2025. Már 24. 13:04
 --
 
 CREATE TABLE `topicreports` (
@@ -429,19 +317,10 @@ CREATE TABLE `topicreports` (
   `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
---
--- TÁBLA KAPCSOLATAI `topicreports`:
---   `topicId`
---       `forumtopics` -> `topicId`
---
-
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `user`
---
--- Létrehozva: 2025. Már 24. 12:49
--- Utolsó frissítés: 2025. Már 24. 13:08
 --
 
 CREATE TABLE `user` (
@@ -451,10 +330,6 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- TÁBLA KAPCSOLATAI `user`:
---
 
 --
 -- A tábla adatainak kiíratása `user`
@@ -568,7 +443,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `forumtopics`
 --
 ALTER TABLE `forumtopics`
-  MODIFY `topicId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `topicId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `seasonraceresult`
@@ -580,7 +455,7 @@ ALTER TABLE `seasonraceresult`
 -- AUTO_INCREMENT a táblához `topiccomments`
 --
 ALTER TABLE `topiccomments`
-  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `topicreports`

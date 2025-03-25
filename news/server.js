@@ -471,3 +471,5 @@ app.get('/news/check-auth', authorize, (req, res) => {
     res.json({ loggedIn: true, username: req.user.username });
 });
 app.listen(port, () => console.log(`Server is running at: http://localhost:${port}`));
+
+module.exports = app;
