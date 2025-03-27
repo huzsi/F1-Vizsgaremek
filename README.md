@@ -24,8 +24,6 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 
 # Mappastruktúra
 ```
-├── .temp / # Olyan fájlok amik nem szükségesek az oldal működéséhez
-|    └── Bet Oldal /
 ├──  hub / # Az elosztó oldal fájljai
 |    └── client / # Frontend fájlok (HTML, CSS, FONTS, JS)       
 |        └── CSS / # Stílusfájlok
