@@ -4,6 +4,7 @@
 
 body {
     background-color: var(--carbon-black);
+    margin: 0 15px;
 }
 
 /*-------------------------HEADER--------------------------*/
@@ -220,6 +221,13 @@ footer {
     /*---------------------*/
     text-align: center;
     box-shadow: 0px 0px 10px 0px var(--warm-red);
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 50px;
 }
 
 /*------------------------FOOTER END------------------------*/

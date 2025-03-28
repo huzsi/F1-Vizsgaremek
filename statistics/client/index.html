@@ -92,6 +92,10 @@
                 <p>All legal rights and materials used, including images and fonts, are the property of F1.</p>
                 <p>All content and articles published are copyrighted and the property of their respective authors.</p>
             </div>
+            <div class="source">
+                <p>&copy; <span id="yearSpan"></span></p>
+                <p>Source: <a href="https://github.com/huzsi/F1-Vizsgaremek">Github</a></p>
+            </div>
         </footer>
     </div>
 
@@ -118,7 +122,16 @@
 
     <script src="static/JS/loading.js"></script>
 
+    <script>
+        const yearSpan = document.getElementById("yearSpan");
+        
+        function change(){
+            const now = new Date();
+            yearSpan.textContent = now.getFullYear();
+        }
 
+        change();
+    </script>
     <script src="https://kit.fontawesome.com/8c9be19cd8.js" crossorigin="anonymous"></script>
 </body>
 </html>

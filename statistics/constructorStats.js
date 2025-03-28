@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || 'ViCu3972@',
-  database: process.env.DB_NAME || 'f1stats'
+  database: process.env.DB_NAME || 'f1-stats'
 });
 
 module.exports = pool.promise();
