@@ -1,0 +1,59 @@
+/*-----------------------------
+* 
+* Responsive styles for each HTML file.
+*
+*-----------------------------
+*
+* Each page's responsive section is marked with a comment.
+* Along with the basic screen sizes, a 1700px breakpoint is included
+* because the appearance of some HTML files was not suitable for larger laptops.
+*
+*-----------------------------
+*Created by: Ináncsi Krisztián
+*Last updated: 2025-03-02
+*/
+
+@media (max-width: 1700px) {
+}
+
+@media (max-width: 1350px) {
+}
+
+@media (max-width: 1200px) { 
+    main a {
+        font-size: 48px;
+    }
+
+    footer div{
+        padding: 0 50px !important;
+    }
+}
+
+
+@media (max-width: 768px) { 
+    main {
+        flex-direction: column;
+        height: auto;
+    }
+
+    footer div{
+        padding: 0 50px !important;
+    }
+}
+
+@media (max-width: 576px) { 
+
+    main a {
+        font-size: 32px;
+    }
+
+    main {
+        flex-direction: column;
+        height: auto;
+    }
+
+    footer div{
+        padding: 0 20px !important;
+    }
+
+}

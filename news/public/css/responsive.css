@@ -451,6 +451,18 @@
     .top-nav, header{
         flex-direction: column;
     }
+
+    header > nav > ul {
+        flex-direction: column;
+        border: unset;
+    }
+
+    header > nav > ul > li {
+        border-right: unset;
+        padding: 0;
+        padding-bottom: 15px;
+    }
+
     .dropdown-content div{
         flex-direction: column;
         justify-content: center;
@@ -509,7 +521,7 @@
         margin: unset !important;
     }
     .track-img img {
-        height: 300px !important;
+        height: 200px !important;
         width: auto ;
     }
     
@@ -550,4 +562,7 @@
         padding: 25px 15px;
     }
 
+    footer > div {
+        padding: 0 40px !important; 
+    }
 }

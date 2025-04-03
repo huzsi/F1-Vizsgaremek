@@ -111,6 +111,12 @@ function calculateConstructorPoints(constructorData, results, driverConstructorM
     const constructorPoints = {};
     constructorData.forEach(constructor => {
         constructorPoints[constructor.constructor] = 0;
+        console.log('Constructor name:', constructor.constructor);
+    });
+
+    console.log("DEBUG - Constructor lista:");
+    constructorData.forEach(constructor => {
+        console.log("constructor.constructor:", constructor.constructor, "|| constructor.constructorName:", constructor.constructorName);
     });
 
     if (!Array.isArray(results)) {
@@ -130,6 +136,15 @@ function calculateConstructorPoints(constructorData, results, driverConstructorM
             }
         }
     });
+
+	// ?? Pontmódosítás a helyes nevekkel
+    if (constructorPoints['redbull'] !== undefined) {
+        constructorPoints['redbull'] -= 3;
+    }
+
+    if (constructorPoints['racingbulls'] !== undefined) {
+        constructorPoints['racingbulls'] += 3;
+    }
 
     return constructorPoints;
 }

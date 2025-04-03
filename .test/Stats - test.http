@@ -1,0 +1,39 @@
+
+### GET Pilot List
+GET http://localhost:3001/api/pilotList
+
+### GET Race Starts
+GET http://localhost:3001/api/raceStarts
+
+### GET Championship Standings
+GET http://localhost:3001/api/championshipStandings
+
+### GET Race Wins
+GET http://localhost:3001/api/raceWins
+
+### GET Podiums
+GET http://localhost:3001/api/podiums
+
+### GET Pole Positions
+GET http://localhost:3001/api/polePositions
+
+### GET Points
+GET http://localhost:3001/api/points
+
+### GET Constructor List
+GET http://localhost:3001/api/constructorList
+
+### GET Constructor Championships
+GET http://localhost:3001/api/constructorChampionship
+
+### GET Constructor Pole Positions
+GET http://localhost:3001/api/constructorPolePosition
+
+### GET Races by Year
+GET http://localhost:3001/races/2023
+
+### GET Season Stats
+GET http://localhost:3001/api/seasonStats?year=2023
+
+### GET Race Results
+GET http://localhost:3001/api/raceResults?raceId=5

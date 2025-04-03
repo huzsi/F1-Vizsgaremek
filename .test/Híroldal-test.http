@@ -1,0 +1,132 @@
+###
+GET http://localhost:3002/news/race-schedule
+###
+GET http://localhost:3002/news/trackinfo?id=1
+###
+GET http://localhost:3002/news/driver-standlist
+###
+GET http://localhost:3002/news/constructor-standlist
+###
+GET http://localhost:3002/news/season-race-results
+###
+GET http://localhost:3002/news/race-results
+###
+POST http://localhost:3002/news/save-race-results
+Content-Type: application/json
+
+{
+    "raceId": "jp",
+    "type": 1,
+    "results": {
+        "P1": 1,
+        "P2": 2,
+        "P3": 3,
+        "P4": 4,
+        "P5": 5,
+        "P6": 6,
+        "P7": 7,
+        "P8": 8,
+        "P9": 9,
+        "P10": 10,
+        "P11": 11,
+        "P12": 12,
+        "P13": 13,
+        "P14": 14,
+        "P15": 15,
+        "P16": 16,
+        "P17": 17,
+        "P18": 18,
+        "P19": 19,
+        "P20": 20
+        
+    }
+}
+###
+GET http://localhost:3002/news/forum-topics
+###
+GET http://localhost:3002/news/forum-topics/1
+###
+GET http://localhost:3002/news/forum-comments/1
+###
+GET http://localhost:3002/news/forum-comments
+### 
+DELETE http://localhost:3002/news/forum-topics/4
+### 
+DELETE http://localhost:3002/news/forum-comments/4
+### POST Create Forum Topic
+POST http://localhost:3002/news/forum-topics
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "topicTitle": "New Topic",
+    "topicContent": "This is a new topic content",
+    "date": "2025-03-23"
+}
+### POST Upload Comment
+POST http://localhost:3002/news/upload-comment
+Content-Type: application/json
+
+{
+    "topicId": 1,
+    "userId": 2,
+    "commentContent": "This is a new comment",
+    "date": "2025-03-23"
+}
+
+### POST Register
+POST http://localhost:3002/news/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+
+### POST Login
+POST http://localhost:3002/news/login
+Content-Type: application/json
+
+{
+    "email": "testuser@example.com",
+    "password": "password123"
+}
+###
+GET http://localhost:3002/news/get-profile
+###
+GET http://localhost:3002/news/get-all-profiles
+###
+PUT http://localhost:3002/news/update-permission
+Content-Type: application/json
+
+{
+  "permission": 1,
+  "id": 1
+}
+
+###
+PUT http://localhost:3002/news/update-username
+Content-Type: application/json
+
+{
+  "username": "newUsername"
+}
+
+###
+PUT http://localhost:3002/news/update-email
+Content-Type: application/json
+
+{
+  "email": "newemail@example.com"
+}
+
+###
+PUT http://localhost:3002/news/update-password
+Content-Type: application/json
+
+{
+    "password": "1234"
+}
+###
+DELETE http://localhost:3002/news/delete-account

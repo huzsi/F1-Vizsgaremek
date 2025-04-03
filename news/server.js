@@ -1,3 +1,5 @@
+/**Githubos verzió */
+
 const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
@@ -44,17 +46,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const conn = mysql.createConnection({
+const conn = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'ViCu3972@',
-    database: 'f1-news'
+    password: '',
+    database: 'f1-news',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-conn.connect(err => {
-    if (err) throw err;
-    console.log('MySQL connected...');
-});
 //Lekérdezések könnyítése érdekében:
 const queryDB = (res, query, params = []) => {
     conn.query(query, params, (err, results) => {
@@ -62,6 +63,7 @@ const queryDB = (res, query, params = []) => {
         res.json(results.length === 1 ? results[0] : results);
     });
 };
+
 //Token tiktosítás miatt, hogy a weboldal elérje a felhasználói lekérdezéseket.
 const authorize = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -80,7 +82,6 @@ const authorize = (req, res, next) => {
 };
 //A weboldal által használt aloldalak elérése:
 const servePage = (page) => (req, res) => res.sendFile(path.join(__dirname, 'public', 'html', `${page}.html`));
-app.get('/', servePage('start'));
 app.get('/news/loader.html', servePage('loader'));
 app.get('/news/index.html', servePage('index'));
 app.get('/news/about.html', servePage('about'));
@@ -167,7 +168,7 @@ app.get('/news/race-results', (req, res) => {
                     d11.driverName AS P11, d12.driverName AS P12, d13.driverName AS P13, d14.driverName AS P14, d15.driverName AS P15,
                     d16.driverName AS P16, d17.driverName AS P17, d18.driverName AS P18, d19.driverName AS P19,d20.driverName AS P20
                     FROM seasonRaceResult srr
-                    JOIN raceNames rn ON srr.raceId = rn.id
+                    JOIN racenames rn ON srr.raceId = rn.id
                     LEFT JOIN driverNames d1 ON srr.P1 = d1.driverId
                     LEFT JOIN driverNames d2 ON srr.P2 = d2.driverId
                     LEFT JOIN driverNames d3 ON srr.P3 = d3.driverId
@@ -240,9 +241,6 @@ app.get('/news/forum-comments/:topicId', (req, res) => {
 app.get('/news/forum-comments', (req, res) => {
     queryDB(res, 'SELECT * FROM topicComments' );
 });
-app.get('/news/load-reports', (req, res) => {
-    queryDB(res, 'SELECT tr.reportId, tr.topicId , u.username, ft.topicTitle , tr.date FROM topicReports tr JOIN user u ON tr.userId = u.id LEFT JOIN forumtopics ft ON tr.topicId = ft.topicId ORDER BY tr.date DESC;');
-})
 app.delete('/news/forum-topics/:topicId', (req, res) => {
     const { topicId } = req.params;  // Helyes destrukturálás
     const query = 'DELETE FROM forumTopics WHERE topicId = ?';
@@ -277,23 +275,6 @@ app.delete('/news/forum-comments/:commentId', (req, res) => {
         res.status(204).end();  // HTTP 204 - No Content (Nincs tartalom)
     });
 });
-app.delete('/news/delete-reports/:topicId', (req, res) => {
-    const topicId = req.params.topicId;
-
-    // Ellenőrizd először, hogy létezik-e ilyen report
-   
-        // Ha van report, töröld
-        const deleteQuery = 'DELETE FROM topicReports WHERE topicId = ?';
-        queryDB(res, deleteQuery, [topicId], (err, deleteResult) => {
-            if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({ error: 'Database error occurred during deletion.' });
-            }
-
-            res.status(204).end();
-        });
-   
-});
 
 // POST a new forum topic
 app.post('/news/forum-topics', (req, res) => {
@@ -324,19 +305,7 @@ app.post('/news/upload-comment', (req, res) => {
         res.status(201).json({ id: result.insertId, topicId, userId, commentContent, date });
     });
 });
-app.post('/news/report-topic', authorize, (req, res) => {
-    const { userId, topicId, date } = req.body;
-    const query = 'INSERT INTO topicReports (userId, topicId, date) VALUES (?, ?, ?)';
-    const params = [userId, topicId, date];
 
-    queryDB(res, query, params, (err, result) => {
-        if (err) {
-            console.error('Error inserting comment:', err);
-            return res.status(500).json({ error: 'Error inserting comment', details: err });
-        }
-        res.status(201).json({ id: result.insertId, topicId, userId, date });
-    });
-});
 app.post('/news/register', (req, res) => {
     const { username, email, password } = req.body;
 
