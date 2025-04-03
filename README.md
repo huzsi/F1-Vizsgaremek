@@ -47,7 +47,6 @@ Ez a weboldal egy átfogó Formula-1-es platform, ahol a látogatók egyrészt e
 |            └── api # API Javascript fájlok
 |            └── frontend # Frontend Javascript fájlok
 |            └── utils # Egyéb Javascript fájlok
-├──  node_modules / # Az oldalhoz szükséges modulok
 ├──  statistics / # Az oldalhoz szükséges modulok
 |    └── client / # Frontend fájlok (CSS, FONTS, JS)
 |        └── CSS / # Stílusfájlok
